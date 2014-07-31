@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<!-- Production xwork configuration file for applicationservice. This file 
+	includes all of the namespace level xwork configuration along with the global 
+	namespace that all other packages should extend. -->
+<struts>
+	<package name="webservice" extends="struts-default" namespace="/webservice">
+
+
+
+		<interceptors>
+			<interceptor-stack name="webservicesample-stack">
+				<interceptor-ref name="autowiring" />
+				<interceptor-ref name="scope" />
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="webservicesample-stack" />
+		
+		<action name="HelloAction" class="com.sample.ui.HelloAction">
+			<result name="success">../index.html</result>
+		</action>
+		
+		<action name="CalculatorAction" class="com.sample.ui.CalculatorAction">
+			<result name="success">../index.html</result>
+		</action>
+		
+	</package>
+
+</struts>

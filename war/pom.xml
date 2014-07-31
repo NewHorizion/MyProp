@@ -1,0 +1,168 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>webservicesample</groupId>
+		<artifactId>webservice-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<groupId>wbeservicesample</groupId>
+	<artifactId>war</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>Group Policy Admin War</name>
+	<description>WAR artifact for Group Policy Admin</description>
+	<build>
+		<finalName>webservicesample</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<warSourceExcludes>scripts/**</warSourceExcludes>
+
+					<webResources>
+						<resource>
+							<directory>${project.build.directory}/generated-html/</directory>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<phase>process-resources</phase>
+						<configuration>
+							<target>
+								<tstamp prefix="start">
+									<format property="currentTime" pattern="MM/dd/yyyy hh:mm aa" />
+								</tstamp>
+								<mkdir dir="${project.build.directory}/generated-html/" />
+								<echo
+									message="Project Name: ${project.name} &lt;br&gt; Project Version: ${project.version} &lt;br&gt; SVN Version: ${buildNumber} &lt;br&gt; Build Date: ${start.currentTime}"
+									file="${project.build.directory}/generated-html/buildInfo-${project.artifactId}.html" />
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<version>1.9.0</version>
+				<configuration>
+
+					<aggregate>false</aggregate>
+					<includes>
+						<include>src/main/webapp/scripts/**/*.js</include>
+					</includes>
+					<excludes>
+						<exclude>src/main/webapp/scripts/mockjax/**</exclude>
+						<exclude>src/main/webapp/scripts/widgets/**</exclude>
+					</excludes>
+					<useDefaultExcludes>true</useDefaultExcludes>
+					<useDefaultMapping>true</useDefaultMapping>
+					<encoding>UTF-8</encoding>
+				</configuration>
+
+			</plugin>
+			
+			
+				<plugin>
+					<groupId>org.jvnet.jax-ws-commons</groupId>
+					<artifactId>jaxws-maven-plugin</artifactId>
+					<version>2.2</version>
+					<executions>
+						<execution>
+							<id>teamWS</id>
+							<goals>
+								<goal>wsgen</goal>
+							</goals>
+							<phase>generate-sources</phase>
+							<configuration>
+								<resourceDestDir>${basedir}/webapp/WEB-INF</resourceDestDir>
+								<sei>com.sample.impl.Calculator</sei>
+								<genWsdl>true</genWsdl>
+								<keep>true</keep>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											com.mycila.maven-license-plugin
+										</groupId>
+										<artifactId>
+											maven-license-plugin
+										</artifactId>
+										<versionRange>
+											[1.9.0,)
+										</versionRange>
+										<goals>
+											<goal>check</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-antrun-plugin
+										</artifactId>
+										<versionRange>
+											[1.3,)
+										</versionRange>
+										<goals>
+											<goal>run</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>wbeservicesample</groupId>
+			<artifactId>web</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>wbeservicesample</groupId>
+			<artifactId>webservice</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+</project>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints
+  xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime"
+  version="2.0">
+  <endpoint name="CalculatorServiceEndPoint"
+  	  service ="{http://www.example.org/calculatorservice/}CalculatorService"
+      port="{http://www.example.org/calculatorservice/}calculatorservicePort"
+      implementation="com.sample.impl.Calculator"
+      url-pattern="/operations"
+      wsdl="WEB-INF/wsdl/CalculatorService.wsdl"/>
+</endpoints>

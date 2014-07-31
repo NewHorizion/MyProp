@@ -1,0 +1,92 @@
+<beans
+xmlns:sec="http://www.springframework.org/schema/security"  
+xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:jaxws="http://cxf.apache.org/jaxws"
+xmlns:p="http://www.springframework.org/schema/p"
+xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+<import resource="classpath:META-INF/cxf/cxf.xml" />
+<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+<import resource="classpath:META-INF/cxf/cxf-extension-jms.xml" />
+<jaxws:endpoint
+id="calculator"
+implementor="com.sample.impl.CalculatorCXFServiceImpl"
+address="/calculatorProcess">
+
+  <jaxws:features>
+        <bean class="org.apache.cxf.feature.LoggingFeature"/>
+    </jaxws:features>
+</jaxws:endpoint>
+
+<!-- <jaxws:endpoint id="calculatorJMSProcess" implementor="com.sample.impl.CalculatorCXFServiceImpl" address="jms://" >
+<jaxws:features>
+<bean class="org.apache.cxf.transport.jms.JMSConfigFeature"
+p:jmsConfig-ref="jmsConfig" />
+</jaxws:features>
+</jaxws:endpoint>
+
+<bean id="jmsConfig" class="org.apache.cxf.transport.jms.JMSConfiguration"
+p:connectionFactory-ref="jmsConnectionFactory"
+p:targetDestination="test.cxf.jmstransport.queue" />
+<bean id="jmsConnectionFactory" class=
+"org.apache.activemq.ActiveMQConnectionFactory">
+<property name="brokerURL" value="tcp://localhost:61616" />
+</bean>-->
+
+
+    <bean id="exceptionTranslationFilter"
+        class="org.springframework.security.web.access.ExceptionTranslationFilter">
+       <property name="authenticationEntryPoint">
+         <bean
+                class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+                <property name="loginFormUrl" value="/login"/>                
+            </bean>
+       </property>
+            
+        <property name="accessDeniedHandler">
+            <bean
+                class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
+                <property name="errorPage" value="/exception" />
+            </bean>
+        </property>
+    </bean>
+
+
+ <bean id="formLoginFilter"
+        class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="allowSessionCreation" value="true"/>
+        <property name="authenticationSuccessHandler">
+            <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+                <constructor-arg value="/"/>
+                <property name="alwaysUseDefaultTargetUrl" value="true"/>
+            </bean>
+        </property>
+        <property name="authenticationFailureHandler">
+            <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+                <constructor-arg value="/login?error=true"/>
+            </bean>
+        </property>
+    </bean>
+    
+    
+    
+ <bean id="securityContextPersistenceFilterWithASCTrue"
+        class="org.springframework.security.web.context.SecurityContextPersistenceFilter">
+ </bean>
+ 
+ <bean id="accessDecisionManager"
+		class="org.springframework.security.access.vote.AffirmativeBased">
+		<property name="decisionVoters">
+			<list>
+				<bean
+					class="com.sample.webserviceprocess.security.RoleVoter"></bean>
+			</list>
+		</property>
+	</bean>
+
+</beans>

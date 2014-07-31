@@ -1,0 +1,46 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:jaxws="http://cxf.apache.org/jaxws"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+<import resource="classpath:META-INF/cxf/cxf.xml" />
+<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+<import resource="classpath:META-INF/cxf/cxf-extension-jms.xml" />
+
+
+<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+ 
+		<property name="driverClassName" value="com.jnetdirect.jsql.JSQLDriver" />
+		<property name="url" value="jdbc:JSQLConnect://localhost:1433/databaseName=MySampleDatabase" />
+		<property name="username" value="sa" />
+		<property name="password" value="password" />
+</bean>
+
+<bean id="sessionFactory"
+        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="configLocation">
+         <value>classpath:hibernate.cfg.xml</value>
+        </property>
+        <property name="configurationClass">
+            <value>org.hibernate.cfg.AnnotationConfiguration</value>
+        </property>
+        <property name="hibernateProperties">
+           <value>
+            hibernate.connection.provider_class=org.hibernate.connection.C3P0ConnectionProvider
+            hibernate.dialect=org.hibernate.dialect.SQLServerDialect
+            hibernate.default_schema=dbo
+            hibernate.show_sql=true
+            </value>
+        </property>
+ </bean>
+
+
+
+</beans>

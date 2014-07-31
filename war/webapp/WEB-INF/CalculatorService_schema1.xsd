@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://www.example.org/calculatorservice/" xmlns:tns="http://www.example.org/calculatorservice/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="addRequest" type="tns:addRequest"/>
+
+  <xs:element name="addResponse" type="tns:addResponse"/>
+
+  <xs:element name="subtract" type="tns:subtract"/>
+
+  <xs:element name="subtractResponse" type="tns:subtractResponse"/>
+
+  <xs:complexType name="subtract">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int" form="qualified"/>
+      <xs:element name="arg1" type="xs:int" form="qualified"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="subtractResponse">
+    <xs:sequence>
+      <xs:element name="subtractResponse" type="xs:int" form="qualified"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addRequest">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int" form="qualified"/>
+      <xs:element name="arg1" type="xs:int" form="qualified"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addResponse">
+    <xs:sequence>
+      <xs:element name="addResponse" type="xs:int" form="qualified"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
