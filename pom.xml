@@ -15,7 +15,7 @@
 			<id>local</id>
 			<name>Maven Repository Switchboard</name>
 			<layout>default</layout>
-			<url>file:///D:/maven_repo</url>
+			<url>https://github.com/vineetInd/Libraries</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
