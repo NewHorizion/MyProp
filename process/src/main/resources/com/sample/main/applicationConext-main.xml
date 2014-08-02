@@ -16,10 +16,10 @@ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 <bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
  
-		<property name="driverClassName" value="com.jnetdirect.jsql.JSQLDriver" />
-		<property name="url" value="jdbc:JSQLConnect://localhost:1433/databaseName=MySampleDatabase" />
-		<property name="username" value="sa" />
-		<property name="password" value="password" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/mySampleDatabase" />
+		<property name="username" value="root" />
+		<property name="password" value="nsel@123" />
 </bean>
 
 <bean id="sessionFactory"
@@ -34,13 +34,10 @@ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
         <property name="hibernateProperties">
            <value>
             hibernate.connection.provider_class=org.hibernate.connection.C3P0ConnectionProvider
-            hibernate.dialect=org.hibernate.dialect.SQLServerDialect
+            hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
             hibernate.default_schema=dbo
             hibernate.show_sql=true
             </value>
         </property>
  </bean>
-
-
-
 </beans>
