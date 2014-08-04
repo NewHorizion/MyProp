@@ -1,40 +1,47 @@
-<html>
+<!DOCTYPE html>
+
+<!-- define angular app -->
+<html ng-app="scotchApp">
+
 <head>
-<title>Group Policy Admin</title>
-	<script type="text/javascript" src="./scripts/thirdparty/jquery-1.5.2.js"></script>
-	<script type="text/javascript">
-		
-		$(document).ready(function() {
-			$('#logoutLink').click(function() {
-				// clear existing errors
-		    	$('#errors').empty();
-		    	$('#messages').empty();
-				
-				$.ajax({
-				  url: "user/Logout.action",
-				  type: "POST",
-				  success: function(data) {
-				    if (data.errorMessage) {
-				    	$('#errors').append(data.errorMessage);
-				    } else {
-				    	$('#messages').append('Logout Successful');
-				    } 
-				  }
-				});
-			});
-		});
-	</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <!-- SCROLLS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+
+  <!-- SPELLS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-route.js"></script>
+  <script src="js/scripts/mainScript.js"></script>
 </head>
-<body>
-    <h1>Group Policy Admin Links</h1>
-    <div id="errors"></div>
-    <div id="messages"></div>
-	<ul>
-	  <li><a href="buildInfo.html">Build Information</a></li>
-	  <li><a href="login.html">Login</a></li>
-	  <li><a href="applicationservice/ListApplications.action">Application Service</a></li>
-	  <li><a href="ruleservice/listRulePackages.html">Rule Service</a></li>
-	  <li><a id="logoutLink" href="javascript:void(0)">Logout</a></li>
-	</ul>
+
+<!-- define angular controller -->
+<body ng-controller="mainController">
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">My Home Page</a>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="#about"><i class="fa fa-shield"></i> About</a></li>
+        <li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>
+        <li><a href="#login"><i class="fa fa-comment"></i> Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="main">
+  
+    <!-- angular templating -->
+		<!-- this is where content will be injected -->
+    <div ng-view></div>
+    
+  </div>
+  
+  
 </body>
+
 </html>

@@ -8,13 +8,21 @@
 <struts>
 	<package name="webservice" extends="struts-default" namespace="/webservice">
 
-
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+		</result-types>
 
 		<interceptors>
 			<interceptor-stack name="webservicesample-stack">
+				<interceptor-ref name="params" />
 				<interceptor-ref name="autowiring" />
 				<interceptor-ref name="scope" />
+				
 			</interceptor-stack>
+			<interceptor name="params"
+				class="com.opensymphony.xwork2.interceptor.ParametersInterceptor">
+				<param name="excludeParams">dojo\..*,^struts\..*</param>
+			</interceptor>
 		</interceptors>
 		
 		<default-interceptor-ref name="webservicesample-stack" />
@@ -25,6 +33,10 @@
 		
 		<action name="CalculatorAction" class="com.sample.ui.CalculatorAction">
 			<result name="success">../index.html</result>
+		</action>
+		
+		<action name="Login" class="com.sample.ui.login.LoginAction" method="login">
+			<result type="json"/>
 		</action>
 		
 	</package>

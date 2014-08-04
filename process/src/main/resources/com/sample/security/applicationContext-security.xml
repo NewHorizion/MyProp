@@ -9,10 +9,12 @@
 
 
  <sec:http auto-config="true"  use-expressions="true">
+
+        <sec:intercept-url pattern="/**" access="permitAll"></sec:intercept-url>
         <sec:intercept-url pattern="/login" access="permitAll"></sec:intercept-url>
         <sec:intercept-url pattern="/logout" access="permitAll"></sec:intercept-url>
         <sec:intercept-url pattern="/accessdenied" access="permitAll"></sec:intercept-url>
-        <sec:intercept-url pattern="/**" access="hasRole('ROLE_USER')"></sec:intercept-url>
+       <!-- <sec:intercept-url pattern="/**" access="hasRole('ROLE_USER')"></sec:intercept-url>-->
         <sec:logout logout-success-url="/logout"></sec:logout>
         
  </sec:http>
