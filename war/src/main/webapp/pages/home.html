@@ -1,5 +1,24 @@
 <div class="jumbotron text-center">
 	<h1>Home Page</h1>
-	
+
 	<p>{{ message }}</p>
+
+	<div ng-controller="CountryCntrl">
+		<div>
+			Country: <select id="country" ng-model="formdata.country"
+				ng-options="country for (country,states) in countries">
+				<option value=''>Select</option>
+			</select>
+		</div>
+		<div>
+			States: <select id="state" ng-disabled="!formdata.country" ng-model="formdata.state"
+				ng-options="state for (state,cities) in formdata.country"><option
+					value=''>Select</option></select>
+		</div>
+		<div>
+			City: <select id="city" ng-disabled="!formdata.state || !formdata.country"
+				ng-model="city" ng-options="city for city in formdata.state"><option
+					value=''>Select</option></select>
+		</div>
+	</div>
 </div>
