@@ -16,4 +16,13 @@
 		class="com.sample.webserviceprocess.HelloProcess">
 	</bean>
 	
+	<bean id="masterDataProcess"
+		class="com.vstar.process.masterData.MasterDataProcessImpl">
+	</bean>
+	
+	<bean id="masterDataInitializedListener"
+		class="com.vstar.process.listeners.MasterDataInitialized">
+		<property name="masterDataProcess" ref="masterDataProcess"></property>
+	</bean>
+	
 </beans>
