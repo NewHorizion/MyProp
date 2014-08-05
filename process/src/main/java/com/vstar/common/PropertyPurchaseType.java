@@ -1,5 +1,11 @@
 package com.vstar.common;
 
+/**
+ * Property Purchase Type
+ * i.e. property is for sale/rent.
+ *
+ */
+
 public enum PropertyPurchaseType 
 {
 	Sale(1, "Sale"), 
