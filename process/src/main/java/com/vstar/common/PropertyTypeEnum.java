@@ -6,7 +6,7 @@ package com.vstar.common;
  * Mapped with: PROP_TYPE table
  * 
  */
-public enum PropertyType 
+public enum PropertyTypeEnum 
 {
 	MultistoreyApartment(1, "Multistorey Apartment"), 
 	BuilderFloorApartment(2, "Builder Floor Apartment"), 
@@ -38,7 +38,7 @@ public enum PropertyType
 
 	private String typeName;
 
-	PropertyType(int value, String name) 
+	PropertyTypeEnum(int value, String name) 
 	{
 		this.value = value;
 		this.typeName = name;
@@ -54,7 +54,7 @@ public enum PropertyType
 		return this.typeName;
 	}
 
-	public static PropertyType valueOf(int value) throws Exception 
+	public static PropertyTypeEnum valueOf(int value) throws Exception 
 	{
 		switch (value) 
 		{
@@ -114,10 +114,10 @@ public enum PropertyType
 				+ value);
 	}
 
-	public static PropertyType valueOfString(String name) throws Exception 
+	public static PropertyTypeEnum valueOfString(String name) throws Exception 
 	{
-		PropertyType[] values = PropertyType.values();
-		for (PropertyType changeType : values) {
+		PropertyTypeEnum[] values = PropertyTypeEnum.values();
+		for (PropertyTypeEnum changeType : values) {
 			if (name.equals(changeType.typeName)) {
 				return changeType;
 			}

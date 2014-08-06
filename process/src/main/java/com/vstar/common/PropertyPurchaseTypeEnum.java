@@ -6,7 +6,7 @@ package com.vstar.common;
  *
  */
 
-public enum PropertyPurchaseType 
+public enum PropertyPurchaseTypeEnum 
 {
 	Sale(1, "Sale"), 
 	Rent(2, "Rent Out");
@@ -15,7 +15,7 @@ public enum PropertyPurchaseType
 
 	private String typeName;
 
-	PropertyPurchaseType(int value, String name) 
+	PropertyPurchaseTypeEnum(int value, String name) 
 	{
 		this.value = value;
 		this.typeName = name;
@@ -31,7 +31,7 @@ public enum PropertyPurchaseType
 		return this.typeName;
 	}
 
-	public static PropertyPurchaseType valueOf(int value) throws Exception 
+	public static PropertyPurchaseTypeEnum valueOf(int value) throws Exception 
 	{
 		switch (value) 
 		{
@@ -44,10 +44,10 @@ public enum PropertyPurchaseType
 				+ value);
 	}
 
-	public static PropertyPurchaseType valueOfString(String name) throws Exception 
+	public static PropertyPurchaseTypeEnum valueOfString(String name) throws Exception 
 	{
-		PropertyPurchaseType[] values = PropertyPurchaseType.values();
-		for (PropertyPurchaseType changeType : values) {
+		PropertyPurchaseTypeEnum[] values = PropertyPurchaseTypeEnum.values();
+		for (PropertyPurchaseTypeEnum changeType : values) {
 			if (name.equals(changeType.typeName)) {
 				return changeType;
 			}

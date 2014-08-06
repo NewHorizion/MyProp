@@ -5,7 +5,7 @@ package com.vstar.common;
  * Mapped with: PROP_CATEGORY table
  *
  */
-public enum PropertyCategory 
+public enum PropertyCategoryEnum 
 {
 	Residential(1, "Residential"), 
 	Commercial(2, "Commercial"), 
@@ -15,7 +15,7 @@ public enum PropertyCategory
 
 	private String typeName;
 
-	PropertyCategory(int value, String name) 
+	PropertyCategoryEnum(int value, String name) 
 	{
 		this.value = value;
 		this.typeName = name;
@@ -31,7 +31,7 @@ public enum PropertyCategory
 		return this.typeName;
 	}
 
-	public static PropertyCategory valueOf(int value) throws Exception 
+	public static PropertyCategoryEnum valueOf(int value) throws Exception 
 	{
 		switch (value) 
 		{
@@ -46,10 +46,10 @@ public enum PropertyCategory
 				+ value);
 	}
 
-	public static PropertyCategory valueOfString(String name) throws Exception 
+	public static PropertyCategoryEnum valueOfString(String name) throws Exception 
 	{
-		PropertyCategory[] values = PropertyCategory.values();
-		for (PropertyCategory changeType : values) {
+		PropertyCategoryEnum[] values = PropertyCategoryEnum.values();
+		for (PropertyCategoryEnum changeType : values) {
 			if (name.equals(changeType.typeName)) {
 				return changeType;
 			}
