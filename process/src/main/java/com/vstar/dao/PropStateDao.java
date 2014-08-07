@@ -13,16 +13,24 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * @author upendra.kumar
+ * State Information
  * 
  */
 @Entity
 @Table(name = "prop_state", catalog = "property_master")
 public class PropStateDao implements java.io.Serializable
 {
+  private static final long serialVersionUID = 3942227844296108153L;
+  @Id
+  @Column(name = "prop_state_Id", unique = true, nullable = false)
   private int propStateId;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "prop_country_Id")
   private PropCountryDao propCountry;
+  @Column(name = "state_Name", length = 50)
   private String stateName;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "created_Date", length = 19)
   private Date createdDate;
 
   public PropStateDao()
@@ -50,8 +58,6 @@ public class PropStateDao implements java.io.Serializable
     this.createdDate = createdDate;
   }
 
-  @Id
-  @Column(name = "prop_state_Id", unique = true, nullable = false)
   public int getPropStateId()
   {
     return this.propStateId;
@@ -62,8 +68,6 @@ public class PropStateDao implements java.io.Serializable
     this.propStateId = propStateId;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_country_Id")
   public PropCountryDao getPropCountry()
   {
     return this.propCountry;
@@ -74,7 +78,6 @@ public class PropStateDao implements java.io.Serializable
     this.propCountry = propCountry;
   }
 
-  @Column(name = "state_Name", length = 50)
   public String getStateName()
   {
     return this.stateName;
@@ -85,8 +88,6 @@ public class PropStateDao implements java.io.Serializable
     this.stateName = stateName;
   }
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_Date", length = 19)
   public Date getCreatedDate()
   {
     return this.createdDate;

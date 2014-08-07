@@ -10,21 +10,34 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * @author upendra.kumar
+ * Property Transaction details
  * 
  */
 @Entity
 @Table(name = "prop_transaction", catalog = "property_master")
 public class PropTransactionDao implements java.io.Serializable
 {
+  private static final long serialVersionUID = 1140634619377853385L;
+  @Id
+  @Column(name = "prop_transaction_Id", unique = true, nullable = false)
   private int propTransactionId;
+  @Column(name = "transaction_Type", length = 15)
   private String transactionType;
+  @Column(name = "possession_Status", length = 15)
   private String possessionStatus;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "available_From", length = 19)
   private Date availableFrom;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "created_Date", length = 19)
   private Date createdDate;
+  @Column(name = "custom1", length = 10)
   private String custom1;
+  @Column(name = "custom2", length = 10)
   private String custom2;
+  @Column(name = "custom3", length = 10)
   private String custom3;
+  @Column(name = "custom4", length = 10)
   private String custom4;
 
   public PropTransactionDao()
@@ -63,8 +76,6 @@ public class PropTransactionDao implements java.io.Serializable
     this.custom4 = custom4;
   }
 
-  @Id
-  @Column(name = "prop_transaction_Id", unique = true, nullable = false)
   public int getPropTransactionId()
   {
     return this.propTransactionId;
@@ -75,7 +86,6 @@ public class PropTransactionDao implements java.io.Serializable
     this.propTransactionId = propTransactionId;
   }
 
-  @Column(name = "transaction_Type", length = 15)
   public String getTransactionType()
   {
     return this.transactionType;
@@ -86,7 +96,6 @@ public class PropTransactionDao implements java.io.Serializable
     this.transactionType = transactionType;
   }
 
-  @Column(name = "possession_Status", length = 15)
   public String getPossessionStatus()
   {
     return this.possessionStatus;
@@ -97,8 +106,6 @@ public class PropTransactionDao implements java.io.Serializable
     this.possessionStatus = possessionStatus;
   }
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "available_From", length = 19)
   public Date getAvailableFrom()
   {
     return this.availableFrom;
@@ -109,8 +116,6 @@ public class PropTransactionDao implements java.io.Serializable
     this.availableFrom = availableFrom;
   }
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_Date", length = 19)
   public Date getCreatedDate()
   {
     return this.createdDate;
@@ -121,7 +126,6 @@ public class PropTransactionDao implements java.io.Serializable
     this.createdDate = createdDate;
   }
 
-  @Column(name = "custom1", length = 10)
   public String getCustom1()
   {
     return this.custom1;
@@ -132,7 +136,6 @@ public class PropTransactionDao implements java.io.Serializable
     this.custom1 = custom1;
   }
 
-  @Column(name = "custom2", length = 10)
   public String getCustom2()
   {
     return this.custom2;
@@ -143,7 +146,6 @@ public class PropTransactionDao implements java.io.Serializable
     this.custom2 = custom2;
   }
 
-  @Column(name = "custom3", length = 10)
   public String getCustom3()
   {
     return this.custom3;
@@ -154,7 +156,6 @@ public class PropTransactionDao implements java.io.Serializable
     this.custom3 = custom3;
   }
 
-  @Column(name = "custom4", length = 10)
   public String getCustom4()
   {
     return this.custom4;

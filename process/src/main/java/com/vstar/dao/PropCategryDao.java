@@ -6,14 +6,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * @author upendra.kumar
+ * Property Categories
  * 
  */
 @Entity
 @Table(name = "prop_categry", catalog = "property_master")
 public class PropCategryDao implements java.io.Serializable
 {
+  private static final long serialVersionUID = -76485736005477641L;
+  @Id
+  @Column(name = "categry_id", unique = true, nullable = false)
   private int categryId;
+  @Column(name = "categry_type", nullable = false, length = 30)
   private String categryType;
 
   public PropCategryDao()
@@ -31,8 +35,6 @@ public class PropCategryDao implements java.io.Serializable
     this.categryType = categryType;
   }
 
-  @Id
-  @Column(name = "categry_id", unique = true, nullable = false)
   public int getCategryId()
   {
     return this.categryId;
@@ -43,7 +45,6 @@ public class PropCategryDao implements java.io.Serializable
     this.categryId = categryId;
   }
 
-  @Column(name = "categry_type", nullable = false, length = 30)
   public String getCategryType()
   {
     return this.categryType;

@@ -10,22 +10,35 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * @author upendra.kumar
+ * Property Terms and Conditions
  * 
  */
 @Entity
 @Table(name = "prop_terms_cond", catalog = "property_master")
 public class PropTermsCondDao implements java.io.Serializable
 {
+  private static final long serialVersionUID = 914284802253705834L;
+  @Id
+  @Column(name = "prop_term_Cond_Id", unique = true, nullable = false)
   private int propTermCondId;
+  @Column(name = "annual_Dues", precision = 18, scale = 0)
   private Long annualDues;
+  @Column(name = "tax", precision = 18, scale = 0)
   private Long tax;
+  @Column(name = "fees", precision = 18, scale = 0)
   private Long fees;
+  @Column(name = "term_N_Cond", length = 50)
   private String termNCond;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "created_Date", length = 19)
   private Date createdDate;
+  @Column(name = "custom1", length = 10)
   private String custom1;
+  @Column(name = "custom2", length = 10)
   private String custom2;
+  @Column(name = "custom3", length = 10)
   private String custom3;
+  @Column(name = "custom4", length = 10)
   private String custom4;
 
   public PropTermsCondDao()
@@ -66,8 +79,6 @@ public class PropTermsCondDao implements java.io.Serializable
     this.custom4 = custom4;
   }
 
-  @Id
-  @Column(name = "prop_term_Cond_Id", unique = true, nullable = false)
   public int getPropTermCondId()
   {
     return this.propTermCondId;
@@ -78,7 +89,6 @@ public class PropTermsCondDao implements java.io.Serializable
     this.propTermCondId = propTermCondId;
   }
 
-  @Column(name = "annual_Dues", precision = 18, scale = 0)
   public Long getAnnualDues()
   {
     return this.annualDues;
@@ -89,7 +99,6 @@ public class PropTermsCondDao implements java.io.Serializable
     this.annualDues = annualDues;
   }
 
-  @Column(name = "tax", precision = 18, scale = 0)
   public Long getTax()
   {
     return this.tax;
@@ -100,7 +109,6 @@ public class PropTermsCondDao implements java.io.Serializable
     this.tax = tax;
   }
 
-  @Column(name = "fees", precision = 18, scale = 0)
   public Long getFees()
   {
     return this.fees;
@@ -111,7 +119,6 @@ public class PropTermsCondDao implements java.io.Serializable
     this.fees = fees;
   }
 
-  @Column(name = "term_N_Cond", length = 50)
   public String getTermNCond()
   {
     return this.termNCond;
@@ -122,8 +129,6 @@ public class PropTermsCondDao implements java.io.Serializable
     this.termNCond = termNCond;
   }
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_Date", length = 19)
   public Date getCreatedDate()
   {
     return this.createdDate;
@@ -134,7 +139,6 @@ public class PropTermsCondDao implements java.io.Serializable
     this.createdDate = createdDate;
   }
 
-  @Column(name = "custom1", length = 10)
   public String getCustom1()
   {
     return this.custom1;
@@ -145,7 +149,6 @@ public class PropTermsCondDao implements java.io.Serializable
     this.custom1 = custom1;
   }
 
-  @Column(name = "custom2", length = 10)
   public String getCustom2()
   {
     return this.custom2;
@@ -156,7 +159,6 @@ public class PropTermsCondDao implements java.io.Serializable
     this.custom2 = custom2;
   }
 
-  @Column(name = "custom3", length = 10)
   public String getCustom3()
   {
     return this.custom3;
@@ -167,7 +169,6 @@ public class PropTermsCondDao implements java.io.Serializable
     this.custom3 = custom3;
   }
 
-  @Column(name = "custom4", length = 10)
   public String getCustom4()
   {
     return this.custom4;

@@ -12,22 +12,38 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * @author upendra.kumar
+ * Property Extension Data
+ * Searching purpose
  *
  */
 @Entity
 @Table(name = "prop_info_ext", catalog = "property_master")
 public class PropInfoExtDao implements java.io.Serializable
 {
+  private static final long serialVersionUID = 7697251516527010610L;
+  @Id
+  @Column(name = "prop_Info_Id", unique = true, nullable = false)
   private int propInfoId;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "prop_Info_Id", unique = true, nullable = false, insertable = false, updatable = false)
   private PropInfoDao propInfo;
+  @Column(name = "number_of_clicks")
   private Integer numberOfClicks;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "last_accessed", length = 19)
   private Date lastAccessed;
+  @Column(name = "popularity")
   private Integer popularity;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "created_Date", length = 19)
   private Date createdDate;
+  @Column(name = "custom1", length = 10)
   private String custom1;
+  @Column(name = "custom2", length = 10)
   private String custom2;
+  @Column(name = "custom3", length = 10)
   private String custom3;
+  @Column(name = "custom4", length = 10)
   private String custom4;
 
   public PropInfoExtDao()
@@ -69,8 +85,6 @@ public class PropInfoExtDao implements java.io.Serializable
     this.custom4 = custom4;
   }
 
-  @Id
-  @Column(name = "prop_Info_Id", unique = true, nullable = false)
   public int getPropInfoId()
   {
     return this.propInfoId;
@@ -81,8 +95,6 @@ public class PropInfoExtDao implements java.io.Serializable
     this.propInfoId = propInfoId;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_Info_Id", unique = true, nullable = false, insertable = false, updatable = false)
   public PropInfoDao getPropInfo()
   {
     return this.propInfo;
@@ -93,7 +105,6 @@ public class PropInfoExtDao implements java.io.Serializable
     this.propInfo = propInfo;
   }
 
-  @Column(name = "number_of_clicks")
   public Integer getNumberOfClicks()
   {
     return this.numberOfClicks;
@@ -104,8 +115,6 @@ public class PropInfoExtDao implements java.io.Serializable
     this.numberOfClicks = numberOfClicks;
   }
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "last_accessed", length = 19)
   public Date getLastAccessed()
   {
     return this.lastAccessed;
@@ -116,7 +125,6 @@ public class PropInfoExtDao implements java.io.Serializable
     this.lastAccessed = lastAccessed;
   }
 
-  @Column(name = "popularity")
   public Integer getPopularity()
   {
     return this.popularity;
@@ -127,8 +135,6 @@ public class PropInfoExtDao implements java.io.Serializable
     this.popularity = popularity;
   }
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_Date", length = 19)
   public Date getCreatedDate()
   {
     return this.createdDate;
@@ -139,7 +145,6 @@ public class PropInfoExtDao implements java.io.Serializable
     this.createdDate = createdDate;
   }
 
-  @Column(name = "custom1", length = 10)
   public String getCustom1()
   {
     return this.custom1;
@@ -150,7 +155,6 @@ public class PropInfoExtDao implements java.io.Serializable
     this.custom1 = custom1;
   }
 
-  @Column(name = "custom2", length = 10)
   public String getCustom2()
   {
     return this.custom2;
@@ -161,7 +165,6 @@ public class PropInfoExtDao implements java.io.Serializable
     this.custom2 = custom2;
   }
 
-  @Column(name = "custom3", length = 10)
   public String getCustom3()
   {
     return this.custom3;
@@ -172,7 +175,6 @@ public class PropInfoExtDao implements java.io.Serializable
     this.custom3 = custom3;
   }
 
-  @Column(name = "custom4", length = 10)
   public String getCustom4()
   {
     return this.custom4;

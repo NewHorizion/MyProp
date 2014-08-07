@@ -4,26 +4,41 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * @author upendra.kumar
+ * Property Location Info
  * 
  */
 @Entity
 @Table(name = "prop_location", catalog = "property_master")
 public class PropLocationDao implements java.io.Serializable
 {
+  private static final long serialVersionUID = 4135668551140108761L;
+  @Id
+  @Column(name = "prop_Location_Id", unique = true, nullable = false)
   private int propLocationId;
+  @Column(name = "locality_Name", length = 25)
   private String localityName;
-  private Integer propCityId;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "prop_city_Id")
+  private PropCityDao propCityDao;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "created_Date", length = 19)
   private Date createdDate;
+  @Column(name = "custom1", length = 10)
   private String custom1;
+  @Column(name = "custom2", length = 10)
   private String custom2;
+  @Column(name = "custom3", length = 10)
   private String custom3;
+  @Column(name = "custom4", length = 10)
   private String custom4;
 
   public PropLocationDao()
@@ -35,12 +50,12 @@ public class PropLocationDao implements java.io.Serializable
     this.propLocationId = propLocationId;
   }
 
-  public PropLocationDao(int propLocationId, String localityName, Integer propCityId,
+  public PropLocationDao(int propLocationId, String localityName, PropCityDao propCityDao,
       Date createdDate, String custom1, String custom2, String custom3, String custom4)
   {
     this.propLocationId = propLocationId;
     this.localityName = localityName;
-    this.propCityId = propCityId;
+    this.propCityDao = propCityDao;
     this.createdDate = createdDate;
     this.custom1 = custom1;
     this.custom2 = custom2;
@@ -48,8 +63,6 @@ public class PropLocationDao implements java.io.Serializable
     this.custom4 = custom4;
   }
 
-  @Id
-  @Column(name = "prop_Location_Id", unique = true, nullable = false)
   public int getPropLocationId()
   {
     return this.propLocationId;
@@ -60,7 +73,6 @@ public class PropLocationDao implements java.io.Serializable
     this.propLocationId = propLocationId;
   }
 
-  @Column(name = "locality_Name", length = 25)
   public String getLocalityName()
   {
     return this.localityName;
@@ -71,19 +83,16 @@ public class PropLocationDao implements java.io.Serializable
     this.localityName = localityName;
   }
 
-  @Column(name = "prop_City_Id")
-  public Integer getPropCityId()
+  public PropCityDao getPropCityDao() 
   {
-    return this.propCityId;
+	return propCityDao;
   }
 
-  public void setPropCityId(Integer propCityId)
+  public void setPropCityDao(PropCityDao propCityDao) 
   {
-    this.propCityId = propCityId;
+	this.propCityDao = propCityDao;
   }
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_Date", length = 19)
   public Date getCreatedDate()
   {
     return this.createdDate;
@@ -94,7 +103,6 @@ public class PropLocationDao implements java.io.Serializable
     this.createdDate = createdDate;
   }
 
-  @Column(name = "custom1", length = 10)
   public String getCustom1()
   {
     return this.custom1;
@@ -105,7 +113,6 @@ public class PropLocationDao implements java.io.Serializable
     this.custom1 = custom1;
   }
 
-  @Column(name = "custom2", length = 10)
   public String getCustom2()
   {
     return this.custom2;
@@ -116,7 +123,6 @@ public class PropLocationDao implements java.io.Serializable
     this.custom2 = custom2;
   }
 
-  @Column(name = "custom3", length = 10)
   public String getCustom3()
   {
     return this.custom3;
@@ -127,7 +133,6 @@ public class PropLocationDao implements java.io.Serializable
     this.custom3 = custom3;
   }
 
-  @Column(name = "custom4", length = 10)
   public String getCustom4()
   {
     return this.custom4;

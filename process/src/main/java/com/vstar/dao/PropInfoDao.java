@@ -13,27 +13,53 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * @author upendra.kumar
+ * Property Details
  *
  */
 @Entity
 @Table(name = "prop_info", catalog = "property_master")
 public class PropInfoDao implements java.io.Serializable
 {
+  private static final long serialVersionUID = -2945416505526136789L;
+  @Id
+  @Column(name = "prop_Info_Id", unique = true, nullable = false)
   private int propInfoId;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "prop_sale_Price_Id")
   private PropPriceDao propPrice;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "prop_term_Cond_Id")
   private PropTermsCondDao propTermsCond;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "prop_location_Id")
   private PropLocationDao propLocation;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "prop_purchase_id")
   private PropPurchaseTypeDao propPurchaseType;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "prop_feature_Id")
   private PropFeaturesDao propFeatures;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "prop_area_Id")
   private PropAreaDao propArea;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "prop_Type_Id")
   private PropTypeDao propType;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "prop_transaction_Id")
   private PropTransactionDao propTransaction;
+  @Column(name = "society_Project", length = 20)
   private String societyProject;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "created_Date", length = 19)
   private Date createdDate;
+  @Column(name = "custom1", length = 10)
   private String custom1;
+  @Column(name = "custom2", length = 10)
   private String custom2;
+  @Column(name = "custom3", length = 10)
   private String custom3;
+  @Column(name = "custom4", length = 10)
   private String custom4;
 
   public PropInfoDao()
@@ -86,8 +112,6 @@ public class PropInfoDao implements java.io.Serializable
     this.custom4 = custom4;
   }
 
-  @Id
-  @Column(name = "prop_Info_Id", unique = true, nullable = false)
   public int getPropInfoId()
   {
     return this.propInfoId;
@@ -98,8 +122,6 @@ public class PropInfoDao implements java.io.Serializable
     this.propInfoId = propInfoId;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_sale_Price_Id")
   public PropPriceDao getPropPrice()
   {
     return this.propPrice;
@@ -110,8 +132,6 @@ public class PropInfoDao implements java.io.Serializable
     this.propPrice = propPrice;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_term_Cond_Id")
   public PropTermsCondDao getPropTermsCond()
   {
     return this.propTermsCond;
@@ -122,8 +142,6 @@ public class PropInfoDao implements java.io.Serializable
     this.propTermsCond = propTermsCond;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_location_Id")
   public PropLocationDao getPropLocation()
   {
     return this.propLocation;
@@ -134,8 +152,6 @@ public class PropInfoDao implements java.io.Serializable
     this.propLocation = propLocation;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_purchase_id")
   public PropPurchaseTypeDao getPropPurchaseType()
   {
     return this.propPurchaseType;
@@ -146,8 +162,6 @@ public class PropInfoDao implements java.io.Serializable
     this.propPurchaseType = propPurchaseType;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_feature_Id")
   public PropFeaturesDao getPropFeatures()
   {
     return this.propFeatures;
@@ -158,8 +172,6 @@ public class PropInfoDao implements java.io.Serializable
     this.propFeatures = propFeatures;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_area_Id")
   public PropAreaDao getPropArea()
   {
     return this.propArea;
@@ -170,8 +182,6 @@ public class PropInfoDao implements java.io.Serializable
     this.propArea = propArea;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_Type_Id")
   public PropTypeDao getPropType()
   {
     return this.propType;
@@ -182,8 +192,6 @@ public class PropInfoDao implements java.io.Serializable
     this.propType = propType;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_transaction_Id")
   public PropTransactionDao getPropTransaction()
   {
     return this.propTransaction;
@@ -194,7 +202,6 @@ public class PropInfoDao implements java.io.Serializable
     this.propTransaction = propTransaction;
   }
 
-  @Column(name = "society_Project", length = 20)
   public String getSocietyProject()
   {
     return this.societyProject;
@@ -205,8 +212,6 @@ public class PropInfoDao implements java.io.Serializable
     this.societyProject = societyProject;
   }
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_Date", length = 19)
   public Date getCreatedDate()
   {
     return this.createdDate;
@@ -217,7 +222,6 @@ public class PropInfoDao implements java.io.Serializable
     this.createdDate = createdDate;
   }
 
-  @Column(name = "custom1", length = 10)
   public String getCustom1()
   {
     return this.custom1;
@@ -228,7 +232,6 @@ public class PropInfoDao implements java.io.Serializable
     this.custom1 = custom1;
   }
 
-  @Column(name = "custom2", length = 10)
   public String getCustom2()
   {
     return this.custom2;
@@ -239,7 +242,6 @@ public class PropInfoDao implements java.io.Serializable
     this.custom2 = custom2;
   }
 
-  @Column(name = "custom3", length = 10)
   public String getCustom3()
   {
     return this.custom3;
@@ -250,7 +252,6 @@ public class PropInfoDao implements java.io.Serializable
     this.custom3 = custom3;
   }
 
-  @Column(name = "custom4", length = 10)
   public String getCustom4()
   {
     return this.custom4;

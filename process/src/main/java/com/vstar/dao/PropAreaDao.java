@@ -10,22 +10,35 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * @author upendra.kumar
+ * Property Area Details
  * 
  */
 @Entity
 @Table(name = "prop_area", catalog = "property_master")
 public class PropAreaDao implements java.io.Serializable
 {
+  private static final long serialVersionUID = -1377011156147399065L;
+  @Id
+  @Column(name = "prop_area_Id", unique = true, nullable = false)
   private int propAreaId;
+  @Column(name = "covered_Area")
   private Integer coveredArea;
+  @Column(name = "measurement", length = 6)
   private String measurement;
+  @Column(name = "plot_Area")
   private Integer plotArea;
+  @Column(name = "land_Area")
   private Integer landArea;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "created_Date", length = 19)
   private Date createdDate;
+  @Column(name = "custom1", length = 10)
   private String custom1;
+  @Column(name = "custom2", length = 10)
   private String custom2;
+  @Column(name = "custom3", length = 10)
   private String custom3;
+  @Column(name = "custom4", length = 10)
   private String custom4;
 
   public PropAreaDao()
@@ -61,8 +74,6 @@ public class PropAreaDao implements java.io.Serializable
     this.custom4 = custom4;
   }
 
-  @Id
-  @Column(name = "prop_area_Id", unique = true, nullable = false)
   public int getPropAreaId()
   {
     return this.propAreaId;
@@ -73,7 +84,6 @@ public class PropAreaDao implements java.io.Serializable
     this.propAreaId = propAreaId;
   }
 
-  @Column(name = "covered_Area")
   public Integer getCoveredArea()
   {
     return this.coveredArea;
@@ -84,7 +94,6 @@ public class PropAreaDao implements java.io.Serializable
     this.coveredArea = coveredArea;
   }
 
-  @Column(name = "measurement", length = 6)
   public String getMeasurement()
   {
     return this.measurement;
@@ -95,7 +104,6 @@ public class PropAreaDao implements java.io.Serializable
     this.measurement = measurement;
   }
 
-  @Column(name = "plot_Area")
   public Integer getPlotArea()
   {
     return this.plotArea;
@@ -106,7 +114,6 @@ public class PropAreaDao implements java.io.Serializable
     this.plotArea = plotArea;
   }
 
-  @Column(name = "land_Area")
   public Integer getLandArea()
   {
     return this.landArea;
@@ -117,8 +124,6 @@ public class PropAreaDao implements java.io.Serializable
     this.landArea = landArea;
   }
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_Date", length = 19)
   public Date getCreatedDate()
   {
     return this.createdDate;
@@ -129,7 +134,6 @@ public class PropAreaDao implements java.io.Serializable
     this.createdDate = createdDate;
   }
 
-  @Column(name = "custom1", length = 10)
   public String getCustom1()
   {
     return this.custom1;
@@ -140,7 +144,6 @@ public class PropAreaDao implements java.io.Serializable
     this.custom1 = custom1;
   }
 
-  @Column(name = "custom2", length = 10)
   public String getCustom2()
   {
     return this.custom2;
@@ -151,7 +154,6 @@ public class PropAreaDao implements java.io.Serializable
     this.custom2 = custom2;
   }
 
-  @Column(name = "custom3", length = 10)
   public String getCustom3()
   {
     return this.custom3;
@@ -162,7 +164,6 @@ public class PropAreaDao implements java.io.Serializable
     this.custom3 = custom3;
   }
 
-  @Column(name = "custom4", length = 10)
   public String getCustom4()
   {
     return this.custom4;

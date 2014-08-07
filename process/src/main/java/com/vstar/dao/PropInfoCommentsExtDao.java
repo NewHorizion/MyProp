@@ -12,19 +12,37 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * Property comments, likes and rating
+ *
+ */
 @Entity
 @Table(name = "prop_info_comments_ext", catalog = "property_master")
 public class PropInfoCommentsExtDao implements java.io.Serializable
 {
+  private static final long serialVersionUID = -2853064893592194790L;
+  @Id
+  @Column(name = "prop_info_Id", unique = true, nullable = false)
   private int propInfoId;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "prop_info_Id", unique = true, nullable = false, insertable = false, updatable = false)
   private PropInfoDao propInfo;
+  @Column(name = "comments", length = 100)
   private String comments;
+  @Column(name = "rating")
   private Integer rating;
+  @Column(name = "likes")
   private Integer likes;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "created_Date", length = 19)
   private Date createdDate;
+  @Column(name = "custom1", length = 10)
   private String custom1;
+  @Column(name = "custom2", length = 10)
   private String custom2;
+  @Column(name = "custom3", length = 10)
   private String custom3;
+  @Column(name = "custom4", length = 10)
   private String custom4;
 
   public PropInfoCommentsExtDao()
@@ -66,8 +84,6 @@ public class PropInfoCommentsExtDao implements java.io.Serializable
     this.custom4 = custom4;
   }
 
-  @Id
-  @Column(name = "prop_info_Id", unique = true, nullable = false)
   public int getPropInfoId()
   {
     return this.propInfoId;
@@ -78,8 +94,6 @@ public class PropInfoCommentsExtDao implements java.io.Serializable
     this.propInfoId = propInfoId;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_info_Id", unique = true, nullable = false, insertable = false, updatable = false)
   public PropInfoDao getPropInfo()
   {
     return this.propInfo;
@@ -90,7 +104,6 @@ public class PropInfoCommentsExtDao implements java.io.Serializable
     this.propInfo = propInfo;
   }
 
-  @Column(name = "comments", length = 100)
   public String getComments()
   {
     return this.comments;
@@ -101,7 +114,6 @@ public class PropInfoCommentsExtDao implements java.io.Serializable
     this.comments = comments;
   }
 
-  @Column(name = "rating")
   public Integer getRating()
   {
     return this.rating;
@@ -112,7 +124,6 @@ public class PropInfoCommentsExtDao implements java.io.Serializable
     this.rating = rating;
   }
 
-  @Column(name = "likes")
   public Integer getLikes()
   {
     return this.likes;
@@ -123,8 +134,6 @@ public class PropInfoCommentsExtDao implements java.io.Serializable
     this.likes = likes;
   }
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_Date", length = 19)
   public Date getCreatedDate()
   {
     return this.createdDate;
@@ -135,7 +144,6 @@ public class PropInfoCommentsExtDao implements java.io.Serializable
     this.createdDate = createdDate;
   }
 
-  @Column(name = "custom1", length = 10)
   public String getCustom1()
   {
     return this.custom1;
@@ -146,7 +154,6 @@ public class PropInfoCommentsExtDao implements java.io.Serializable
     this.custom1 = custom1;
   }
 
-  @Column(name = "custom2", length = 10)
   public String getCustom2()
   {
     return this.custom2;
@@ -157,7 +164,6 @@ public class PropInfoCommentsExtDao implements java.io.Serializable
     this.custom2 = custom2;
   }
 
-  @Column(name = "custom3", length = 10)
   public String getCustom3()
   {
     return this.custom3;
@@ -168,7 +174,6 @@ public class PropInfoCommentsExtDao implements java.io.Serializable
     this.custom3 = custom3;
   }
 
-  @Column(name = "custom4", length = 10)
   public String getCustom4()
   {
     return this.custom4;

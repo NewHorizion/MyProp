@@ -5,21 +5,39 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Property features
+ *
+ */
 @Entity
 @Table(name = "prop_features", catalog = "property_master")
 public class PropFeaturesDao implements java.io.Serializable
 {
+  private static final long serialVersionUID = -4329916729253167714L;
+  @Id
+  @Column(name = "prop_feature_Id", unique = true, nullable = false)
   private int propFeatureId;
+  @Column(name = "bed_Rooms")
   private Integer bedRooms;
+  @Column(name = "bath_Rooms")
   private Integer bathRooms;
+  @Column(name = "balconies")
   private Integer balconies;
+  @Column(name = "furnished")
   private Byte furnished;
+  @Column(name = "age_Of_Const", length = 10)
   private String ageOfConst;
+  @Column(name = "avail_Floor")
   private Integer availFloor;
+  @Column(name = "total_Floors")
   private Integer totalFloors;
+  @Column(name = "custom1", length = 10)
   private String custom1;
+  @Column(name = "custom2", length = 10)
   private String custom2;
+  @Column(name = "custom3", length = 10)
   private String custom3;
+  @Column(name = "custom4", length = 10)
   private String custom4;
 
   public PropFeaturesDao()
@@ -64,8 +82,6 @@ public class PropFeaturesDao implements java.io.Serializable
     this.custom4 = custom4;
   }
 
-  @Id
-  @Column(name = "prop_feature_Id", unique = true, nullable = false)
   public int getPropFeatureId()
   {
     return this.propFeatureId;
@@ -76,7 +92,6 @@ public class PropFeaturesDao implements java.io.Serializable
     this.propFeatureId = propFeatureId;
   }
 
-  @Column(name = "bed_Rooms")
   public Integer getBedRooms()
   {
     return this.bedRooms;
@@ -87,7 +102,6 @@ public class PropFeaturesDao implements java.io.Serializable
     this.bedRooms = bedRooms;
   }
 
-  @Column(name = "bath_Rooms")
   public Integer getBathRooms()
   {
     return this.bathRooms;
@@ -98,7 +112,6 @@ public class PropFeaturesDao implements java.io.Serializable
     this.bathRooms = bathRooms;
   }
 
-  @Column(name = "balconies")
   public Integer getBalconies()
   {
     return this.balconies;
@@ -109,7 +122,6 @@ public class PropFeaturesDao implements java.io.Serializable
     this.balconies = balconies;
   }
 
-  @Column(name = "furnished")
   public Byte getFurnished()
   {
     return this.furnished;
@@ -120,7 +132,6 @@ public class PropFeaturesDao implements java.io.Serializable
     this.furnished = furnished;
   }
 
-  @Column(name = "age_Of_Const", length = 10)
   public String getAgeOfConst()
   {
     return this.ageOfConst;
@@ -131,7 +142,6 @@ public class PropFeaturesDao implements java.io.Serializable
     this.ageOfConst = ageOfConst;
   }
 
-  @Column(name = "avail_Floor")
   public Integer getAvailFloor()
   {
     return this.availFloor;
@@ -142,7 +152,6 @@ public class PropFeaturesDao implements java.io.Serializable
     this.availFloor = availFloor;
   }
 
-  @Column(name = "total_Floors")
   public Integer getTotalFloors()
   {
     return this.totalFloors;
@@ -153,7 +162,6 @@ public class PropFeaturesDao implements java.io.Serializable
     this.totalFloors = totalFloors;
   }
 
-  @Column(name = "custom1", length = 10)
   public String getCustom1()
   {
     return this.custom1;
@@ -164,7 +172,6 @@ public class PropFeaturesDao implements java.io.Serializable
     this.custom1 = custom1;
   }
 
-  @Column(name = "custom2", length = 10)
   public String getCustom2()
   {
     return this.custom2;
@@ -175,7 +182,6 @@ public class PropFeaturesDao implements java.io.Serializable
     this.custom2 = custom2;
   }
 
-  @Column(name = "custom3", length = 10)
   public String getCustom3()
   {
     return this.custom3;
@@ -186,7 +192,6 @@ public class PropFeaturesDao implements java.io.Serializable
     this.custom3 = custom3;
   }
 
-  @Column(name = "custom4", length = 10)
   public String getCustom4()
   {
     return this.custom4;

@@ -9,15 +9,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * @author upendra.kumar
+ * Property Types like Residential Plot/Flat
  * 
  */
 @Entity
 @Table(name = "prop_type", catalog = "property_master")
 public class PropTypeDao implements java.io.Serializable
 {
+  private static final long serialVersionUID = -6261006342019880313L;
+  @Id
+  @Column(name = "prop_Type_Id", unique = true, nullable = false)
   private int propTypeId;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "categry_id")
   private PropCategryDao propCategry;
+  @Column(name = "type_Desc", length = 30)
   private String typeDesc;
 
   public PropTypeDao()
@@ -42,8 +48,6 @@ public class PropTypeDao implements java.io.Serializable
     this.typeDesc = typeDesc;
   }
 
-  @Id
-  @Column(name = "prop_Type_Id", unique = true, nullable = false)
   public int getPropTypeId()
   {
     return this.propTypeId;
@@ -54,8 +58,6 @@ public class PropTypeDao implements java.io.Serializable
     this.propTypeId = propTypeId;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "categry_id")
   public PropCategryDao getPropCategry()
   {
     return this.propCategry;
@@ -66,7 +68,6 @@ public class PropTypeDao implements java.io.Serializable
     this.propCategry = propCategry;
   }
 
-  @Column(name = "type_Desc", length = 30)
   public String getTypeDesc()
   {
     return this.typeDesc;

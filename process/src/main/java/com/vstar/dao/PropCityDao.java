@@ -12,13 +12,25 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * City Information
+ *
+ */
 @Entity
 @Table(name = "prop_city", catalog = "property_master")
 public class PropCityDao implements java.io.Serializable
 {
+  private static final long serialVersionUID = -6770999383173196275L;
+  @Id
+  @Column(name = "prop_City_Id", unique = true, nullable = false)
   private int propCityId;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "prop_state_Id")
   private PropStateDao propState;
+  @Column(name = "city_Name", length = 50)
   private String cityName;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "created_Date", length = 19)
   private Date createdDate;
 
   public PropCityDao()
@@ -45,8 +57,6 @@ public class PropCityDao implements java.io.Serializable
     this.createdDate = createdDate;
   }
 
-  @Id
-  @Column(name = "prop_City_Id", unique = true, nullable = false)
   public int getPropCityId()
   {
     return this.propCityId;
@@ -57,8 +67,6 @@ public class PropCityDao implements java.io.Serializable
     this.propCityId = propCityId;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_state_Id")
   public PropStateDao getPropState()
   {
     return this.propState;
@@ -69,7 +77,6 @@ public class PropCityDao implements java.io.Serializable
     this.propState = propState;
   }
 
-  @Column(name = "city_Name", length = 50)
   public String getCityName()
   {
     return this.cityName;
@@ -80,8 +87,6 @@ public class PropCityDao implements java.io.Serializable
     this.cityName = cityName;
   }
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_Date", length = 19)
   public Date getCreatedDate()
   {
     return this.createdDate;

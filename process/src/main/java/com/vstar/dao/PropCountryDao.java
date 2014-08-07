@@ -9,12 +9,22 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * Country Information
+ *
+ */
 @Entity
 @Table(name = "prop_country", catalog = "property_master")
 public class PropCountryDao implements java.io.Serializable
 {
+  private static final long serialVersionUID = 7422788475417443480L;
+  @Id
+  @Column(name = "prop_country_Id", unique = true, nullable = false)
   private int propCountryId;
+  @Column(name = "country_Name", length = 50)
   private String countryName;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "created_Date", length = 19)
   private Date createdDate;
 
   public PropCountryDao()
@@ -33,8 +43,6 @@ public class PropCountryDao implements java.io.Serializable
     this.createdDate = createdDate;
   }
 
-  @Id
-  @Column(name = "prop_country_Id", unique = true, nullable = false)
   public int getPropCountryId()
   {
     return this.propCountryId;
@@ -45,7 +53,6 @@ public class PropCountryDao implements java.io.Serializable
     this.propCountryId = propCountryId;
   }
 
-  @Column(name = "country_Name", length = 50)
   public String getCountryName()
   {
     return this.countryName;
@@ -56,8 +63,6 @@ public class PropCountryDao implements java.io.Serializable
     this.countryName = countryName;
   }
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_Date", length = 19)
   public Date getCreatedDate()
   {
     return this.createdDate;

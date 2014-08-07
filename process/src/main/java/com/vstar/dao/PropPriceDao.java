@@ -10,20 +10,31 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * @author upendra.kumar
+ * Property price details
  * 
  */
 @Entity
 @Table(name = "prop_price", catalog = "property_master")
 public class PropPriceDao implements java.io.Serializable
 {
+  private static final long serialVersionUID = -3122163787290182894L;
+  @Id
+  @Column(name = "prop_sale_Price_Id", unique = true, nullable = false)
   private int propSalePriceId;
+  @Column(name = "expected_Price", precision = 18, scale = 0)
   private Long expectedPrice;
+  @Column(name = "price_Per_Sqr_Ft", precision = 18, scale = 0)
   private Long pricePerSqrFt;
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(name = "created_Date", length = 19)
   private Date createdDate;
+  @Column(name = "custom1", length = 10)
   private String custom1;
+  @Column(name = "custom2", length = 10)
   private String custom2;
+  @Column(name = "custom3", length = 10)
   private String custom3;
+  @Column(name = "custom4", length = 10)
   private String custom4;
 
   public PropPriceDao()
@@ -59,8 +70,6 @@ public class PropPriceDao implements java.io.Serializable
     this.custom4 = custom4;
   }
 
-  @Id
-  @Column(name = "prop_sale_Price_Id", unique = true, nullable = false)
   public int getPropSalePriceId()
   {
     return this.propSalePriceId;
@@ -71,7 +80,6 @@ public class PropPriceDao implements java.io.Serializable
     this.propSalePriceId = propSalePriceId;
   }
 
-  @Column(name = "expected_Price", precision = 18, scale = 0)
   public Long getExpectedPrice()
   {
     return this.expectedPrice;
@@ -82,7 +90,6 @@ public class PropPriceDao implements java.io.Serializable
     this.expectedPrice = expectedPrice;
   }
 
-  @Column(name = "price_Per_Sqr_Ft", precision = 18, scale = 0)
   public Long getPricePerSqrFt()
   {
     return this.pricePerSqrFt;
@@ -93,8 +100,6 @@ public class PropPriceDao implements java.io.Serializable
     this.pricePerSqrFt = pricePerSqrFt;
   }
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_Date", length = 19)
   public Date getCreatedDate()
   {
     return this.createdDate;
@@ -105,7 +110,6 @@ public class PropPriceDao implements java.io.Serializable
     this.createdDate = createdDate;
   }
 
-  @Column(name = "custom1", length = 10)
   public String getCustom1()
   {
     return this.custom1;
@@ -116,7 +120,6 @@ public class PropPriceDao implements java.io.Serializable
     this.custom1 = custom1;
   }
 
-  @Column(name = "custom2", length = 10)
   public String getCustom2()
   {
     return this.custom2;
@@ -127,7 +130,6 @@ public class PropPriceDao implements java.io.Serializable
     this.custom2 = custom2;
   }
 
-  @Column(name = "custom3", length = 10)
   public String getCustom3()
   {
     return this.custom3;
@@ -138,7 +140,6 @@ public class PropPriceDao implements java.io.Serializable
     this.custom3 = custom3;
   }
 
-  @Column(name = "custom4", length = 10)
   public String getCustom4()
   {
     return this.custom4;
