@@ -1,13 +1,27 @@
-<?xml version='1.0' encoding='utf-8'?>
-<!DOCTYPE hibernate-configuration PUBLIC
-        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-    	
-        
-        <!-- <mapping class="com.connecture.grouppolicyadmin.process.employer.configuration.message.EligibilityGroupMessageInfo"/>  -->
-        
-    </session-factory>
+  <session-factory>
+    <!-- <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/property_master</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">root</property> -->
+    <mapping class="com.vstar.dao.PropTermsCondDao"/>
+    <mapping class="com.vstar.dao.PropStateDao"/>
+    <mapping class="com.vstar.dao.PropPurchaseTypeDao"/>
+    <mapping class="com.vstar.dao.PropTransactionDao"/>
+    <mapping class="com.vstar.dao.PropCityDao"/>
+    <mapping class="com.vstar.dao.PropInfoCommentsExtDao"/>
+    <mapping class="com.vstar.dao.PropInfoExtDao"/>
+    <mapping class="com.vstar.dao.PropLocationDao"/>
+    <mapping class="com.vstar.dao.PropTypeDao"/>
+    <mapping class="com.vstar.dao.PropFeaturesDao"/>
+    <mapping class="com.vstar.dao.PropCategryDao"/>
+    <mapping class="com.vstar.dao.PropPriceDao"/>
+    <mapping class="com.vstar.dao.PropImageDao"/>
+    <mapping class="com.vstar.dao.PropInfoDao"/>
+    <mapping class="com.vstar.dao.PropAreaDao"/>
+    <mapping class="com.vstar.dao.PropCountryDao"/>
+  </session-factory>
 </hibernate-configuration>

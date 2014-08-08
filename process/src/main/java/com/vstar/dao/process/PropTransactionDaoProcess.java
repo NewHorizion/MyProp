@@ -67,4 +67,20 @@ public class PropTransactionDaoProcess
     propTransactionDao = (PropTransactionDao) query.uniqueResult();
     return propTransactionDao;
   }
+  /**
+   * @return the sessionFactory
+   */
+  public SessionFactory getSessionFactory()
+  {
+    return sessionFactory;
+  }
+
+  /**
+   * @param sessionFactory the sessionFactory to set
+   */
+  public void setSessionFactory(SessionFactory sessionFactory)
+  {
+    this.sessionFactory = sessionFactory;
+  }
+  
 }

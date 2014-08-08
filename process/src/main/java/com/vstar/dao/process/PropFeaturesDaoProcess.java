@@ -67,4 +67,20 @@ public class PropFeaturesDaoProcess
     propFeaturesDao = (PropFeaturesDao) query.uniqueResult();
     return propFeaturesDao;
   }
+  /**
+   * @return the sessionFactory
+   */
+  public SessionFactory getSessionFactory()
+  {
+    return sessionFactory;
+  }
+
+  /**
+   * @param sessionFactory the sessionFactory to set
+   */
+  public void setSessionFactory(SessionFactory sessionFactory)
+  {
+    this.sessionFactory = sessionFactory;
+  }
+  
 }

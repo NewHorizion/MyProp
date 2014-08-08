@@ -69,4 +69,20 @@ public class PropPurchaseTypeDaoProcess
     propPurchaseTypeDao = (PropPurchaseTypeDao) query.uniqueResult();
     return propPurchaseTypeDao;
   }
+  /**
+   * @return the sessionFactory
+   */
+  public SessionFactory getSessionFactory()
+  {
+    return sessionFactory;
+  }
+
+  /**
+   * @param sessionFactory the sessionFactory to set
+   */
+  public void setSessionFactory(SessionFactory sessionFactory)
+  {
+    this.sessionFactory = sessionFactory;
+  }
+  
 }

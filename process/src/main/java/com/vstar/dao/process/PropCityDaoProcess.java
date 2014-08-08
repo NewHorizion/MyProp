@@ -67,4 +67,20 @@ public class PropCityDaoProcess
     propCityDao = (PropCityDao) query.uniqueResult();
     return propCityDao;
   }
+  /**
+   * @return the sessionFactory
+   */
+  public SessionFactory getSessionFactory()
+  {
+    return sessionFactory;
+  }
+
+  /**
+   * @param sessionFactory the sessionFactory to set
+   */
+  public void setSessionFactory(SessionFactory sessionFactory)
+  {
+    this.sessionFactory = sessionFactory;
+  }
+  
 }

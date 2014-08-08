@@ -67,4 +67,20 @@ public class PropInfoExtDaoProcess
     propInfoExtDao = (PropInfoExtDao) query.uniqueResult();
     return propInfoExtDao;
   }
+  /**
+   * @return the sessionFactory
+   */
+  public SessionFactory getSessionFactory()
+  {
+    return sessionFactory;
+  }
+
+  /**
+   * @param sessionFactory the sessionFactory to set
+   */
+  public void setSessionFactory(SessionFactory sessionFactory)
+  {
+    this.sessionFactory = sessionFactory;
+  }
+  
 }

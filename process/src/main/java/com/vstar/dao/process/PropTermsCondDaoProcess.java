@@ -68,4 +68,20 @@ public class PropTermsCondDaoProcess
     propTermsCondDao = (PropTermsCondDao) query.uniqueResult();
     return propTermsCondDao;
   }
+  /**
+   * @return the sessionFactory
+   */
+  public SessionFactory getSessionFactory()
+  {
+    return sessionFactory;
+  }
+
+  /**
+   * @param sessionFactory the sessionFactory to set
+   */
+  public void setSessionFactory(SessionFactory sessionFactory)
+  {
+    this.sessionFactory = sessionFactory;
+  }
+  
 }
