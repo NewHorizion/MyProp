@@ -79,3 +79,17 @@
     		$scope.countries = data;
     		});
     }
+   
+    function searchControl ($scope,$http)
+	    {
+	    	$scope.visible = true;
+	    	$scope.search = function ()
+	    	{
+	    	 $http.post('http://localhost:8080/webservicesample/openService/search/properties')
+	    		.success(function(data) {
+	    		console.log(data);
+	    		$scope.properties = data;
+	    		});
+	    	}
+	    }
+   

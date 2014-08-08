@@ -20,6 +20,10 @@
 		class="com.vstar.process.masterData.MasterDataProcessImpl">
 	</bean>
 	
+	<bean id="propertySearchProcess"
+		class="com.vstar.process.property.search.PropertySearchProcessImpl">
+	</bean>
+	
 	<bean id="masterDataInitializedListener"
 		class="com.vstar.process.listeners.MasterDataInitialized">
 		<property name="masterDataProcess" ref="masterDataProcess"></property>

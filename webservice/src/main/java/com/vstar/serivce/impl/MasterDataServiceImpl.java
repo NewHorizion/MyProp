@@ -23,7 +23,7 @@ public class MasterDataServiceImpl implements MasterDataService {
 	public String getLocationMasterData() {
 		Map<String, Map<String,List<String>>> locations = masterDataProcess.getLocationMasterData();
 		Gson gson = new Gson();
-		String json = "Countries:" + gson.toJson(locations);
+		String json = gson.toJson(locations);
 		return json;
 	}
 

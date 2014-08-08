@@ -11,14 +11,40 @@
 			</select>
 		</div>
 		<div>
-			States: <select id="state" ng-disabled="!formdata.country" ng-model="formdata.state"
+			States: <select id="state" ng-disabled="!formdata.country"
+				ng-model="formdata.state"
 				ng-options="state for (state,cities) in formdata.country"><option
 					value=''>Select</option></select>
 		</div>
 		<div>
-			City: <select id="city" ng-disabled="!formdata.state || !formdata.country"
-				ng-model="city" ng-options="city for city in formdata.state"><option
+			City: <select id="city"
+				ng-disabled="!formdata.state || !formdata.country" ng-model="city"
+				ng-options="city for city in formdata.state"><option
 					value=''>Select</option></select>
 		</div>
+
+	</div>
+
+	<div ng-controller="searchControl" class="col-md-10">
+		<button ng-click="search()">Search</button>
+		<p ng-show="visible">
+		<ul class="propertys">
+		<li ng-repeat="property in properties" class ="property-listing">
+			<div>
+				<p>{{property.propertyTitle}}</p>
+
+				<p>Project : {{ property.projectName }}</p>
+				<p>Developer : {{ property.developerName }}</p>
+
+				<div>
+					<div>
+						<P>{{property.propPrice}}</P>
+						<p ng-show="rateSqft">{property.rateSqft}</p>
+					</div>
+				</div>
+			</div>
+		</li>
+		</ul>
+		</p>
 	</div>
 </div>
