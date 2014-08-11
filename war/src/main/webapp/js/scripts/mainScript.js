@@ -6,7 +6,7 @@
 		$routeProvider
 
 			// route for the home page
-			.when('/', {
+			.when('/home', {
 				templateUrl : 'pages/home.html',
 				controller  : 'mainController'
 			})
@@ -22,7 +22,18 @@
 				templateUrl : 'pages/contact.html',
 				controller  : 'contactController'
 			})
-			//rout for the login page
+			// route for the portfolio page
+			.when('/portfolio', {
+				templateUrl : 'pages/portfolio.html',
+				controller  : 'contactController'
+			})
+			
+				// route for the portfolio page
+			.when('/blog', {
+				templateUrl : 'pages/blog.html',
+				controller  : 'contactController'
+			})
+			// rout for the login page
 			.when('/login', {
 			templateUrl : 'pages/login.html',
 			controller  : 'loginController'
@@ -72,24 +83,25 @@
 		};
 	});
 	
-    function CountryCntrl($scope,$http) {
+	 scotchApp.controller('CountryCntrl', function($scope,$http) {
     	 $http.get('http://localhost:8080/webservicesample/openService/master/location')
     		.success(function(data) {
     		console.log(data);
     		$scope.countries = data;
     		});
-    }
-   
-    function searchControl ($scope,$http)
-	    {
 	    	$scope.visible = true;
 	    	$scope.search = function ()
 	    	{
-	    	 $http.post('http://localhost:8080/webservicesample/openService/search/properties')
+	    		$http({
+	    			method : 'post',
+	    			url : 'http://localhost:8080/webservicesample/openService/search/properties',
+	    			data : JSON.stringify($scope.formData), // pass in data as strings
+	    			headers: {'Content-Type': 'application/json'}
+	    			})
 	    		.success(function(data) {
 	    		console.log(data);
 	    		$scope.properties = data;
 	    		});
 	    	}
-	    }
+	    });
    
