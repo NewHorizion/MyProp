@@ -18,6 +18,7 @@
 	
 	<bean id="masterDataProcess"
 		class="com.vstar.process.masterData.MasterDataProcessImpl">
+		<property name="mergedProperties" ref="mergedProperties"></property>
 	</bean>
 	
 	<bean id="propertySearchProcess"
@@ -27,6 +28,7 @@
 	<bean id="masterDataInitializedListener"
 		class="com.vstar.process.listeners.MasterDataInitialized">
 		<property name="masterDataProcess" ref="masterDataProcess"></property>
+		<property name="mergedProperties" ref="mergedProperties"></property>
 	</bean>
 	
 </beans>

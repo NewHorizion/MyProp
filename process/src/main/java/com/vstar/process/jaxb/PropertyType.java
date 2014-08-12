@@ -15,16 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for cities complex type.
+ * <p>Java class for propertyType complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="cities">
+ * &lt;complexType name="propertyType">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="cityName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="type" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -34,36 +35,54 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "cities", propOrder = {
-    "cityName"
+@XmlType(name = "propertyType", propOrder = {
+    "type",
+    "id"
 })
-public class Cities {
+public class PropertyType {
 
     @XmlElement(required = true)
-    protected String cityName;
+    protected String type;
+    protected int id;
 
     /**
-     * Gets the value of the cityName property.
+     * Gets the value of the type property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getCityName() {
-        return cityName;
+    public String getType() {
+        return type;
     }
 
     /**
-     * Sets the value of the cityName property.
+     * Sets the value of the type property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setCityName(String value) {
-        this.cityName = value;
+    public void setType(String value) {
+        this.type = value;
+    }
+
+    /**
+     * Gets the value of the id property.
+     * 
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     */
+    public void setId(int value) {
+        this.id = value;
     }
 
 }

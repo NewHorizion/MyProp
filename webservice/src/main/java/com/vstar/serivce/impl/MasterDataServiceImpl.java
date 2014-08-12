@@ -21,9 +21,7 @@ public class MasterDataServiceImpl implements MasterDataService {
 	@Produces("application/json")
 	@Path("/location")
 	public String getLocationMasterData() {
-		Map<String, Map<String,List<String>>> locations = masterDataProcess.getLocationMasterData();
-		Gson gson = new Gson();
-		String json = gson.toJson(locations);
+		String json= masterDataProcess.readMasterData();
 		return json;
 	}
 

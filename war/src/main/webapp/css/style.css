@@ -1974,3 +1974,63 @@ article img.pull-right, article .align-right{
 @media (max-width: 360px) {
 
 }
+
+/* Custom CSS */
+
+#main_content{
+width:970px;
+margin:auto;
+clear:both;
+background-color:#FFFFFF;
+}
+
+.column1{
+width:257px;
+float:left;
+margin:0px;
+padding:10px 10px 10px 5px;
+}
+.column2{
+width:340px;
+float:left;
+margin:0px;
+padding:10px 5px 10px 5px;
+}
+.column3{
+width:320px;
+float:left;
+margin:0px;
+padding:10px 10px 10px 5px;
+}
+.column4{
+width:690px;
+float:left;
+margin:0px;
+padding:10px 0px 10px 5px;
+}
+
+.left_box{
+width:257px;
+height:auto;
+float:left;
+padding-bottom:10px;
+}
+
+.top_left_box{
+width:257px;
+height:10px;
+float:left;
+background:url(../img/top_box_bg.gif) no-repeat center;
+}
+.center_left_box{
+width:257px;
+height: auto;
+float:left;
+background:url(../img/center_box_bg.gif) repeat-y;
+}
+.bottom_left_box{
+width:257px;
+height:10px;
+float:left;
+background:url(../img/bottom_box_bg.gif) no-repeat center;
+}

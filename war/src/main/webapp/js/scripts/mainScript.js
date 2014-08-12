@@ -87,7 +87,8 @@
     	 $http.get('http://localhost:8080/webservicesample/openService/master/location')
     		.success(function(data) {
     		console.log(data);
-    		$scope.countries = data;
+    		$scope.propertyTypes = data.propertyTypes;
+    		$scope.locations = data.locations;
     		});
 	    	$scope.visible = true;
 	    	$scope.search = function ()

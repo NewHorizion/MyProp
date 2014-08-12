@@ -1,99 +1,87 @@
-<section id="content">
-	<form>
+<div class="row">
+	<div id="main_content"  ng-controller="CountryCntrl">
+		<section id="content">
+			<form>
+				<div class="column1">
+					<div class="left_box">
+						<div class="top_left_box"></div>
+						<div class="center_left_box">
+							<div class="box_title">
+								<span>Find</span> your place:
+							</div>
+							<div class="form">
+								<div class="form_row">
+									<select id="country" placeholder="Country"
+										ng-model="formData.city"
+										ng-options="city.cityName group by city.stateName for city in locations">
+										<option value=''>Select</option>
+									</select>
+								</div>
 
+								<div class="form_row">
+									<select id="country" ng-model="formData.propertyType"
+										ng-options="propertyType.id as propertyType.name for propertyType in propertyTypes">
+										<option value=''>Select</option>
+									</select>
+								</div>
 
-		<div class="left_box">
-			<div class="top_left_box"></div>
-			<div class="center_left_box">
-				<div class="box_title">
-					<span>Find</span> your place:
-				</div>
-				<div class="form">
-					<div class="form_row">
-						<label class="left">City: </label> <input type="text"
-							class="form_input" />
-					</div>
-					<div class="form_row">
-						<label class="left">State: </label> <input type="text"
-							class="form_input" />
-					</div>
-					<div class="form_row">
-						<label class="left">Price: </label> <input type="text"
-							class="form_input" value="minimum" />
-					</div>
-					<div class="form_row">
-						<label class="left">To: </label> <input type="text"
-							class="form_input" value="maximum" />
-					</div>
-					<div class="form_row">
-						<label class="left">Rooms: </label> <input type="text"
-							class="form_input" />
-					</div>
-					<div class="form_row">
-						<label class="left_long">Looking for to:</label>
-					</div>
-					<div class="form_row">
-						<input type="radio" name="reason" /> sell home
-					</div>
-					<div class="form_row">
-						<input type="radio" name="reason" /> buy home
-					</div>
-					<div class="form_row">
-						<input type="radio" name="reason" /> rent home
-					</div>
-					<div style="float: right; padding: 10px 25px 0 0;">
-						<input type="image" src="images/find.gif" />
-					</div>
-				</div>
-			</div>
-			<div class="bottom_left_box"></div>
-		</div>
-
-		<div class="row" ng-controller="CountryCntrl">
-			<div>
-				<select id="country" placeholder="Country" class="col-lg-4 field"
-					ng-model="
-					formData.country"
-					ng-options="country for (country,states) in countries">
-					<option value=''>Country</option>
-				</select>
-			</div>
-			<div>
-				<select id="state" class="col-lg-4 field"
-					ng-disabled="
-					!formData.country" ng-model="formData.state"
-					ng-options="state for (state,cities) in formData.country"><option
-						value=''>State</option></select>
-			</div>
-			<div>
-				<select id="city" class="col-lg-4 field"
-					ng-disabled="
-					!formData.state || !formData.country"
-					ng-model="formData.city"
-					ng-options="city for city in formData.state"><option
-						value=''>City</option></select>
-			</div>
-
-			<button ng-click="search()">Search</button>
-			<p ng-show="visible">
-			<ul class="propertys">
-				<li ng-repeat="property in properties" class="property-listing">
-					<div>
-						<p>{{property.propertyTitle}}</p>
-
-						<p>Project : {{ property.projectName }}</p>
-						<p>Developer : {{ property.developerName }}</p>
-
-						<div>
-							<div>
-								<P>{{property.propPrice}}</P>
-								<p ng-show="rateSqft">{property.rateSqft}</p>
+								<div class="form_row">
+									<label class="left">Price: </label> <input type="text"
+										class="form_input" value="minimum" />
+								</div>
+								<div class="form_row">
+									<label class="left">To: </label> <input type="text"
+										class="form_input" value="maximum" />
+								</div>
+								<div class="form_row">
+									<label class="left">Rooms: </label> <input type="text"
+										class="form_input" />
+								</div>
+								<div class="form_row">
+									<label class="left_long">Looking for to:</label>
+								</div>
+								<div class="form_row">
+									<input type="radio" name="reason" /> sell home
+								</div>
+								<div class="form_row">
+									<input type="radio" name="reason" /> buy home
+								</div>
+								<div class="form_row">
+									<input type="radio" name="reason" /> rent home
+								</div>
+								<div style="float: right; padding: 10px 25px 0 0;">
+									<input type="image" src="img/find.gif" ng-click="search()" />
+								</div>
 							</div>
 						</div>
 					</div>
-				</li>
-			</ul>
-			</p>
-		</div>
-	</form>
-</section>
+					<div class="bottom_left_box"></div>
+				</div>
+
+				<!-- begining of column 2 -->
+				<div class="column2">
+					<p ng-show="visible">
+					<ul class="propertys">
+						<li ng-repeat="property in properties" class="property-listing">
+							<div>
+								<p>{{property.propertyTitle}}</p>
+
+								<p>Project : {{ property.projectName }}</p>
+								<p>Developer : {{ property.developerName }}</p>
+
+								<div>
+									<div>
+										<P>{{property.propPrice}}</P>
+										<p ng-show="rateSqft">{property.rateSqft}</p>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+					</p>
+				</div>
+				<!-- end of column 2 -->
+			</form>
+		</section>
+	</div>
+</div>
