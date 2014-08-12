@@ -40,4 +40,26 @@ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
             </value>
         </property>
  </bean>
+ 
+    <!-- default properties -->
+   <bean id="defaultProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+      <property name="location" value="classpath:/default.properties"/>
+   </bean>
+   
+    <!-- merged properties -->
+    
+   <bean id="mergedProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+      <property name="propertiesArray">
+      	<list>
+      		<ref bean="defaultProperties"/>
+      	</list>
+      </property>
+   </bean>
+   
+   <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+     <property name="systemPropertiesModeName">
+       <value>SYSTEM_PROPERTIES_MODE_OVERRIDE</value>
+     </property>
+	 <property name="properties" ref="mergedProperties"/>
+   </bean>
 </beans>
