@@ -2034,3 +2034,39 @@ height:10px;
 float:left;
 background:url(../img/bottom_box_bg.gif) no-repeat center;
 }
+
+.offer_box{
+width:320px;
+height:206px;
+background-color:#f3f5f6;
+padding:10px;
+margin:10px 0px 10px 0px;
+}
+
+.small_title{
+background-color:#385870;
+text-align:left;
+width:100%;
+padding:5px 5px 5px 15px;
+color:#FFFFFF;
+font-weight:bold;
+}
+.offer_info{
+padding:5px;
+}
+p.offer{
+text-align:justify;
+font-size:10px;
+}
+.offer_info span{
+font-weight:bold;
+color:#d8325d;
+}
+img.img_left{
+float:left;
+padding:0px 8px 8px 0px;
+}
+p.offer{
+text-align:justify;
+font-size:10px;
+}

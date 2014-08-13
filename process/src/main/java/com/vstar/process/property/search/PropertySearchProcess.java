@@ -5,5 +5,5 @@ import java.util.Map;
 
 public interface PropertySearchProcess {
    public List<Map<String,String>> findProperty ();
-   
+   public String findLatestProperties ();
 }

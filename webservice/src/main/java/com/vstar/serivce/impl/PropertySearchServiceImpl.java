@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -22,11 +23,19 @@ public class PropertySearchServiceImpl implements PropertySearchService {
 	@Consumes("application/json")
 	@Produces("application/json")
 	@Path("/properties")
-	public String getLocationMasterData() {
+	public String findProperties() {
 		List<Map<String,String>> searchProperties = propertySearchProcess.findProperty();
 		Gson gson = new Gson();
 		String json = gson.toJson(searchProperties);
 		return json;
+	}
+	
+	@Transactional
+	@GET
+	@Produces("application/json")
+	@Path("/latest")
+	public String getLatestProperties() {
+		return propertySearchProcess.findLatestProperties();
 	}
 
 	public PropertySearchProcess getPropertySearchProcess() {
@@ -37,5 +46,7 @@ public class PropertySearchServiceImpl implements PropertySearchService {
 			PropertySearchProcess propertySearchProcess) {
 		this.propertySearchProcess = propertySearchProcess;
 	}
+
+	
 
 }

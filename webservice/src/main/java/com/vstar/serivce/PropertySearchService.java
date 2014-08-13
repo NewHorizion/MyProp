@@ -14,5 +14,13 @@ public interface PropertySearchService {
 	@Consumes("application/json")
 	@Produces("application/json")
 	@Path("/search")
-    public String getLocationMasterData ();
+    public String findProperties ();
+	
+	@Transactional
+	@GET
+	@Produces("application/json")
+	@Path("/latest")
+    public String getLatestProperties ();
+	
+	
 }

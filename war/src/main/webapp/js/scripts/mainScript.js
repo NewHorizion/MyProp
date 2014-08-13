@@ -105,4 +105,12 @@
 	    		});
 	    	}
 	    });
-   
+	 
+	 
+	 scotchApp.controller('latestSearchCntrl', function($scope,$http) {
+    	 $http.get('http://localhost:8080/webservicesample/openService/search/latest')
+    		.success(function(data) {
+    		console.log(data);
+    		$scope.latestProperties = data.latestProperties;
+    		});
+	    });

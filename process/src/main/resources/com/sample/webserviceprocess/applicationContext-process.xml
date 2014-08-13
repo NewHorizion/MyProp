@@ -23,6 +23,7 @@
 	
 	<bean id="propertySearchProcess"
 		class="com.vstar.process.property.search.PropertySearchProcessImpl">
+		<property name="mergedProperties" ref="mergedProperties"></property>
 	</bean>
 	
 	<bean id="masterDataInitializedListener"
