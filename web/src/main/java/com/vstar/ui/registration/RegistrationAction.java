@@ -19,12 +19,7 @@ public class RegistrationAction extends ActionSupport
 
   public String save()
   {
-    System.out.println("-----------------");
-    System.out.println(propUsersDaoProcess);
-    System.out.println(propUsersDaoProcess.getSessionFactory());
-    System.out.println("-----------------");
-    PropUsersDao user = new PropUsersDao(userId, password, (byte) 1);
-    propUsersDaoProcess.addUpdatePropUsersDao(user);
+    propUsersDaoProcess.createUser(userId,password,true);
     jsonMap.put("success", true);
     jsonMap.put("messages", "Welcome " + userName + "!!!!");
     return SUCCESS;

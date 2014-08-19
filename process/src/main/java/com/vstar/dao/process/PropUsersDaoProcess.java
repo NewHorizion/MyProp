@@ -1,14 +1,12 @@
 package com.vstar.dao.process;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
-import com.vstar.dao.PropUsersDao;
+import org.springframework.security.authentication.dao.SaltSource;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 /**
  * PropUsersDaoProcess
@@ -16,18 +14,57 @@ import com.vstar.dao.PropUsersDao;
  */
 public class PropUsersDaoProcess
 {
-  private SessionFactory sessionFactory;
 
-  /**
-   * 
-   * @param PropUsersDao
-   * @throws HibernateException
-   */
-  public PropUsersDao addUpdatePropUsersDao(PropUsersDao PropUsersDao) throws HibernateException
-  {
-    Session session = sessionFactory.openSession();
-    return (PropUsersDao) session.merge(PropUsersDao);
-  }
+	private JdbcUserDetailsManager userDetailsManager;
+	private SaltSource saltSource = null;
+	private PasswordEncoder passwordEncoder = null;
+ 
+	private UserDetails user;
+ 
+	private boolean accountNonExpired;
+	private boolean credentialsNonExpired;
+	private boolean accountNonLocked;
+ 
+	public void createUser( String userName,String password, boolean enabled)
+	{
+		
+		Object salt = null; 
+ 
+		user = new User( userName, 
+						 password, 
+						 enabled, 
+						 accountNonExpired, 
+						 credentialsNonExpired, 
+						 accountNonLocked, 
+						 AuthorityUtils.createAuthorityList("ROLE_USER") );
+ 
+		if( this.saltSource != null )
+		{
+			salt = this.saltSource.getSalt( user );
+		}
+ 
+		// calculate what hashedPassword would be in this configuration
+		String hashedPassword = passwordEncoder.encodePassword( user.getPassword(), salt );
+ 
+		// create a new user with the hashed password 
+		UserDetails userHashedPassword = new User( userName, 
+													 hashedPassword, 
+                                    				 enabled, 
+                                    				 accountNonExpired, 
+                                    				 credentialsNonExpired, 
+                                    				 accountNonLocked, 
+                                    				 AuthorityUtils.createAuthorityList("ROLE_USER")  );
+ 
+		// if the user extists, delete it 
+		if( !userDetailsManager.userExists( userHashedPassword.getUsername() ) )
+		{
+			userDetailsManager.createUser( userHashedPassword );
+		}
+ 
+		
+ 
+	}
+
 
   /**
    * 
@@ -36,50 +73,80 @@ public class PropUsersDaoProcess
    */
   public void deletePropUsersDao(String usersId) throws HibernateException
   {
-    Session session = sessionFactory.getCurrentSession();
-    PropUsersDao propUsersDao = (PropUsersDao) session.load(PropUsersDao.class, usersId);
-    session.delete(propUsersDao);
+	  userDetailsManager.deleteUser(usersId);
   }
 
-  /**
-   * @return
-   */
-  public List<PropUsersDao> getAllPropUsersDaos() throws HibernateException
-  {
-    List<PropUsersDao> propUsersDaos = new ArrayList<PropUsersDao>();
-    Session session = sessionFactory.getCurrentSession();
-    propUsersDaos = session.createQuery("from PropUsersDao").list();
-    return propUsersDaos;
-  }
 
   /**
    * @param PropUsersDaoid
    * @return
    */
-  public PropUsersDao getPropUsersDaoById(String usersId) throws HibernateException
+  public UserDetails getPropUsersDaoById(String usersId) throws HibernateException
   {
-    PropUsersDao propUsersDao = null;
-    Session session = sessionFactory.getCurrentSession();
-    String queryString = "from PropUsersDao where username = :username";
-    Query query = session.createQuery(queryString);
-    query.setString("username", usersId);
-    propUsersDao = (PropUsersDao) query.uniqueResult();
-    return propUsersDao;
+	  UserDetails userDetails =  userDetailsManager.loadUserByUsername(usersId);
+    return userDetails;
   }
 
-  /**
-   * @return the sessionFactory
-   */
-  public SessionFactory getSessionFactory()
+  
+  public JdbcUserDetailsManager getUserDetailsManager()
   {
-    return sessionFactory;
+  	return userDetailsManager;
   }
 
-  /**
-   * @param sessionFactory the sessionFactory to set
-   */
-  public void setSessionFactory(SessionFactory sessionFactory)
+	public void setUserDetailsManager(JdbcUserDetailsManager userDetailsManager)
   {
-    this.sessionFactory = sessionFactory;
+  	this.userDetailsManager = userDetailsManager;
   }
+
+	public SaltSource getSaltSource()
+  {
+  	return saltSource;
+  }
+
+	public void setSaltSource(SaltSource saltSource)
+  {
+  	this.saltSource = saltSource;
+  }
+
+	public PasswordEncoder getPasswordEncoder()
+  {
+  	return passwordEncoder;
+  }
+
+	public void setPasswordEncoder(PasswordEncoder passwordEncoder)
+  {
+  	this.passwordEncoder = passwordEncoder;
+  }
+
+	public boolean isAccountNonExpired()
+  {
+  	return accountNonExpired;
+  }
+
+	public void setAccountNonExpired(boolean accountNonExpired)
+  {
+  	this.accountNonExpired = accountNonExpired;
+  }
+
+	public boolean isCredentialsNonExpired()
+  {
+  	return credentialsNonExpired;
+  }
+
+	public void setCredentialsNonExpired(boolean credentialsNonExpired)
+  {
+  	this.credentialsNonExpired = credentialsNonExpired;
+  }
+
+	public boolean isAccountNonLocked()
+  {
+  	return accountNonLocked;
+  }
+
+	public void setAccountNonLocked(boolean accountNonLocked)
+  {
+  	this.accountNonLocked = accountNonLocked;
+  }
+
+
 }

@@ -1,5 +1,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:sec="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:sec="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
           http://www.springframework.org/schema/tx
@@ -8,52 +9,69 @@
           http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
 
 
- <sec:http auto-config="true"  use-expressions="true">
+	<sec:http auto-config="true" use-expressions="true">
 
-        <sec:intercept-url pattern="/**" access="permitAll"></sec:intercept-url>
-        <sec:intercept-url pattern="/login" access="permitAll"></sec:intercept-url>
-        <sec:intercept-url pattern="/logout" access="permitAll"></sec:intercept-url>
-        <sec:intercept-url pattern="/accessdenied" access="permitAll"></sec:intercept-url>
-       <!-- <sec:intercept-url pattern="/**" access="hasRole('ROLE_USER')"></sec:intercept-url>-->
-        <sec:logout logout-success-url="/logout"></sec:logout>
-        
- </sec:http>
- 
- 
- <bean id="myUserDetailsService"
-class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
-<property name="dataSource" ref="dataSource"/>
-</bean>
+		<sec:intercept-url pattern="/**" access="permitAll"></sec:intercept-url>
+		<sec:intercept-url pattern="/login" access="permitAll"></sec:intercept-url>
+		<sec:intercept-url pattern="/logout" access="permitAll"></sec:intercept-url>
+		<sec:intercept-url pattern="/accessdenied" access="permitAll"></sec:intercept-url>
+		<!-- <sec:intercept-url pattern="/**" access="hasRole('ROLE_USER')"></sec:intercept-url> -->
+		<sec:logout logout-success-url="/logout"></sec:logout>
 
- <bean id="filterSecurityInterceptor"
-        class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
-        <property name="authenticationManager" ref="authenticationManager" />
-        <property name="accessDecisionManager" ref="accessDecisionManager" />
-        
-        <property name="securityMetadataSource">
-            <sec:filter-invocation-definition-source>
-                <sec:intercept-url pattern="/secure/extreme/**" access="ROLE_SUPERVISOR"/>
-                <sec:intercept-url pattern="/secure/**" access="ROLE_USER"/>
-                <sec:intercept-url pattern="/**" access="ROLE_USER"/>
-            </sec:filter-invocation-definition-source>
-        </property>
-    </bean>
+	</sec:http>
 
-  <tx:annotation-driven />
-    <bean id="transactionManager"
-        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"></property>
-    </bean>   
-    
-<sec:authentication-manager alias="authenticationManager">
-<sec:authentication-provider>
-<sec:user-service>
-<sec:user name="jimi" password="jimispassword" authorities="ROLE_USER, ROLE_ADMIN"/>
-<sec:user name="bob" password="bobspassword" authorities="ROLE_USER"/>
-</sec:user-service>
-</sec:authentication-provider>
+	<bean id="defaultPasswordEncoder"
+		class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+		<constructor-arg>
+			<value>256</value>
+		</constructor-arg>
+	</bean>
 
-<sec:authentication-provider user-service-ref='myUserDetailsService'/>
-</sec:authentication-manager>
+	<bean id="defaultSaltSource"
+		class="org.springframework.security.authentication.dao.SystemWideSaltSource">
+		<property name="systemWideSalt" value="ACPRECF95"></property>
+	</bean>
+
+	<bean id="myUserDetailsService"
+		class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+		<bean id="jdbcUserDetailsManager"
+		class="org.springframework.security.provisioning.JdbcUserDetailsManager">
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="filterSecurityInterceptor"
+		class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="accessDecisionManager" ref="accessDecisionManager" />
+
+		<property name="securityMetadataSource">
+			<sec:filter-invocation-definition-source>
+				<sec:intercept-url pattern="/secure/extreme/**"
+					access="ROLE_SUPERVISOR" />
+				<sec:intercept-url pattern="/secure/**" access="ROLE_USER" />
+				<sec:intercept-url pattern="/**" access="ROLE_USER" />
+			</sec:filter-invocation-definition-source>
+		</property>
+	</bean>
+
+	<sec:authentication-manager alias="authenticationManager">
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="jimi" password="jimispassword" authorities="ROLE_USER, ROLE_ADMIN" />
+				<sec:user name="bob" password="bobspassword" authorities="ROLE_USER" />
+			</sec:user-service>
+		</sec:authentication-provider>
+
+		<sec:authentication-provider
+			user-service-ref='myUserDetailsService'>
+			<sec:password-encoder ref="defaultPasswordEncoder">
+				<sec:salt-source ref="defaultSaltSource" />
+			</sec:password-encoder>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
 
 </beans>
