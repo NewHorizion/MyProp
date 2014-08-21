@@ -15,17 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for propertyType complex type.
+ * <p>Java class for localities complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="propertyType">
+ * &lt;complexType name="localities">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="type" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="locName" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="locId" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,54 +35,54 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "propertyType", propOrder = {
-    "type",
-    "id"
+@XmlType(name = "localities", propOrder = {
+    "locName",
+    "locId"
 })
-public class PropertyType {
+public class Localities {
 
     @XmlElement(required = true)
-    protected String type;
-    protected int id;
+    protected String locName;
+    protected int locId;
 
     /**
-     * Gets the value of the type property.
+     * Gets the value of the locName property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getType() {
-        return type;
+    public String getLocName() {
+        return locName;
     }
 
     /**
-     * Sets the value of the type property.
+     * Sets the value of the locName property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setType(String value) {
-        this.type = value;
+    public void setLocName(String value) {
+        this.locName = value;
     }
 
     /**
-     * Gets the value of the id property.
+     * Gets the value of the locId property.
      * 
      */
-    public int getId() {
-        return id;
+    public int getLocId() {
+        return locId;
     }
 
     /**
-     * Sets the value of the id property.
+     * Sets the value of the locId property.
      * 
      */
-    public void setId(int value) {
-        this.id = value;
+    public void setLocId(int value) {
+        this.locId = value;
     }
 
 }
