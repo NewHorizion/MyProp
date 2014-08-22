@@ -12,33 +12,30 @@ import com.vstar.dao.PropStateDao;
 
 /**
  * PropStateDaoProcess
- * 
  */
 public class PropStateDaoProcess
 {
   private SessionFactory sessionFactory;
 
   /**
-   * 
    * @param PropStateDao
    * @throws HibernateException
    */
   public PropStateDao addUpdatePropStateDao(PropStateDao propStateDao) throws HibernateException
   {
     Session session = sessionFactory.getCurrentSession();
-    return (PropStateDao)session.merge(propStateDao);
+    return (PropStateDao) session.merge(propStateDao);
   }
 
   /**
-   * 
    * @param PropStateDaoid
    * @throws HibernateException
    */
-  public void deletePropStateDao(int propStateId) throws HibernateException
+  public void deletePropStateDao(long propStateId) throws HibernateException
   {
     Session session = sessionFactory.getCurrentSession();
-    PropStateDao propStateDao = (PropStateDao) session.load(PropStateDao.class, new Integer(
-        propStateId));
+    PropStateDao propStateDao = (PropStateDao) session.load(PropStateDao.class, new Long(
+      propStateId));
     session.delete(propStateDao);
   }
 
@@ -57,16 +54,17 @@ public class PropStateDaoProcess
    * @param PropStateDaoid
    * @return
    */
-  public PropStateDao getPropStateDaoById(int propStateId) throws HibernateException
+  public PropStateDao getPropStateDaoById(long propStateId) throws HibernateException
   {
     PropStateDao propStateDao = null;
     Session session = sessionFactory.getCurrentSession();
     String queryString = "from PropStateDao where propStateId = :propStateId";
     Query query = session.createQuery(queryString);
-    query.setInteger("propStateId", propStateId);
+    query.setLong("propStateId", propStateId);
     propStateDao = (PropStateDao) query.uniqueResult();
     return propStateDao;
   }
+
   /**
    * @return the sessionFactory
    */
@@ -82,5 +80,5 @@ public class PropStateDaoProcess
   {
     this.sessionFactory = sessionFactory;
   }
-  
+
 }
