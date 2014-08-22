@@ -1,6 +1,5 @@
 package com.vstar.process.masterData;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,16 +10,21 @@ import com.vstar.common.PropertyTypeEnum;
 import com.vstar.dao.process.PropertiesConstants;
 import com.vstar.process.jaxb.MasterData;
 import com.vstar.process.jaxb.converters.MasterDataConverter;
+import com.vstar.process.masterData.infoBean.PropCityInfo;
+import com.vstar.process.masterData.infoBean.PropLocationDataProcessImpl;
+import com.vstar.process.masterData.infoBean.PropLocationInfo;
+import com.vstar.process.masterData.infoBean.PropStateInfo;
 
 public class MasterDataProcessImpl implements MasterDataProcess {
 	private Properties mergedProperties;
 	private final String JAXB_MASTER_DATA_PACKAGE = "com.vstar.process.jaxb";
+	private PropLocationDataProcessImpl propLocationDataProcessImpl;
 
 	@Override
-	public Map<String, Map<String, List<String>>> getLocationMasterData() {
-		Map<String, Map<String, List<String>>> countries = new LinkedHashMap<String, Map<String, List<String>>>();
+	public Map<String, Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>>> getLocationMasterData() {
+	  Map<String, Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>>> countries = null;
 
-		Map<String, List<String>> statesMap = new LinkedHashMap<String, List<String>>();
+		/*Map<String, List<String>> statesMap = new LinkedHashMap<String, List<String>>();
 		List<String> MaharashtraCities = new ArrayList<String>();
 		MaharashtraCities.add("Mumbai");
 		MaharashtraCities.add("Vidarbha");
@@ -34,7 +38,8 @@ public class MasterDataProcessImpl implements MasterDataProcess {
 		upCities.add("Kanpur");
 
 		statesMap.put("Uttar Pradesh", upCities);
-		countries.put("India", statesMap);
+		countries.put("India", statesMap);*/
+		countries = propLocationDataProcessImpl.getPropLocationData();
 		return countries;
 	}
 
@@ -66,5 +71,15 @@ public class MasterDataProcessImpl implements MasterDataProcess {
 	public void setMergedProperties(Properties mergedProperties) {
 		this.mergedProperties = mergedProperties;
 	}
+
+  public PropLocationDataProcessImpl getPropLocationDataProcessImpl()
+  {
+    return propLocationDataProcessImpl;
+  }
+
+  public void setPropLocationDataProcessImpl(PropLocationDataProcessImpl propLocationDataProcessImpl)
+  {
+    this.propLocationDataProcessImpl = propLocationDataProcessImpl;
+  }
 
 }

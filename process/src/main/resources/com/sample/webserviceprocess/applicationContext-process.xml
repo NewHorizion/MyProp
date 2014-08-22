@@ -12,9 +12,28 @@
 
 	<bean id="helloProcess" class="com.sample.webserviceprocess.HelloProcess">
 	</bean>
+	
+	<bean id="propStateDaoProcess" class="com.vstar.dao.process.PropStateDaoProcess">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="propCityDaoProcess" class="com.vstar.dao.process.PropCityDaoProcess">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="propLocationDaoProcess" class="com.vstar.dao.process.PropLocationDaoProcess">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="propLocationDataProcessImpl" class="com.vstar.process.masterData.infoBean.PropLocationDataProcessImpl">
+		<property name="propStateDaoProcess" ref="propStateDaoProcess"></property>
+		<property name="propCityDaoProcess" ref="propCityDaoProcess"></property>
+		<property name="propLocationDaoProcess" ref="propLocationDaoProcess"></property>
+	</bean>
 
 	<bean id="masterDataProcess" class="com.vstar.process.masterData.MasterDataProcessImpl">
 		<property name="mergedProperties" ref="mergedProperties"></property>
+		<property name="propLocationDataProcessImpl" ref="propLocationDataProcessImpl"></property>
 	</bean>
 
 	<bean id="propertySearchProcess"

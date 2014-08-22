@@ -21,6 +21,9 @@ import com.vstar.dao.process.PropertiesConstants;
 import com.vstar.process.jaxb.MasterData;
 import com.vstar.process.jaxb.converters.MasterDataConverter;
 import com.vstar.process.masterData.MasterDataProcess;
+import com.vstar.process.masterData.infoBean.PropCityInfo;
+import com.vstar.process.masterData.infoBean.PropLocationInfo;
+import com.vstar.process.masterData.infoBean.PropStateInfo;
 
 public class MasterDataInitialized implements
 		ApplicationListener<ContextRefreshedEvent> {
@@ -38,7 +41,7 @@ public class MasterDataInitialized implements
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		Map<String, Map<String, List<String>>> countries = masterDataProcess
+	  Map<String, Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>>> countries = masterDataProcess
 				.getLocationMasterData();
 		Map<Integer,String> propertyTypes = masterDataProcess.getPropertyTypes();
 		MasterData masterData = new MasterData();

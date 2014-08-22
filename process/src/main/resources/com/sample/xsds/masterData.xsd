@@ -19,7 +19,7 @@
        <xsd:complexType name="states">
             <xsd:sequence>
                 <xsd:element name="stateName" type="xsd:string"></xsd:element>
-                <xsd:element name="stateId" type="xsd:int"></xsd:element>
+                <xsd:element name="stateId" type="xsd:long"></xsd:element>
                 <xsd:element type="cities" name="cities" maxOccurs="unbounded"></xsd:element>
             </xsd:sequence>
        </xsd:complexType>
@@ -27,7 +27,7 @@
   <xsd:complexType name="cities">
             <xsd:sequence>
                 <xsd:element name="cityName" type="xsd:string"></xsd:element>
-                <xsd:element name="cityId" type="xsd:int"></xsd:element>
+                <xsd:element name="cityId" type="xsd:long"></xsd:element>
                 <xsd:element type="localities" name="localities" maxOccurs="unbounded"></xsd:element>
             </xsd:sequence>
    </xsd:complexType>
@@ -35,7 +35,7 @@
      <xsd:complexType name="localities">
             <xsd:sequence>
                 <xsd:element name="locName" type="xsd:string"></xsd:element>
-                <xsd:element name="locId" type="xsd:int"></xsd:element>
+                <xsd:element name="locId" type="xsd:long"></xsd:element>
             </xsd:sequence>
    </xsd:complexType>
    

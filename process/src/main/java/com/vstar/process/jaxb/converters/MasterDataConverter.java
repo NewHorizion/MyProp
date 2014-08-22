@@ -9,9 +9,13 @@ import java.util.Set;
 import com.google.gson.Gson;
 import com.vstar.process.jaxb.Cities;
 import com.vstar.process.jaxb.Countries;
+import com.vstar.process.jaxb.Localities;
 import com.vstar.process.jaxb.MasterData;
 import com.vstar.process.jaxb.PropertyType;
 import com.vstar.process.jaxb.States;
+import com.vstar.process.masterData.infoBean.PropCityInfo;
+import com.vstar.process.masterData.infoBean.PropLocationInfo;
+import com.vstar.process.masterData.infoBean.PropStateInfo;
 import com.vstar.process.masterData.model.LocationModel;
 import com.vstar.process.masterData.model.PropertyTypeModel;
 
@@ -23,27 +27,47 @@ public class MasterDataConverter {
 	 * @param countries
 	 */
 	public static void convertLocationMasterData(MasterData masterData,
-			Map<String, Map<String, List<String>>> countries) {
+	  Map<String, Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>>> countries) {
 		// Extract countries key from countries map.
 		Set<String> countriesSet = countries.keySet();
-		Set<String> stateSet = null;
+		Set<PropStateInfo> stateSet = null;
+		Set<PropCityInfo> citySet = null;
+		  
 		Countries jaxbCountry = null;
 		States jaxbState = null;
-		Map<String, List<String>> mapStates = null;
-		List<String> cities = null;
+		Cities jaxbCity = null;
+		Localities jaxbLocalities = null;
+		
+		Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>> mapStates = null;
+		Map<PropCityInfo, List<PropLocationInfo>> cities = null;
+		List<PropLocationInfo> propLocationInfos = null; 
+		
 		for (String country : countriesSet) {
 			jaxbCountry = new Countries();
 			jaxbCountry.setCountryName(country);
 			// Extract states from countries map using country as a key.
 			mapStates = countries.get(country);
 			stateSet = mapStates.keySet();
-			for (String state : stateSet) {
+			for (PropStateInfo state : stateSet) {
 				jaxbState = new States();
-				jaxbState.setStateName(state);
+				jaxbState.setStateName(state.getStateName());
+				jaxbState.setStateId(state.getStateId());
+				
 				cities = mapStates.get(state);
-				for (String city : cities) {
-					Cities jaxbCity = new Cities();
-					jaxbCity.setCityName(city);
+				citySet = cities.keySet();
+				for (PropCityInfo city : citySet) {
+					jaxbCity = new Cities();
+					jaxbCity.setCityName(city.getCityName());
+					jaxbCity.setCityId(city.getCityId());
+					
+					propLocationInfos = cities.get(city);
+					for (PropLocationInfo propLocationInfo : propLocationInfos)
+					{
+					  jaxbLocalities = new Localities();
+					  jaxbLocalities.setLocId(propLocationInfo.getLocationId());
+					  jaxbLocalities.setLocName(propLocationInfo.getLocationName());
+					  jaxbCity.getLocalities().add(jaxbLocalities);
+					}
 					jaxbState.getCities().add(jaxbCity);
 				}
 				jaxbCountry.getStates().add(jaxbState);
