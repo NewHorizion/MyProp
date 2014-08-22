@@ -29,7 +29,7 @@ public class PropLocationDataProcessImpl implements PropLocationDataProcess
   {
     Map<String, Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>>> countries = new LinkedHashMap<String, Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>>>();
     Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>> statesMap = new LinkedHashMap<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>>();
-    Map<PropCityInfo, List<PropLocationInfo>> citiesMap = new LinkedHashMap<PropCityInfo, List<PropLocationInfo>>();
+    Map<PropCityInfo, List<PropLocationInfo>> citiesMap = null;
 
     List<PropLocationInfo> propLocationInfos = null;
 
@@ -47,6 +47,7 @@ public class PropLocationDataProcessImpl implements PropLocationDataProcess
       propStateInfo.setStateId(propStateDao.getPropStateId());
       propStateInfo.setStateName(propStateDao.getStateName());
 
+      citiesMap = new LinkedHashMap<PropCityInfo, List<PropLocationInfo>>();
       propCityDaos = propCityDaoProcess.getAllPropCitiesByStateId(propStateDao.getPropStateId());
       for (PropCityDao propCityDao : propCityDaos)
       {
