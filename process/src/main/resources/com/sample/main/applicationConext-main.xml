@@ -38,8 +38,7 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
 		<property name="hibernateProperties">
 			<value>
 				hibernate.connection.provider_class=org.hibernate.connection.C3P0ConnectionProvider
-				hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
-				hibernate.default_schema=dbo
+				hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
 				hibernate.show_sql=true
 			</value>
 		</property>

@@ -68,7 +68,7 @@ public class PropLocationDaoProcess
     List<PropLocationDao> propLocationDaos = new ArrayList<PropLocationDao>();
     Session session = sessionFactory.getCurrentSession();
     Criteria criteria = session.createCriteria(PropLocationDao.class);
-    criteria.add(Restrictions.eq("propCity", cityId));
+    criteria.add(Restrictions.eq("propCityDao.propCityId", cityId));
     propLocationDaos = criteria.list();
     return propLocationDaos;
   }
