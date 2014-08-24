@@ -6,41 +6,47 @@
 		$routeProvider
 
 			// route for the home page
-			.when('/home', {
+		.when('/home', {
 				templateUrl : 'pages/home.html',
 				controller  : 'mainController'
 			})
 
 			// route for the about page
-			.when('/about', {
+		.when('/about', {
 				templateUrl : 'pages/about.html',
 				controller  : 'aboutController'
 			})
 
 			// route for the contact page
-			.when('/contact', {
+		.when('/contact', {
 				templateUrl : 'pages/contact.html',
 				controller  : 'contactController'
 			})
 			// route for the portfolio page
-			.when('/portfolio', {
+		.when('/portfolio', {
 				templateUrl : 'pages/portfolio.html',
 				controller  : 'contactController'
 			})
 			
 				// route for the portfolio page
-			.when('/blog', {
+		.when('/blog', {
 				templateUrl : 'pages/blog.html',
 				controller  : 'contactController'
 			})
 			// rout for the login page
-			.when('/login', {
+		.when('/login', {
 			templateUrl : 'pages/login.html',
 			controller  : 'loginController'
 		})
-		// rout for the login page
+		// route for the registration page
 		.when('/registration', {
 		templateUrl : 'pages/registration.html',
+		controller  : 'registrationController'
+		})
+		
+		// route for the search result page
+		.when('/search', {
+		templateUrl : 'pages/searchResult.html',
 		controller  : 'registrationController'
 		});
 	});
@@ -116,7 +122,7 @@
 		};
 	});
 	
-	 scotchApp.controller('CountryCntrl', function($scope,$http) {
+	 scotchApp.controller('CountryCntrl', function($scope,$http,$location) {
     	 $http.get('http://localhost:8080/webservicesample/openService/master/location')
     		.success(function(data) {
     		console.log(data);
@@ -124,6 +130,7 @@
     		$scope.locations = data.locations;
     		});
 	    	$scope.visible = true;
+	    	$scope.properties = [];
 	    	$scope.search = function ()
 	    	{
 	    		$http({
@@ -134,10 +141,14 @@
 	    			})
 	    		.success(function(data) {
 	    		console.log(data);
+	    		if ($location.path().indexOf('/search') < 0)
+	    		      $location.path('search');
 	    		$scope.properties = data;
 	    		});
 	    	}
 	    });
+	 
+	 
 	 
 	 
 	 scotchApp.controller('latestSearchCntrl', function($scope,$http) {

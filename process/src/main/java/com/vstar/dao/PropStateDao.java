@@ -18,83 +18,71 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "prop_state", catalog = "property_master")
-public class PropStateDao implements java.io.Serializable
-{
-  private static final long serialVersionUID = 3942227844296108153L;
-  @Id
-  @Column(name = "prop_state_Id", unique = true, nullable = false)
-  private long propStateId;
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_country_Id")
-  private PropCountryDao propCountry;
-  @Column(name = "state_Name", length = 50)
-  private String stateName;
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "created_Date", length = 19)
-  private Date createdDate;
+public class PropStateDao implements java.io.Serializable {
+	private static final long serialVersionUID = 3942227844296108153L;
+	@Id
+	@Column(name = "prop_state_Id", unique = true, nullable = false)
+	private Long propStateId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "prop_country_Id")
+	private PropCountryDao propCountry;
+	@Column(name = "state_Name", length = 50)
+	private String stateName;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created_Date", length = 19)
+	private Date createdDate;
 
-  public PropStateDao()
-  {
-  }
+	public PropStateDao() {
+	}
 
-  public PropStateDao(long propStateId)
-  {
-    this.propStateId = propStateId;
-  }
+	public PropStateDao(long propStateId) {
+		this.propStateId = propStateId;
+	}
 
-  /**
-   * 
-   * @param propStateId
-   * @param propCountry
-   * @param stateName
-   * @param createdDate
-   */
-  public PropStateDao(long propStateId, PropCountryDao propCountry, String stateName,
-      Date createdDate)
-  {
-    this.propStateId = propStateId;
-    this.propCountry = propCountry;
-    this.stateName = stateName;
-    this.createdDate = createdDate;
-  }
+	/**
+	 * 
+	 * @param propStateId
+	 * @param propCountry
+	 * @param stateName
+	 * @param createdDate
+	 */
+	public PropStateDao(long propStateId, PropCountryDao propCountry,
+			String stateName, Date createdDate) {
+		this.propStateId = propStateId;
+		this.propCountry = propCountry;
+		this.stateName = stateName;
+		this.createdDate = createdDate;
+	}
 
-  public long getPropStateId()
-  {
-    return this.propStateId;
-  }
+	public PropCountryDao getPropCountry() {
+		return this.propCountry;
+	}
 
-  public void setPropStateId(long propStateId)
-  {
-    this.propStateId = propStateId;
-  }
+	public void setPropCountry(PropCountryDao propCountry) {
+		this.propCountry = propCountry;
+	}
 
-  public PropCountryDao getPropCountry()
-  {
-    return this.propCountry;
-  }
+	public String getStateName() {
+		return this.stateName;
+	}
 
-  public void setPropCountry(PropCountryDao propCountry)
-  {
-    this.propCountry = propCountry;
-  }
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
+	}
 
-  public String getStateName()
-  {
-    return this.stateName;
-  }
+	public Date getCreatedDate() {
+		return this.createdDate;
+	}
 
-  public void setStateName(String stateName)
-  {
-    this.stateName = stateName;
-  }
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
 
-  public Date getCreatedDate()
-  {
-    return this.createdDate;
-  }
+	public Long getPropStateId() {
+		return propStateId;
+	}
 
-  public void setCreatedDate(Date createdDate)
-  {
-    this.createdDate = createdDate;
-  }
+	public void setPropStateId(Long propStateId) {
+		this.propStateId = propStateId;
+	}
 }

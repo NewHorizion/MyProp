@@ -1,13 +1,21 @@
 <div class="jumbotron text-center">
-	<h1>{{property.propertyTitle}}</h1>
+	<p ng-show="visible">
+	<ul class="propertys">
+		<li ng-repeat="property in properties" class="property-listing">
+			<div>
+				<p>{{property.propertyTitle}}</p>
 
-	<p>Project : {{ property.projectName }}</p>
-	<p>Developer : {{ property.developerName }}</p>
+				<p>Project : {{ property.projectName }}</p>
+				<p>Developer : {{ property.developerName }}</p>
 
-	<div>
-		<div>
-		    <P> {{property.propPrice}}</P>
-		    <p ng-show="rateSqft"> {property.rateSqft} </p>
-		 </div>
-	</div>
+				<div>
+					<div>
+						<P>{{property.propPrice}}</P>
+						<p ng-show="rateSqft">{property.rateSqft}</p>
+					</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+	</p>
 </div>

@@ -2070,3 +2070,8 @@ p.offer{
 text-align:justify;
 font-size:10px;
 }
+/* Signup css */
+.center-form {
+width:330px;
+margin:10% auto;
+}

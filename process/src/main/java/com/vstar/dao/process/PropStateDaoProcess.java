@@ -46,7 +46,9 @@ public class PropStateDaoProcess
   {
     List<PropStateDao> propStateDaos = new ArrayList<PropStateDao>();
     Session session = sessionFactory.getCurrentSession();
-    propStateDaos = session.createQuery("from PropStateDao").list();
+    Query query = session.createQuery("from PropStateDao");
+    System.out.print("hjjjjjjjj" + query.getQueryString());
+    propStateDaos = query.list();
     return propStateDaos;
   }
 

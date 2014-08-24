@@ -16,6 +16,7 @@ import com.vstar.process.jaxb.States;
 import com.vstar.process.masterData.infoBean.PropCityInfo;
 import com.vstar.process.masterData.infoBean.PropLocationInfo;
 import com.vstar.process.masterData.infoBean.PropStateInfo;
+import com.vstar.process.masterData.model.LocalityModel;
 import com.vstar.process.masterData.model.LocationModel;
 import com.vstar.process.masterData.model.PropertyTypeModel;
 
@@ -128,6 +129,20 @@ public class MasterDataConverter {
 									location.setCityName(jaxbCity.getCityName());
 									location.setStateName(jaxbState
 											.getStateName());
+									location.setCityId(jaxbCity.getCityId());
+									if (null!=jaxbCity.getLocalities() && jaxbCity.getLocalities().size()>0)
+									{
+										List<LocalityModel> localities  = new ArrayList<LocalityModel>();
+										for (Localities jaxbLocality:jaxbCity.getLocalities())
+										{
+											LocalityModel localityModel = new LocalityModel();
+											localityModel.setCityName(jaxbCity.getCityName());
+											localityModel.setLocalityId(jaxbLocality.getLocId());
+											localityModel.setLocalityName(jaxbLocality.getLocName());
+											localities.add(localityModel);
+										}
+										location.setLocalities(localities);
+									}
 									locations.add(location);
 								}
 							}

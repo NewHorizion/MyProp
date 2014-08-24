@@ -9,6 +9,32 @@
           http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
 
 
+    <bean id="springSecurityFilterChain" class="org.springframework.security.web.FilterChainProxy">
+        <sec:filter-chain-map path-type="ant">
+            <sec:filter-chain pattern="/**" filters="concurrencyFilter,securityContextPersistenceFilter,sessionManagementFilter"/>
+        </sec:filter-chain-map>
+    </bean>
+    
+    <!-- Filters  -->
+    	<bean id="sessionManagementFilter"
+		class="org.springframework.security.web.session.SessionManagementFilter">
+		<constructor-arg>
+			<bean
+				class="org.springframework.security.web.context.HttpSessionSecurityContextRepository"></bean>
+		</constructor-arg>
+		<property name="sessionAuthenticationStrategy" ref="sas" />
+	</bean>
+	
+	<bean id="concurrencyFilter"
+	    class="org.springframework.security.web.session.ConcurrentSessionFilter">
+		<property name="sessionRegistry" ref="sessionRegistry" />
+		<property name="expiredUrl" value="/expired.html" />
+	</bean>
+	
+	<bean id="securityContextPersistenceFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter"/>
+    
+    <!-- Filters End -->
+
 	<sec:http auto-config="true" use-expressions="true">
 
 		<sec:intercept-url pattern="/**" access="permitAll"></sec:intercept-url>
@@ -57,6 +83,19 @@
 			</sec:filter-invocation-definition-source>
 		</property>
 	</bean>
+	
+	<!-- Session Management -->
+
+	<bean id="sas"
+		class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
+		<constructor-arg name="sessionRegistry" ref="sessionRegistry" />
+		<property name="maximumSessions" value="1" />
+	</bean>
+
+	<bean id="sessionRegistry"
+		class="org.springframework.security.core.session.SessionRegistryImpl" scope="prototype">
+	</bean>
+	<!-- session management end -->
 
 	<sec:authentication-manager alias="authenticationManager">
 		<sec:authentication-provider>

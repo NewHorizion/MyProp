@@ -20,7 +20,7 @@ public class PropCountryDao implements java.io.Serializable
   private static final long serialVersionUID = 7422788475417443480L;
   @Id
   @Column(name = "prop_country_Id", unique = true, nullable = false)
-  private long propCountryId;
+  private Long propCountryId;
   @Column(name = "country_Name", length = 50)
   private String countryName;
   @Temporal(TemporalType.TIMESTAMP)
@@ -43,15 +43,6 @@ public class PropCountryDao implements java.io.Serializable
     this.createdDate = createdDate;
   }
 
-  public long getPropCountryId()
-  {
-    return this.propCountryId;
-  }
-
-  public void setPropCountryId(long propCountryId)
-  {
-    this.propCountryId = propCountryId;
-  }
 
   public String getCountryName()
   {
@@ -72,4 +63,12 @@ public class PropCountryDao implements java.io.Serializable
   {
     this.createdDate = createdDate;
   }
+
+public Long getPropCountryId() {
+	return propCountryId;
+}
+
+public void setPropCountryId(Long propCountryId) {
+	this.propCountryId = propCountryId;
+}
 }

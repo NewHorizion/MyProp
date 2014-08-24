@@ -11,9 +11,17 @@
 							</div>
 							<div class="form">
 								<div class="form_row">
-									<select id="country" placeholder="Country"
+									<select id="city" placeholder="city"
 										ng-model="formData.city"
 										ng-options="city.cityName group by city.stateName for city in locations">
+										<option value=''>Select</option>
+									</select>
+								</div>
+								
+									<select id="localities" placeholder="Locality"
+										ng-disabled="!formData.city"
+										ng-model="formData.locality"
+										ng-options="locality.localityId as locality.localityName group by locality.cityName for locality in formData.city.localities">
 										<option value=''>Select</option>
 									</select>
 								</div>
@@ -57,7 +65,8 @@
 					</div>
 					<div class="bottom_left_box"></div>
 				</div>
-
+          
+                
 				<!-- begining of column 2 -->
 				<div class="column2">
 					<p ng-show="visible">

@@ -17,7 +17,7 @@ public class PropPurchaseTypeDao implements java.io.Serializable
   private static final long serialVersionUID = -8870123891198504897L;
   @Id
   @Column(name = "prop_purchase_id", unique = true, nullable = false)
-  private int propPurchaseId;
+  private Long propPurchaseId;
   @Column(name = "prop_purchase_desc", nullable = false, length = 20)
   private String propPurchaseDesc;
 
@@ -25,21 +25,12 @@ public class PropPurchaseTypeDao implements java.io.Serializable
   {
   }
 
-  public PropPurchaseTypeDao(int propPurchaseId, String propPurchaseDesc)
+  public PropPurchaseTypeDao(Long propPurchaseId, String propPurchaseDesc)
   {
     this.propPurchaseId = propPurchaseId;
     this.propPurchaseDesc = propPurchaseDesc;
   }
 
-  public int getPropPurchaseId()
-  {
-    return this.propPurchaseId;
-  }
-
-  public void setPropPurchaseId(int propPurchaseId)
-  {
-    this.propPurchaseId = propPurchaseId;
-  }
 
   public String getPropPurchaseDesc()
   {
@@ -50,4 +41,12 @@ public class PropPurchaseTypeDao implements java.io.Serializable
   {
     this.propPurchaseDesc = propPurchaseDesc;
   }
+
+public Long getPropPurchaseId() {
+	return propPurchaseId;
+}
+
+public void setPropPurchaseId(Long propPurchaseId) {
+	this.propPurchaseId = propPurchaseId;
+}
 }

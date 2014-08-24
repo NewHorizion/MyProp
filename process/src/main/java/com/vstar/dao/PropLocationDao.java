@@ -23,7 +23,7 @@ public class PropLocationDao implements java.io.Serializable
   private static final long serialVersionUID = 4135668551140108761L;
   @Id
   @Column(name = "prop_Location_Id", unique = true, nullable = false)
-  private long propLocationId;
+  private Long propLocationId;
   @Column(name = "locality_Name", length = 25)
   private String localityName;
   @ManyToOne(fetch = FetchType.LAZY)
@@ -40,14 +40,10 @@ public class PropLocationDao implements java.io.Serializable
   private String custom3;
   @Column(name = "custom4", length = 10)
   private String custom4;
-
-  public PropLocationDao()
+ 
+  public PropLocationDao ()
   {
-  }
-
-  public PropLocationDao(long propLocationId)
-  {
-    this.propLocationId = propLocationId;
+	  
   }
 
   public PropLocationDao(long propLocationId, String localityName, PropCityDao propCityDao,
@@ -142,4 +138,8 @@ public class PropLocationDao implements java.io.Serializable
   {
     this.custom4 = custom4;
   }
+
+public void setPropLocationId(Long propLocationId) {
+	this.propLocationId = propLocationId;
+}
 }

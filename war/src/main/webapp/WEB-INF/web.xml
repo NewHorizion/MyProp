@@ -28,6 +28,12 @@
 com.sun.xml.ws.transport.http.servlet.WSServletContextListener
 </listener-class>
 </listener>
+
+<listener>
+		<display-name>Spring Security Session Publisher</display-name>
+		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+</listener>
+	
 <servlet>
 <servlet-name>calculatorService</servlet-name>
 <servlet-class>
