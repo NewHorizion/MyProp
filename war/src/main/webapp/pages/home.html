@@ -18,14 +18,29 @@
 									</select>
 								</div>
 								
-									<select id="localities" placeholder="Locality"
+								<div 
+    								multi-select 
+    								input-model="formData.city.localities"
+    								button-label="localityName"         
+    								item-label="localityName" 
+    								tick-property="ticked" 
+    								helper-elements="filter reset"
+    								max-labels="1"
+    								default-label="Select"
+    								output-model="formData.locality">
+								</div>
+								
+									<!-- <select id="localities" placeholder="Locality"
 										ng-disabled="!formData.city"
 										ng-model="formData.locality"
 										ng-options="locality.localityId as locality.localityName group by locality.cityName for locality in formData.city.localities">
 										<option value=''>Select</option>
-									</select>
+									</select> -->
 								</div>
 
+								<div class="box_title">
+									<span>Search For:</span>
+								</div>
 								<div class="form_row">
 									<select id="country" ng-model="formData.propertyType"
 										ng-options="propertyType.id as propertyType.name for propertyType in propertyTypes">

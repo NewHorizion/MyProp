@@ -8,6 +8,7 @@ public class PropLocationInfo
 {
   private long locationId;
   private String locationName;
+  private boolean ticked;
 
   public PropLocationInfo()
   {
@@ -38,6 +39,16 @@ public class PropLocationInfo
   public void setLocationName(String locationName)
   {
     this.locationName = locationName;
+  }
+
+  public boolean isTicked()
+  {
+    return ticked;
+  }
+
+  public void setTicked(boolean ticked)
+  {
+    this.ticked = ticked;
   }
 
 }
