@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS `property_master`.`prop_users`;
+CREATE TABLE  `property_master`.`prop_users` (
+  `userId` varchar(50) NOT NULL,
+  `userType` varchar(10) DEFAULT NULL,
+  `userName` varchar(50) DEFAULT NULL,
+  `mobileNo` varchar(15) DEFAULT NULL,
+  `landLineNo` varchar(15) DEFAULT NULL,
+  `prop_city_Id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`userId`),
+  KEY `prop_city_ibfk_2` (`prop_city_Id`),
+  CONSTRAINT `prop_city_ibfk_2` FOREIGN KEY (`prop_city_Id`) REFERENCES `prop_city` (`prop_City_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

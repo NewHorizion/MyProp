@@ -10,17 +10,23 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "users", catalog = "property_master")
+@Table(name = "prop_users", catalog = "property_master")
 public class PropUsersDao implements java.io.Serializable
 {
   private static final long serialVersionUID = -6261006342019880313L;
   @Id
-  @Column(name = "username", unique = true, nullable = false, length = 50)
+  @Column(name = "userId", unique = true, nullable = false)
   private String userId;
-  @Column(name = "password", length = 50)
-  private String password;
-  @Column(name = "enabled")
-  private Byte enabled;
+  @Column(name = "userType")
+  private String userType;
+  @Column(name = "userName")
+  private String userName;
+  @Column(name = "mobileNo")
+  private String mobileNo;
+  @Column(name = "landLineNo")
+  private String landLineNo;
+  @Column(name = "prop_city_Id")
+  private long propCityId;
 
   public PropUsersDao()
   {
@@ -31,11 +37,15 @@ public class PropUsersDao implements java.io.Serializable
     this.userId = userId;
   }
 
-  public PropUsersDao(String userId, String password, Byte enabled)
+  public PropUsersDao(String userId, String userType, String userName, String mobileNo,
+      String landLineNo, long propCityId)
   {
     this.userId = userId;
-    this.password = password;
-    this.enabled = enabled;
+    this.userType = userType;
+    this.userName = userName;
+    this.mobileNo = mobileNo;
+    this.landLineNo = landLineNo;
+    this.propCityId = propCityId;
   }
 
   /**
@@ -55,34 +65,82 @@ public class PropUsersDao implements java.io.Serializable
   }
 
   /**
-   * @return the password
+   * @return the userType
    */
-  public String getPassword()
+  public String getUserType()
   {
-    return password;
+    return userType;
   }
 
   /**
-   * @param password the password to set
+   * @param userType the userType to set
    */
-  public void setPassword(String password)
+  public void setUserType(String userType)
   {
-    this.password = password;
+    this.userType = userType;
   }
 
   /**
-   * @return the enabled
+   * @return the userName
    */
-  public Byte getEnabled()
+  public String getUserName()
   {
-    return enabled;
+    return userName;
   }
 
   /**
-   * @param enabled the enabled to set
+   * @param userName the userName to set
    */
-  public void setEnabled(Byte enabled)
+  public void setUserName(String userName)
   {
-    this.enabled = enabled;
+    this.userName = userName;
+  }
+
+  /**
+   * @return the mobileNo
+   */
+  public String getMobileNo()
+  {
+    return mobileNo;
+  }
+
+  /**
+   * @param mobileNo the mobileNo to set
+   */
+  public void setMobileNo(String mobileNo)
+  {
+    this.mobileNo = mobileNo;
+  }
+
+  /**
+   * @return the landLineNo
+   */
+  public String getLandLineNo()
+  {
+    return landLineNo;
+  }
+
+  /**
+   * @param landLineNo the landLineNo to set
+   */
+  public void setLandLineNo(String landLineNo)
+  {
+    this.landLineNo = landLineNo;
+  }
+
+  /**
+   * @return the propCityId
+   */
+  public long getPropCityId()
+  {
+    return propCityId;
+  }
+
+  /**
+   * @param propCityId the propCityId to set
+   */
+  public void setPropCityId(long propCityId)
+  {
+    this.propCityId = propCityId;
   }
 }
