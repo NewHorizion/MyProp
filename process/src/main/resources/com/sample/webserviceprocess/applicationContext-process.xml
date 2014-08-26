@@ -53,5 +53,11 @@
 		<property name="saltSource" ref="defaultSaltSource" />
 		<property name="passwordEncoder" ref="defaultPasswordEncoder" />
 	</bean>
-
+    
+    <bean id="propUserDaoExtnProcess"
+		class="com.vstar.dao.process.PropUserDaoExtnProcess">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+    
+    
 </beans>

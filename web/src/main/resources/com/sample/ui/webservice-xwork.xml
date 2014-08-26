@@ -9,7 +9,9 @@
 	<package name="webservice" extends="struts-default" namespace="/webservice">
 
 		<result-types>
-			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" >
+			 <param name="includeProperties">json*</param>
+			</result-type>
 		</result-types>
 
 		<interceptors>

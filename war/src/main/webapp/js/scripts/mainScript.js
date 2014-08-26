@@ -27,7 +27,7 @@
 				templateUrl : 'pages/portfolio.html',
 				controller  : 'contactController'
 			})
-			
+
 				// route for the portfolio page
 		.when('/blog', {
 				templateUrl : 'pages/blog.html',
@@ -43,7 +43,7 @@
 		templateUrl : 'pages/registration.html',
 		controller  : 'registrationController'
 		})
-		
+
 		// route for the search result page
 		.when('/search', {
 		templateUrl : 'pages/searchResult.html',
@@ -65,7 +65,7 @@
 	scotchApp.controller('contactController', function($scope) {
 		$scope.message = 'Contact us! JK. This is just a demo.';
 	});
-	
+
 	scotchApp.controller('loginController', function($scope,$http) {
 		$scope.formData = {};
 
@@ -93,12 +93,14 @@
 
 		};
 	});
-	
+
 	scotchApp.controller('registrationController', function($scope,$http) {
 		$scope.formData = {};
 
 		// process the form
-		$scope.processForm = function() {
+		$scope.signup = function() {
+		$scope.formData.propCityId = $scope.formData.propCity.cityId
+		$scope.formData.propCity = $scope.formData.propCity.cityName;	
 		$http({
 		method : 'POST',
 		url : 'webservice/Registration.action',
@@ -121,7 +123,7 @@
 
 		};
 	});
-	
+
 	 scotchApp.controller('CountryCntrl', function($scope,$http,$location) {
     	 $http.get('http://localhost:8080/webservicesample/openService/master/location')
     		.success(function(data) {
@@ -131,6 +133,7 @@
     		});
 	    	$scope.visible = true;
 	    	$scope.properties = [];
+
 	    	$scope.search = function ()
 	    	{
 	    		$http({
@@ -147,10 +150,10 @@
 	    		});
 	    	}
 	    });
-	 
-	 
-	 
-	 
+
+
+
+
 	 scotchApp.controller('latestSearchCntrl', function($scope,$http) {
     	 $http.get('http://localhost:8080/webservicesample/openService/search/latest')
     		.success(function(data) {

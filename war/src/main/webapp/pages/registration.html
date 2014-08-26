@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controller="registrationController">
   <div class="row">
     <div class="center-form panel">
       <div class="panel-body">
@@ -6,9 +6,9 @@
           <h2 class="text-center">Sign up</h2>
 			
 		  <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.userType.$invalid && signupForm.userType.$dirty }">
-            <input class="" type="radio" name="userType" ng-model="userType" value="Owner" >&nbsp;Owner &nbsp;&nbsp;&nbsp;
-            <input class="" type="radio" name="userType" ng-model="userType" value="Agent" >&nbsp;Agent &nbsp;&nbsp;&nbsp;
-            <input class="" type="radio" name="userType" ng-model="userType" value="Builder" >&nbsp;Buider
+            <input class="" type="radio" name="userType" ng-model="formData.userType" value="Owner" >&nbsp;Owner &nbsp;&nbsp;&nbsp;
+            <input class="" type="radio" name="userType" ng-model="formData.userType" value="Agent" >&nbsp;Agent &nbsp;&nbsp;&nbsp;
+            <input class="" type="radio" name="userType" ng-model="formData.userType" value="Builder" >&nbsp;Buider
             <span class="ion-person form-control-feedback"></span>
             <div class="help-block text-danger" ng-if="signupForm.userType.$dirty" ng-messages="signupForm.userType.$error">
               <div ng-message="required">You must select user type.</div>
@@ -16,7 +16,7 @@
           </div>
           
           <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.fullName.$invalid && signupForm.fullName.$dirty }">
-            <input class="form-control input-lg" type="text" name="displayName" ng-model="displayName" placeholder="Name" required>
+            <input class="form-control input-lg" type="text" name="displayName" ng-model="formData.displayName" placeholder="Name" required>
             <span class="ion-person form-control-feedback"></span>
             <div class="help-block text-danger" ng-if="signupForm.fullName.$dirty" ng-messages="signupForm.fullName.$error">
               <div ng-message="required">You must enter your name.</div>
@@ -24,7 +24,7 @@
           </div>
 
           <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.email.$invalid && signupForm.email.$dirty }">
-            <input unique-email class="form-control input-lg" type="email" id="email" name="email" ng-model="email" placeholder="Email" required autofocus>
+            <input unique-email class="form-control input-lg" type="email" id="email" name="email" ng-model="formData.email" placeholder="Email" required autofocus>
             <span class="ion-at form-control-feedback"></span>
             <div class="help-block text-danger" ng-if="signupForm.email.$dirty" ng-messages="signupForm.email.$error">
               <div ng-message="required">Your email address is required.</div>
@@ -34,7 +34,7 @@
           </div>
 
           <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.password.$invalid && signupForm.password.$dirty }">
-            <input password-strength class="form-control input-lg" type="password" name="password" ng-model="password" placeholder="Password" required>
+            <input password-strength class="form-control input-lg" type="password" name="password" ng-model="formData.password" placeholder="Password" required>
             <span class="ion-key form-control-feedback"></span>
             <div class="help-block text-danger" ng-if="signupForm.password.$dirty" ng-messages="signupForm.password.$error">
               <div ng-message="required">Password is required.</div>
@@ -45,7 +45,7 @@
             <select
                 class="form-control input-lg" 
                 placeholder="city"
-				ng-model="propCityId"
+				ng-model="formData.propCity"
 				ng-options="city.cityName group by city.stateName for city in locations">
 				<option value=''>Select City</option>
 			</select>
@@ -56,7 +56,7 @@
          </div>
          
          <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.mobileNo.$invalid && signupForm.mobileNo.$dirty }">
-            <input class="form-control input-lg" type="text" name="mobileNo" ng-model="mobileNo" placeholder="Mobile No" required>
+            <input class="form-control input-lg" type="text" name="mobileNo" ng-model="formData.mobileNo" placeholder="Mobile No" required>
             <span class="ion-person form-control-feedback"></span>
             <div class="help-block text-danger" ng-if="signupForm.mobileNo.$dirty" ng-messages="signupForm.mobileNo.$error">
               <div ng-message="required">You must enter your mobile No.</div>
@@ -64,7 +64,7 @@
           </div>
           
           <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.landLineNo.$invalid && signupForm.landLineNo.$dirty }">
-            <input class="form-control input-lg" type="text" name="landLineNo" ng-model="landLineNo" placeholder="Landline No" required>
+            <input class="form-control input-lg" type="text" name="landLineNo" ng-model="formData.landLineNo" placeholder="Landline No" required>
             <span class="ion-person form-control-feedback"></span>
             <div class="help-block text-danger" ng-if="signupForm.landLineNo.$dirty" ng-messages="signupForm.landLineNo.$error">
               <div ng-message="required">You must enter your mobile No.</div>
