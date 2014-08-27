@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="row">
+    <div class="center-form panel">
+      <div class="panel-body">
+          <h2 class="text-center">Property Info</h2>
+<!-- Mandate Property Info starts -->
+		  			
+		  <div class="form-group has-feedback">
+			<div class="box_title">
+				<span>Property For:</span>
+			</div>
+			<div class="form_row">
+				<input class="" type="radio" name="purchaseType" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.purchaseType" value="1" >&nbsp;Sale &nbsp;&nbsp;&nbsp;
+            	<input class="" type="radio" name="purchaseType" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.purchaseType" value="2" >&nbsp;Rent Out &nbsp;&nbsp;&nbsp;
+			</div>
+          </div>
+          
+          <div class="form-group has-feedback">
+            <div class="box_title">
+				<span>Search For:</span>
+			</div>
+			<div class="form_row">
+				<select id="country" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.propertyType"
+					ng-options="propertyType.id as propertyType.name for propertyType in propertyTypes">
+					<option value=''>Select</option>
+				</select>
+			</div>
+          </div>
+          
+          <div class="box_title">
+				<span>Find your place:</span>
+		  </div>
+		  <div class="form_row">
+		  	<div class="form_row">
+				<select id="city" placeholder="city"
+					ng-model="formData.propertyFeatureInfo.propertyMandateInfo.city"
+					ng-options="city.cityName group by city.stateName for city in locations">
+					<option value=''>Select</option>
+				</select>
+			</div>
+				
+			<div 
+				multi-select 
+				input-model="formData.city.localities"
+				button-label="localityName"         
+				item-label="localityName" 
+				tick-property="ticked" 
+				helper-elements="filter reset"
+				max-labels="1"
+				default-label="Select"
+				output-model="formData.propertyFeatureInfo.propertyMandateInfo.locality">
+			</div>
+		</div>
+		<div class="form_row">
+			<div class="box_title">
+				<span>Property Area:</span>
+		    </div>
+			
+			<div class="form-group">
+				<input type="text" name="formData.coveredArea" class="form-control" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.coveredArea">
+			</div>
+		</div>
+		
+		<div class="form_row">
+			<div class="box_title">
+				<span>Property Price:</span>
+		    </div>
+			
+			<div class="form-group">
+				<input type="text" name="formData.propPrice" class="form-control" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.propPrice">
+			</div>
+		</div>
+		
+		<div class="form_row">
+			<div class="box_title">
+				<span>Transaction Type:</span>
+		    </div>
+			
+			<div class="form-group">
+				<input class="" type="radio" name="transactionType" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.transactionType" value="New Property" >&nbsp;New Property &nbsp;&nbsp;&nbsp;
+            	<input class="" type="radio" name="transactionType" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.transactionType" value="Resale" >&nbsp;Resale &nbsp;&nbsp;&nbsp;
+			</div>
+		</div>
+<!-- Mandate Property Info Ends-->
+		
+      </div>
+    </div>
+  </div>
+</div>
