@@ -1,6 +1,6 @@
 package com.vstar.process.propertyDetailInfo;
 
-import org.codehaus.stax2.LocationInfo;
+import com.vstar.process.masterData.infoBean.PropLocationInfo;
 
 /**
  * Capturing Property Mandate Features
@@ -9,7 +9,7 @@ public class PropertyMandateInfo
 {
   private String purchaseType;
   private long propertyTypeId;
-  private LocationInfo location;
+  private PropLocationInfo propLocationInfo;
   private int coveredArea;
   private long propPrice;
   private String transactionType;
@@ -32,16 +32,6 @@ public class PropertyMandateInfo
   public void setPropertyTypeId(long propertyTypeId)
   {
     this.propertyTypeId = propertyTypeId;
-  }
-
-  public LocationInfo getLocation()
-  {
-    return location;
-  }
-
-  public void setLocation(LocationInfo location)
-  {
-    this.location = location;
   }
 
   public int getCoveredArea()
@@ -72,6 +62,16 @@ public class PropertyMandateInfo
   public void setTransactionType(String transactionType)
   {
     this.transactionType = transactionType;
+  }
+
+  public PropLocationInfo getPropLocationInfo()
+  {
+    return propLocationInfo;
+  }
+
+  public void setPropLocationInfo(PropLocationInfo propLocationInfo)
+  {
+    this.propLocationInfo = propLocationInfo;
   }
 
 }
