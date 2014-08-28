@@ -1,54 +1,93 @@
 	// create the module and name it scotchApp
-	var scotchApp = angular.module('scotchApp', ['ngRoute', 'multi-select']);
+	var scotchApp = angular.module('scotchApp', ['multi-select','ngAnimate', 'ui.router']);
 
 	// configure our routes
-	scotchApp.config(function($routeProvider) {
-		$routeProvider
-
+	scotchApp.config(function($stateProvider,$urlRouterProvider) {
+		
+		$stateProvider
+	    
+        // route to show our basic form (/form)
+        .state('form', {
+            url: '/propertyForm',
+            templateUrl: 'pages/propertyForm.html',
+            controller: 'postPropertyController'
+        })
+        
+        // nested states 
+        // each of these sections will have their own view
+        // url will be nested (/form/propertyDetails)
+        .state('form.propertyDetails', {
+            url: '/propertyDetails',
+            templateUrl: 'pages/propertyDetail.html'
+        })
+        
+        // url will be /form/upload
+        .state('form.upload', {
+            url: '/upload',
+            templateUrl: 'pages/uploadPropertyImages.html'
+        })
+        
+        // url will be /form/post property
+        .state('form.postProperty', {
+            url: '/postProperty',
+            templateUrl: 'pages/postProperty.html'
+        })
+		
 			// route for the home page
-		.when('/home', {
+		.state('home', {
+				url:'/home',
 				templateUrl : 'pages/home.html',
 				controller  : 'mainController'
 			})
 
 			// route for the about page
-		.when('/about', {
+		.state('about', {
+				url:'/about',
 				templateUrl : 'pages/about.html',
 				controller  : 'aboutController'
 			})
 
 			// route for the contact page
-		.when('/contact', {
+		.state('contact', {
+				url:'/contact',
 				templateUrl : 'pages/contact.html',
 				controller  : 'contactController'
 			})
 			// route for the portfolio page
-		.when('/portfolio', {
+		.state('portfolio', {
+				url:'/portfolio',
 				templateUrl : 'pages/portfolio.html',
 				controller  : 'contactController'
 			})
 
 				// route for the portfolio page
-		.when('/blog', {
+		.state('blog', {
+				url:'/blog',
 				templateUrl : 'pages/blog.html',
 				controller  : 'contactController'
 			})
 			// rout for the login page
-		.when('/login', {
+		.state('login', {	
+			url:'/login',
 			templateUrl : 'pages/login.html',
 			controller  : 'loginController'
 		})
 		// route for the registration page
-		.when('/registration', {
+		.state('registration', {
+		url:'/registration',
 		templateUrl : 'pages/registration.html',
 		controller  : 'registrationController'
 		})
 
 		// route for the search result page
-		.when('/search', {
+		.state('search', {
+		url:'/search',
 		templateUrl : 'pages/searchResult.html',
 		controller  : 'registrationController'
 		});
+		
+		$urlRouterProvider.otherwise('/home');
+		
 	});
 
 	// create the controller and inject Angular's $scope
@@ -161,3 +200,15 @@
     		$scope.latestProperties = data.latestProperties;
     		});
 	    });
+
+	 scotchApp.controller('postPropertyController', function($scope) {
+		    
+		    // we will store all of our form data in this object
+		    $scope.formData = {};
+		    
+		    // function to process the form
+		    $scope.processForm = function() {
+		        alert('awesome!');  
+		    };
+		    
+		});
