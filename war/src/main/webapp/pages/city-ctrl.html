@@ -1,0 +1,6 @@
+
+<select id="city" placeholder="city"
+	ng-model="formData.city"
+	ng-options="city.cityName group by city.stateName for city in locations">
+	<option value=''>Select</option>
+</select>

@@ -1,0 +1,5 @@
+<select id="propertyType" ng-model="formData.propertyType"
+	ng-options="propertyType.id as propertyType.name group by propertyType.categoryName for propertyType in propertyTypes">
+	<option value=''>Select</option>
+</select>
+

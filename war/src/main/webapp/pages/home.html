@@ -11,14 +11,18 @@
 							</div>
 							<div class="form">
 								<div class="form_row">
-									<select id="city" placeholder="city"
+									<!-- <select id="city" placeholder="city"
 										ng-model="formData.city"
 										ng-options="city.cityName group by city.stateName for city in locations">
 										<option value=''>Select</option>
-									</select>
+									</select> -->
+									<city-ctrl></city-ctrl>
 								</div>
 								
-								<div 
+								<location-ctrl></location-ctrl>
+								
+								
+								<!-- <div 
     								multi-select 
     								input-model="formData.city.localities"
     								button-label="localityName"         
@@ -28,7 +32,7 @@
     								max-labels="1"
     								default-label="Select"
     								output-model="formData.locality">
-								</div>
+								</div> -->
 								
 									<!-- <select id="localities" placeholder="Locality"
 										ng-disabled="!formData.city"
@@ -41,12 +45,15 @@
 								<div class="box_title">
 									<span>Search For:</span>
 								</div>
-								<div class="form_row">
+								<!-- <div class="form_row">
 									<select id="country" ng-model="formData.propertyType"
 										ng-options="propertyType.id as propertyType.name group by propertyType.categoryName for propertyType in propertyTypes">
 										<option value=''>Select</option>
 									</select>
-								</div>
+								</div> -->
+								
+								<property-ctrl></property-ctrl>
+								
 
 								<div class="form_row">
 									<label class="left">Price: </label> <input type="text"
