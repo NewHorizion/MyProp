@@ -8,40 +8,43 @@ package com.vstar.common;
  */
 public enum PropertyTypeEnum 
 {
-	MultistoreyApartment(1, "Multistorey Apartment"), 
-	BuilderFloorApartment(2, "Builder Floor Apartment"), 
-	ResidentialHouse(3, "Residential House"), 
-	Villa(4, "Villa"), 
-	ResidentialPlot(5, "Residential Plot"), 
-	Penthouse(6, "Penthouse"), 
-	StudioApartment(7, "Studio Apartment"), 
-	ServiceApartment(8, "Service Apartment"),
-	CommercialOfficeSpace(9, "Commercial Office Space"), 
-	OfficeITParkSEZ(10, "Office in IT Park/ SEZ"), 
-	CommercialShop(11, "Commercial Shop"), 
-	SpaceShoppingMall(12, "Space in Shopping Mall"), 
-	CommercialShowroom(13, "Commercial Showroom"), 
-	Kiosk(14, "Kiosk"), 
-	BusinessCentre(15, "Business Centre"), 
-	CommercialLand(16, "Commercial Land"),
-	WarehouseGodown(17, "Warehouse/ Godown"), 
-	GuestHouse(18, "Guest House"), 
-	Hotel(19, "Hotel"), 
-	HotelSites(20, "Hotel Sites"), 
-	IndustrialLand(21, "Industrial Land"), 
-	IndustrialBuilding(22, "Industrial Building"), 
-	IndustrialShed(23, "Industrial Shed"),
-	AgriculturalLand(24, "Agricultural Land"), 
-	FarmHouse(25, "Farm House");
+	MultistoreyApartment(1, "Multistorey Apartment", PropertyCategoryEnum.Residential), 
+	BuilderFloorApartment(2, "Builder Floor Apartment", PropertyCategoryEnum.Residential), 
+	ResidentialHouse(3, "Residential House", PropertyCategoryEnum.Residential), 
+	Villa(4, "Villa", PropertyCategoryEnum.Residential), 
+	ResidentialPlot(5, "Residential Plot", PropertyCategoryEnum.Residential), 
+	Penthouse(6, "Penthouse", PropertyCategoryEnum.Residential), 
+	StudioApartment(7, "Studio Apartment", PropertyCategoryEnum.Residential), 
+	ServiceApartment(8, "Service Apartment", PropertyCategoryEnum.Residential),
+	CommercialOfficeSpace(9, "Commercial Office Space", PropertyCategoryEnum.Commercial), 
+	OfficeITParkSEZ(10, "Office in IT Park/ SEZ", PropertyCategoryEnum.Commercial), 
+	CommercialShop(11, "Commercial Shop", PropertyCategoryEnum.Commercial), 
+	SpaceShoppingMall(12, "Space in Shopping Mall", PropertyCategoryEnum.Commercial), 
+	CommercialShowroom(13, "Commercial Showroom", PropertyCategoryEnum.Commercial), 
+	Kiosk(14, "Kiosk", PropertyCategoryEnum.Commercial), 
+	BusinessCentre(15, "Business Centre", PropertyCategoryEnum.Commercial), 
+	CommercialLand(16, "Commercial Land", PropertyCategoryEnum.Commercial),
+	WarehouseGodown(17, "Warehouse/ Godown", PropertyCategoryEnum.Commercial), 
+	GuestHouse(18, "Guest House", PropertyCategoryEnum.Commercial), 
+	Hotel(19, "Hotel", PropertyCategoryEnum.Commercial), 
+	HotelSites(20, "Hotel Sites", PropertyCategoryEnum.Commercial), 
+	IndustrialLand(21, "Industrial Land", PropertyCategoryEnum.Commercial), 
+	IndustrialBuilding(22, "Industrial Building", PropertyCategoryEnum.Commercial), 
+	IndustrialShed(23, "Industrial Shed", PropertyCategoryEnum.Commercial),
+	AgriculturalLand(24, "Agricultural Land", PropertyCategoryEnum.Agriculture), 
+	FarmHouse(25, "Farm House", PropertyCategoryEnum.Agriculture);
 
 	private int value;
 
 	private String typeName;
+	
+	private PropertyCategoryEnum propertyCategoryEnum;
 
-	PropertyTypeEnum(int value, String name) 
+	PropertyTypeEnum(int value, String name, PropertyCategoryEnum propertyCategoryEnum) 
 	{
 		this.value = value;
 		this.typeName = name;
+		this.propertyCategoryEnum = propertyCategoryEnum;
 	}
 
 	public int getId() 
@@ -125,4 +128,15 @@ public enum PropertyTypeEnum
 		throw new Exception(
 				"Could not find Policy Request Change Type for name:" + name);
 	}
+
+  public PropertyCategoryEnum getPropertyCategoryEnum()
+  {
+    return propertyCategoryEnum;
+  }
+
+  public void setPropertyCategoryEnum(PropertyCategoryEnum propertyCategoryEnum)
+  {
+    this.propertyCategoryEnum = propertyCategoryEnum;
+  }
+
 }

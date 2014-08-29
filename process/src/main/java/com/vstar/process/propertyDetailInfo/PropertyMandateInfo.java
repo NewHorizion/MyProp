@@ -13,6 +13,7 @@ public class PropertyMandateInfo
   private int coveredArea;
   private long propPrice;
   private String transactionType;
+  private String address;
 
   public String getPurchaseType()
   {
@@ -72,6 +73,16 @@ public class PropertyMandateInfo
   public void setPropLocationInfo(PropLocationInfo propLocationInfo)
   {
     this.propLocationInfo = propLocationInfo;
+  }
+
+  public String getAddress()
+  {
+    return address;
+  }
+
+  public void setAddress(String address)
+  {
+    this.address = address;
   }
 
 }

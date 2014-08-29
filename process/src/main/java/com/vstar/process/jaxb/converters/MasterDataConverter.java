@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.gson.Gson;
+import com.vstar.common.PropertyCategoryEnum;
+import com.vstar.common.PropertyTypeEnum;
 import com.vstar.process.jaxb.Cities;
 import com.vstar.process.jaxb.Countries;
 import com.vstar.process.jaxb.Localities;
@@ -83,14 +85,17 @@ public class MasterDataConverter {
 	 * @param propertyTypes
 	 */
 	public static void convertPropertyTypesMasterData(MasterData masterData,
-			Map<Integer, String> propertyTypes) {
+			Map<Integer, PropertyTypeEnum> propertyTypes) {
 		// Extract countries key from countries map.
 		Set<Integer> propertyTypeSet = propertyTypes.keySet();
 		PropertyType jaxbPropertyType = null;
+		PropertyTypeEnum propertyTypeEnum = null;
 		for (Integer propertyTypeId : propertyTypeSet) {
 			jaxbPropertyType = new PropertyType();
-			jaxbPropertyType.setId(propertyTypeId);
-			jaxbPropertyType.setType(propertyTypes.get(propertyTypeId));
+			propertyTypeEnum = propertyTypes.get(propertyTypeId);
+			jaxbPropertyType.setId(propertyTypeEnum.getId());
+			jaxbPropertyType.setType(propertyTypeEnum.getName());
+			jaxbPropertyType.setCategoryName(propertyTypeEnum.getPropertyCategoryEnum().getName());
 			masterData.getPropertTypes().add(jaxbPropertyType);
 		}
 
@@ -110,6 +115,7 @@ public class MasterDataConverter {
 					PropertyTypeModel propertyTypeModel = new PropertyTypeModel();
 					propertyTypeModel.setId(jaxbPropertyType.getId());
 					propertyTypeModel.setName(jaxbPropertyType.getType());
+					propertyTypeModel.setCategoryName(jaxbPropertyType.getCategoryName());
 					propertyTypes.add(propertyTypeModel);
 				}
 				masterDataMap.put("propertyTypes", propertyTypes);

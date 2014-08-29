@@ -43,7 +43,7 @@
 								</div>
 								<div class="form_row">
 									<select id="country" ng-model="formData.propertyType"
-										ng-options="propertyType.id as propertyType.name for propertyType in propertyTypes">
+										ng-options="propertyType.id as propertyType.name group by propertyType.categoryName for propertyType in propertyTypes">
 										<option value=''>Select</option>
 									</select>
 								</div>

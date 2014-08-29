@@ -44,10 +44,10 @@ public class MasterDataProcessImpl implements MasterDataProcess {
 	}
 
 	@Override
-	public Map<Integer, String> getPropertyTypes() {
-		Map<Integer, String> propertyTypes = new LinkedHashMap<Integer, String>();
+	public Map<Integer, PropertyTypeEnum> getPropertyTypes() {
+		Map<Integer, PropertyTypeEnum> propertyTypes = new LinkedHashMap<Integer, PropertyTypeEnum>();
 		for (PropertyTypeEnum propertyType : PropertyTypeEnum.values()) {
-			propertyTypes.put(propertyType.getId(), propertyType.getName());
+			propertyTypes.put(propertyType.getId(), propertyType);
 		}
 		return propertyTypes;
 	}

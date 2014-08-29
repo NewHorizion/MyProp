@@ -3,6 +3,7 @@ package com.vstar.process.masterData.model;
 public class PropertyTypeModel {
 	private Integer id;
 	private String name;
+	private String categoryName;
 
 	public Integer getId() {
 		return id;
@@ -19,5 +20,15 @@ public class PropertyTypeModel {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+  public String getCategoryName()
+  {
+    return categoryName;
+  }
+
+  public void setCategoryName(String categoryName)
+  {
+    this.categoryName = categoryName;
+  }
 
 }

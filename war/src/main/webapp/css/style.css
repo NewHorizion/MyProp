@@ -2138,3 +2138,57 @@ margin:10% auto;
 	from 	{ -webkit-transform:translateX(200%); }
 	to 		{ -webkit-transform: translateX(0); }
 }
+
+
+/* Post Property Page */
+.cBoxOut {
+    border: 1px solid #666;
+    float: left;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;
+}
+
+.registrForm {
+    padding: 10px;
+    width: 95%;
+}
+
+ul, li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+body, form, input, textarea, textfield, ul, li, p, table, td, select {
+    font: 12px Arial,Helvetica,sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+li.all {
+    color: #ff0000;
+    display: block;
+    text-align: right;
+}
+.registrForm ul li {
+    font-size: 11px;
+    line-height: 16px;
+    padding: 4px 0;
+}
+
+.registrForm ul li label {
+    clear: left;
+    display: block;
+    float: left;
+    font-size: 11px;
+    padding-right: 10px;
+    text-align: right;
+    vertical-align: middle;
+    width: 225px;
+}
+
+.registrForm ul li input, select {
+    text-align: left;
+    vertical-align: middle;
+}
