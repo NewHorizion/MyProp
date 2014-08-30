@@ -1,106 +1,74 @@
-<div class="container">
-  <div class="row">
-    <div class="center-form panel">
-      <div class="panel-body">
-          <h2 class="text-center">Property Important Features</h2>
+<div class="cBoxOut">
+	<h2 class="text-center">Property Important Features</h2>
 
-<!-- Residential Property Info -->		  			
-		  <div class="form-group has-feedback">
-			<div class="box_title">
-				<span>No. of Bedrooms:</span>
-			</div>
-			<div class="form_row">
-				<select id="bedrooms" ng-model="formData.propertyFeatureInfo.residentialPropInfo.noOfBedRooms"
-					ng-options="">
-					<option value=''>Select</option>
-				</select>
-			</div>
-          </div>
-          
-          <div class="form-group has-feedback">
-			<div class="box_title">
-				<span>No. of Bathrooms:</span>
-			</div>
-			<div class="form_row">
-				<select id="bathrooms" ng-model="formData.propertyFeatureInfo.residentialPropInfo.noOfBathRooms"
-					ng-options="">
-					<option value=''>Select</option>
-				</select>
-			</div>
-          </div>
-          
-          <div class="form-group has-feedback">
-			<div class="box_title">
-				<span>No. of Balconies:</span>
-			</div>
-			<div class="form_row">
-				<select id="balconies" ng-model="formData.propertyFeatureInfo.residentialPropInfo.noOfCalonies"
-					ng-options="">
-					<option value=''>Select</option>
-				</select>
-			</div>
-          </div>
-          
-          <div class="form-group has-feedback">
-			<div class="box_title">
-				<span>Furnished Status:</span>
-			</div>
-			<div class="form_row">
+<!-- Residential Property Info -->
+	<div class="cBox registrForm">	
+		<ul>
+        	<li class="all">* denotes mandatory fields</li>	  		
+			<li>
+				<h5>Property Features Info</h5>
+			</li>
+			
+			<li ng-controller="BedBathNoList">
+				<label>No. of Bedrooms<em>*</em> :</label>
+				<bedroom-no-ctrl></bedroom-no-ctrl>
+			</li>
+			
+			<li ng-controller="BedBathNoList">
+				<label>No. of Bathrooms<em>*</em> :</label>
+				<bathroom-no-ctrl></bathroom-no-ctrl>
+			</li>
+			
+			<li ng-controller="BedBathNoList">
+				<label>No. of Balconies<em>*</em> :</label>
+				<balcony-no-ctrl></balcony-no-ctrl>
+			</li>
+			
+			<li>
+				<label>Furnished Status<em>*</em> :</label>
 				<select id="furnished" ng-model="formData.propertyFeatureInfo.residentialPropInfo.furnishedStatus"
 					ng-options="">
-					<option value=''>Select</option>
+					<option value="-1">---Furnished Status---</option>
+					<option value="Furnished">Furnished</option>
+					<option value="Unfurnished">Unfurnished</option>
+					<option value="Semi-Furnished">Semi-Furnished</option>
 				</select>
-			</div>
-          </div>
-          
-          <div class="form-group has-feedback">
-			<div class="box_title">
-				<span>Floor No. :</span>
-			</div>
-			<div class="form_row">
-				<select id="floorNumber" ng-model="formData.propertyFeatureInfo.residentialPropInfo.floorNumber"
-					ng-options="">
-					<option value=''>Select</option>
-				</select>
-			</div>
-          </div>
-          
-          <div class="form-group has-feedback">
-			<div class="box_title">
-				<span>Total Floor :</span>
-			</div>
-			<div class="form_row">
-				<select id="totalFloor" ng-model="formData.propertyFeatureInfo.residentialPropInfo.totalFloor"
-					ng-options="">
-					<option value=''>Select</option>
-				</select>
-			</div>
-          </div>
-<!-- Residential Info Ends -->
-
-          <div class="form-group has-feedback">
-			<div class="box_title">
-				<span>Possession Status :</span>
-			</div>
-			<div class="form_row">
-				<input class="" type="radio" name="possessionStatus" ng-model="formData.propertyFeatureInfo.residentialPropInfo.possessionStatus" value="Under Construction" >&nbsp;Under Construction &nbsp;&nbsp;&nbsp;
-            	<input class="" type="radio" name="possessionStatus" ng-model="formData.propertyFeatureInfo.residentialPropInfo.possessionStatus" value="Ready to Move" >&nbsp;Ready to Move &nbsp;&nbsp;&nbsp;
-			</div>
-          </div>
-          
-          <div class="form-group has-feedback">
-			<div class="box_title">
-				<span>Available From :</span>
-			</div>
-			<div class="form_row">
+			</li>
+			
+			<li ng-controller="FloorNoList">
+				<label>Floor No<em>*</em> :</label>
+				<floor-no-ctrl></floor-no-ctrl>
+			</li>
+			
+			<li ng-controller="FloorNoList">
+				<label>Total Floor<em>*</em> :</label>
+				<total-floor-ctrl></total-floor-ctrl>
+			</li>
+			
+			<li>
+				<label>Possession Status<em>*</em> :</label>
+				<input class="" type="radio" name="possessionStatus" ng-model="formData.propertyFeatureInfo.residentialPropInfo.possessionStatus" value="Under Construction" >Under Construction
+            	<input class="" type="radio" name="possessionStatus" ng-model="formData.propertyFeatureInfo.residentialPropInfo.possessionStatus" value="Ready to Move" >Ready to Move
+			</li>
+			
+			<li>
+				<label>Available From<em>*</em> :</label>
 				<select id="availableFrom" ng-model="formData.propertyFeatureInfo.residentialPropInfo.availableFrom"
 					ng-options="">
 					<option value=''>Select</option>
 				</select>
-			</div>
-          </div>
-		
-      </div>
-    </div>
-  </div>
+			</li>
+			
+		</ul>
+          
+<!-- Residential Info Ends -->
+
+	</div>
+</div>		
+<div class="form-group row">
+<div class="col-xs-6 col-xs-offset-3">
+    <a ui-sref="form.postProperty" class="btn btn-block btn-info">
+    Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a>
+</div>
 </div>

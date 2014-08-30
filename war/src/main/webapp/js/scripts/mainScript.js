@@ -25,7 +25,7 @@ scotchApp.config(function($stateProvider, $urlRouterProvider) {
 	// url will be /form/upload
 	.state('form.upload', {
 		url : '/upload',
-		templateUrl : 'pages/uploadPropertyImages.html'
+		templateUrl : 'pages/propertyFeatures.html'
 	})
 
 	// url will be /form/post property
