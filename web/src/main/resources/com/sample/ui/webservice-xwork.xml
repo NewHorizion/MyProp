@@ -19,11 +19,16 @@
 				<interceptor-ref name="params" />
 				<interceptor-ref name="autowiring" />
 				<interceptor-ref name="scope" />
+				<interceptor-ref name="jsonToObject" />
 				
 			</interceptor-stack>
 			<interceptor name="params"
 				class="com.opensymphony.xwork2.interceptor.ParametersInterceptor">
 				<param name="excludeParams">dojo\..*,^struts\..*</param>
+			</interceptor>
+			
+			<interceptor name="jsonToObject"
+				class="com.vstar.interceptors.JsonToParamInterceptor">
 			</interceptor>
 		</interceptors>
 		
@@ -40,7 +45,12 @@
 		<action name="Login" class="com.sample.ui.login.LoginAction" method="login">
 			<result type="json"/>
 		</action>
+		
 		<action name="Registration" class="com.vstar.ui.registration.RegistrationAction" method="save">
+			<result type="json"/>
+		</action>
+		
+		<action name="UploadPropertyAction" class="com.sample.ui.VstarProperty.UploadPropertyAction" method="save">
 			<result type="json"/>
 		</action>
 		

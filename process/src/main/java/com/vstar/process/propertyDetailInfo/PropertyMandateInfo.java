@@ -5,117 +5,114 @@ import com.vstar.process.masterData.infoBean.PropLocationInfo;
 /**
  * Capturing Property Mandate Features
  */
-public class PropertyMandateInfo
-{
-  private String purchaseType;
-  private long propertyTypeId;
-  private PropLocationInfo propLocationInfo;
-  private int coveredArea;
-  private long propPrice;
-  private String transactionType;
-  private String address;
-  private int plotArea;
-  private String coveredAreaUnit;
-  private String plotAreaUnit;
-  
-  public String getPurchaseType()
-  {
-    return purchaseType;
-  }
+public class PropertyMandateInfo {
+	private String purchaseType;
+	private long propertyTypeId;
+	private PropLocationInfo propLocationInfo;
+	private int coveredArea;
+	private long propPrice;
+	private String transactionType;
+	private String address;
+	private int plotArea;
+	private String coveredAreaUnit;
+	private String plotAreaUnit;
+	private String city;
+	private String locality;
 
-  public void setPurchaseType(String purchaseType)
-  {
-    this.purchaseType = purchaseType;
-  }
+	public String getPurchaseType() {
+		return purchaseType;
+	}
 
-  public long getPropertyTypeId()
-  {
-    return propertyTypeId;
-  }
+	public void setPurchaseType(String purchaseType) {
+		this.purchaseType = purchaseType;
+	}
 
-  public void setPropertyTypeId(long propertyTypeId)
-  {
-    this.propertyTypeId = propertyTypeId;
-  }
+	public long getPropertyTypeId() {
+		return propertyTypeId;
+	}
 
-  public int getCoveredArea()
-  {
-    return coveredArea;
-  }
+	public void setPropertyTypeId(long propertyTypeId) {
+		this.propertyTypeId = propertyTypeId;
+	}
 
-  public void setCoveredArea(int coveredArea)
-  {
-    this.coveredArea = coveredArea;
-  }
+	public int getCoveredArea() {
+		return coveredArea;
+	}
 
-  public long getPropPrice()
-  {
-    return propPrice;
-  }
+	public void setCoveredArea(int coveredArea) {
+		this.coveredArea = coveredArea;
+	}
 
-  public void setPropPrice(long propPrice)
-  {
-    this.propPrice = propPrice;
-  }
+	public long getPropPrice() {
+		return propPrice;
+	}
 
-  public String getTransactionType()
-  {
-    return transactionType;
-  }
+	public void setPropPrice(long propPrice) {
+		this.propPrice = propPrice;
+	}
 
-  public void setTransactionType(String transactionType)
-  {
-    this.transactionType = transactionType;
-  }
+	public String getTransactionType() {
+		return transactionType;
+	}
 
-  public PropLocationInfo getPropLocationInfo()
-  {
-    return propLocationInfo;
-  }
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
 
-  public void setPropLocationInfo(PropLocationInfo propLocationInfo)
-  {
-    this.propLocationInfo = propLocationInfo;
-  }
+	public PropLocationInfo getPropLocationInfo() {
+		return propLocationInfo;
+	}
 
-  public String getAddress()
-  {
-    return address;
-  }
+	public void setPropLocationInfo(PropLocationInfo propLocationInfo) {
+		this.propLocationInfo = propLocationInfo;
+	}
 
-  public void setAddress(String address)
-  {
-    this.address = address;
-  }
+	public String getAddress() {
+		return address;
+	}
 
-  public int getPlotArea()
-  {
-    return plotArea;
-  }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-  public void setPlotArea(int plotArea)
-  {
-    this.plotArea = plotArea;
-  }
+	public String getCity() {
+		return city;
+	}
 
-  public String getCoveredAreaUnit()
-  {
-    return coveredAreaUnit;
-  }
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-  public void setCoveredAreaUnit(String coveredAreaUnit)
-  {
-    this.coveredAreaUnit = coveredAreaUnit;
-  }
+	public String getLocality() {
+		return locality;
+	}
 
-  public String getPlotAreaUnit()
-  {
-    return plotAreaUnit;
-  }
+	public void setLocality(String locality) {
+		this.locality = locality;
+	}
 
-  public void setPlotAreaUnit(String plotAreaUnit)
-  {
-    this.plotAreaUnit = plotAreaUnit;
-  }
+	public int getPlotArea() {
+		return plotArea;
+	}
+
+	public void setPlotArea(int plotArea) {
+		this.plotArea = plotArea;
+	}
+
+	public String getCoveredAreaUnit() {
+		return coveredAreaUnit;
+	}
+
+	public void setCoveredAreaUnit(String coveredAreaUnit) {
+		this.coveredAreaUnit = coveredAreaUnit;
+	}
+
+	public String getPlotAreaUnit() {
+		return plotAreaUnit;
+	}
+
+	public void setPlotAreaUnit(String plotAreaUnit) {
+		this.plotAreaUnit = plotAreaUnit;
+	}
 
 }

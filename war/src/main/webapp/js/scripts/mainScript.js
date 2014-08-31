@@ -1,6 +1,5 @@
 // create the module and name it scotchApp
-var scotchApp = angular.module('scotchApp', [ 'multi-select', 'ngAnimate',
-		'ui.router' ]);
+	var scotchApp = angular.module('scotchApp', ['multi-select','fileAppDir','ngAnimate', 'ui.router', 'flow']);
 
 // configure our routes
 scotchApp.config(function($stateProvider, $urlRouterProvider) {
@@ -88,8 +87,25 @@ scotchApp.config(function($stateProvider, $urlRouterProvider) {
 	});
 
 	$urlRouterProvider.otherwise('/home');
-
-});
+	})
+	
+	.config (['flowFactoryProvider',function (flowFactoryProvider)
+	{
+		
+		flowFactoryProvider.defaults = {
+			    target: 'upload.php',
+			    permanentErrors: [404, 500, 501],
+			    maxChunkRetries: 1,
+			    chunkRetryInterval: 5000,
+			    simultaneousUploads: 4,
+			    singleFile: true
+			  }
+	
+		flowFactoryProvider.on('catchAll', function (event) {
+			    console.log('catchAll', arguments);
+			  });
+		
+	}]);
 
 // create the controller and inject Angular's $scope
 scotchApp.controller('mainController', function($scope) {
@@ -235,14 +251,42 @@ scotchApp.controller('latestSearchCntrl', function($scope, $http) {
 			});
 });
 
-scotchApp.controller('postPropertyController', function($scope) {
+scotchApp.controller('postPropertyController', function($scope,$http) {
 
 	// we will store all of our form data in this object
 	$scope.formData = {};
+		    $scope.files = [];
 
+		    //listen for the file selected event
+		    $scope.$on("fileSelected", function (event, args) {
+		        $scope.$apply(function () {            
+		            //add the file object to the scope's files collection
+		            $scope.files.push(args.file);
+		        });
+		    });
 	// function to process the form
 	$scope.processForm = function() {
-		alert('awesome!');
-	};
+		var fd = new FormData();
+		$scope.formData.propertyFeatureInfo.propertyMandateInfo.city = $scope.formData.propertyFeatureInfo.propertyMandateInfo.city.cityName;
+		fd.append('jsonData',angular.toJson($scope.formData));
 
+		//remove comment to append a file to the request
+		var oBlob = new Blob(['test'], { type: "text/plain"});
+		fd.append("files", oBlob,$scope.files);
+		
+		    	  $http({
+		              method: 'POST',
+		              url: "webservice/UploadPropertyAction.action",
+		              headers: { 'Content-Type': undefined },
+		              transformRequest: angular.identity,
+		              data: fd
+		          })
+		          
+		          .success(function (data, status, headers, config) {
+		              alert("success!");
+		          })
+		          .error(function (data, status, headers, config) {
+		              alert("failed!");
+		          });
+		    };
 });
