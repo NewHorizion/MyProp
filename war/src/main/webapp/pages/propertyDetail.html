@@ -57,16 +57,60 @@
         <li>
     		<h5>Property Area Info </h5>
    		</li>
-   		<li>
+   		<li ng-controller="AreaUnits">
     		<label>Covered Area <em>*</em> : </label>
-    		<input type="text" name="formData.coveredArea" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.coveredArea">
-		    <select name="selectCoveredArea" id="selectCoveredArea" class="smltxt"> 
-		        <option selected="selected" value="Sq-ft">Sq-ft</option>
-		        <option value="Sq-m">Sq-m</option> 
-		        <option value="Sq-Yrd">Sq-Yrd</option>
-		        <option value="Acre">Acre</option>
-		        <option value="Bigha">Bigha</option>
-		    </select>
+    		<input id="coveredArea" type="text" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.coveredArea">
+		    <select id="selectCoveredArea" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.coveredAreaUnit"
+		    	ng-options="areaUnit.value for areaUnit in areaUnits">
+				<!-- <option selected="selected" value="Sq-ft">Sq-ft</option>
+				<option value="Sq-yrd">Sq-yrd</option>
+				<option value="Sq-m">Sq-m</option>
+				<option value="Acre">Acre</option>
+				<option value="Bigha">Bigha</option>
+				<option value="Hectare">Hectare</option>
+				<option value="Marla">Marla</option>
+				<option value="Kanal">Kanal</option>
+				<option value="Biswa1">Biswa1</option>
+				<option value="Biswa2">Biswa2</option>
+				<option value="Ground">Ground</option>
+				<option value="Aankadam">Aankadam</option>
+				<option value="Rood">Rood</option>
+				<option value="Chatak">Chatak</option>
+				<option value="Kottah">Kottah</option>
+				<option value="Marla">Marla</option>
+				<option value="Cent">Cent</option>
+				<option value="Perch">Perch</option>
+				<option value="Guntha">Guntha</option>
+				<option value="Are">Are</option> -->
+			</select>
+   		</li>
+   		
+   		<li ng-controller="AreaUnits">
+   			<label>Plot/Land Area <em>*</em> : </label>
+   			<input id="plotArea" type="text" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.plotArea">
+   			<select id="selectPlotArea" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.plotAreaUnit"
+   				ng-options="areaUnit.value for areaUnit in areaUnits">
+				<!-- <option selected="selected" value="Sq-ft">Sq-ft</option>
+				<option value="Sq-yrd">Sq-yrd</option>
+				<option value="Sq-m">Sq-m</option>
+				<option value="Acre">Acre</option>
+				<option value="Bigha">Bigha</option>
+				<option value="Hectare">Hectare</option>
+				<option value="Marla">Marla</option>
+				<option value="Kanal">Kanal</option>
+				<option value="Biswa1">Biswa1</option>
+				<option value="Biswa2">Biswa2</option>
+				<option value="Ground">Ground</option>
+				<option value="Aankadam">Aankadam</option>
+				<option value="Rood">Rood</option>
+				<option value="Chatak">Chatak</option>
+				<option value="Kottah">Kottah</option>
+				<option value="Marla">Marla</option>
+				<option value="Cent">Cent</option>
+				<option value="Perch">Perch</option>
+				<option value="Guntha">Guntha</option>
+				<option value="Are">Are</option> -->
+			</select>
    		</li>
    		
    		<li>

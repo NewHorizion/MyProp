@@ -196,3 +196,29 @@ scotchApp
 		templateUrl : 'pages/balcony-no-ctrl.html'
 	}; 
 });
+
+
+scotchApp
+	.controller('AreaUnits', function($scope) {
+		$scope.areaUnits = [
+		     { id: 'Sq-yrd', value:'Sq-yrd'},
+		     { id: 'Sq-m', value:'Sq-m'},
+		     { id: 'Acre', value:'Acre'},
+		     { id: 'Bigha', value:'Bigha'},
+		     { id: 'Hectare', value:'Hectare'},
+		     { id: 'Marla', value:'Marla'},
+		     { id: 'Kanal', value:'Kanal'},
+		     { id: 'Biswa1', value:'Biswa1'},
+		     { id: 'Biswa2', value:'Biswa2'},
+		     { id: 'Ground', value:'Ground'},
+		     { id: 'Aankadam', value:'Aankadam'},
+		     { id: 'Rood', value:'Rood'},
+		     { id: 'Chatak', value:'Chatak'},
+		     { id: 'Kottah', value:'Kottah'},
+		     { id: 'Ground', value:'Ground'},
+		     { id: 'Cents', value:'Cents'},
+		     { id: 'Perch', value:'Perch'},
+		     { id: 'Guntha', value:'Guntha'},
+		     { id: 'Ares', value:'Ares'}
+		];
+});

@@ -14,7 +14,10 @@ public class PropertyMandateInfo
   private long propPrice;
   private String transactionType;
   private String address;
-
+  private int plotArea;
+  private String coveredAreaUnit;
+  private String plotAreaUnit;
+  
   public String getPurchaseType()
   {
     return purchaseType;
@@ -83,6 +86,36 @@ public class PropertyMandateInfo
   public void setAddress(String address)
   {
     this.address = address;
+  }
+
+  public int getPlotArea()
+  {
+    return plotArea;
+  }
+
+  public void setPlotArea(int plotArea)
+  {
+    this.plotArea = plotArea;
+  }
+
+  public String getCoveredAreaUnit()
+  {
+    return coveredAreaUnit;
+  }
+
+  public void setCoveredAreaUnit(String coveredAreaUnit)
+  {
+    this.coveredAreaUnit = coveredAreaUnit;
+  }
+
+  public String getPlotAreaUnit()
+  {
+    return plotAreaUnit;
+  }
+
+  public void setPlotAreaUnit(String plotAreaUnit)
+  {
+    this.plotAreaUnit = plotAreaUnit;
   }
 
 }
