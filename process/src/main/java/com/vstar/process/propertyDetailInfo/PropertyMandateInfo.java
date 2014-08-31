@@ -14,8 +14,8 @@ public class PropertyMandateInfo {
 	private String transactionType;
 	private String address;
 	private int plotArea;
-	private String coveredAreaUnit;
-	private String plotAreaUnit;
+	private ResidentialUnits coveredAreaUnit;
+	private ResidentialUnits plotAreaUnit;
 	private String city;
 	private String locality;
 
@@ -99,19 +99,19 @@ public class PropertyMandateInfo {
 		this.plotArea = plotArea;
 	}
 
-	public String getCoveredAreaUnit() {
+	public ResidentialUnits getCoveredAreaUnit() {
 		return coveredAreaUnit;
 	}
 
-	public void setCoveredAreaUnit(String coveredAreaUnit) {
+	public void setCoveredAreaUnit(ResidentialUnits coveredAreaUnit) {
 		this.coveredAreaUnit = coveredAreaUnit;
 	}
 
-	public String getPlotAreaUnit() {
+	public ResidentialUnits getPlotAreaUnit() {
 		return plotAreaUnit;
 	}
 
-	public void setPlotAreaUnit(String plotAreaUnit) {
+	public void setPlotAreaUnit(ResidentialUnits plotAreaUnit) {
 		this.plotAreaUnit = plotAreaUnit;
 	}
 

@@ -4,96 +4,80 @@ import java.util.Date;
 
 /**
  * Residential Property Details
- *
+ * 
  */
-public class ResidentialPropInfo
-{
-  private int noOfBedRooms;
-  private int noOfBathRooms;
-  private int noOfCalonies;
-  private String furnishedStatus;
-  private int floorNumber;
-  private int totalFloor;
-  private String possessionStatus;
-  private Date availableFrom;
+public class ResidentialPropInfo {
+	private ResidentialUnits noOfBedRooms;
+	private ResidentialUnits noOfBathRooms;
+	private ResidentialUnits noOfCalonies;
+	private String furnishedStatus;
+	private ResidentialUnits floorNumber;
+	private ResidentialUnits totalFloor;
+	private String possessionStatus;
+	private Date availableFrom;
 
-  public int getNoOfBedRooms()
-  {
-    return noOfBedRooms;
-  }
 
-  public void setNoOfBedRooms(int noOfBedRooms)
-  {
-    this.noOfBedRooms = noOfBedRooms;
-  }
+	public String getFurnishedStatus() {
+		return furnishedStatus;
+	}
 
-  public int getNoOfBathRooms()
-  {
-    return noOfBathRooms;
-  }
+	public void setFurnishedStatus(String furnishedStatus) {
+		this.furnishedStatus = furnishedStatus;
+	}
 
-  public void setNoOfBathRooms(int noOfBathRooms)
-  {
-    this.noOfBathRooms = noOfBathRooms;
-  }
+	public String getPossessionStatus() {
+		return possessionStatus;
+	}
 
-  public int getNoOfCalonies()
-  {
-    return noOfCalonies;
-  }
+	public void setPossessionStatus(String possessionStatus) {
+		this.possessionStatus = possessionStatus;
+	}
 
-  public void setNoOfCalonies(int noOfCalonies)
-  {
-    this.noOfCalonies = noOfCalonies;
-  }
+	public Date getAvailableFrom() {
+		return availableFrom;
+	}
 
-  public String getFurnishedStatus()
-  {
-    return furnishedStatus;
-  }
+	public void setAvailableFrom(Date availableFrom) {
+		this.availableFrom = availableFrom;
+	}
 
-  public void setFurnishedStatus(String furnishedStatus)
-  {
-    this.furnishedStatus = furnishedStatus;
-  }
+	public ResidentialUnits getNoOfCalonies() {
+		return noOfCalonies;
+	}
 
-  public int getFloorNumber()
-  {
-    return floorNumber;
-  }
+	public void setNoOfCalonies(ResidentialUnits noOfCalonies) {
+		this.noOfCalonies = noOfCalonies;
+	}
 
-  public void setFloorNumber(int floorNumber)
-  {
-    this.floorNumber = floorNumber;
-  }
+	public ResidentialUnits getNoOfBedRooms() {
+		return noOfBedRooms;
+	}
 
-  public int getTotalFloor()
-  {
-    return totalFloor;
-  }
+	public void setNoOfBedRooms(ResidentialUnits noOfBedRooms) {
+		this.noOfBedRooms = noOfBedRooms;
+	}
 
-  public void setTotalFloor(int totalFloor)
-  {
-    this.totalFloor = totalFloor;
-  }
+	public ResidentialUnits getNoOfBathRooms() {
+		return noOfBathRooms;
+	}
 
-  public String getPossessionStatus()
-  {
-    return possessionStatus;
-  }
+	public void setNoOfBathRooms(ResidentialUnits noOfBathRooms) {
+		this.noOfBathRooms = noOfBathRooms;
+	}
 
-  public void setPossessionStatus(String possessionStatus)
-  {
-    this.possessionStatus = possessionStatus;
-  }
+	public ResidentialUnits getFloorNumber() {
+		return floorNumber;
+	}
 
-  public Date getAvailableFrom()
-  {
-    return availableFrom;
-  }
+	public void setFloorNumber(ResidentialUnits floorNumber) {
+		this.floorNumber = floorNumber;
+	}
 
-  public void setAvailableFrom(Date availableFrom)
-  {
-    this.availableFrom = availableFrom;
-  }
+	public ResidentialUnits getTotalFloor() {
+		return totalFloor;
+	}
+
+	public void setTotalFloor(ResidentialUnits totalFloor) {
+		this.totalFloor = totalFloor;
+	}
 }
