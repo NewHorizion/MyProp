@@ -117,15 +117,27 @@
     		<h5>Property Price</h5>
     	</li>
     	<li>
-    		<label>Total Price <em>*</em> : </label>
+    		<label>Expected Price <em>*</em> : </label>
 	     	<input type="text" name="formData.propPrice" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.propPrice">          
    		</li>
    
    		<li>
     		<label>Available from: </label>	
-        	<input type="button" onclick="displayCalendar(document.getElementById('theDate2'),'dd-mm-yyyy',this)" value="Cal">
+        	<input type="button" value="Cal">
    		</li>
-  
+   		
+   		<li>
+		   <label for="keyword">Brief Description <em>*</em> : <br>
+		    [ e.g. East-facing, fully furnished bungalow with 5 
+		    BHK and power back-up, located in premium locality, for immediate sale ]</label>
+		    <textarea cols="30" rows="5" id="txtPropertyDescription" name="formData.propertyFeatureInfo.propertyMandateInfo.propertyDescription"></textarea>
+		    <input value="300" style="BORDER-TOp-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; WIDTH: 30px; BACKGROUND-COLOR: #fff; BORDER-RIGHT-WIDTH: 0px" size="4" readonly="readOnly" name="detailDescCounter" maxlength="4" id="detailDescCounter">characters left
+		 </li>
+		 
+		 <li>
+		   	<label>I want to deal with Agent<em style="color:Red">*</em> :</label>
+		    <input type="checkbox" value="Yes" name="formData.propertyFeatureInfo.propertyMandateInfo.dealingType">Yes
+		 </li>
   	</ul>
   
 	<!--<br><table width="300" height="90" background="images/2.jpg"><tbody><tr><td align="center"><span 2.jpg"="" images="" style="font-size:28px; color:black;&gt;&lt;img src=" id="ii">RtEEbW</span></td></tr></tbody></table>	

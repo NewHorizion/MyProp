@@ -222,3 +222,23 @@ scotchApp
 		     { id: 'Ares', value:'Ares'}
 		];
 });
+
+scotchApp
+	.controller('CheckBoxCtrl', function($scope) {
+	  $scope.inHouseAmenities = [
+	          'Servant Quarters', 
+	          'private Terrace/ Garden', 
+	          'Vaastu Compliant', 
+	          'Air Conditioned',	          
+	          'Intercom Facility', 
+	          'Internet / Wi-Fi Connectivity', 
+	          'RO Water System', 
+	          'piped Gas'
+	    ];
+	  $scope.checkAll = function() {
+		      $scope.inHouseAmenities = angular.copy($scope.inHouseAmenities);
+	  };
+	  $scope.uncheckAll = function() {
+		      $scope.inHouseAmenities = [];
+	  };
+});

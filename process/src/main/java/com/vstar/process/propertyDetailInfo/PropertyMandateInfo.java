@@ -18,6 +18,8 @@ public class PropertyMandateInfo {
 	private ResidentialUnits plotAreaUnit;
 	private String city;
 	private String locality;
+	private String propertyDescription;
+	private boolean dealingType;
 
 	public String getPurchaseType() {
 		return purchaseType;
@@ -114,5 +116,25 @@ public class PropertyMandateInfo {
 	public void setPlotAreaUnit(ResidentialUnits plotAreaUnit) {
 		this.plotAreaUnit = plotAreaUnit;
 	}
+
+  public String getPropertyDescription()
+  {
+    return propertyDescription;
+  }
+
+  public void setPropertyDescription(String propertyDescription)
+  {
+    this.propertyDescription = propertyDescription;
+  }
+
+  public boolean isDealingType()
+  {
+    return dealingType;
+  }
+
+  public void setDealingType(boolean dealingType)
+  {
+    this.dealingType = dealingType;
+  }
 
 }
