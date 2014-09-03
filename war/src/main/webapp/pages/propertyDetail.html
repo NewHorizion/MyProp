@@ -21,7 +21,8 @@
 				ng-options="propertyType.id as propertyType.name group by propertyType.categoryName for propertyType in propertyTypes">
 				<option value=''>Select</option>
 			</select> -->
-			<property-ctrl></property-ctrl>
+			<property-ctrl property-model-name="formData.propertyFeatureInfo.propertyMandateInfo.propertyType"
+				property-types="propertyTypes"></property-ctrl>
         </li>
         <li>
           	<label>Transaction Type <em>*</em> :</label>
@@ -32,13 +33,15 @@
         <li>
           <h5>Property Location </h5>
         </li>  
-        <li>
+        <li ng-controller="CountryCntrl">
         	<label>City <em>*</em>:</label>
-        	<select id="city" placeholder="city"
+        	<!-- <select id="city" placeholder="city"
 				ng-model="formData.propertyFeatureInfo.propertyMandateInfo.city"
 				ng-options="city.cityName group by city.stateName for city in locations">
 				<option value=''>Select</option>
-			</select>
+			</select> -->
+			<city-ctrl city-model-name="formData.propertyFeatureInfo.propertyMandateInfo.city"
+				locations="locations"></city-ctrl>
 		</li>
 		<li>
 			<label>Location <em>*</em>:</label>
@@ -157,7 +160,9 @@
    </div>
  </div>
 <!-- Mandate Property Info Ends-->
-
+<pre>
+  {{ formData }}
+ </pre>
 <div class="col-xs-6 col-xs-offset-3">
     <a ui-sref="form.upload" class="btn btn-block btn-info">
     Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>

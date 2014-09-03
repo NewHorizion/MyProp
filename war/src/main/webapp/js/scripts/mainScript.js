@@ -228,7 +228,12 @@ scotchApp
 				}).directive('cityCtrl', function() {
 			return {
 				restrict: 'E',
+				scope: {
+					cityModelName: '=',
+					locations:'='
+	            },
 				templateUrl : 'pages/city-ctrl.html'
+				
 			};
 		}).directive('locationCtrl', function() {
 			return {
@@ -238,6 +243,10 @@ scotchApp
 		}).directive('propertyCtrl', function() {
 			return {
 				restrict: 'E',
+				scope: {
+					propertyModelName: '=',
+					propertyTypes:'='
+	            },
 				templateUrl : 'pages/property-ctrl.html'
 			};
 		});

@@ -16,7 +16,7 @@
 										ng-options="city.cityName group by city.stateName for city in locations">
 										<option value=''>Select</option>
 									</select> -->
-									<city-ctrl></city-ctrl>
+									<city-ctrl city-model-name="formData.city" locations="locations"></city-ctrl>
 								</div>
 								
 								<location-ctrl></location-ctrl>
