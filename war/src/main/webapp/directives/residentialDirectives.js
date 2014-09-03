@@ -224,21 +224,53 @@ scotchApp
 });
 
 scotchApp
-	.controller('CheckBoxCtrl', function($scope) {
+	.controller('InHouseAmenityCtrl', function($scope) {
 	  $scope.inHouseAmenities = [
-	          'Servant Quarters', 
-	          'private Terrace/ Garden', 
-	          'Vaastu Compliant', 
-	          'Air Conditioned',	          
-	          'Intercom Facility', 
-	          'Internet / Wi-Fi Connectivity', 
-	          'RO Water System', 
-	          'piped Gas'
-	    ];
+	          {id:1, label: 'Servant Quarters'}, 
+	          {id:2, label: 'Private Terrace/ Garden'}, 
+	          {id:3, label: 'Vaastu Compliant'}, 
+	          {id:4, label: 'Air Conditioned'},	          
+	          {id:5, label: 'Intercom Facility'}, 
+	          {id:6, label: 'Internet / Wi-Fi Connectivity'}, 
+	          {id:7, label: 'RO Water System'}, 
+	          {id:8, label: 'Piped Gas'}
+	    ];	  
 	  $scope.checkAll = function() {
 		      $scope.inHouseAmenities = angular.copy($scope.inHouseAmenities);
 	  };
 	  $scope.uncheckAll = function() {
 		      $scope.inHouseAmenities = [];
 	  };
+});
+
+scotchApp
+.controller('ExtAmenityCtrl', function($scope) {
+  $scope.extAmenities = [
+          {id:1, label: 'Power Back Up'}, 
+          {id:2, label: 'Lift'}, 
+          {id:3, label: 'Rain Water Harvesting'}, 
+          {id:4, label: 'Club House'},	          
+          {id:5, label: 'Swimming pool'}, 
+          {id:6, label: 'Gymnasium'}, 
+          {id:7, label: 'Park'}, 
+          {id:8, label: 'Reserved parking'},
+          {id:9, label: 'Security'},
+          {id:10, label: 'Water Storage'},	          
+          {id:11, label: 'Service/Goods Lift'}, 
+          {id:12, label: 'Visitor parking'}, 
+          {id:13, label: 'Maintenance Staff'}, 
+          {id:14, label: 'Waste Disposal'},          
+          {id:15, label: 'Laundry Service'},
+          {id:16, label: 'DTH Television Facility'},
+          {id:17, label: 'Banquet Hall'},	          
+          {id:18, label: 'Bar/Lounge'}, 
+          {id:19, label: 'Cafeteria/Food Court'}, 
+          {id:20, label: 'Conference Room'}
+    ];
+  $scope.checkAll = function() {
+	      $scope.extAmenities = angular.copy($scope.extAmenities);
+  };
+  $scope.uncheckAll = function() {
+	      $scope.extAmenities = [];
+  };
 });

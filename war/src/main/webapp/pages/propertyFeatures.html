@@ -62,53 +62,38 @@
 			<li>
 		   		<h3>Amenities </h3>
 		  	</li>
-		  	<li>
-			   	<b>Angular In House :</b>
-			</li>
-			<li ng-controller="CheckBoxCtrl">
-			  	<div ng-repeat="inHouseAmenitie in inHouseAmenities">
-	  				<input type="checkbox" checklist-model="user.inHouseAmenities" checklist-value="inHouseAmenitie"> {{inHouseAmenitie}}
+		  	<li ng-controller="InHouseAmenityCtrl">
+			   	<b>In House Amenities :</b>
+			
+				<div
+					multi-select 
+    				input-model="inHouseAmenities"
+    				button-label="label"         
+    				item-label="label" 
+    				tick-property="ticked" 
+    				helper-elements="filter reset"
+    				max-labels="1"
+    				max-Height = "200px;"
+    				default-label="--InHouse Amenities--"
+    				output-model="formData.propertyFeatureInfo.residentialPropInfo.inHouseAmenitie">
 				</div>
 			</li>
-		  	<li>
-			   	<b>In House :</b>
-			</li>
-			<li>
-		        <input type="checkbox" onclick="fun()" name="amenityInt" value="Servant Quarters" id="amenityInt1"> Servant Quarters
-		        <input type="checkbox" onclick="fun()" name="amenityInt" value="private Terrace/ Garden" id="amenityInt2"> Private Terrace/ Garden
-		        <input type="checkbox" onclick="fun()" name="amenityInt" value="Vaastu Compliant" id="amenityInt3"> Vaastu Compliant
-		        <input type="checkbox" onclick="fun()" name="amenityInt" value="Air Conditioned" id="amenityInt4"> Air Conditioned
-		        <input type="checkbox" onclick="fun()" name="amenityInt" value="Intercom Facility" id="amenityInt5"> Intercom Facility<br>
-		        <input type="checkbox" onclick="fun()" name="amenityInt" value="Internet / Wi-Fi Connectivity" id="amenityInt6"> Internet / Wi-Fi Connectivity
-		        <input type="checkbox" onclick="fun()" name="amenityInt" value="RO Water System" id="amenityInt7"> RO Water System
-		        <input type="checkbox" onclick="fun()" name="amenityInt" value="piped Gas" id="amenityInt8"> Piped Gas
-		        <input type="hidden" name="_amenityInt" style="width:200px" id="_amenityInt" value=""> 
-  			</li>
   			<li>
   				<b>External Amenities :</b>
    			</li>
-   			<li>
-	            <input type="checkbox" name="amenityExt" value="power Back Up" onclick="fun1()" id="amenityExt1"> Power Back Up
-	            <input type="checkbox" name="amenityExt" value="Lift" onclick="fun1()" id="amenityExt2"> Lift
-	            <input type="checkbox" name="amenityExt" value="Rain Water Harvesting" onclick="fun1()" id="amenityExt3"> Rain Water Harvesting
-	          	<input type="checkbox" name="amenityExt" value="Club House" onclick="fun1()" id="amenityExt4"> Club House
-	          	<input type="checkbox" name="amenityExt" value="Swimming pool" onclick="fun1()" id="amenityExt5"> Swimming Pool
-	          	<input type="checkbox" name="amenityExt" value="Gymnasium" onclick="fun1()" id="amenityExt6"> Gymnasium<br>
-	          	<input type="checkbox" name="amenityExt" onclick="fun1()" value="park" id="amenityExt7"> Park
-		        <input type="checkbox" name="amenityExt" onclick="fun1()" value="Reserved parking" id="amenityExt8"> Reserved Parking
-		        <input type="checkbox" name="amenityExt" onclick="fun1()" value="Security" id="amenityExt9"> Security
-	          	<input type="checkbox" name="amenityExt" onclick="fun1()" value="Water Storage" id="amenityExt10"> Water Storage
-	          	<input type="checkbox" name="amenityExt" onclick="fun1()" value="Service/Goods Lift" id="amenityExt11"> Service/Goods Lift
-	          	<input type="checkbox" name="amenityExt" onclick="fun1()" value="Visitor parking" id="amenityExt12"> Visitor Parking<br>
-	          	<input type="checkbox" name="amenityExt" onclick="fun1()" value="Maintenance Staff" id="amenityExt13"> Maintenance Staff
-	          	<input type="checkbox" name="amenityExt" onclick="fun1()" value="Waste Disposal" id="amenityExt14"> Waste Disposal
-	          	<input type="checkbox" name="amenityExt" onclick="fun1()" value="Laundry Service" id="amenityExt15"> Laundry Service
-	          	<input type="checkbox" name="amenityExt" onclick="fun1()" value="DTH Television Facility" id="amenityExt16"> DTH Television Facility
-	          	<input type="checkbox" name="amenityExt" onclick="fun1()" value="Banquet Hall" id="amenityExt17"> Banquet Hall<br>
-	          	<input type="checkbox" name="amenityExt" onclick="fun1()" value="Bar/Lounge" id="amenityExt18"> Bar/Lounge
-	          	<input type="checkbox" name="amenityExt" onclick="fun1()" value="Cafeteria/Food Court" id="amenityExt19"> Cafeteria/Food Court
-	          	<input type="checkbox" name="amenityExt" onclick="fun1()" value="Conference Room" id="amenityExt20"> Conference Room
-	          	<input type="hidden" name="_amenityExt" style="width:200px" id="_amenityExt" value=""> 
+	        <li ng-controller="ExtAmenityCtrl">
+	        	<div
+					multi-select 
+    				input-model="extAmenities"
+    				button-label="label"         
+    				item-label="label" 
+    				tick-property="ticked" 
+    				helper-elements="filter reset"
+    				max-labels="1"
+    				max-Height = "200px;"
+    				default-label="--External Amenities--"
+    				output-model="formData.propertyFeatureInfo.residentialPropInfo.externalAmenitie">
+				</div> 
   			</li>
   			
   			<li>

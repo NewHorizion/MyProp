@@ -128,7 +128,7 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
             // If user specify a height, call this function
             $scope.setHeight = function() {
                 if ( typeof $scope.maxHeight !== 'undefined' ) {
-                    return 'max-height: ' + $scope.maxHeight + '; overflow-y:scroll';
+                    return 'max-height: ' + $scope.maxHeight + '; overflow:scroll';
                 }
             }
 
