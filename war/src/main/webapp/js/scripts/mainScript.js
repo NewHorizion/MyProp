@@ -78,6 +78,13 @@ scotchApp.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl : 'pages/registration.html',
 		controller : 'registrationController'
 	})
+	
+	// route for post requirement
+	.state('requirement', {
+		url : '/requirement',
+		templateUrl : 'pages/postRequirement.html',
+		controller : 'requirementController'
+	})
 
 	// route for the search result page
 	.state('search', {
@@ -120,6 +127,10 @@ scotchApp.controller('aboutController', function($scope) {
 
 scotchApp.controller('contactController', function($scope) {
 	$scope.message = 'Contact us! JK. This is just a demo.';
+});
+
+scotchApp.controller('requirementController', function($scope) {
+	$scope.message = 'Post requirement';
 });
 
 scotchApp
