@@ -1,5 +1,5 @@
 // create the module and name it scotchApp
-	var scotchApp = angular.module('scotchApp', ['angularjs-dropdown-multiselect', 'multi-select','fileAppDir','ngAnimate', 'ui.router', 'flow', 'checklist-model']);
+	var scotchApp = angular.module('scotchApp', ['multi-select','fileAppDir','ngAnimate', 'ui.router', 'flow', 'checklist-model']);
 
 // configure our routes
 scotchApp.config(function($stateProvider, $urlRouterProvider) {
