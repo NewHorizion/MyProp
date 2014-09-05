@@ -24,14 +24,11 @@
 				<balcony-no-ctrl></balcony-no-ctrl>
 			</li>
 			
-			<li>
+			<li ng-controller="FurnishedStatuses">
 				<label>Furnished Status<em>*</em> :</label>
 				<select id="furnished" ng-model="formData.propertyFeatureInfo.residentialPropInfo.furnishedStatus"
-					ng-options="">
-					<option value="-1">---Furnished Status---</option>
-					<option value="Furnished">Furnished</option>
-					<option value="Unfurnished">Unfurnished</option>
-					<option value="Semi-Furnished">Semi-Furnished</option>
+					ng-options="furnishedStatus.value for furnishedStatus in furnishedStatuses track by furnishedStatus.value">
+					<option value="">Select</option>
 				</select>
 			</li>
 			
@@ -63,13 +60,13 @@
 			   	<label for="keyword">Brief Description <em>*</em> : <br>
 			    	[ e.g. East-facing, fully furnished bungalow with 5 
 			    	BHK and power back-up, located in premium locality, for immediate sale ]</label>
-			    <textarea cols="30" rows="5" id="txtPropertyDescription" name="formData.propertyFeatureInfo.propertyMandateInfo.propertyDescription"></textarea>
+			    <textarea cols="30" rows="5" id="txtPropertyDescription" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.propertyDescription"></textarea>
 			    <input value="300" style="BORDER-TOp-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; WIDTH: 30px; BACKGROUND-COLOR: #fff; BORDER-RIGHT-WIDTH: 0px" size="4" readonly="readOnly" name="detailDescCounter" maxlength="4" id="detailDescCounter">characters left
 		 	</li>
 		 
 		 	<li>
 		   		<label>I want to deal with Agent<em style="color:Red">*</em> :</label>
-		    	<input type="checkbox" value="Yes" name="formData.propertyFeatureInfo.propertyMandateInfo.dealingType">Yes
+		    	<input type="checkbox" value="Yes" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.dealingType">Yes
 		 	</li>
 			
 			<li>
@@ -88,7 +85,8 @@
     				max-labels="1"
     				max-Height = "200px;"
     				default-label="--InHouse Amenities--"
-    				output-model="formData.propertyFeatureInfo.residentialPropInfo.inHouseAmenitie">
+    				output-model="formData.propertyFeatureInfo.residentialPropInfo.inHouseAmenitie"
+    				on-item-click="itemSelect( data )">
 				</div>
 			</li>
   			<li>
@@ -116,7 +114,7 @@
 			   	<label for="keyword">Landmarks &amp; Neighbourhood : <br>
 			    	[ We strongly recommend you to mention landmark(s) 
 			    	near your property ] </label>
-			    <textarea cols="50" rows="5" name="txtLandmarks" id="txtLandmarks"></textarea>
+			    <textarea cols="50" rows="5" ng-model="formData.propertyFeatureInfo.residentialPropInfo.txtLandmarks" id="txtLandmarks"></textarea>
 			    <input name="landmarksCounter" value="3000" size="4" maxlength="4" readonly="readOnly" style="BORDER-TOp-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; WIDTH: 30px; BACKGROUND-COLOR: #fff; BORDER-RIGHT-WIDTH: 0px" id="landmarksCounter">
 			    characters left
 			</li>
