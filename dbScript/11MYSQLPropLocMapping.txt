@@ -1,0 +1,24 @@
+/*Dropping FK constraint*/
+ALTER TABLE prop_info
+DROP foreign key prop_info_ibfk_3
+
+
+/*Dropping location_id column*/
+ALTER TABLE prop_info
+DROP COLUMN prop_location_id
+
+
+/*Creating Mapping table of Property with location*/
+create table prop_location_info(
+  prop_location_info_id int(11) not null,
+  prop_location_id int(11),
+  prop_info_id int(11) not null,
+  prop_location_name varchar(50),
+  prop_address varchar(100),
+  prop_city_id int(11),
+  created_Date datetime DEFAULT NULL,
+  PRIMARY KEY (`prop_location_info_Id`),
+  CONSTRAINT `prop_location_info_ibfk_1` FOREIGN KEY (`prop_Info_Id`) REFERENCES `prop_info` (`prop_Info_Id`),
+  CONSTRAINT `prop_location_info_ibfk_2` FOREIGN KEY (`prop_location_Id`) REFERENCES `prop_location` (`prop_location_Id`),
+  CONSTRAINT `prop_location_info_ibfk_3` FOREIGN KEY (`prop_city_Id`) REFERENCES `prop_city` (`prop_city_Id`)
+)

@@ -3,11 +3,13 @@ package com.vstar.dao.process.propertyUpload;
 import com.vstar.dao.PropAreaDao;
 import com.vstar.dao.PropFeaturesDao;
 import com.vstar.dao.PropInfoDao;
+import com.vstar.dao.PropLocationInfoDao;
 import com.vstar.dao.PropPriceDao;
 import com.vstar.dao.PropTransactionDao;
 import com.vstar.dao.process.PropAreaDaoProcess;
 import com.vstar.dao.process.PropFeaturesDaoProcess;
 import com.vstar.dao.process.PropInfoDaoProcess;
+import com.vstar.dao.process.PropLocationInfoDaoProcess;
 import com.vstar.dao.process.PropPriceDaoProcess;
 import com.vstar.dao.process.PropTransactionDaoProcess;
 import com.vstar.process.propertyDetailInfo.PropertyFeatureInfo;
@@ -25,6 +27,7 @@ public class PropertyUploadProcess
   private PropInfoDaoProcess propInfoDaoProcess;
   private PropPriceDaoProcess propPriceDaoProcess;
   private PropTransactionDaoProcess propTransactionDaoProcess;
+  private PropLocationInfoDaoProcess propLocationInfoDaoProcess;
   private PropInfoDao propInfoDao;
   
   /**
@@ -37,8 +40,27 @@ public class PropertyUploadProcess
     propInfoDao = new PropInfoDao();
     savePropertyMandateInfos(propertyFeatureInfo.getPropertyMandateInfo());
     savePropertyFeatureInfo(propertyFeatureInfo.getResidentialPropInfo());
-    propInfoDaoProcess.addUpdatePropInfoDao(propInfoDao);
+    // Saving Property Master table
+    propInfoDao = propInfoDaoProcess.addUpdatePropInfoDao(propInfoDao);
+    
+    // Saving Property Location Info
+    savePropertyLocationInfo(propertyFeatureInfo.getPropertyMandateInfo());
     return true;
+  }
+  
+  /**
+   * Saving Property Location Info
+   * @param propertyMandateInfo
+   */
+  private void savePropertyLocationInfo(PropertyMandateInfo propertyMandateInfo)
+  {
+    PropLocationInfoDao propLocationInfoDao = new PropLocationInfoDao();
+    propLocationInfoDao.setPropAddress(propertyMandateInfo.getAddress());
+    propLocationInfoDao.setPropCityDao(Integer.parseInt(propertyMandateInfo.getCity()));
+    propLocationInfoDao.setPropInfoDao(propInfoDao);
+    propLocationInfoDao.setPropLocationDao(propertyMandateInfo.getPropLocationInfo().getLocationId());
+    propLocationInfoDao.setPropLocationName(propertyMandateInfo.getLocality());
+    propLocationInfoDaoProcess.addUpdatePropAreaDao(propLocationInfoDao);
   }
   
   /**
@@ -142,6 +164,16 @@ public class PropertyUploadProcess
   public void setPropTransactionDaoProcess(PropTransactionDaoProcess propTransactionDaoProcess)
   {
     this.propTransactionDaoProcess = propTransactionDaoProcess;
+  }
+
+  public PropLocationInfoDaoProcess getPropLocationInfoDaoProcess()
+  {
+    return propLocationInfoDaoProcess;
+  }
+
+  public void setPropLocationInfoDaoProcess(PropLocationInfoDaoProcess propLocationInfoDaoProcess)
+  {
+    this.propLocationInfoDaoProcess = propLocationInfoDaoProcess;
   }
 
 }

@@ -39,9 +39,6 @@ public class PropInfoDao implements java.io.Serializable
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "prop_term_Cond_Id", nullable = true)
   private PropTermsCondDao propTermsCond;
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_location_Id", nullable = true)
-  private PropLocationDao propLocation;
   @Column(name = "prop_purchase_id")
   private Integer propPurchaseType;
   @ManyToOne(fetch = FetchType.LAZY)
@@ -97,15 +94,13 @@ public class PropInfoDao implements java.io.Serializable
    * @param custom4
    */
   public PropInfoDao(int propInfoId, PropPriceDao propPrice, PropTermsCondDao propTermsCond,
-      PropLocationDao propLocation, Integer propPurchaseType,
-      PropFeaturesDao propFeatures, PropAreaDao propArea, Integer propType,
+      Integer propPurchaseType, PropFeaturesDao propFeatures, PropAreaDao propArea, Integer propType,
       PropTransactionDao propTransaction, String transactionType, Date createdDate, String custom1,
       String custom2, String custom3, String custom4)
   {
     this.propInfoId = propInfoId;
     this.propPrice = propPrice;
     this.propTermsCond = propTermsCond;
-    this.propLocation = propLocation;
     this.propPurchaseType = propPurchaseType;
     this.propFeatures = propFeatures;
     this.propArea = propArea;
@@ -147,16 +142,6 @@ public class PropInfoDao implements java.io.Serializable
   public void setPropTermsCond(PropTermsCondDao propTermsCond)
   {
     this.propTermsCond = propTermsCond;
-  }
-
-  public PropLocationDao getPropLocation()
-  {
-    return this.propLocation;
-  }
-
-  public void setPropLocation(PropLocationDao propLocation)
-  {
-    this.propLocation = propLocation;
   }
 
   public Integer getPropPurchaseType()
