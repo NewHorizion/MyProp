@@ -9,3 +9,7 @@ CREATE TABLE HIBERNATE_SEQUENCES(
 
 ALTER TABLE prop_features
 MODIFY furnished varchar(20)
+
+ALTER Table prop_info CHANGE society_project transaction_type varchar(20)
+
+ALTER Table prop_transaction CHANGE transaction_type society_project varchar(20)
