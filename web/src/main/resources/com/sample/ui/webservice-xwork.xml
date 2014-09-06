@@ -17,6 +17,7 @@
 		<interceptors>
 			<interceptor-stack name="webservicesample-stack">
 				<interceptor-ref name="params" />
+				<interceptor-ref name="fileUpload" />
 				<interceptor-ref name="autowiring" />
 				<interceptor-ref name="scope" />
 				<interceptor-ref name="jsonToObject" />
@@ -29,6 +30,10 @@
 			
 			<interceptor name="jsonToObject"
 				class="com.vstar.interceptors.JsonToParamInterceptor">
+			</interceptor>
+			
+				<interceptor name="fileUpload"
+				class="org.apache.struts2.interceptor.FileUploadInterceptor">
 			</interceptor>
 		</interceptors>
 		

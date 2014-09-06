@@ -16,6 +16,10 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
 
 	@Override
 	public List<Map<String, String>> findProperty() {
+		final String APPLICATION_CONTEXT_PATH = mergedProperties
+				.getProperty(PropertiesConstants.APPLICATION_CONTEXR_PATH);
+		final String OUTSIDE_WAR_IMAGES_PATH = mergedProperties
+				.getProperty(PropertiesConstants.OUTSIDE_WAR_IMAGES_PATH);
 		List<Map<String, String>> searchProperties = new ArrayList<Map<String, String>>();
 		Map<String, String> property1 = new LinkedHashMap<String, String>();
 		property1.put("propertyTitle",
@@ -24,6 +28,8 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
 		property1.put("developerName", "VS Shelters");
 		property1.put("propPrice", "42.85 Lac(s) (Negotiable)");
 		property1.put("rateSqft", "3,860/Sq-ft");
+		property1.put("propertyImagePath",APPLICATION_CONTEXT_PATH
+				+ OUTSIDE_WAR_IMAGES_PATH + "/thumb.jpg");
 		searchProperties.add(property1);
 		Map<String, String> property2 = new LinkedHashMap<String, String>();
 		property2.put("propertyTitle",
@@ -32,6 +38,16 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
 		property2.put("developerName", "Bhagini Developers");
 		property2.put("propPrice", "42.0 Lac(s)");
 		property2.put("rateSqft", "3,677");
+		property2.put("propertyImagePath",APPLICATION_CONTEXT_PATH
+				+ OUTSIDE_WAR_IMAGES_PATH + "/thumb.jpg");
+		searchProperties.add(property2);
+		searchProperties.add(property2);
+		searchProperties.add(property2);
+		searchProperties.add(property2);
+		searchProperties.add(property2);
+		searchProperties.add(property2);
+		searchProperties.add(property2);
+		searchProperties.add(property2);
 		searchProperties.add(property2);
 		return searchProperties;
 	}
@@ -76,6 +92,9 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
 				.setPropertyTitle("2 BHK Multistorey Apartment in Banashankari Stage 3");
 		property2.setPropertyPrice("42.85 Lac(s) (Negotiable)");
 		latestProperties.add(property2	);
+		latestProperties.add(property2	);
+		latestProperties.add(property2	);
+		
 		
 		mapRecentProperties.put("latestProperties", latestProperties);
 		Gson gson = new Gson();

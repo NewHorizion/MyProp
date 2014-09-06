@@ -1,5 +1,5 @@
 // create the module and name it scotchApp
-	var scotchApp = angular.module('scotchApp', ['multi-select','fileAppDir','ngAnimate', 'ui.router', 'flow', 'checklist-model']);
+	var scotchApp = angular.module('scotchApp', ['multi-select','fileAppDir','ngAnimate', 'ui.router', 'flow', 'checklist-model','ng.httpLoader','PropertySearchServices']);
 
 // configure our routes
 scotchApp.config(function($stateProvider, $urlRouterProvider) {
@@ -85,12 +85,18 @@ scotchApp.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl : 'pages/postRequirement.html',
 		controller : 'requirementController'
 	})
+		// route for the registration page
+	.state('viewDetails', {
+		url : '/viewDetails',
+		templateUrl : 'pages/SinglePropertyDetails.html',
+		controller : 'registrationController'
+	})
 
 	// route for the search result page
 	.state('search', {
 		url : '/search',
 		templateUrl : 'pages/searchResult.html',
-		controller : 'registrationController'
+		controller : 'searchResultController'
 	});
 
 	$urlRouterProvider.otherwise('/home');
@@ -112,7 +118,12 @@ scotchApp.config(function($stateProvider, $urlRouterProvider) {
 			    console.log('catchAll', arguments);
 			  });
 		
-	}]);
+	}])
+.config(['httpMethodInterceptorProvider',
+         function (httpMethodInterceptorProvider) {
+         httpMethodInterceptorProvider.whitelistDomain('http://localhost:8080/webservicesample');
+        }
+       ]);
 
 // create the controller and inject Angular's $scope
 scotchApp.controller('mainController', function($scope) {
@@ -209,33 +220,12 @@ scotchApp
 							.get(
 									'http://localhost:8080/webservicesample/openService/master/location')
 							.success(function(data) {
-								console.log(data);
 								$scope.propertyTypes = data.propertyTypes;
 								$scope.locations = data.locations;
 							});
 					$scope.visible = true;
 					$scope.properties = [];
 
-					$scope.search = function() {
-						$http(
-								{
-									method : 'post',
-									url : 'http://localhost:8080/webservicesample/openService/search/properties',
-									data : JSON.stringify($scope.formData), // pass
-									// in
-									// data
-									// as
-									// strings
-									headers : {
-										'Content-Type' : 'application/json'
-									}
-								}).success(function(data) {
-							console.log(data);
-							if ($location.path().indexOf('/search') < 0)
-								$location.path('search');
-							$scope.properties = data;
-						});
-					}
 				}).directive('cityCtrl', function() {
 			return {
 				restrict: 'E',
@@ -261,6 +251,28 @@ scotchApp
 				templateUrl : 'pages/property-ctrl.html'
 			};
 		});
+scotchApp.controller('searchController', function($scope, $http,$location,searchService) {
+	$scope.search = function() {
+		$http(
+				{
+					method : 'post',
+					url : 'http://localhost:8080/webservicesample/openService/search/properties',
+					data : JSON.stringify($scope.$parent.formData), // pass
+					headers : {
+						'Content-Type' : 'application/json'
+					}
+				}).success(function(data) {
+			$scope.properties = data;
+			searchService.saveSearchResponse (data);
+			if ($location.path().indexOf('/search') < 0)
+				$location.path('search',false);
+		});
+	}
+});
+
+scotchApp.controller('searchResultController', function($scope, $http,searchService) {
+	$scope.properties = searchService.getSearchResponse ();
+});
 
 scotchApp.controller('latestSearchCntrl', function($scope, $http) {
 	$http.get(

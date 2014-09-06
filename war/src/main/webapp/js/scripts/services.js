@@ -2,11 +2,28 @@
 
 /* Services */
 
-var propertySrvices = angular.module('propertyServices', ['ngResource']);
 
-propertySrvices.factory('PropertyHttp', ['$http',
+var PropertySearchServices = angular.module('PropertySearchServices', []);
+
+PropertySearchServices.factory('PropertyService', ['$http',
   function($http){
     return $http('http://localhost:8080/webservicesample/openService/search/latest', {}, {
       query: {method:'GET', isArray:true}
     });
   }]);
+
+
+
+PropertySearchServices.factory('searchService', function () {
+    var searchResponse = {};
+
+    return {
+        saveSearchResponse:function (data) {
+            searchResponse = data;
+            console.log(data);
+        },
+        getSearchResponse:function () {
+            return searchResponse;
+        }
+    };
+});

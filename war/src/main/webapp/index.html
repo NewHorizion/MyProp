@@ -2,6 +2,7 @@
 <html ng-app="scotchApp">
 
 <head>
+<title>My Prop</title>
 <script src="js/jquery.min.js"></script>
 <!-- SCROLLS -->
 <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -28,6 +29,7 @@
 <script src="js/ng-flow-standalone.js"></script>
 <!--  end angular -->
 <script src="directives/fileUpload.js"></script>
+<script src="js/scripts/services.js"></script>
 <script src="js/scripts/mainScript.js"></script>
 <script src="directives/residentialDirectives.js"></script>
 <script src="js/jquery.js"></script>
@@ -44,6 +46,7 @@
 <script src="js/angular-multi-select.js"></script>
 <script src="js/checklist-model.js"></script>
 <script src="js/angular-animate.js"></script>
+<script src="js/angular-http-loader.js"></script>
 </head>
 
 
@@ -93,6 +96,9 @@
 		<!-- angular templating -->
 		<!-- this is where content will be injected -->
 		<div ui-view></div>
+		<script type="text/ng-template" id="example-loader.tpl.html">Loading {{title}}...</script>
+		<div ng-http-loader methods="GET" title="Foo" ttl="2" template="example-loader.tpl.html"></div>
+		<div ng-http-loader methods="['PUT', 'POST']" template="example-loader.tpl.html"></div>
 		<ng-include src="'pages/footer.html'"> </ng-include>
 	</div>
 </body>
