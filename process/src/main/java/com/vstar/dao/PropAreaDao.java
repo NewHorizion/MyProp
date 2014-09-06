@@ -2,12 +2,17 @@ package com.vstar.dao;
 
 import java.util.Date;
 
+import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 /**
  * Property Area Details
@@ -15,18 +20,25 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "prop_area", catalog = "property_master")
+@GenericGenerator(name = "PropAreaInfo", strategy = "org.hibernate.id.enhanced.TableGenerator", parameters = {
+  @Parameter(name = "segment_value", value = "Prop_Area_Info"),
+  @Parameter(name = "increment_size", value = "10"),
+  @Parameter(name = "optimizer", value = "pooled")})
 public class PropAreaDao implements java.io.Serializable
 {
   private static final long serialVersionUID = -1377011156147399065L;
   @Id
+  @GeneratedValue(generator = "PropAreaInfo")
   @Column(name = "prop_area_Id", unique = true, nullable = false)
   private int propAreaId;
   @Column(name = "covered_Area")
   private Integer coveredArea;
-  @Column(name = "measurement", length = 6)
-  private String measurement;
+  @Column(name = "covered_area_unit", length = 15)
+  private String coveredAreaUnit;
   @Column(name = "plot_Area")
   private Integer plotArea;
+  @Column(name = "plot_Area_Unit", length = 15)
+  private String plotAreaUnit;
   @Column(name = "land_Area")
   private Integer landArea;
   @Temporal(TemporalType.TIMESTAMP)
@@ -47,7 +59,6 @@ public class PropAreaDao implements java.io.Serializable
 
   /**
    * 
-   * @param propAreaId
    * @param coveredArea
    * @param measurement
    * @param plotArea
@@ -58,14 +69,14 @@ public class PropAreaDao implements java.io.Serializable
    * @param custom3
    * @param custom4
    */
-  public PropAreaDao(int propAreaId, Integer coveredArea, String measurement, Integer plotArea,
+  public PropAreaDao(Integer coveredArea, String coveredAreaUnit, Integer plotArea, String plotAreaUnit,
       Integer landArea, Date createdDate, String custom1, String custom2, String custom3,
       String custom4)
   {
-    this.propAreaId = propAreaId;
     this.coveredArea = coveredArea;
-    this.measurement = measurement;
+    this.coveredAreaUnit = coveredAreaUnit;
     this.plotArea = plotArea;
+    this.plotAreaUnit = plotAreaUnit;
     this.landArea = landArea;
     this.createdDate = createdDate;
     this.custom1 = custom1;
@@ -92,16 +103,6 @@ public class PropAreaDao implements java.io.Serializable
   public void setCoveredArea(Integer coveredArea)
   {
     this.coveredArea = coveredArea;
-  }
-
-  public String getMeasurement()
-  {
-    return this.measurement;
-  }
-
-  public void setMeasurement(String measurement)
-  {
-    this.measurement = measurement;
   }
 
   public Integer getPlotArea()
@@ -172,5 +173,25 @@ public class PropAreaDao implements java.io.Serializable
   public void setCustom4(String custom4)
   {
     this.custom4 = custom4;
+  }
+
+  public String getCoveredAreaUnit()
+  {
+    return coveredAreaUnit;
+  }
+
+  public void setCoveredAreaUnit(String coveredAreaUnit)
+  {
+    this.coveredAreaUnit = coveredAreaUnit;
+  }
+
+  public String getPlotAreaUnit()
+  {
+    return plotAreaUnit;
+  }
+
+  public void setPlotAreaUnit(String plotAreaUnit)
+  {
+    this.plotAreaUnit = plotAreaUnit;
   }
 }

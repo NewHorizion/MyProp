@@ -2,8 +2,12 @@ package com.vstar.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 /**
  * Property features
@@ -11,10 +15,15 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "prop_features", catalog = "property_master")
+@GenericGenerator(name = "PropFeatureInfo", strategy = "org.hibernate.id.enhanced.TableGenerator", parameters = {
+  @Parameter(name = "segment_value", value = "Prop_Feature_Info"),
+  @Parameter(name = "increment_size", value = "10"),
+  @Parameter(name = "optimizer", value = "pooled")})
 public class PropFeaturesDao implements java.io.Serializable
 {
   private static final long serialVersionUID = -4329916729253167714L;
   @Id
+  @GeneratedValue(generator = "PropFeatureInfo")
   @Column(name = "prop_feature_Id", unique = true, nullable = false)
   private int propFeatureId;
   @Column(name = "bed_Rooms")
@@ -24,7 +33,7 @@ public class PropFeaturesDao implements java.io.Serializable
   @Column(name = "balconies")
   private Integer balconies;
   @Column(name = "furnished")
-  private Byte furnished;
+  private String furnished;
   @Column(name = "age_Of_Const", length = 10)
   private String ageOfConst;
   @Column(name = "avail_Floor")
@@ -65,7 +74,7 @@ public class PropFeaturesDao implements java.io.Serializable
    * @param custom4
    */
   public PropFeaturesDao(int propFeatureId, Integer bedRooms, Integer bathRooms, Integer balconies,
-      Byte furnished, String ageOfConst, Integer availFloor, Integer totalFloors, String custom1,
+      String furnished, String ageOfConst, Integer availFloor, Integer totalFloors, String custom1,
       String custom2, String custom3, String custom4)
   {
     this.propFeatureId = propFeatureId;
@@ -122,12 +131,12 @@ public class PropFeaturesDao implements java.io.Serializable
     this.balconies = balconies;
   }
 
-  public Byte getFurnished()
+  public String getFurnished()
   {
     return this.furnished;
   }
 
-  public void setFurnished(Byte furnished)
+  public void setFurnished(String furnished)
   {
     this.furnished = furnished;
   }

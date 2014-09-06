@@ -21,7 +21,7 @@ public class PropTransactionDao implements java.io.Serializable
   @Id
   @Column(name = "prop_transaction_Id", unique = true, nullable = false)
   private int propTransactionId;
-  @Column(name = "transaction_Type", length = 15)
+  @Column(name = "society_project", length = 20)
   private String transactionType;
   @Column(name = "possession_Status", length = 15)
   private String possessionStatus;

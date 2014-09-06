@@ -1,0 +1,174 @@
+<!-- Mandate Property Info starts -->
+<div class="row">
+	<div class="col-sm-8 col-sm-offset-2">	  			
+		<div id="form-container">  
+			<div class="cBoxOut" ng-controller="CountryCntrl">
+				<div ng-include src="'pages/propertyDetail.html'"></div>   
+    			<!-- <h2>Sell or Rent out your Property</h2>
+    			<div class="cBox registrForm">
+		      	<ul>
+			        <li class="all">* denotes mandatory fields</li>
+			
+			        <li>
+			          	<h5>Basic Details </h5>
+			        </li>
+			        <li>
+			          	<label>I want to <em>*</em> : </label>
+			          	<input type="radio" name="purchaseType" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.purchaseType" value="1" >Sale 
+			           	<input type="radio" name="purchaseType" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.purchaseType" value="2" >Rent Out
+			        <li>
+			          	<label>Property Type <em>*</em> :</label>
+			          	<select id="propertyType" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.propertyType"
+							ng-options="propertyType.id as propertyType.name group by propertyType.categoryName for propertyType in propertyTypes">
+							<option value=''>Select</option>
+						</select>
+						<property-ctrl property-model-name="formData.propertyFeatureInfo.propertyMandateInfo.propertyType"
+							property-types="propertyTypes"></property-ctrl>
+			        </li>
+			        <li>
+			          	<label>Transaction Type <em>*</em> :</label>
+			          	<input class="" type="radio" name="transactionType" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.transactionType" value="New Property" >New Property
+			          	<input class="" type="radio" name="transactionType" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.transactionType" value="Resale" >Resale 
+			        </li>
+			            
+			        <li>
+			          <h5>Property Location </h5>
+			        </li>  
+			        <li ng-controller="CountryCntrl">
+			        	<label>City <em>*</em>:</label>
+			        	<select id="city" placeholder="city"
+							ng-model="formData.propertyFeatureInfo.propertyMandateInfo.city"
+							ng-options="city.cityName group by city.stateName for city in locations">
+							<option value=''>Select</option>
+						</select>
+						<city-ctrl city-model-name="formData.propertyFeatureInfo.propertyMandateInfo.city"
+							locations="locations"></city-ctrl>
+					</li>
+					<li>
+						<label>Location <em>*</em>:</label>
+						<select id="localities" placeholder="Locality"
+							ng-model="formData.propertyFeatureInfo.propertyMandateInfo.locality"
+							ng-options="locality.localityId as locality.localityName group by locality.cityName for locality in formData.propertyFeatureInfo.propertyMandateInfo.city.localities">
+							<option value=''>Select</option>
+						</select>
+			        </li>
+			        
+			        <li>
+			          <label>Address : </label>
+			          <textarea id="address" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.address" rows="5" cols="30"></textarea>
+			       </li>
+			           
+			        <li>
+			    		<h5>Property Area Info </h5>
+			   		</li>
+			   		<li ng-controller="AreaUnits">
+			    		<label>Covered Area <em>*</em> : </label>
+			    		<input id="coveredArea" type="text" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.coveredArea">
+					    <select id="selectCoveredArea" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.coveredAreaUnit"
+					    	ng-options="areaUnit.value for areaUnit in areaUnits">
+							<option selected="selected" value="Sq-ft">Sq-ft</option>
+							<option value="Sq-yrd">Sq-yrd</option>
+							<option value="Sq-m">Sq-m</option>
+							<option value="Acre">Acre</option>
+							<option value="Bigha">Bigha</option>
+							<option value="Hectare">Hectare</option>
+							<option value="Marla">Marla</option>
+							<option value="Kanal">Kanal</option>
+							<option value="Biswa1">Biswa1</option>
+							<option value="Biswa2">Biswa2</option>
+							<option value="Ground">Ground</option>
+							<option value="Aankadam">Aankadam</option>
+							<option value="Rood">Rood</option>
+							<option value="Chatak">Chatak</option>
+							<option value="Kottah">Kottah</option>
+							<option value="Marla">Marla</option>
+							<option value="Cent">Cent</option>
+							<option value="Perch">Perch</option>
+							<option value="Guntha">Guntha</option>
+							<option value="Are">Are</option>
+						</select>
+			   		</li>
+			   		
+			   		<li ng-controller="AreaUnits">
+			   			<label>Plot/Land Area <em>*</em> : </label>
+			   			<input id="plotArea" type="text" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.plotArea">
+			   			<select id="selectPlotArea" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.plotAreaUnit"
+			   				ng-options="areaUnit.value for areaUnit in areaUnits">
+							<option selected="selected" value="Sq-ft">Sq-ft</option>
+							<option value="Sq-yrd">Sq-yrd</option>
+							<option value="Sq-m">Sq-m</option>
+							<option value="Acre">Acre</option>
+							<option value="Bigha">Bigha</option>
+							<option value="Hectare">Hectare</option>
+							<option value="Marla">Marla</option>
+							<option value="Kanal">Kanal</option>
+							<option value="Biswa1">Biswa1</option>
+							<option value="Biswa2">Biswa2</option>
+							<option value="Ground">Ground</option>
+							<option value="Aankadam">Aankadam</option>
+							<option value="Rood">Rood</option>
+							<option value="Chatak">Chatak</option>
+							<option value="Kottah">Kottah</option>
+							<option value="Marla">Marla</option>
+							<option value="Cent">Cent</option>
+							<option value="Perch">Perch</option>
+							<option value="Guntha">Guntha</option>
+							<option value="Are">Are</option>
+						</select>
+			   		</li>
+			   		
+			   		<li>
+			    		<h5>Property Price</h5>
+			    	</li>
+			    	<li>
+			    		<label>Expected Price <em>*</em> : </label>
+				     	<input type="text" name="formData.propPrice" ng-model="formData.propertyFeatureInfo.propertyMandateInfo.propPrice">          
+			   		</li>
+			   
+			   		<li>
+			    		<label>Available from: </label>	
+			        	<input type="button" value="Cal">
+			   		</li>
+			   		
+			   		<li>
+					   <label for="keyword">Brief Description <em>*</em> : <br>
+					    [ e.g. East-facing, fully furnished bungalow with 5 
+					    BHK and power back-up, located in premium locality, for immediate sale ]</label>
+					    <textarea cols="30" rows="5" id="txtPropertyDescription" name="formData.propertyFeatureInfo.propertyMandateInfo.propertyDescription"></textarea>
+					    <input value="300" style="BORDER-TOp-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; WIDTH: 30px; BACKGROUND-COLOR: #fff; BORDER-RIGHT-WIDTH: 0px" size="4" readonly="readOnly" name="detailDescCounter" maxlength="4" id="detailDescCounter">characters left
+					 </li>
+					 
+					 <li>
+					   	<label>I want to deal with Agent<em style="color:Red">*</em> :</label>
+					    <input type="checkbox" value="Yes" name="formData.propertyFeatureInfo.propertyMandateInfo.dealingType">Yes
+					 </li>
+		  		</ul>
+  
+				<br><table width="300" height="90" background="images/2.jpg"><tbody><tr><td align="center"><span 2.jpg"="" images="" style="font-size:28px; color:black;&gt;&lt;img src=" id="ii">RtEEbW</span></td></tr></tbody></table>	
+			         <input type="button" value="Try another image" onclick="captcha();" style="border:0px;background:white;color:black">
+				 		<p class="frm_cntrls">
+						<label>
+							Type Code
+							<em style="color:Red">*</em>:
+						</label>
+						<span class="frm_cnt"> 
+							<input type="text" class="smltxt" name="j_captcha_response" id="j_captcha_response" onfocus="javascript:txtFocus('d22');"> &nbsp;<span class="grey_txt1 cont_text2">[ Please type the characters mentioned above ]</span>
+						 <br> 
+							<span id="d22" style="color:Red"></span>  </span>
+							<span class="cl"></span>
+						</p> -->
+	
+   				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+ </div>
+<!-- Mandate Property Info Ends-->
+<pre>
+  {{ formData }}
+ </pre>
+<div class="col-xs-6 col-xs-offset-3">
+    <a ui-sref="form.upload" class="btn btn-block btn-info">
+    Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a>
+</div>

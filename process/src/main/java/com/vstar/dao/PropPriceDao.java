@@ -4,10 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 /**
  * Property price details
@@ -15,10 +19,15 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "prop_price", catalog = "property_master")
+@GenericGenerator(name = "PropPriceInfo", strategy = "org.hibernate.id.enhanced.TableGenerator", parameters = {
+  @Parameter(name = "segment_value", value = "Prop_Price_Info"),
+  @Parameter(name = "increment_size", value = "10"),
+  @Parameter(name = "optimizer", value = "pooled")})
 public class PropPriceDao implements java.io.Serializable
 {
   private static final long serialVersionUID = -3122163787290182894L;
   @Id
+  @GeneratedValue(generator = "PropPriceInfo")
   @Column(name = "prop_sale_Price_Id", unique = true, nullable = false)
   private int propSalePriceId;
   @Column(name = "expected_Price", precision = 18, scale = 0)

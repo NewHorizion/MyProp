@@ -6,8 +6,8 @@ import com.vstar.process.masterData.infoBean.PropLocationInfo;
  * Capturing Property Mandate Features
  */
 public class PropertyMandateInfo {
-	private String purchaseType;
-	private long propertyTypeId;
+	private int purchaseType;
+	private int propertyTypeId;
 	private PropLocationInfo propLocationInfo;
 	private int coveredArea;
 	private long propPrice;
@@ -18,22 +18,20 @@ public class PropertyMandateInfo {
 	private ResidentialUnits plotAreaUnit;
 	private String city;
 	private String locality;
-	private String propertyDescription;
-	private boolean dealingType;
 
-	public String getPurchaseType() {
+	public int getPurchaseType() {
 		return purchaseType;
 	}
 
-	public void setPurchaseType(String purchaseType) {
+	public void setPurchaseType(int purchaseType) {
 		this.purchaseType = purchaseType;
 	}
 
-	public long getPropertyTypeId() {
+	public int getPropertyTypeId() {
 		return propertyTypeId;
 	}
 
-	public void setPropertyTypeId(long propertyTypeId) {
+	public void setPropertyTypeId(int propertyTypeId) {
 		this.propertyTypeId = propertyTypeId;
 	}
 
@@ -116,25 +114,5 @@ public class PropertyMandateInfo {
 	public void setPlotAreaUnit(ResidentialUnits plotAreaUnit) {
 		this.plotAreaUnit = plotAreaUnit;
 	}
-
-  public String getPropertyDescription()
-  {
-    return propertyDescription;
-  }
-
-  public void setPropertyDescription(String propertyDescription)
-  {
-    this.propertyDescription = propertyDescription;
-  }
-
-  public boolean isDealingType()
-  {
-    return dealingType;
-  }
-
-  public void setDealingType(boolean dealingType)
-  {
-    this.dealingType = dealingType;
-  }
-
+	
 }

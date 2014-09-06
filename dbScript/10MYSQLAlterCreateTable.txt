@@ -1,0 +1,11 @@
+ALTER TABLE prop_area CHANGE measurement covered_area_unit varchar(15)
+
+ALTER TABLE prop_area add plot_area_unit varchar(15)
+
+
+CREATE TABLE HIBERNATE_SEQUENCES(
+ SEQUENCE_NAME varchar(200) PRIMARY KEY NOT NULL,
+ NEXT_VAL int NOT NULL)
+
+ALTER TABLE prop_features
+MODIFY furnished varchar(20)

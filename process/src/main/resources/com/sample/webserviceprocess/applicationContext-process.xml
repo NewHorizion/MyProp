@@ -58,6 +58,39 @@
 		class="com.vstar.dao.process.PropUserDaoExtnProcess">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	
+	<bean id="propAreaDaoProcess"
+		class="com.vstar.dao.process.PropAreaDaoProcess">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="propFeaturesDaoProcess"
+		class="com.vstar.dao.process.PropFeaturesDaoProcess">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="propInfoDaoProcess"
+		class="com.vstar.dao.process.PropInfoDaoProcess">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="propPriceDaoProcess"
+		class="com.vstar.dao.process.PropPriceDaoProcess">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="propTransactionDaoProcess"
+		class="com.vstar.dao.process.PropTransactionDaoProcess">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
     
-    
+    <bean id="propertyUploadProcess"
+		class="com.vstar.dao.process.propertyUpload.PropertyUploadProcess">
+		<property name="propAreaDaoProcess" ref="propAreaDaoProcess" />
+		<property name="propFeaturesDaoProcess" ref="propFeaturesDaoProcess" />
+		<property name="propInfoDaoProcess" ref="propInfoDaoProcess" />
+		<property name="propPriceDaoProcess" ref="propPriceDaoProcess" />
+		<property name="propTransactionDaoProcess" ref="propTransactionDaoProcess" />
+	</bean>
+	
 </beans>

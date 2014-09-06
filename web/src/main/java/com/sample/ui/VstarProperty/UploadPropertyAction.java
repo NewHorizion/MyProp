@@ -8,52 +8,76 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.opensymphony.xwork2.ActionSupport;
+import com.vstar.dao.process.PropAreaDaoProcess;
+import com.vstar.dao.process.propertyUpload.PropertyUploadProcess;
 import com.vstar.process.propertyDetailInfo.PropertyFeatureInfo;
 
-public class UploadPropertyAction extends ActionSupport {
-	private Map<String, Object> jsonMap = new LinkedHashMap<String, Object>();
-	private PropertyFeatureInfo propertyFeatureInfo;
-	private String data; 
-	private MultipartFile [] files;
+public class UploadPropertyAction extends ActionSupport
+{
+  private Map<String, Object> jsonMap = new LinkedHashMap<String, Object>();
+  private PropertyFeatureInfo propertyFeatureInfo;
+  private String data;
+  private MultipartFile[] files;
+  private PropertyUploadProcess propertyUploadProcess;
 
-	public String save() {
-	     Gson gson = new Gson();
-	    JsonElement jsonElement = gson.toJsonTree(data);
-	     propertyFeatureInfo = gson.fromJson(data, PropertyFeatureInfo.class);
-		return SUCCESS;
-	}
+  public String save()
+  {
+    // Gson gson = new Gson();
+    // JsonElement jsonElement = gson.toJsonTree(data);
+    // propertyFeatureInfo = gson.fromJson(data, PropertyFeatureInfo.class);
+    boolean savedSuccess = propertyUploadProcess.savePropertyDetails(propertyFeatureInfo);
+    
+    return SUCCESS;
+  }
 
-	public Map<String, Object> getJsonMap() {
-		return jsonMap;
-	}
+  public Map<String, Object> getJsonMap()
+  {
+    return jsonMap;
+  }
 
-	public void setJsonMap(Map<String, Object> jsonMap) {
-		this.jsonMap = jsonMap;
-	}
+  public void setJsonMap(Map<String, Object> jsonMap)
+  {
+    this.jsonMap = jsonMap;
+  }
 
+  public MultipartFile[] getFiles()
+  {
+    return files;
+  }
 
-	public MultipartFile[] getFiles() {
-		return files;
-	}
+  public void setFiles(MultipartFile[] files)
+  {
+    this.files = files;
+  }
 
-	public void setFiles(MultipartFile[] files) {
-		this.files = files;
-	}
+  public String getData()
+  {
+    return data;
+  }
 
-	public String getData() {
-		return data;
-	}
+  public void setData(String data)
+  {
+    this.data = data;
+  }
 
-	public void setData(String data) {
-		this.data = data;
-	}
+  public PropertyFeatureInfo getPropertyFeatureInfo()
+  {
+    return propertyFeatureInfo;
+  }
 
-	public PropertyFeatureInfo getPropertyFeatureInfo() {
-		return propertyFeatureInfo;
-	}
+  public void setPropertyFeatureInfo(PropertyFeatureInfo propertyFeatureInfo)
+  {
+    this.propertyFeatureInfo = propertyFeatureInfo;
+  }
 
-	public void setPropertyFeatureInfo(PropertyFeatureInfo propertyFeatureInfo) {
-		this.propertyFeatureInfo = propertyFeatureInfo;
-	}
+  public PropertyUploadProcess getPropertyUploadProcess()
+  {
+    return propertyUploadProcess;
+  }
+
+  public void setPropertyUploadProcess(PropertyUploadProcess propertyUploadProcess)
+  {
+    this.propertyUploadProcess = propertyUploadProcess;
+  }
 
 }
