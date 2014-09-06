@@ -25,7 +25,7 @@ public class PropUsersDaoProcess
 	private boolean credentialsNonExpired;
 	private boolean accountNonLocked;
  
-	public void createUser( String userName,String password, boolean enabled)
+	public void createUser( String userName,String password, boolean enabled , String userRole)
 	{
 		
 		Object salt = null; 
@@ -58,7 +58,11 @@ public class PropUsersDaoProcess
 		// if the user extists, delete it 
 		if( !userDetailsManager.userExists( userHashedPassword.getUsername() ) )
 		{
+			// Creating user
 			userDetailsManager.createUser( userHashedPassword );
+			// adding role to created user
+			userDetailsManager.addUserToGroup(userName, userRole);
+			
 		}
  
 		

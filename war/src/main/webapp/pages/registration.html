@@ -6,9 +6,9 @@
           <h2 class="text-center">Sign up</h2>
 			
 		  <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.userType.$invalid && signupForm.userType.$dirty }">
-            <input class="" type="radio" name="userType" ng-model="formData.userType" value="Owner" >&nbsp;Owner &nbsp;&nbsp;&nbsp;
-            <input class="" type="radio" name="userType" ng-model="formData.userType" value="Agent" >&nbsp;Agent &nbsp;&nbsp;&nbsp;
-            <input class="" type="radio" name="userType" ng-model="formData.userType" value="Builder" >&nbsp;Buider
+            <input class="" type="radio" name="userType" ng-model="formData.userType" value="owner" >&nbsp;Owner &nbsp;&nbsp;&nbsp;
+            <input class="" type="radio" name="userType" ng-model="formData.userType" value="agent" >&nbsp;Agent &nbsp;&nbsp;&nbsp;
+            <input class="" type="radio" name="userType" ng-model="formData.userType" value="builder" >&nbsp;Buider
             <span class="ion-person form-control-feedback"></span>
             <div class="help-block text-danger" ng-if="signupForm.userType.$dirty" ng-messages="signupForm.userType.$error">
               <div ng-message="required">You must select user type.</div>

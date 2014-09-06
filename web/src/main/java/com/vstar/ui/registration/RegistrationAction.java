@@ -22,7 +22,7 @@ public class RegistrationAction extends ActionSupport {
 	private PropUserDaoExtnProcess propUserDaoExtnProcess;
 
 	public String save() {
-		propUsersDaoProcess.createUser(email, password, true);
+		propUsersDaoProcess.createUser(email, password, true , userType);
 		jsonMap.put("success", true);
 		jsonMap.put("messages", "Welcome " + displayName + "!!!!");
 		PropUsersDao userExtn = new PropUsersDao(email, userType, displayName, mobileNo, landLineNo, propCityId);
