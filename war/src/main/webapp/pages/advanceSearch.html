@@ -1,0 +1,89 @@
+<section class="advance-search" ng-controller="CountryCntrl">
+
+	<div class="container box-banner">
+		<div>
+			<div class="col-lg-12">
+				<h3 class="search-heading">
+					<i class="fa fa-search"></i>Find Your Home
+				</h3>
+				<div class="col-lg-8 box-blue">
+					<form id="searchForm" method="post" class="validateform"
+						name="send-contact">
+						<div class="row col-lg-12">
+							<div class="col-lg-4 field">
+								<div class="form-group move-down">
+									<label for="Autocomplete2">City</label>
+									<city-ctrl city-model-name="formData.city"
+										locations="locations"></city-ctrl>
+								</div>
+							</div>
+							<div class="col-lg-4 field">
+
+								<div class="form-group move-down">
+									<label for="Autocomplete2">Locations</label> <input type="text"
+										auto-complete ui-items="formData.city.localities"
+										ng-model="formData.locations" />
+								</div>
+							</div>
+							<div class="col-lg-4 field">
+								<div class="form-group move-down">
+									<label for="Autocomplete2">Property Type</label>
+									<property-ctrl
+										property-model-name="formData.propertyFeatureInfo.propertyMandateInfo.propertyTypeId"
+										property-types="propertyTypes"></property-ctrl>
+								</div>
+							</div>
+						</div>
+
+						<div class="row col-lg-12">
+							<div class="col-lg-3 field">
+								<div class="form-group move-down">
+									<label for="Autocomplete2">&#8377; Min Budger</label>
+									<property-ctrl
+										property-model-name="formData.propertyFeatureInfo.propertyMandateInfo.propertyTypeId"
+										property-types="propertyTypes"></property-ctrl>
+								</div>
+							</div>
+							<div class="col-lg-3 field">
+								<div class="form-group move-down">
+									<label for="Autocomplete2">&#8377; Max Budget</label>
+									<property-ctrl
+										property-model-name="formData.propertyFeatureInfo.propertyMandateInfo.propertyTypeId"
+										property-types="propertyTypes"></property-ctrl>
+								</div>
+							</div>
+
+							<div class="col-lg-3 field" ng-controller="BedBathNoList">
+								<div class="form-group move-down">
+									<label>Bedroom</label>
+									<bedroom-no-ctrl></bedroom-no-ctrl>
+								</div>
+							</div>
+
+							<div class="col-lg-3 field">
+								<div class="form-group move-down">
+									<label for="Autocomplete2">Property Type</label>
+									<property-ctrl
+										property-model-name="formData.propertyFeatureInfo.propertyMandateInfo.propertyTypeId"
+										property-types="propertyTypes"></property-ctrl>
+								</div>
+							</div>
+							<div class="col-lg-12 margintop10 field"
+								ng-controller="searchController">
+								<p>
+									<button class="btn btn-theme-orange margintop10 pull-left"
+										type="submit" ng-click="search()">Search</button>
+									<span class="pull-right margintop20">* Please fill all
+										required form field, thanks!</span>
+								</p>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-lg-4"></div>
+			</div>
+		</div>
+	</div>
+
+
+</section>
