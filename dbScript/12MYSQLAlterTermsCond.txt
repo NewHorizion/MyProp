@@ -1,0 +1,19 @@
+ALTER TABLE prop_terms_cond
+DROP COLUMN annual_dues
+
+
+ALTER TABLE prop_terms_cond
+DROP COLUMN tax
+
+
+ALTER TABLE prop_terms_cond
+DROP COLUMN fees
+
+ALTER TABLE prop_terms_cond
+ADD description varchar(300)
+
+ALTER TABLE prop_terms_cond
+ADD landmarks varchar(500)
+
+ALTER TABLE prop_terms_cond
+MODIFY term_n_cond varchar(500)
