@@ -4,31 +4,37 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 /**
  * Property Terms and Conditions
- * 
  */
 @Entity
 @Table(name = "prop_terms_cond", catalog = "property_master")
+@GenericGenerator(name = "PropTermsCondInfo", strategy = "org.hibernate.id.enhanced.TableGenerator", parameters = {
+  @Parameter(name = "segment_value", value = "Prop_TermsCond_Info"),
+  @Parameter(name = "increment_size", value = "10"),
+  @Parameter(name = "optimizer", value = "pooled")})
 public class PropTermsCondDao implements java.io.Serializable
 {
   private static final long serialVersionUID = 914284802253705834L;
   @Id
+  @GeneratedValue(generator = "PropTermsCondInfo")
   @Column(name = "prop_term_Cond_Id", unique = true, nullable = false)
   private int propTermCondId;
-  @Column(name = "annual_Dues", precision = 18, scale = 0)
-  private Long annualDues;
-  @Column(name = "tax", precision = 18, scale = 0)
-  private Long tax;
-  @Column(name = "fees", precision = 18, scale = 0)
-  private Long fees;
-  @Column(name = "term_N_Cond", length = 50)
+  @Column(name = "term_N_Cond", length = 500)
   private String termNCond;
+  @Column(name = "description", length = 300)
+  private String description;
+  @Column(name = "landmarks", length = 500)
+  private String landmarks;
   @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "created_Date", length = 19)
   private Date createdDate;
@@ -51,7 +57,6 @@ public class PropTermsCondDao implements java.io.Serializable
   }
 
   /**
-   * 
    * @param propTermCondId
    * @param annualDues
    * @param tax
@@ -63,15 +68,21 @@ public class PropTermsCondDao implements java.io.Serializable
    * @param custom3
    * @param custom4
    */
-  public PropTermsCondDao(int propTermCondId, Long annualDues, Long tax, Long fees,
-      String termNCond, Date createdDate, String custom1, String custom2, String custom3,
-      String custom4)
+  public PropTermsCondDao(
+    int propTermCondId,
+    String description,
+    String landmarks,
+    String termNCond,
+    Date createdDate,
+    String custom1,
+    String custom2,
+    String custom3,
+    String custom4)
   {
     this.propTermCondId = propTermCondId;
-    this.annualDues = annualDues;
-    this.tax = tax;
-    this.fees = fees;
     this.termNCond = termNCond;
+    this.description = description;
+    this.landmarks = landmarks;
     this.createdDate = createdDate;
     this.custom1 = custom1;
     this.custom2 = custom2;
@@ -87,36 +98,6 @@ public class PropTermsCondDao implements java.io.Serializable
   public void setPropTermCondId(int propTermCondId)
   {
     this.propTermCondId = propTermCondId;
-  }
-
-  public Long getAnnualDues()
-  {
-    return this.annualDues;
-  }
-
-  public void setAnnualDues(Long annualDues)
-  {
-    this.annualDues = annualDues;
-  }
-
-  public Long getTax()
-  {
-    return this.tax;
-  }
-
-  public void setTax(Long tax)
-  {
-    this.tax = tax;
-  }
-
-  public Long getFees()
-  {
-    return this.fees;
-  }
-
-  public void setFees(Long fees)
-  {
-    this.fees = fees;
   }
 
   public String getTermNCond()
@@ -177,5 +158,25 @@ public class PropTermsCondDao implements java.io.Serializable
   public void setCustom4(String custom4)
   {
     this.custom4 = custom4;
+  }
+
+  public String getDescription()
+  {
+    return description;
+  }
+
+  public void setDescription(String description)
+  {
+    this.description = description;
+  }
+
+  public String getLandmarks()
+  {
+    return landmarks;
+  }
+
+  public void setLandmarks(String landmarks)
+  {
+    this.landmarks = landmarks;
   }
 }

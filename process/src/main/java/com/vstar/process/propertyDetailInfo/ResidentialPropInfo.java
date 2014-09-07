@@ -16,7 +16,9 @@ public class ResidentialPropInfo
   private String possessionStatus;
   private Date availableFrom;
   private String propertyDescription;
+  private String landmarks;
   private boolean dealingType;
+  private String termsNConditions;
 
   public ResidentialUnits getFurnishedStatus()
   {
@@ -116,5 +118,25 @@ public class ResidentialPropInfo
   public void setDealingType(boolean dealingType)
   {
     this.dealingType = dealingType;
+  }
+
+  public String getLandmarks()
+  {
+    return landmarks;
+  }
+
+  public void setLandmarks(String landmarks)
+  {
+    this.landmarks = landmarks;
+  }
+
+  public String getTermsNConditions()
+  {
+    return termsNConditions;
+  }
+
+  public void setTermsNConditions(String termsNConditions)
+  {
+    this.termsNConditions = termsNConditions;
   }
 }

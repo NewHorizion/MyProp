@@ -88,6 +88,11 @@
 		class="com.vstar.dao.process.PropLocationInfoDaoProcess">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	
+	<bean id="propTermsCondDaoProcess"
+		class="com.vstar.dao.process.PropTermsCondDaoProcess">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
     
     <bean id="propertyUploadProcess"
 		class="com.vstar.dao.process.propertyUpload.PropertyUploadProcess">
@@ -97,6 +102,7 @@
 		<property name="propPriceDaoProcess" ref="propPriceDaoProcess" />
 		<property name="propTransactionDaoProcess" ref="propTransactionDaoProcess" />
 		<property name="propLocationInfoDaoProcess" ref="propLocationInfoDaoProcess" />
+		<property name="propTermsCondDaoProcess" ref="propTermsCondDaoProcess" />
 	</bean>
 	
 </beans>
