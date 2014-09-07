@@ -59,6 +59,9 @@
 			<result type="json"/>
 		</action>
 		
+		<action name="UploadRequirementAction" class="com.sample.ui.VstarProperty.UploadPropertyAction" method="saveRequirement">
+			<result type="json"/>
+		</action>
 		
 	</package>
 

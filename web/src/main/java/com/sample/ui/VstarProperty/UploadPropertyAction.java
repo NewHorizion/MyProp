@@ -22,6 +22,12 @@ public class UploadPropertyAction extends ActionSupport
     boolean savedSuccess = propertyUploadProcess.savePropertyDetails(propertyFeatureInfo);
     return SUCCESS;
   }
+  
+  public String saveRequirement()
+  {
+    propertyUploadProcess.saveRequirementDetails(propertyFeatureInfo.getPropertyMandateInfo()); 
+    return SUCCESS;
+  }
 
   public Map<String, Object> getJsonMap()
   {

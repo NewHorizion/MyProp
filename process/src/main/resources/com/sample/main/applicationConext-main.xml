@@ -23,7 +23,7 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/property_master" />
 		<property name="username" value="root" />
-		<property name="password" value="nsel@123" />
+		<property name="password" value="password" />
 	</bean>
 
 	<bean id="sessionFactory"

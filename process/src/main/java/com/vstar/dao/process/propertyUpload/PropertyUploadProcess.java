@@ -14,6 +14,7 @@ import com.vstar.dao.process.PropLocationInfoDaoProcess;
 import com.vstar.dao.process.PropPriceDaoProcess;
 import com.vstar.dao.process.PropTermsCondDaoProcess;
 import com.vstar.dao.process.PropTransactionDaoProcess;
+import com.vstar.exception.GenericProcessException;
 import com.vstar.process.propertyDetailInfo.PropertyFeatureInfo;
 import com.vstar.process.propertyDetailInfo.PropertyMandateInfo;
 import com.vstar.process.propertyDetailInfo.ResidentialPropInfo;
@@ -41,13 +42,63 @@ public class PropertyUploadProcess
   public boolean savePropertyDetails(PropertyFeatureInfo propertyFeatureInfo)
   {
     propInfoDao = new PropInfoDao();
-    savePropertyMandateInfos(propertyFeatureInfo.getPropertyMandateInfo());
-    savePropertyFeatureInfo(propertyFeatureInfo.getResidentialPropInfo());
+    try
+    {
+      savePropertyMandateInfos(propertyFeatureInfo.getPropertyMandateInfo());
+      savePropertyFeatureInfo(propertyFeatureInfo.getResidentialPropInfo());
+    }
+    catch(GenericProcessException e)
+    {
+      //Log the exception
+    }
     // Saving Property Master table
-    propInfoDao = propInfoDaoProcess.addUpdatePropInfoDao(propInfoDao);
+    try
+    {
+      propInfoDao = propInfoDaoProcess.addUpdatePropInfoDao(propInfoDao);
+    }
+    catch(GenericProcessException e)
+    {
+      //Log the exception
+    }
     
     // Saving Property Location Info
-    savePropertyLocationInfo(propertyFeatureInfo.getPropertyMandateInfo());
+    try
+    {
+      savePropertyLocationInfo(propertyFeatureInfo.getPropertyMandateInfo());
+    }
+    catch(GenericProcessException e)
+    {
+      //Log the exception
+    }
+    return true;
+  }
+  
+  /**
+   * Saving Requirement Details
+   * @param propertyMandateInfo
+   * @return
+   */
+  public boolean saveRequirementDetails(PropertyMandateInfo propertyMandateInfo)
+  {
+    propInfoDao = new PropInfoDao();
+    try
+    {
+      savePropertyMandateInfos(propertyMandateInfo);
+      propInfoDao = propInfoDaoProcess.addUpdatePropInfoDao(propInfoDao);
+    }
+    catch(GenericProcessException e)
+    {
+      //Log the exception
+    }
+    // Saving Property Location Info
+    try
+    {
+      savePropertyLocationInfo(propertyMandateInfo);
+    }
+    catch(GenericProcessException e)
+    {
+      //Log the exception
+    }
     return true;
   }
   
@@ -58,20 +109,27 @@ public class PropertyUploadProcess
   private void savePropertyLocationInfo(PropertyMandateInfo propertyMandateInfo)
   {
     PropLocationInfoDao propLocationInfoDao = new PropLocationInfoDao();
-    propLocationInfoDao.setPropAddress(propertyMandateInfo.getAddress());
-    if (propertyMandateInfo.getLocality() != null)
+    try
     {
-      // Existing Location
-      propLocationInfoDao.setPropLocationDao(Long.parseLong(propertyMandateInfo.getLocality()));
+      propLocationInfoDao.setPropAddress(propertyMandateInfo.getAddress());
+      if (propertyMandateInfo.getLocality() != null)
+      {
+        // Existing Location
+        propLocationInfoDao.setPropLocationDao(Long.parseLong(propertyMandateInfo.getLocality()));
+      }
+      else
+      {
+        // New Location
+        propLocationInfoDao.setPropCityDao(Integer.parseInt(propertyMandateInfo.getCity()));
+        propLocationInfoDao.setPropLocationName(propertyMandateInfo.getLocality());
+      }
+      propLocationInfoDao.setPropInfoDao(propInfoDao);
+      propLocationInfoDaoProcess.addUpdatePropAreaDao(propLocationInfoDao);
     }
-    else
+    catch (GenericProcessException e)
     {
-      // New Location
-      propLocationInfoDao.setPropCityDao(Integer.parseInt(propertyMandateInfo.getCity()));
-      propLocationInfoDao.setPropLocationName(propertyMandateInfo.getLocality());
+      // Log the exception
     }
-    propLocationInfoDao.setPropInfoDao(propInfoDao);
-    propLocationInfoDaoProcess.addUpdatePropAreaDao(propLocationInfoDao);
   }
   
   /**
@@ -82,28 +140,55 @@ public class PropertyUploadProcess
   {
     // Saving Property features
     PropFeaturesDao propFeaturesDao = new PropFeaturesDao();
-    propFeaturesDao.setBedRooms(Integer.parseInt(residentialPropInfo.getNoOfBedRooms().getValue()));
-    propFeaturesDao.setBathRooms(Integer.parseInt(residentialPropInfo.getNoOfBathRooms().getValue()));
-    propFeaturesDao.setBalconies(Integer.parseInt(residentialPropInfo.getNoOfBalonies().getValue()));
-    propFeaturesDao.setFurnished(residentialPropInfo.getFurnishedStatus().getValue());
-    propFeaturesDao.setAvailFloor(Integer.parseInt(residentialPropInfo.getFloorNumber().getValue()));
-    propFeaturesDao.setTotalFloors(Integer.parseInt(residentialPropInfo.getTotalFloor().getValue()));
-    propFeaturesDao = propFeaturesDaoProcess.addUpdatePropFeaturesDao(propFeaturesDao);
-    propInfoDao.setPropFeatures(propFeaturesDao);
-    
+    try
+    {
+      propFeaturesDao.setBedRooms(Integer
+        .parseInt(residentialPropInfo.getNoOfBedRooms().getValue()));
+      propFeaturesDao.setBathRooms(Integer.parseInt(residentialPropInfo.getNoOfBathRooms()
+        .getValue()));
+      propFeaturesDao.setBalconies(Integer.parseInt(residentialPropInfo.getNoOfBalonies()
+        .getValue()));
+      propFeaturesDao.setFurnished(residentialPropInfo.getFurnishedStatus().getValue());
+      propFeaturesDao.setAvailFloor(Integer.parseInt(residentialPropInfo.getFloorNumber()
+        .getValue()));
+      propFeaturesDao.setTotalFloors(Integer.parseInt(residentialPropInfo.getTotalFloor()
+        .getValue()));
+      propFeaturesDao = propFeaturesDaoProcess.addUpdatePropFeaturesDao(propFeaturesDao);
+      propInfoDao.setPropFeatures(propFeaturesDao);
+    }
+    catch (GenericProcessException e)
+    {
+      // Log the exception
+    }
+
     // Saving Property transactions
     PropTransactionDao propTransactionDao = new PropTransactionDao();
-    propTransactionDao.setPossessionStatus(residentialPropInfo.getPossessionStatus());
-    propTransactionDao = propTransactionDaoProcess.addUpdatePropTransactionDao(propTransactionDao);
-    propInfoDao.setPropTransaction(propTransactionDao);
-    
-    //Saving Property TermsNConditions
+    try
+    {
+      propTransactionDao.setPossessionStatus(residentialPropInfo.getPossessionStatus());
+      propTransactionDao = propTransactionDaoProcess
+        .addUpdatePropTransactionDao(propTransactionDao);
+      propInfoDao.setPropTransaction(propTransactionDao);
+    }
+    catch (GenericProcessException e)
+    {
+      // Log the exception
+    }
+
+    // Saving Property TermsNConditions
     PropTermsCondDao propTermsCondDao = new PropTermsCondDao();
-    propTermsCondDao.setDescription(residentialPropInfo.getPropertyDescription());
-    propTermsCondDao.setLandmarks(residentialPropInfo.getLandmarks());
-    propTermsCondDao.setTermNCond(residentialPropInfo.getTermsNConditions());
-    propTermsCondDao = propTermsCondDaoProcess.addUpdatePropTermsCondDao(propTermsCondDao);
-    propInfoDao.setPropTermsCond(propTermsCondDao);
+    try
+    {
+      propTermsCondDao.setDescription(residentialPropInfo.getPropertyDescription());
+      propTermsCondDao.setLandmarks(residentialPropInfo.getLandmarks());
+      propTermsCondDao.setTermNCond(residentialPropInfo.getTermsNConditions());
+      propTermsCondDao = propTermsCondDaoProcess.addUpdatePropTermsCondDao(propTermsCondDao);
+      propInfoDao.setPropTermsCond(propTermsCondDao);
+    }
+    catch (GenericProcessException e)
+    {
+      // Log the exception
+    }
   }
   
   /**
@@ -112,27 +197,40 @@ public class PropertyUploadProcess
    */
   public void savePropertyMandateInfos(PropertyMandateInfo propertyMandateInfo)
   {
-    // Setting Property Purchase type
-    propInfoDao.setPropPurchaseType(propertyMandateInfo.getPurchaseType());
-    // Setting Property Transaction type
-    propInfoDao.setTransactionType(propertyMandateInfo.getTransactionType());
-    // Setting Property Type Info
-    propInfoDao.setPropType(propertyMandateInfo.getPropertyTypeId());
-    // Saving Property Area Info
-    PropAreaDao propAreaDao = new PropAreaDao();
-    propAreaDao.setCoveredArea(propertyMandateInfo.getCoveredArea());
-    propAreaDao.setCoveredAreaUnit(propertyMandateInfo.getCoveredAreaUnit().getValue());
-    propAreaDao.setPlotArea(propertyMandateInfo.getPlotArea());
-    propAreaDao.setPlotAreaUnit(propertyMandateInfo.getPlotAreaUnit().getValue());
-    propAreaDao = propAreaDaoProcess.addUpdatePropAreaDao(propAreaDao);
-    propInfoDao.setPropArea(propAreaDao);
-    
-    // Saving Property Price Info
-    PropPriceDao propPriceDao = new PropPriceDao();
-    propPriceDao.setExpectedPrice(propertyMandateInfo.getPropPrice());
-    propPriceDao = propPriceDaoProcess.addUpdatePropPriceDao(propPriceDao);
-    propInfoDao.setPropPrice(propPriceDao);
-    
+    try
+    {
+      // Setting Property Purchase type
+      propInfoDao.setPropPurchaseType(propertyMandateInfo.getPurchaseType());
+      // Setting Property Transaction type
+      propInfoDao.setTransactionType(propertyMandateInfo.getTransactionType());
+      // Setting Property Type Info
+      propInfoDao.setPropType(propertyMandateInfo.getPropertyTypeId());
+      // Saving Property Area Info
+      PropAreaDao propAreaDao = new PropAreaDao();
+      propAreaDao.setCoveredArea(propertyMandateInfo.getCoveredArea());
+      propAreaDao.setCoveredAreaUnit(propertyMandateInfo.getCoveredAreaUnit().getValue());
+      propAreaDao.setPlotArea(propertyMandateInfo.getPlotArea());
+      propAreaDao.setPlotAreaUnit(propertyMandateInfo.getPlotAreaUnit().getValue());
+      propAreaDao = propAreaDaoProcess.addUpdatePropAreaDao(propAreaDao);
+      propInfoDao.setPropArea(propAreaDao);
+    }
+    catch (GenericProcessException e)
+    {
+      // Log the exception
+    }
+
+    try
+    {
+      // Saving Property Price Info
+      PropPriceDao propPriceDao = new PropPriceDao();
+      propPriceDao.setExpectedPrice(propertyMandateInfo.getPropPrice());
+      propPriceDao = propPriceDaoProcess.addUpdatePropPriceDao(propPriceDao);
+      propInfoDao.setPropPrice(propPriceDao);
+    }
+    catch (GenericProcessException e)
+    {
+      // Log the exception
+    }
   }
 
   public PropAreaDaoProcess getPropAreaDaoProcess()
