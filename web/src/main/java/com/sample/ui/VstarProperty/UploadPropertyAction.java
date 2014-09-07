@@ -5,10 +5,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.opensymphony.xwork2.ActionSupport;
-import com.vstar.dao.process.PropAreaDaoProcess;
 import com.vstar.dao.process.propertyUpload.PropertyUploadProcess;
 import com.vstar.process.propertyDetailInfo.PropertyFeatureInfo;
 
@@ -22,11 +19,7 @@ public class UploadPropertyAction extends ActionSupport
 
   public String save()
   {
-    // Gson gson = new Gson();
-    // JsonElement jsonElement = gson.toJsonTree(data);
-    // propertyFeatureInfo = gson.fromJson(data, PropertyFeatureInfo.class);
     boolean savedSuccess = propertyUploadProcess.savePropertyDetails(propertyFeatureInfo);
-    
     return SUCCESS;
   }
 
