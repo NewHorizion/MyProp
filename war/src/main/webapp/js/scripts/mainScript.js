@@ -287,7 +287,7 @@ scotchApp.controller('postPropertyController', function($scope,$http) {
 	// function to process the form
 	$scope.processForm = function() {
 		var fd = new FormData();
-		$scope.formData.propertyFeatureInfo.propertyMandateInfo.city = $scope.formData.propertyFeatureInfo.propertyMandateInfo.city.cityName;
+		$scope.formData.propertyFeatureInfo.propertyMandateInfo.city = $scope.formData.propertyFeatureInfo.propertyMandateInfo.city.cityId;
 		fd.append('jsonData',angular.toJson($scope.formData));
 
 		//remove comment to append a file to the request

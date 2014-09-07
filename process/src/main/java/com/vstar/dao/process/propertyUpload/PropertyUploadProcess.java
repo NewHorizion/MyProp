@@ -56,10 +56,16 @@ public class PropertyUploadProcess
   {
     PropLocationInfoDao propLocationInfoDao = new PropLocationInfoDao();
     propLocationInfoDao.setPropAddress(propertyMandateInfo.getAddress());
-    propLocationInfoDao.setPropCityDao(Integer.parseInt(propertyMandateInfo.getCity()));
+    if (propertyMandateInfo.getLocality() != null)
+    {
+      propLocationInfoDao.setPropLocationDao(Long.parseLong(propertyMandateInfo.getLocality()));
+    }
+    else
+    {
+      propLocationInfoDao.setPropCityDao(Integer.parseInt(propertyMandateInfo.getCity()));
+      propLocationInfoDao.setPropLocationName(propertyMandateInfo.getLocality());
+    }
     propLocationInfoDao.setPropInfoDao(propInfoDao);
-    propLocationInfoDao.setPropLocationDao(propertyMandateInfo.getPropLocationInfo().getLocationId());
-    propLocationInfoDao.setPropLocationName(propertyMandateInfo.getLocality());
     propLocationInfoDaoProcess.addUpdatePropAreaDao(propLocationInfoDao);
   }
   

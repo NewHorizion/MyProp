@@ -24,5 +24,6 @@
     <mapping class="com.vstar.dao.PropAreaDao"/>
     <mapping class="com.vstar.dao.PropCountryDao"/>
     <mapping class="com.vstar.dao.PropUsersDao"/>
+    <mapping class="com.vstar.dao.PropLocationInfoDao"/>
   </session-factory>
 </hibernate-configuration>
