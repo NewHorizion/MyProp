@@ -15,18 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for propertyType complex type.
+ * <p>Java class for rentBudget complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="propertyType">
+ * &lt;complexType name="rentBudget">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="type" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="categoryName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,18 +35,15 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "propertyType", propOrder = {
+@XmlType(name = "rentBudget", propOrder = {
     "type",
-    "id",
-    "categoryName"
+    "id"
 })
-public class PropertyType {
+public class RentBudget {
 
     @XmlElement(required = true)
     protected String type;
     protected int id;
-    @XmlElement(required = true)
-    protected String categoryName;
 
     /**
      * Gets the value of the type property.
@@ -87,30 +83,6 @@ public class PropertyType {
      */
     public void setId(int value) {
         this.id = value;
-    }
-
-    /**
-     * Gets the value of the categoryName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    /**
-     * Sets the value of the categoryName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCategoryName(String value) {
-        this.categoryName = value;
     }
 
 }
