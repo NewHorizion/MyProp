@@ -1,0 +1,66 @@
+
+<aside class="right-sidebar">
+	<div class="block smsalert">
+		<p>
+			Create a SMS Alert Filter and we will send you SMS alerts whenever a
+			new lsting match your criteria. What are you waiting for ? It is <strong>absolutely
+				FREE</strong>! Start saving time now!
+		</p>
+		<p>
+			<a href="#"><img src="images/smsbutton.gif" alt="" /></a>
+		</p>
+	</div>
+
+	<div class="widget">
+		<h5 class="widgetheading">Quick Links</h5>
+		<ul class="cat">
+			<li class="icon-angle-right"><a href="#">Pro Agent Account</a></li>
+			<li class="icon-angle-right"><a href="#">Find Agents</a></li>
+			<li class="icon-angle-right"><a href="#">Banking &amp;
+					Finance Help</a></li>
+			<li class="icon-angle-right"><a href="#">Help &amp; Support</a></li>
+			<li class="icon-angle-right"><a href="#">SMS Alerts</a></li>
+			<li class="icon-angle-right"><a href="#">Email Alerts</a></li>
+			<li class="icon-angle-right"><a href="#">Advertising in
+					RealOne</a></li>
+			<li class="icon-angle-right"><a href="#">Privacy Policy</a></li>
+		</ul>
+		<div class="clear">&nbsp;</div>
+	</div>
+
+	<div class="widget" ng-controller="latestSearchCntrl">
+		<h2 class="sidebar_head">
+			<span class="h2link"><a href="#">View More</a></span> Hot Properties
+		</h2>
+		<ul class="propertys">
+			<li ng-repeat="property in latestProperties" class="property-listing">
+				<span> <img ng-src="{{property.propertyThumbImagePath}}"
+					alt="" width="66" height="66" />
+			</span>
+				<h3>
+					<a href="#">{{property.propertyTitle}}</a>
+				</h3>
+				<p class="description">
+					{{property.propertyDescription}} <span class="price">{{property.propertyPrice}}</span>
+				</p>
+				<div class="clear">&nbsp;</div>
+			</li>
+		</ul>
+	</div>
+
+	<div id="widget">
+		<div class="block advert">
+			<img src="images/advertisehere.jpg" alt="" />
+		</div>
+
+		<div class="block">
+			<img src="images/dreamcar.jpg" alt="" />
+		</div>
+		<div class="block">
+			<img src="images/dreamcar.jpg" alt="" />
+		</div>
+		<div class="block">
+			<img src="images/dreamcar.jpg" alt="" />
+		</div>
+	</div>
+</aside>
