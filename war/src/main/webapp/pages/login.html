@@ -1,3 +1,39 @@
+<script>
+  
+  // When the browser is ready...
+  $(function() {
+  
+    // Setup form validation on the #register-form element
+    $("#loginForm").validate({
+    
+        // Specify the validation rules
+        rules: {
+        	userName: "required",
+            password: {
+                required: true,
+                minlength: 5
+            }
+        },
+        
+        // Specify the validation error messages
+        messages: {
+        	userName: "Please enter your first name",
+            password: {
+                required: "Please provide a password",
+                minlength: "Your password must be at least 5 characters long"
+            }
+        },
+        
+        submitHandler: function (form) {
+        },
+        invalidHandler: function (form) {
+        }
+    });
+
+  });
+  
+  </script>
+  
 <section id="content">
 <div class="container">
 <div class="col-md-6 col-md-offset-3">
@@ -13,7 +49,7 @@
 <span class="help-block" ng-show="errorName">{{ errorName }}</span>
 </div>
 <!-- FORM -->
-<form ng-submit="processForm()">
+<form id="loginForm" ng-submit="processForm()">
 <!-- NAME -->
 <div id="name-group" class="form-group" ng-class="{ 'has-error' : errorName }">
 <label>User Name</label>

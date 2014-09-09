@@ -18,8 +18,19 @@ $(document).ready(function () {
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-2"></div>
-				<div class="col-lg-6"></div>
-				<div class="col-lg-4"><ng-include src="'pages/hotProperties.html'"> </ng-include></div>
+				<div id="tabs" class="col-lg-6" ng-controller="TabsCtrl">
+					<ul class="breadcrumb">
+						<li ng-repeat="tab in tabs"
+							ng-class="{active:isActiveTab(tab.url)}"
+							ng-click="onClickTab(tab)">{{tab.title}}</li>
+					</ul>
+					<div id="mainView">
+						<div ng-include="currentTab"></div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<ng-include src="'pages/hotProperties.html'"> </ng-include>
+				</div>
 			</div>
 		</div>
 
