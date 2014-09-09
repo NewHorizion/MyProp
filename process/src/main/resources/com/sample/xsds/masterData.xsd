@@ -5,6 +5,8 @@
          <xsd:sequence>
             <xsd:element name="countries" type="countries" maxOccurs="unbounded" />
             <xsd:element name="propertTypes" type="propertyType" maxOccurs="unbounded" />
+            <xsd:element name="rentBudgets" type="rentBudget" maxOccurs="unbounded" />
+            <xsd:element name="saleBudgets" type="saleBudget" maxOccurs="unbounded" />
          </xsd:sequence>
       </xsd:complexType>
    </xsd:element>
