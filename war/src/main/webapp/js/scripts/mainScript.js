@@ -311,6 +311,8 @@ scotchApp
 							.success(function(data) {
 								$scope.propertyTypes = data.propertyTypes;
 								$scope.locations = data.locations;
+								$scope.rentBudgets = data.rentBudgets;
+								$scope.saleBudgets = data.saleBudgets;
 							});
 					$scope.visible = true;
 					$scope.properties = [];
@@ -339,7 +341,25 @@ scotchApp
 				},
 				templateUrl : 'pages/property-ctrl.html'
 			};
-		});
+		}).directive('rentBudgetCtrl', function() {
+			return {
+				restrict : 'E',
+				scope : {
+					rentModelName : '=',
+					rentBudgets : '='
+				},
+				templateUrl : 'pages/rent-budget-ctrl.html'
+			};
+		}).directive('saleBudgetCtrl', function() {
+			return {
+				restrict : 'E',
+				scope : {
+					saleModelName : '=',
+					saleBudgets : '='
+				},
+				templateUrl : 'pages/sale-budget-ctrl.html'
+			};
+		});;
 
 scotchApp
 		.controller(

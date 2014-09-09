@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.vstar.common.BudgetEnum;
 import com.vstar.common.JAXBUtility;
 import com.vstar.common.PropertyTypeEnum;
 import com.vstar.dao.process.PropertiesConstants;
@@ -51,6 +52,32 @@ public class MasterDataProcessImpl implements MasterDataProcess {
 		}
 		return propertyTypes;
 	}
+	
+	@Override
+  public Map<Integer, BudgetEnum> getRentBudgets(){
+    Map<Integer, BudgetEnum> rentBudgets = new LinkedHashMap<Integer, BudgetEnum>();
+    for (BudgetEnum rentBudget : BudgetEnum.values()) {
+      if (rentBudget.getId() > 1500000)
+      {
+        break;
+      }
+      rentBudgets.put(rentBudget.getId(), rentBudget);
+    }
+    return rentBudgets;
+  }
+	
+	@Override
+  public Map<Integer, BudgetEnum> getSaleBudgets() {
+	  Map<Integer, BudgetEnum> saleBudgets = new LinkedHashMap<Integer, BudgetEnum>();
+    for (BudgetEnum saleBudget : BudgetEnum.values()) {
+      if (saleBudget.getId() == 1500000 || saleBudget.getId() < 500000)
+      {
+        continue;
+      }
+      saleBudgets.put(saleBudget.getId(), saleBudget);
+    }
+    return saleBudgets;
+  }
 
 	/**
 	 * @return

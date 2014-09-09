@@ -17,6 +17,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
+import com.vstar.common.BudgetEnum;
 import com.vstar.common.PropertyTypeEnum;
 import com.vstar.dao.process.PropertiesConstants;
 import com.vstar.process.jaxb.MasterData;
@@ -45,9 +46,13 @@ public class MasterDataInitialized implements
 	  Map<String, Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>>> countries = masterDataProcess
 				.getLocationMasterData();
 		Map<Integer, PropertyTypeEnum> propertyTypes = masterDataProcess.getPropertyTypes();
+		Map<Integer, BudgetEnum> rentBudgets = masterDataProcess.getRentBudgets();
+		Map<Integer, BudgetEnum> saleBudgets = masterDataProcess.getSaleBudgets();
 		MasterData masterData = new MasterData();
 		MasterDataConverter.convertLocationMasterData(masterData, countries);
 		MasterDataConverter.convertPropertyTypesMasterData(masterData, propertyTypes);
+		MasterDataConverter.convertRentBudgetMasterData(masterData, rentBudgets);
+		MasterDataConverter.convertSaleBudgetMasterData(masterData, saleBudgets);
 		try {
 			masrshallMasterDatatToFile(masterData);
 		} catch (JAXBException e) {

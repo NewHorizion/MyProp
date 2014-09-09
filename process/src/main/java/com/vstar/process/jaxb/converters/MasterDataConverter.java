@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.gson.Gson;
+import com.vstar.common.BudgetEnum;
 import com.vstar.common.PropertyCategoryEnum;
 import com.vstar.common.PropertyTypeEnum;
 import com.vstar.process.jaxb.Cities;
@@ -14,10 +15,13 @@ import com.vstar.process.jaxb.Countries;
 import com.vstar.process.jaxb.Localities;
 import com.vstar.process.jaxb.MasterData;
 import com.vstar.process.jaxb.PropertyType;
+import com.vstar.process.jaxb.RentBudget;
+import com.vstar.process.jaxb.SaleBudget;
 import com.vstar.process.jaxb.States;
 import com.vstar.process.masterData.infoBean.PropCityInfo;
 import com.vstar.process.masterData.infoBean.PropLocationInfo;
 import com.vstar.process.masterData.infoBean.PropStateInfo;
+import com.vstar.process.masterData.model.BudgetModel;
 import com.vstar.process.masterData.model.LocalityModel;
 import com.vstar.process.masterData.model.LocationModel;
 import com.vstar.process.masterData.model.PropertyTypeModel;
@@ -100,6 +104,42 @@ public class MasterDataConverter {
 		}
 
 	}
+	
+	/**
+   * @param masterData
+   * @param rentBudgets
+   */
+  public static void convertRentBudgetMasterData(MasterData masterData,
+      Map<Integer, BudgetEnum> rentBudgets) {
+    Set<Integer> rentBudgetSet = rentBudgets.keySet();
+    RentBudget jaxbRentBudget = null;
+    BudgetEnum rentBudgetEnum = null;
+    for (Integer rentBudgetId : rentBudgetSet) {
+      jaxbRentBudget = new RentBudget();
+      rentBudgetEnum = rentBudgets.get(rentBudgetId);
+      jaxbRentBudget.setId(rentBudgetEnum.getId());
+      jaxbRentBudget.setType(rentBudgetEnum.getName());
+      masterData.getRentBudgets().add(jaxbRentBudget);
+    }
+  }
+  
+  /**
+   * @param masterData
+   * @param saleBudgets
+   */
+  public static void convertSaleBudgetMasterData(MasterData masterData,
+    Map<Integer, BudgetEnum> saleBudgets) {
+  Set<Integer> saleBudgetSet = saleBudgets.keySet();
+  SaleBudget jaxbSaleBudget = null;
+  BudgetEnum saleBudgetEnum = null;
+  for (Integer saleBudgetId : saleBudgetSet) {
+    jaxbSaleBudget = new SaleBudget();
+    saleBudgetEnum = saleBudgets.get(saleBudgetId);
+    jaxbSaleBudget.setId(saleBudgetEnum.getId());
+    jaxbSaleBudget.setType(saleBudgetEnum.getName());
+    masterData.getSaleBudgets().add(jaxbSaleBudget);
+  }
+}
 
 	/**
 	 * @param jaxbMasterData
@@ -120,6 +160,38 @@ public class MasterDataConverter {
 				}
 				masterDataMap.put("propertyTypes", propertyTypes);
 			}
+			
+			List<RentBudget> jaxbRentBudgets = jaxbMasterData
+        .getRentBudgets();
+      if (null != jaxbRentBudgets && !jaxbRentBudgets.isEmpty())
+      {
+        List<BudgetModel> rentBudgets = new ArrayList<BudgetModel>();
+        BudgetModel rentBudgetModel = null;
+        for (RentBudget jaxbRentBudget : jaxbRentBudgets)
+        {
+          rentBudgetModel = new BudgetModel();
+          rentBudgetModel.setId(jaxbRentBudget.getId());
+          rentBudgetModel.setName(jaxbRentBudget.getType());
+          rentBudgets.add(rentBudgetModel);
+        }
+        masterDataMap.put("rentBudgets", rentBudgets);
+      }
+      
+      List<SaleBudget> jaxbSaleBudgets = jaxbMasterData
+        .getSaleBudgets();
+      if (null != jaxbSaleBudgets && !jaxbSaleBudgets.isEmpty())
+      {
+        List<BudgetModel> saleBudgets = new ArrayList<BudgetModel>();
+        BudgetModel saleBudgetModel = null;
+        for (SaleBudget jaxbSaleBudget : jaxbSaleBudgets)
+        {
+          saleBudgetModel = new BudgetModel();
+          saleBudgetModel.setId(jaxbSaleBudget.getId());
+          saleBudgetModel.setName(jaxbSaleBudget.getType());
+          saleBudgets.add(saleBudgetModel);
+        }
+        masterDataMap.put("saleBudgets", saleBudgets);
+      }
 
 			List<Countries> jaxbCountries = jaxbMasterData.getCountries();
 			if (null != jaxbCountries && !jaxbCountries.isEmpty()) {

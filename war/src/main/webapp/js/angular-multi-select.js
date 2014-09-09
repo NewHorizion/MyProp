@@ -835,7 +835,17 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
             // watch1, for changes in input model property
             // updates multi-select when user select/deselect a single checkbox programatically
             // https://github.com/isteven/angular-multi-select/issues/8
-            $scope.$watch( 'inputModel' , function( newVal ) {                                 
+            $scope.$watch( 'inputModel' , function( newVal ) {
+            	if ($scope.outputModel !== undefined){
+              		var data = $scope.outputModel;
+              		angular.forEach(newVal, function (item) {
+              			angular.forEach(data, function (da) {
+              				if (angular.equals(item.label, da.label)) {
+              					item.ticked = true;
+            		  			}
+              				});
+            		  	});
+              	  }
                 if ( newVal ) {
                     $scope.refreshSelectedItems();                                   
                     $scope.refreshOutputModel();
@@ -851,7 +861,7 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
 
             // watch2 for changes in input model as a whole
             // this on updates the multi-select when a user load a whole new input-model. We also update the $scope.backUp variable
-            $scope.$watch( 'inputModel' , function( newVal ) {  
+            $scope.$watch( 'inputModel' , function( newVal ) {
                 if ( newVal ) {
                     $scope.backUp = angular.copy( $scope.inputModel );    
                     $scope.updateFilter();
