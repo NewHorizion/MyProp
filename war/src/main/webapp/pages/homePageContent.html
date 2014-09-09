@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" ng-app="ngSampleApp">
+    <head>
+        <meta charset="utf-8">
+        <title>jQuery UI Tabs</title>
+
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
+
+        <script>
+            $(function() {
+               
+            });
+
+            var app = angular.module('ngSampleApp', []);
+
+            app.controller("sampleController", ['$scope', function($scope) {
+
+                $scope.demoText = "Hello World!"
+
+            }]);
+            
+            app.directive('jqTabs',function($compile, $timeout){
+              return function(scope, elem, attrs){
+                elem.tabs({load: function( event, ui ) {
+                 $timeout(function(){
+                     $compile($(ui.panel).contents())(scope)
+                 })
+                
+                }
+                  
+                });
+              }
+            })
+        </script>
+    </head>
+    <body  ng-controller="sampleController">
+    
+        <div id="tabs" jq-tabs>
+            <ul>
+                <li><a href="#tabs-1">Preloaded</a></li>
+                <li><a href="ajax.html">Ajax Loaded</a></li>
+            </ul>
+            <div id="tabs-1">
+                <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+            </div>
+        </div>
+    </body>
+</html>

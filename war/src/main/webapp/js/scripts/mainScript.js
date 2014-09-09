@@ -1,5 +1,5 @@
 // create the module and name it scotchApp
-	var scotchApp = angular.module('scotchApp', [ 'multi-select', 'fileAppDir',
+var scotchApp = angular.module('scotchApp', [ 'multi-select', 'fileAppDir',
 		'ngAnimate', 'ui.router', 'flow', 'checklist-model', 'ng.httpLoader',
 		'PropertySearchServices' ]);
 
@@ -195,9 +195,50 @@ scotchApp
 				'loginController',
 				function($scope, $http) {
 					$scope.formData = {};
+                    
+					$scope.validateLogin = function() {
+							  
+							    // Setup form validation on the #register-form element
+							    $("#loginForm").validate({
+							    
+							        // Specify the validation rules
+							        rules: {
+							            firstname: "required",
+							            lastname: "required",
+							            email: {
+							                required: true,
+							                email: true
+							            },
+							            password: {
+							                required: true,
+							                minlength: 5
+							            },
+							            agree: "required"
+							        },
+							        
+							        // Specify the validation error messages
+							        messages: {
+							            firstname: "Please enter your first name",
+							            lastname: "Please enter your last name",
+							            password: {
+							                required: "Please provide a password",
+							                minlength: "Your password must be at least 5 characters long"
+							            },
+							            email: "Please enter a valid email address",
+							            agree: "Please accept our policy"
+							        },
+							        
+							        submitHandler: function(form) {
+							            form.submit();
+							        }
+							    });
 
+							  };
 					// process the form
 					$scope.processForm = function() {
+						 if ($("#loginForm").valid()){
+					           alert("Submitting...");
+					       }
 						$http(
 								{
 									method : 'POST',
@@ -276,26 +317,26 @@ scotchApp
 
 				}).directive('cityCtrl', function() {
 			return {
-				restrict: 'E',
-				scope: {
-					cityModelName: '=',
-					locations:'='
-	            },
+				restrict : 'E',
+				scope : {
+					cityModelName : '=',
+					locations : '='
+				},
 				templateUrl : 'pages/city-ctrl.html'
-				
+
 			};
 		}).directive('locationCtrl', function() {
 			return {
-				restrict: 'E',
+				restrict : 'E',
 				templateUrl : 'pages/location-ctrl.html'
 			};
 		}).directive('propertyCtrl', function() {
 			return {
-				restrict: 'E',
-				scope: {
-					propertyModelName: '=',
-					propertyTypes:'='
-	            },
+				restrict : 'E',
+				scope : {
+					propertyModelName : '=',
+					propertyTypes : '='
+				},
 				templateUrl : 'pages/property-ctrl.html'
 			};
 		});
@@ -382,3 +423,26 @@ scotchApp
 						});
 					};
 				});
+
+scotchApp.controller('TabsCtrl', [ '$scope', function($scope) {
+	$scope.tabs = [ {
+		title : 'Rent',
+		url : 'pages/homePageContent.html'
+	}, {
+		title : 'Buy',
+		url : 'pages/ajax.html'
+	}, {
+		title : 'Recent',
+		url : 'pages/about.html'
+	} ];
+
+	$scope.currentTab = 'pages/homePageContent.html';
+
+	$scope.onClickTab = function(tab) {
+		$scope.currentTab = tab.url;
+	}
+
+	$scope.isActiveTab = function(tabUrl) {
+		return tabUrl == $scope.currentTab;
+	}
+} ]);
