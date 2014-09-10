@@ -226,20 +226,17 @@ scotchApp
 scotchApp
 	.controller('InHouseAmenityCtrl', function($scope) {
 	  $scope.inHouseAmenities = [
-	          {id:1, label: 'Servant Quarters'}, 
-	          {id:2, label: 'Private Terrace/ Garden'}, 
-	          {id:3, label: 'Vaastu Compliant'}, 
-	          {id:4, label: 'Air Conditioned'},	          
-	          {id:5, label: 'Intercom Facility'}, 
-	          {id:6, label: 'Internet / Wi-Fi Connectivity'}, 
-	          {id:7, label: 'RO Water System'}, 
-	          {id:8, label: 'Piped Gas'}
-	    ];	  
-	  $scope.checkAll = function() {
-		      $scope.inHouseAmenities = angular.copy($scope.inHouseAmenities);
-	  };
-	  $scope.uncheckAll = function() {
-		      $scope.inHouseAmenities = [];
+	          {id:1, label: 'Servant Quarters', ticked: false}, 
+	          {id:2, label: 'Private Terrace/ Garden', ticked: false}, 
+	          {id:3, label: 'Vaastu Compliant', ticked: false}, 
+	          {id:4, label: 'Air Conditioned', ticked: false},	          
+	          {id:5, label: 'Intercom Facility', ticked: false}, 
+	          {id:6, label: 'Internet / Wi-Fi Connectivity', ticked:false}, 
+	          {id:7, label: 'RO Water System', ticked: false}, 
+	          {id:8, label: 'Piped Gas', ticked: false}
+	    ];
+	  $scope.itemSelect = function(data) {
+		  
 	  };
 });
 
@@ -273,4 +270,13 @@ scotchApp
   $scope.uncheckAll = function() {
 	      $scope.extAmenities = [];
   };
+});
+
+scotchApp
+.controller('FurnishedStatuses', function($scope) {
+  $scope.furnishedStatuses = [
+          {id:1, value: 'Furnished'}, 
+          {id:2, value: 'Unfurnished'}, 
+          {id:3, value: 'Semi-Furnished'}
+    ]; 
 });
