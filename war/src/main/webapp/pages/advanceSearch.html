@@ -39,17 +39,13 @@
 							<div class="col-lg-3 field">
 								<div class="form-group move-down">
 									<label for="Autocomplete2">&#8377; Min Budger</label>
-									<property-ctrl
-										property-model-name="formData.propertyFeatureInfo.propertyMandateInfo.propertyTypeId"
-										property-types="propertyTypes"></property-ctrl>
+									<div ng-controller="CountryCntrl"><rent-budget-ctrl rent-model-name="rent" rent-budgets="rentBudgets"></rent-budget-ctrl></div>
 								</div>
 							</div>
 							<div class="col-lg-3 field">
 								<div class="form-group move-down">
 									<label for="Autocomplete2">&#8377; Max Budget</label>
-									<property-ctrl
-										property-model-name="formData.propertyFeatureInfo.propertyMandateInfo.propertyTypeId"
-										property-types="propertyTypes"></property-ctrl>
+									<div ng-controller="CountryCntrl"><sale-budget-ctrl sale-model-name="sale" sale-budgets="saleBudgets"></sale-budget-ctrl></div>
 								</div>
 							</div>
 
