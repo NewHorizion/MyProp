@@ -73,8 +73,8 @@
 		   		<h3>Amenities </h3>
 		  	</li>
 		  	<li ng-controller="InHouseAmenityCtrl">
-			   	<b>In House Amenities :</b>
-			
+			   	<label><b>In House Amenities :</b></label>
+				<div style="float:left;">
 				<div
 					multi-select 
     				input-model="inHouseAmenities"
@@ -88,11 +88,12 @@
     				output-model="formData.propertyFeatureInfo.residentialPropInfo.inHouseAmenitie"
     				on-item-click="itemSelect( data )">
 				</div>
+				</div>
 			</li>
-  			<li>
-  				<b>External Amenities :</b>
-   			</li>
-	        <li ng-controller="ExtAmenityCtrl">
+			<br/><br/><br/>
+  			<li ng-controller="ExtAmenityCtrl">
+  				<label><b>External Amenities :</b></label>
+	        	<div style="float:left;">
 	        	<div
 					multi-select 
     				input-model="extAmenities"
@@ -105,8 +106,9 @@
     				default-label="--External Amenities--"
     				output-model="formData.propertyFeatureInfo.residentialPropInfo.externalAmenitie">
 				</div> 
+				</div>
   			</li>
-  			
+  			<br/><br/><br/>
   			<li>
    				<h3>Property Snapshot </h3>
   			</li>

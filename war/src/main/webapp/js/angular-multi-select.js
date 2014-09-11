@@ -685,7 +685,8 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
                                 temp = value[ $scope.indexProperty ];                                
                                 value[ $scope.tickProperty ] = $scope.backUp[ temp ][ $scope.tickProperty ];
                             }
-                        });               
+                        });  
+                        $scope.outputModel = [];
                         break;
                     case 'CLEAR':
                         $scope.tabIndex = $scope.tabIndex + 1;

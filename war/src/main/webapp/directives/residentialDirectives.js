@@ -168,17 +168,17 @@ scotchApp
 scotchApp
 .controller('BedBathNoList', function($scope) {
   $scope.roomNos = [
-    { id: '1001', value:'1'},
-    { id: '1002', value:'2'},
-    { id: '1003', value:'3'},
-    { id: '1004', value:'4'},
-    { id: '1005', value:'5'},
-    { id: '1006', value:'6'},
-    { id: '1007', value:'7'},
-    { id: '1008', value:'8'},
-    { id: '1009', value:'9'},
-    { id: '1010', value:'10'},
-    { id: '1011', value:'>10'}
+    { id: '1001', label:'1', ticked: false},
+    { id: '1002', label:'2', ticked: false},
+    { id: '1003', label:'3', ticked: false},
+    { id: '1004', label:'4', ticked: false},
+    { id: '1005', label:'5', ticked: false},
+    { id: '1006', label:'6', ticked: false},
+    { id: '1007', label:'7', ticked: false},
+    { id: '1008', label:'8', ticked: false},
+    { id: '1009', label:'9', ticked: false},
+    { id: '1010', label:'10', ticked: false},
+    { id: '1011', label:'>10', ticked: false}
   ];
 }).directive('bedroomNoCtrl', function() {
 	return {

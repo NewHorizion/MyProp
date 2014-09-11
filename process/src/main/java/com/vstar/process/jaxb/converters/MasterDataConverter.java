@@ -154,7 +154,7 @@ public class MasterDataConverter {
 				for (PropertyType jaxbPropertyType : jaxbPropertyTypes) {
 					PropertyTypeModel propertyTypeModel = new PropertyTypeModel();
 					propertyTypeModel.setId(jaxbPropertyType.getId());
-					propertyTypeModel.setName(jaxbPropertyType.getType());
+					propertyTypeModel.setLabel(jaxbPropertyType.getType());
 					propertyTypeModel.setCategoryName(jaxbPropertyType.getCategoryName());
 					propertyTypes.add(propertyTypeModel);
 				}
@@ -216,7 +216,7 @@ public class MasterDataConverter {
 											LocalityModel localityModel = new LocalityModel();
 											localityModel.setCityName(jaxbCity.getCityName());
 											localityModel.setLocalityId(jaxbLocality.getLocId());
-											localityModel.setLocalityName(jaxbLocality.getLocName());
+											localityModel.setLabel(jaxbLocality.getLocName());
 											localities.add(localityModel);
 										}
 										location.setLocalities(localities);

@@ -2,19 +2,19 @@ package com.vstar.process.masterData.model;
 
 public class LocalityModel
 {
-  private String localityName;
+  private String label;
   private long localityId;
   private String cityName;
   private boolean ticked;
 
-  public String getLocalityName()
+  public String getLabel()
   {
-    return localityName;
+    return label;
   }
 
-  public void setLocalityName(String localityName)
+  public void setLabel(String label)
   {
-    this.localityName = localityName;
+    this.label = label;
   }
 
   public long getLocalityId()
