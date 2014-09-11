@@ -16,6 +16,7 @@
 
 		<interceptors>
 			<interceptor-stack name="webservicesample-stack">
+			    <interceptor-ref name="hibernateTransactionManagement" />
 				<interceptor-ref name="params" />
 				<interceptor-ref name="fileUpload" />
 				<interceptor-ref name="autowiring" />
@@ -31,6 +32,9 @@
 			<interceptor name="jsonToObject"
 				class="com.vstar.interceptors.JsonToParamInterceptor">
 			</interceptor>
+			
+			<interceptor name="hibernateTransactionManagement"
+				class="com.vstar.interceptors.HibernateInterceptor" />
 			
 				<interceptor name="fileUpload"
 				class="org.apache.struts2.interceptor.FileUploadInterceptor">

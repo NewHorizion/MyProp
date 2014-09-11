@@ -44,6 +44,8 @@
 	<bean id="masterDataInitializedListener" class="com.vstar.process.listeners.MasterDataInitialized">
 		<property name="masterDataProcess" ref="masterDataProcess"></property>
 		<property name="mergedProperties" ref="mergedProperties"></property>
+		<property name="sessionFactory" ref="sessionFactory" />
+		<property name="transManager" ref="transactionManager" />
 	</bean>
 
 	<bean id="propUsersDaoProcess" class="com.vstar.dao.process.PropUsersDaoProcess">

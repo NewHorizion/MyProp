@@ -13,8 +13,13 @@ import javax.xml.bind.Marshaller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 import com.vstar.common.BudgetEnum;
@@ -29,7 +34,8 @@ import com.vstar.process.masterData.infoBean.PropStateInfo;
 
 public class MasterDataInitialized implements
 		ApplicationListener<ContextRefreshedEvent> {
-
+	private SessionFactory sessionFactory;
+	private PlatformTransactionManager transManager;
 	// System property for XML binding namespace mapper
 	private static final String XML_BIND_NAMESPACE_MAPPER_PROP = "com.sun.xml.bind.namespacePrefixMapper";
 	private MasterDataProcess masterDataProcess;
@@ -43,22 +49,31 @@ public class MasterDataInitialized implements
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-	  Map<String, Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>>> countries = masterDataProcess
-				.getLocationMasterData();
-		Map<Integer, PropertyTypeEnum> propertyTypes = masterDataProcess.getPropertyTypes();
-		Map<Integer, BudgetEnum> rentBudgets = masterDataProcess.getRentBudgets();
-		Map<Integer, BudgetEnum> saleBudgets = masterDataProcess.getSaleBudgets();
-		MasterData masterData = new MasterData();
-		MasterDataConverter.convertLocationMasterData(masterData, countries);
-		MasterDataConverter.convertPropertyTypesMasterData(masterData, propertyTypes);
-		MasterDataConverter.convertRentBudgetMasterData(masterData, rentBudgets);
-		MasterDataConverter.convertSaleBudgetMasterData(masterData, saleBudgets);
+		TransactionStatus status = transManager
+				.getTransaction(new DefaultTransactionDefinition(
+						TransactionDefinition.PROPAGATION_REQUIRED));
 		try {
+			Map<String, Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>>> countries = masterDataProcess
+					.getLocationMasterData();
+			Map<Integer, PropertyTypeEnum> propertyTypes = masterDataProcess
+					.getPropertyTypes();
+			Map<Integer, BudgetEnum> rentBudgets = masterDataProcess
+					.getRentBudgets();
+			Map<Integer, BudgetEnum> saleBudgets = masterDataProcess
+					.getSaleBudgets();
+			MasterData masterData = new MasterData();
+			MasterDataConverter
+					.convertLocationMasterData(masterData, countries);
+			MasterDataConverter.convertPropertyTypesMasterData(masterData,
+					propertyTypes);
+			MasterDataConverter.convertRentBudgetMasterData(masterData,
+					rentBudgets);
+			MasterDataConverter.convertSaleBudgetMasterData(masterData,
+					saleBudgets);
+
 			masrshallMasterDatatToFile(masterData);
-		} catch (JAXBException e) {
-			 logger.error("Could not create file::"+e.getMessage());
-		} catch (URISyntaxException e) {
-			 logger.error("Could not create file::"+e.getMessage());
+		} catch (Exception e) {
+			logger.error("Could not create file::" + e.getMessage());
 		}
 
 	}
@@ -94,7 +109,6 @@ public class MasterDataInitialized implements
 	public void setMasterDataProcess(MasterDataProcess masterDataProcess) {
 		this.masterDataProcess = masterDataProcess;
 	}
-	
 
 	public Properties getMergedProperties() {
 		return mergedProperties;
@@ -104,5 +118,20 @@ public class MasterDataInitialized implements
 		this.mergedProperties = mergedProperties;
 	}
 
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+	public PlatformTransactionManager getTransManager() {
+		return transManager;
+	}
+
+	public void setTransManager(PlatformTransactionManager transManager) {
+		this.transManager = transManager;
+	}
 
 }
