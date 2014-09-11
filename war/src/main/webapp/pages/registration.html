@@ -4,8 +4,8 @@
       <div class="panel-body">
         <form method="post" ng-submit="signup()" name="signupForm">
           <h2 class="text-center">Sign up</h2>
-			
-		  <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.userType.$invalid && signupForm.userType.$dirty }">
+		  <ng-include src="'pages/registrationModel.html'"> </ng-include>
+		  <!-- <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.userType.$invalid && signupForm.userType.$dirty }">
             <input class="" type="radio" name="userType" ng-model="formData.userType" value="owner" >&nbsp;Owner &nbsp;&nbsp;&nbsp;
             <input class="" type="radio" name="userType" ng-model="formData.userType" value="agent" >&nbsp;Agent &nbsp;&nbsp;&nbsp;
             <input class="" type="radio" name="userType" ng-model="formData.userType" value="builder" >&nbsp;Buider
@@ -61,7 +61,7 @@
             <div class="help-block text-danger" ng-if="signupForm.mobileNo.$dirty" ng-messages="signupForm.mobileNo.$error">
               <div ng-message="required">You must enter your mobile No.</div>
             </div>
-          </div>
+          </div>-->
           
           <div class="form-group has-feedback" ng-class="{ 'has-error' : signupForm.landLineNo.$invalid && signupForm.landLineNo.$dirty }">
             <input class="form-control input-lg" type="text" name="landLineNo" ng-model="formData.landLineNo" placeholder="Landline No" required>
