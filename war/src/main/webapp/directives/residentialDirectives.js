@@ -168,21 +168,25 @@ scotchApp
 scotchApp
 .controller('BedBathNoList', function($scope) {
   $scope.roomNos = [
-    { id: '1001', label:'1', ticked: false},
-    { id: '1002', label:'2', ticked: false},
-    { id: '1003', label:'3', ticked: false},
-    { id: '1004', label:'4', ticked: false},
-    { id: '1005', label:'5', ticked: false},
-    { id: '1006', label:'6', ticked: false},
-    { id: '1007', label:'7', ticked: false},
-    { id: '1008', label:'8', ticked: false},
-    { id: '1009', label:'9', ticked: false},
-    { id: '1010', label:'10', ticked: false},
-    { id: '1011', label:'>10', ticked: false}
+    { id: '1', label:'1', ticked: false},
+    { id: '2', label:'2', ticked: false},
+    { id: '3', label:'3', ticked: false},
+    { id: '4', label:'4', ticked: false},
+    { id: '5', label:'5', ticked: false},
+    { id: '6', label:'6', ticked: false},
+    { id: '7', label:'7', ticked: false},
+    { id: '8', label:'8', ticked: false},
+    { id: '9', label:'9', ticked: false},
+    { id: '10', label:'10', ticked: false},
+    { id: '11', label:'>10', ticked: false}
   ];
 }).directive('bedroomNoCtrl', function() {
 	return {
 		restrict: 'E',
+		scope : {
+			bedModelName : '=',
+			roomNos : '='
+		},
 		templateUrl : 'pages/bedroom-no-ctrl.html'
 	};
 }).directive('bathroomNoCtrl', function() {

@@ -59,13 +59,13 @@ public class PropAreaDaoProcess
    */
   public PropAreaDao getPropAreaDaoById(int propAreaDaoid) throws HibernateException
   {
-    PropAreaDao PropAreaDao = null;
+    PropAreaDao propAreaDao = null;
     Session session = sessionFactory.getCurrentSession();
     String queryString = "from PropAreaDao where propAreaId = :propAreaId";
     Query query = session.createQuery(queryString);
     query.setInteger("propAreaId", propAreaDaoid);
-    PropAreaDao = (PropAreaDao) query.uniqueResult();
-    return PropAreaDao;
+    propAreaDao = (PropAreaDao) query.uniqueResult();
+    return propAreaDao;
   }
 
   /**

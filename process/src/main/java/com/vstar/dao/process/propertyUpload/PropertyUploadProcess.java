@@ -5,18 +5,25 @@ import com.vstar.dao.PropFeaturesDao;
 import com.vstar.dao.PropInfoDao;
 import com.vstar.dao.PropLocationInfoDao;
 import com.vstar.dao.PropPriceDao;
+import com.vstar.dao.PropRequirementDao;
 import com.vstar.dao.PropTermsCondDao;
 import com.vstar.dao.PropTransactionDao;
+import com.vstar.dao.ReqPropTypeDao;
 import com.vstar.dao.process.PropAreaDaoProcess;
 import com.vstar.dao.process.PropFeaturesDaoProcess;
 import com.vstar.dao.process.PropInfoDaoProcess;
 import com.vstar.dao.process.PropLocationInfoDaoProcess;
 import com.vstar.dao.process.PropPriceDaoProcess;
+import com.vstar.dao.process.PropRequirementDaoProcess;
 import com.vstar.dao.process.PropTermsCondDaoProcess;
 import com.vstar.dao.process.PropTransactionDaoProcess;
+import com.vstar.dao.process.ReqPropTypeDaoProcess;
 import com.vstar.exception.GenericProcessException;
+import com.vstar.process.masterData.model.LocalityModel;
+import com.vstar.process.masterData.model.PropertyTypeModel;
 import com.vstar.process.propertyDetailInfo.PropertyFeatureInfo;
 import com.vstar.process.propertyDetailInfo.PropertyMandateInfo;
+import com.vstar.process.propertyDetailInfo.RequirementInfo;
 import com.vstar.process.propertyDetailInfo.ResidentialPropInfo;
 
 /**
@@ -33,6 +40,9 @@ public class PropertyUploadProcess
   private PropLocationInfoDaoProcess propLocationInfoDaoProcess;
   private PropTermsCondDaoProcess propTermsCondDaoProcess;
   private PropInfoDao propInfoDao;
+  private PropRequirementDao propRequirementDao;
+  private ReqPropTypeDaoProcess reqPropTypeDaoProcess;
+  private PropRequirementDaoProcess propRequirementDaoProcess;
   
   /**
    * Save Property Details
@@ -78,28 +88,88 @@ public class PropertyUploadProcess
    * @param propertyMandateInfo
    * @return
    */
-  public boolean saveRequirementDetails(PropertyMandateInfo propertyMandateInfo)
+  public boolean saveRequirementDetails(RequirementInfo requirementInfo)
   {
     propInfoDao = new PropInfoDao();
     try
     {
-      savePropertyMandateInfos(propertyMandateInfo);
-      propInfoDao = propInfoDaoProcess.addUpdatePropInfoDao(propInfoDao);
-    }
-    catch(GenericProcessException e)
-    {
-      //Log the exception
-    }
-    // Saving Property Location Info
-    try
-    {
-      savePropertyLocationInfo(propertyMandateInfo);
+      propRequirementDao = new PropRequirementDao();
+      savePropertyReqDetails(requirementInfo);
+      createReqLocations(requirementInfo.getLocations(), requirementInfo.getCity());
+      createReqPropTypes(requirementInfo.getPropertyTypes());
     }
     catch(GenericProcessException e)
     {
       //Log the exception
     }
     return true;
+  }
+  
+  /**
+   * Creating Requirement Property Types Mapping
+   * @param propertyTypes
+   */
+  private void createReqPropTypes(PropertyTypeModel[] propertyTypes)
+  {
+    ReqPropTypeDao reqPropTypeDao = null;
+    for(PropertyTypeModel propertyType : propertyTypes)
+    {
+      reqPropTypeDao = new ReqPropTypeDao();
+      reqPropTypeDao.setPropRequirementDao(propRequirementDao);
+      reqPropTypeDao.setPropTypeId(propertyType.getId());
+      reqPropTypeDaoProcess.addUpdateReqPropTypeDao(reqPropTypeDao);
+    }
+  }
+  
+  /**
+   * Saving Property Requirement Details
+   * @param requirementInfo
+   */
+  private void savePropertyReqDetails(RequirementInfo requirementInfo)
+  {
+    propRequirementDao.setMinCoveredArea(requirementInfo.getMinCoveredArea());
+    propRequirementDao.setMaxCoveredArea(requirementInfo.getMaxCoveredArea());
+    propRequirementDao.setCoveredAreaUnit(requirementInfo.getCoveredAreaUnit() != null
+      ? requirementInfo.getCoveredAreaUnit().getValue()
+      : null);
+    propRequirementDao.setMinPlotArea(requirementInfo.getMinPlotArea());
+    propRequirementDao.setMaxPlotArea(requirementInfo.getMaxPlotArea());
+    propRequirementDao.setPlotAreaUnit(requirementInfo.getPlotAreaUnit() != null ? requirementInfo
+      .getPlotAreaUnit().getValue() : null);
+    propRequirementDao.setMinBudget(Long.parseLong(requirementInfo.getMinBudget().getId()));
+    propRequirementDao.setMaxBudget(Long.parseLong(requirementInfo.getMaxBudget().getId()));
+    propRequirementDao.setDealingType(requirementInfo.getDealingType());
+    propRequirementDao.setMinBedrooms(Integer.parseInt(requirementInfo.getMinBedrooms().getId()));
+    propRequirementDao.setMaxBedrooms(Integer.parseInt(requirementInfo.getMaxBedrooms().getId()));
+    propRequirementDao.setPropPurchaseId(requirementInfo.getPurchaseType());
+    propRequirementDao = propRequirementDaoProcess.addUpdatePropRequirementDao(propRequirementDao);
+  }
+  
+  /**
+   * Creating Requirement & Location Mapping
+   * @param locations
+   * @param cityId
+   */
+  private void createReqLocations(LocalityModel[] locations, int cityId)
+  {
+    PropLocationInfoDao propLocationInfoDao = null;
+    for(LocalityModel location : locations)
+    {
+      propLocationInfoDao = new PropLocationInfoDao();
+      try
+      {
+          // Existing Location
+        propLocationInfoDao.setPropLocationDao(location.getLocalityId());
+        propLocationInfoDao.setPropRequirementDao(propRequirementDao);
+        propLocationInfoDaoProcess.addUpdatePropAreaDao(propLocationInfoDao);
+      }
+      catch (GenericProcessException e)
+      {
+        // Log the exception
+      }
+    }
+    
+    
   }
   
   /**
@@ -301,6 +371,26 @@ public class PropertyUploadProcess
   public void setPropTermsCondDaoProcess(PropTermsCondDaoProcess propTermsCondDaoProcess)
   {
     this.propTermsCondDaoProcess = propTermsCondDaoProcess;
+  }
+
+  public ReqPropTypeDaoProcess getReqPropTypeDaoProcess()
+  {
+    return reqPropTypeDaoProcess;
+  }
+
+  public void setReqPropTypeDaoProcess(ReqPropTypeDaoProcess reqPropTypeDaoProcess)
+  {
+    this.reqPropTypeDaoProcess = reqPropTypeDaoProcess;
+  }
+
+  public PropRequirementDaoProcess getPropRequirementDaoProcess()
+  {
+    return propRequirementDaoProcess;
+  }
+
+  public void setPropRequirementDaoProcess(PropRequirementDaoProcess propRequirementDaoProcess)
+  {
+    this.propRequirementDaoProcess = propRequirementDaoProcess;
   }
 
 }

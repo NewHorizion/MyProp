@@ -2,7 +2,7 @@ package com.vstar.process.masterData.model;
 
 public class BudgetModel {
 	private Integer id;
-	private String name;
+	private String value;
 
 	public Integer getId() {
 		return id;
@@ -12,12 +12,12 @@ public class BudgetModel {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getValue() {
+		return value;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 }

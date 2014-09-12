@@ -163,7 +163,7 @@ scotchApp
 					// function to process the form
 					$scope.submitForm = function() {
 						var fd = new FormData();
-						$scope.formData.propertyFeatureInfo.propertyMandateInfo.city = $scope.formData.propertyFeatureInfo.propertyMandateInfo.city.cityId;
+						$scope.formData.requirementInfo.city = $scope.formData.requirementInfo.city.cityId;
 						fd.append('jsonData', angular.toJson($scope.formData));
 
 						// remove comment to append a file to the request

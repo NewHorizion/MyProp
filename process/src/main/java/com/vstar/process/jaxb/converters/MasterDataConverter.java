@@ -171,7 +171,7 @@ public class MasterDataConverter {
         {
           rentBudgetModel = new BudgetModel();
           rentBudgetModel.setId(jaxbRentBudget.getId());
-          rentBudgetModel.setName(jaxbRentBudget.getType());
+          rentBudgetModel.setValue(jaxbRentBudget.getType());
           rentBudgets.add(rentBudgetModel);
         }
         masterDataMap.put("rentBudgets", rentBudgets);
@@ -187,7 +187,7 @@ public class MasterDataConverter {
         {
           saleBudgetModel = new BudgetModel();
           saleBudgetModel.setId(jaxbSaleBudget.getId());
-          saleBudgetModel.setName(jaxbSaleBudget.getType());
+          saleBudgetModel.setValue(jaxbSaleBudget.getType());
           saleBudgets.add(saleBudgetModel);
         }
         masterDataMap.put("saleBudgets", saleBudgets);

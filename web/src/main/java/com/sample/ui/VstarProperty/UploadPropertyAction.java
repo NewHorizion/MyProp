@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.opensymphony.xwork2.ActionSupport;
 import com.vstar.dao.process.propertyUpload.PropertyUploadProcess;
 import com.vstar.process.propertyDetailInfo.PropertyFeatureInfo;
+import com.vstar.process.propertyDetailInfo.RequirementInfo;
 
 public class UploadPropertyAction extends ActionSupport
 {
@@ -16,6 +17,7 @@ public class UploadPropertyAction extends ActionSupport
   private String data;
   private MultipartFile[] files;
   private PropertyUploadProcess propertyUploadProcess;
+  private RequirementInfo requirementInfo;
 
   public String save()
   {
@@ -25,7 +27,7 @@ public class UploadPropertyAction extends ActionSupport
   
   public String saveRequirement()
   {
-    propertyUploadProcess.saveRequirementDetails(propertyFeatureInfo.getPropertyMandateInfo()); 
+    propertyUploadProcess.saveRequirementDetails(requirementInfo); 
     return SUCCESS;
   }
 
@@ -77,6 +79,16 @@ public class UploadPropertyAction extends ActionSupport
   public void setPropertyUploadProcess(PropertyUploadProcess propertyUploadProcess)
   {
     this.propertyUploadProcess = propertyUploadProcess;
+  }
+
+  public RequirementInfo getRequirementInfo()
+  {
+    return requirementInfo;
+  }
+
+  public void setRequirementInfo(RequirementInfo requirementInfo)
+  {
+    this.requirementInfo = requirementInfo;
   }
 
 }

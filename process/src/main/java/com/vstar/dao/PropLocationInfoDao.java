@@ -39,8 +39,11 @@ public class PropLocationInfoDao implements java.io.Serializable
   @Column(name = "prop_location_Id", nullable = true)
   private Long propLocationDao;
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_info_Id", nullable = false)
+  @JoinColumn(name = "prop_info_Id", nullable = true)
   private PropInfoDao propInfoDao;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "prop_requirement_id", nullable = true)
+  private PropRequirementDao propRequirementDao;
   @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "created_Date", length = 19)
   private Date createdDate;
@@ -115,6 +118,16 @@ public class PropLocationInfoDao implements java.io.Serializable
   public void setPropAddress(String propAddress)
   {
     this.propAddress = propAddress;
+  }
+
+  public PropRequirementDao getPropRequirementDao()
+  {
+    return propRequirementDao;
+  }
+
+  public void setPropRequirementDao(PropRequirementDao propRequirementDao)
+  {
+    this.propRequirementDao = propRequirementDao;
   }
 
 }
