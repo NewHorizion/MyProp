@@ -28,10 +28,11 @@
 		<div class="clear">&nbsp;</div>
 	</div>
 
-	<div class="widget" ng-controller="latestSearchCntrl">
+	<div class="widget" ng-controller="latestSearchCntrl" ng-init="initializeController()">
 		<h2 class="sidebar_head">
 			<span class="h2link"><a href="#">View More</a></span> Hot Properties
 		</h2>
+		<div ng-model="latestProperties"/>
 		<ul class="propertys">
 			<li ng-repeat="property in latestProperties" class="property-listing">
 				<span> <img ng-src="{{property.propertyThumbImagePath}}"

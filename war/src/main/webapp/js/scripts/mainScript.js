@@ -1,7 +1,18 @@
 // create the module and name it scotchApp
-var scotchApp = angular.module('scotchApp', [ 'multi-select', 'fileAppDir',
-		'ngAnimate', 'ui.router', 'flow', 'checklist-model', 'ng.httpLoader',
-		'PropertySearchServices' ]);
+var scotchApp = angular.module('scotchApp',
+		[ 'multi-select', 'fileAppDir', 'ngAnimate', 'ui.router', 'flow',
+				'checklist-model', 'ng.httpLoader', 'PropertySearchServices',
+				'ajaxService', 'PropertyServices', 'blockUI' ]);
+scotchApp.config(function(blockUIConfigProvider) {
+
+	// Change the default overlay message
+	blockUIConfigProvider.message("Loading...");
+	// Change the default delay to 100ms before the blocking is visible
+	blockUIConfigProvider.delay(5);
+	// Disable automatically blocking of the user interface
+	blockUIConfigProvider.autoBlock(false);
+
+});
 
 // configure our routes
 scotchApp
@@ -389,13 +400,19 @@ scotchApp.controller('searchResultController', function($scope, $http,
 	$scope.properties = searchService.getSearchResponse();
 });
 
-scotchApp.controller('latestSearchCntrl', function($scope, $http) {
-	$http.get(
-			'http://localhost:8080/webservicesample/openService/search/latest')
-			.success(function(data) {
-				console.log(data);
-				$scope.latestProperties = data.latestProperties;
-			});
+scotchApp.controller('latestSearchCntrl', function($scope, propertyService) {
+	$scope.initializeController = function() {
+		propertyService.findLatest($scope.getLatestPropCompleted,
+				$scope.getLatestPropError);
+	}
+	$scope.getLatestPropCompleted = function(response) {
+		$scope.latestProperties = response.latestProperties;
+	}
+
+	$scope.getLatestPropError = function(response) {
+		alert("hi");
+		// alertsService.RenderErrorMessage(response.ReturnMessage);
+	}
 });
 
 scotchApp

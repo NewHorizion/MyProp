@@ -24,17 +24,33 @@ public class PropertySearchServiceImpl implements PropertySearchService {
 	@Produces("application/json")
 	@Path("/properties")
 	public String findProperties() {
-		List<Map<String,String>> searchProperties = propertySearchProcess.findProperty();
+		List<Map<String, String>> searchProperties = propertySearchProcess
+				.findProperty();
 		Gson gson = new Gson();
 		String json = gson.toJson(searchProperties);
 		return json;
 	}
-	
+
 	@Transactional
 	@GET
 	@Produces("application/json")
 	@Path("/latest")
 	public String getLatestProperties() {
+		return propertySearchProcess.findLatestProperties();
+	}
+
+	@Override
+	public String getRentedProperties() {
+		return propertySearchProcess.findLatestProperties();
+	}
+
+	@Override
+	public String getSellProperties() {
+		return propertySearchProcess.findLatestProperties();
+	}
+
+	@Override
+	public String getHotProperties() {
 		return propertySearchProcess.findLatestProperties();
 	}
 
@@ -46,7 +62,5 @@ public class PropertySearchServiceImpl implements PropertySearchService {
 			PropertySearchProcess propertySearchProcess) {
 		this.propertySearchProcess = propertySearchProcess;
 	}
-
-	
 
 }
