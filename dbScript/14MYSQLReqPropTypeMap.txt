@@ -1,0 +1,11 @@
+create table req_prop_type
+(
+  req_prop_type_id int not null,
+  prop_requirement_id int,
+  prop_type_id int,
+  primary key (`req_prop_type_id`),
+  CONSTRAINT `req_prop_ibfk_1` FOREIGN KEY (`prop_Type_Id`) REFERENCES `prop_type` (`prop_Type_Id`),
+  CONSTRAINT `req_prop_ibfk_2` FOREIGN KEY (`prop_requirement_Id`) REFERENCES `prop_requirement` (`prop_requirement_Id`)
+)
+
+
