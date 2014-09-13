@@ -2,7 +2,7 @@
 var scotchApp = angular.module('scotchApp',
 		[ 'multi-select', 'fileAppDir', 'ngAnimate', 'ui.router', 'flow',
 				'checklist-model', 'ng.httpLoader', 'PropertySearchServices',
-				'ajaxService', 'PropertyServices', 'blockUI' ]);
+				'ajaxService', 'PropertyServices', 'blockUI','alertsService','ui.bootstrap']);
 scotchApp.config(function(blockUIConfigProvider) {
 
 	// Change the default overlay message
@@ -375,7 +375,7 @@ scotchApp
 scotchApp
 		.controller(
 				'searchController',
-				function($scope, $http, $location, searchService) {
+				function($scope, $http, $location, searchService,$modal) {
 					$scope.search = function() {
 						$http(
 								{
@@ -393,6 +393,21 @@ scotchApp
 								$location.path('search', false);
 						});
 					}
+					
+					$scope.openModal = function () {
+
+					    var modalInstance = $modal.open({
+					        templateUrl: 'pages/advanceSearch.html',
+					        controller: 'searchController',
+					        windowClass: 'app-modal-window'
+					    });
+
+					    modalInstance.result.then(function (productID) {
+
+					    }, function () {
+					        // function executed on modal dismissal
+					    });
+					};
 				});
 
 scotchApp.controller('searchResultController', function($scope, $http,
@@ -400,7 +415,7 @@ scotchApp.controller('searchResultController', function($scope, $http,
 	$scope.properties = searchService.getSearchResponse();
 });
 
-scotchApp.controller('latestSearchCntrl', function($scope, propertyService) {
+scotchApp.controller('latestSearchCntrl', function($scope, propertyService,alertsService) {
 	$scope.initializeController = function() {
 		propertyService.findLatest($scope.getLatestPropCompleted,
 				$scope.getLatestPropError);
@@ -410,8 +425,7 @@ scotchApp.controller('latestSearchCntrl', function($scope, propertyService) {
 	}
 
 	$scope.getLatestPropError = function(response) {
-		alert("hi");
-		// alertsService.RenderErrorMessage(response.ReturnMessage);
+	    alertsService.RenderErrorMessage("error in reqiuest");
 	}
 });
 

@@ -34,6 +34,7 @@
 <script src="js/scripts/services.js"></script>
 <script src="js/services/propertyServices.js"></script>
 <script src="js/services/AjaxServices.js"></script>
+<script src="js/services/AlertsServices.js"></script>
 <!-- Custom Services end -->
 <script src="js/angular-block-ui.js"></script>
 <script src="js/scripts/mainScript.js"></script>
@@ -46,6 +47,7 @@
 <script src="js/google-code-prettify/prettify.js"></script>
 <script src="js/portfolio/jquery.quicksand.js"></script>
 <script src="js/portfolio/setting.js"></script>
+<script src="js/ui-bootstrap-tpls-0.11.0.js"></script>
 <script src="js/jquery.flexslider.js"></script>
 <script src="js/animate.js"></script>
 <script src="js/custom.js"></script>
@@ -56,7 +58,9 @@
 <script src="js/lib/validation/jquery.validate.js"></script>
 <script src="js/lib/validation/jquery.validate.min.js"></script>
 <script src="js/lib/validation/additional-methods.js"></script>
-<script src="js/lib/validation/additional-methods.min.js"></script>   
+<script src="js/lib/validation/additional-methods.min.js"></script>
+<!-- helpers -->
+<script src="js/helpers/UIHelpers.js"></script>
 </head>
 
 
@@ -105,11 +109,13 @@
 
 		<!-- angular templating -->
 		<!-- this is where content will be injected -->
-			<ng-include src="'pages/advanceSearch.html'"> </ng-include>
+		<ng-include src="'pages/advanceSearch.html'"> </ng-include>
 		<div ui-view></div>
 		<script type="text/ng-template" id="example-loader.tpl.html">Loading {{title}}...</script>
-		<div ng-http-loader methods="GET" title="Foo" ttl="2" template="example-loader.tpl.html"></div>
-		<div ng-http-loader methods="['PUT', 'POST']" template="example-loader.tpl.html"></div>
+		<div ng-http-loader methods="GET" title="Foo" ttl="2"
+			template="example-loader.tpl.html"></div>
+		<div ng-http-loader methods="['PUT', 'POST']"
+			template="example-loader.tpl.html"></div>
 		<ng-include src="'pages/footer.html'"> </ng-include>
 	</div>
 </body>

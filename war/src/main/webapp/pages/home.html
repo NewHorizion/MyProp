@@ -2,15 +2,15 @@
 <title>RealOne | Search Results</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript">
-$(document).ready(function () {
-    $('#searchdiv').hide();
-    $('a').click(function () {
-        $('#searchdiv').fadeIn('slow');
-    });
-    $('a#close').click(function () {
-        $('#searchdiv').fadeOut('slow');
-    })
-});
+	$(document).ready(function() {
+		$('#searchdiv').hide();
+		$('a').click(function() {
+			$('#searchdiv').fadeIn('slow');
+		});
+		$('a#close').click(function() {
+			$('#searchdiv').fadeOut('slow');
+		})
+	});
 </script>
 </head>
 <body>
@@ -32,6 +32,14 @@ $(document).ready(function () {
 					<ng-include src="'pages/hotProperties.html'"> </ng-include>
 				</div>
 			</div>
+		</div>
+         
+		<div style="padding-top: 20px">
+		 132424243{{alerts}}
+			<alert ng-repeat="alert in alerts" type="{{alert.type}}"
+				close="closeAlert($index)">
+			<div ng-bind-html="MessageBox"></div>
+			</alert>
 		</div>
 
 	</section>
