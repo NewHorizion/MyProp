@@ -459,6 +459,32 @@ scotchApp
 							alert("failed!");
 						});
 					};
+					
+					// Watch the value of property type selected
+					$scope.$watch( 'formData.propertyFeatureInfo.propertyMandateInfo.propertyTypeId' , function( selectedVal ) {
+						if (selectedVal !== undefined)
+						{
+							if (selectedVal == '5' || selectedVal == '16'
+									|| selectedVal == '20' || selectedVal == '21'
+										|| selectedVal == '23' || selectedVal == '24')
+							{
+								$scope.displayFeatures = false;
+								// Handling Industrial Shed
+								if (selectedVal == '23')
+								{
+									$scope.displayArea = false;
+									return;
+								}
+								$scope.displayArea = true;
+							}
+							else
+							{
+								$scope.displayArea = false;
+								$scope.displayFeatures = true;
+							}
+						}
+							
+		            }, true);
 				});
 
 scotchApp.controller('TabsCtrl', [ '$scope', function($scope) {
