@@ -6,6 +6,11 @@
         <form method="post" ng-submit="signup()" name="signupForm" id="signupForm">
           <h2 class="text-center">Sign up</h2>
 		  <ng-include src="'pages/registrationModel.html'"> </ng-include>
+		  
+		  <div class="form-group has-feedback">
+            	<input class="form-control input-lg" type="text" 
+            		ng-model="formData.registrationInfo.landlineNumber" placeholder="Landline No" id="landLineNo">
+          </div>
           <p class="text-center text-muted"><small>By clicking on Sign up, you agree to <a href="#">terms & conditions</a> and <a href="#">privacy policy</a></small></p>
           <button type="submit" class="btn btn-lg btn-block btn-primary">Sign up</button>
           <br/>
