@@ -449,11 +449,25 @@ scotchApp
 					$scope.$watch( 'formData.propertyFeatureInfo.propertyMandateInfo.propertyTypeId' , function( selectedVal ) {
 						if (selectedVal !== undefined)
 						{
+							// Variables displaying single fields
+							$scope.displayBedroom = false;
+							$scope.displayBathroom = false;
+							$scope.displayBalcony = false;
+							$scope.displayFurnished = false;
+							$scope.displayFloorNo = false;
+							$scope.displayTotalFloor = false;
+							
 							if (selectedVal == '5' || selectedVal == '16'
 									|| selectedVal == '20' || selectedVal == '21'
 										|| selectedVal == '23' || selectedVal == '24')
 							{
 								$scope.displayFeatures = false;
+								$scope.displayBedroom = false;
+								$scope.displayBathroom = false;
+								$scope.displayBalcony = false;
+								$scope.displayFurnished = false;
+								$scope.displayFloorNo = false;
+								$scope.displayTotalFloor = false;
 								// Handling Industrial Shed
 								if (selectedVal == '23')
 								{
@@ -466,6 +480,93 @@ scotchApp
 							{
 								$scope.displayArea = false;
 								$scope.displayFeatures = true;
+								$scope.displayBedroom = true;
+								$scope.displayBathroom = true;
+								$scope.displayBalcony = true;
+								$scope.displayFurnished = true;
+								$scope.displayFloorNo = true;
+								$scope.displayTotalFloor = true;
+							}
+							// Hiding Balcony
+							if (selectedVal == '7')
+							{
+								$scope.displayBedroom = true;
+								$scope.displayBathroom = true;
+								$scope.displayBalcony = false;
+								$scope.displayFurnished = true;
+								$scope.displayFloorNo = true;
+								$scope.displayTotalFloor = true;
+							}
+							// Hiding Floor No
+							if (selectedVal == '3' || selectedVal == '4' || selectedVal == '18')
+							{
+								$scope.displayBedroom = true;
+								$scope.displayBathroom = true;
+								$scope.displayBalcony = true;
+								$scope.displayFurnished = true;
+								$scope.displayFloorNo = false;
+								$scope.displayTotalFloor = true;
+							}
+							// Hiding Bedroom/Balcony
+							if (selectedVal == '9' || selectedVal == '10' || selectedVal == '12'
+								|| selectedVal == '13')
+							{
+								$scope.displayBedroom = false;
+								$scope.displayBathroom = true;
+								$scope.displayBalcony = false;
+								$scope.displayFurnished = true;
+								$scope.displayFloorNo = true;
+								$scope.displayTotalFloor = true;
+							}
+							// Hiding Bedroom/Bathroom/Balcony
+							if (selectedVal == '13' || selectedVal == '17')
+							{
+								$scope.displayBedroom = false;
+								$scope.displayBathroom = false;
+								$scope.displayBalcony = false;
+								$scope.displayFurnished = true;
+								$scope.displayFloorNo = true;
+								$scope.displayTotalFloor = true;
+							}
+							// Only Furnished
+							if (selectedVal == '14')
+							{
+								$scope.displayBedroom = false;
+								$scope.displayBathroom = false;
+								$scope.displayBalcony = false;
+								$scope.displayFurnished = true;
+								$scope.displayFloorNo = false;
+								$scope.displayTotalFloor = false;
+							}
+							// Only Furnished/Total Floor
+							if (selectedVal == '15' || selectedVal == '25')
+							{
+								$scope.displayBedroom = false;
+								$scope.displayBathroom = false;
+								$scope.displayBalcony = false;
+								$scope.displayFurnished = true;
+								$scope.displayFloorNo = false;
+								$scope.displayTotalFloor = true;
+							}
+							// Hiding Balcony/Floor No
+							if (selectedVal == '19')
+							{
+								$scope.displayBedroom = true;
+								$scope.displayBathroom = true;
+								$scope.displayBalcony = false;
+								$scope.displayFurnished = true;
+								$scope.displayFloorNo = false;
+								$scope.displayTotalFloor = true;
+							}
+							// Only Total Floor
+							if (selectedVal == '22')
+							{
+								$scope.displayBedroom = false;
+								$scope.displayBathroom = false;
+								$scope.displayBalcony = false;
+								$scope.displayFurnished = false;
+								$scope.displayFloorNo = false;
+								$scope.displayTotalFloor = true;
 							}
 						}
 							

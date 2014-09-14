@@ -10,22 +10,22 @@
         	</li>	  		
 			<div ng-show="displayFeatures">
 			
-				<li ng-controller="BedBathNoList">
+				<li ng-controller="BedBathNoList" ng-show="displayBedroom">
 					<label>No. of Bedrooms<em>*</em> :</label>
 					<bedroom-no-ctrl bed-model-name="formData.propertyFeatureInfo.residentialPropInfo.noOfBedRooms" room-nos="roomNos"></bedroom-no-ctrl>
 				</li>
 				
-				<li ng-controller="BedBathNoList">
+				<li ng-controller="BedBathNoList" ng-show="displayBathroom">
 					<label>No. of Bathrooms<em>*</em> :</label>
 					<bathroom-no-ctrl></bathroom-no-ctrl>
 				</li>
 				
-				<li ng-controller="BedBathNoList">
+				<li ng-controller="BedBathNoList" ng-show="displayBalcony">
 					<label>No. of Balconies<em>*</em> :</label>
 					<balcony-no-ctrl></balcony-no-ctrl>
 				</li>
 				
-				<li ng-controller="FurnishedStatuses">
+				<li ng-controller="FurnishedStatuses" ng-show="displayFurnished">
 					<label>Furnished Status<em>*</em> :</label>
 					<select id="furnished" ng-model="formData.propertyFeatureInfo.residentialPropInfo.furnishedStatus"
 						ng-options="furnishedStatus.value for furnishedStatus in furnishedStatuses track by furnishedStatus.value">
@@ -33,12 +33,12 @@
 					</select>
 				</li>
 				
-				<li ng-controller="FloorNoList">
+				<li ng-controller="FloorNoList" ng-show="displayFloorNo">
 					<label>Floor No<em>*</em> :</label>
 					<floor-no-ctrl></floor-no-ctrl>
 				</li>
 				
-				<li ng-controller="FloorNoList">
+				<li ng-controller="FloorNoList" ng-show="displayTotalFloor">
 					<label>Total Floor<em>*</em> :</label>
 					<total-floor-ctrl></total-floor-ctrl>
 				</li>
