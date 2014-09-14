@@ -1,79 +1,43 @@
-
-	<div class="form-group has-feedback"
-		ng-class="{ 'has-error' : signupForm.userType.$invalid && signupForm.userType.$dirty }">
+	<div class="form-group has-feedback">
 		<input class="" type="radio" name="userType"
-			ng-model="formData.userType" value="owner">&nbsp;Owner
+			ng-model="formData.userType" value="owner" checked="checked"/>&nbsp;Owner
 		&nbsp;&nbsp;&nbsp; <input class="" type="radio" name="userType"
-			ng-model="formData.userType" value="agent">&nbsp;Agent
+			ng-model="formData.userType" value="agent" />&nbsp;Agent
 		&nbsp;&nbsp;&nbsp; <input class="" type="radio" name="userType"
-			ng-model="formData.userType" value="builder">&nbsp;Buider <span
-			class="ion-person form-control-feedback"></span>
-		<div class="help-block text-danger" ng-if="signupForm.userType.$dirty"
-			ng-messages="signupForm.userType.$error">
-			<div ng-message="required">You must select user type.</div>
-		</div>
+			ng-model="formData.userType" value="builder" id="userType"/>&nbsp;Buider 
 	</div>
 
-	<div class="form-group has-feedback"
-		ng-class="{ 'has-error' : signupForm.fullName.$invalid && signupForm.fullName.$dirty }">
+	<div class="form-group has-feedback">
 		<input class="form-control input-lg" type="text" name="displayName"
-			ng-model="formData.displayName" placeholder="Name" required>
-		<span class="ion-person form-control-feedback"></span>
-		<div class="help-block text-danger" ng-if="signupForm.fullName.$dirty"
-			ng-messages="signupForm.fullName.$error">
-			<div ng-message="required">You must enter your name.</div>
-		</div>
+			ng-model="formData.displayName" placeholder="Name" id="displayName"/>
 	</div>
 
-	<div class="form-group has-feedback"
-		ng-class="{ 'has-error' : signupForm.email.$invalid && signupForm.email.$dirty }">
+	<div class="form-group has-feedback">
 		<input unique-email class="form-control input-lg" type="email"
-			id="email" name="email" ng-model="formData.email" placeholder="Email"
-			required autofocus> <span
-			class="ion-at form-control-feedback"></span>
-		<div class="help-block text-danger" ng-if="signupForm.email.$dirty"
-			ng-messages="signupForm.email.$error">
-			<div ng-message="required">Your email address is required.</div>
-			<div ng-message="email">Your email address is invalid.</div>
-			<div ng-message="unique">
-				<span class="ion-looping"></span> Email is already taken.
-			</div>
-		</div>
+			name="email" ng-model="formData.email" placeholder="Email"
+			 autofocus id="email"/> 
 	</div>
 
-	<div class="form-group has-feedback"
-		ng-class="{ 'has-error' : signupForm.password.$invalid && signupForm.password.$dirty }">
+	<div class="form-group has-feedback">
 		<input password-strength class="form-control input-lg" type="password"
-			name="password" ng-model="formData.password" placeholder="Password"
-			required> <span class="ion-key form-control-feedback"></span>
-		<div class="help-block text-danger" ng-if="signupForm.password.$dirty"
-			ng-messages="signupForm.password.$error">
-			<div ng-message="required">Password is required.</div>
-		</div>
+			name="password" ng-model="formData.password" placeholder="Password" id="password"/>
 	</div>
 
-	<div class="form-group has-feedback"
-		ng-class="{ 'has-error' : signupForm.propCityId.$invalid && signupForm.propCityId.$dirty }"
+	<div class="form-group has-feedback" 
 		ng-controller="CountryCntrl">
 		<select class="form-control input-lg" placeholder="city"
 			ng-model="formData.propCity"
-			ng-options="city.cityName group by city.stateName for city in locations">
-			<option value=''>Select City</option>
-		</select> <span class="ion-key form-control-feedback"></span>
-		<div class="help-block text-danger"
-			ng-if="signupForm.propCityId.$dirty"
-			ng-messages="signupForm.propCityId.$error">
-			<div ng-message="required">City is required.</div>
-		</div>
+			ng-options="city.cityName group by city.stateName for city in locations" 
+			id="city" name="city">
+			<option value=''></option>
+		</select> 
 	</div>
 
-	<div class="form-group has-feedback"
-		ng-class="{ 'has-error' : signupForm.mobileNo.$invalid && signupForm.mobileNo.$dirty }">
+	<div class="form-group has-feedback">
 		<input class="form-control input-lg" type="text" name="mobileNo"
-			ng-model="formData.mobileNo" placeholder="Mobile No" required>
-		<span class="ion-person form-control-feedback"></span>
-		<div class="help-block text-danger" ng-if="signupForm.mobileNo.$dirty"
-			ng-messages="signupForm.mobileNo.$error">
-			<div ng-message="required">You must enter your mobile No.</div>
-		</div>
+			ng-model="formData.mobileNo" placeholder="Mobile No" id="mobileNo" maxlength="10"/>
 	</div>
+	<div class="form-group has-feedback">
+            <input class="form-control input-lg" type="text" name="landLineNo" 
+            ng-model="formData.landLineNo" placeholder="Landline No" id="landLineNo">
+     </div>

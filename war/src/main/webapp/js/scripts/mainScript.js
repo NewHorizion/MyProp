@@ -206,49 +206,10 @@ scotchApp
 				'loginController',
 				function($scope, $http) {
 					$scope.formData = {};
-                    
-					$scope.validateLogin = function() {
-							  
-							    // Setup form validation on the #register-form element
-							    $("#loginForm").validate({
-							    
-							        // Specify the validation rules
-							        rules: {
-							            firstname: "required",
-							            lastname: "required",
-							            email: {
-							                required: true,
-							                email: true
-							            },
-							            password: {
-							                required: true,
-							                minlength: 5
-							            },
-							            agree: "required"
-							        },
-							        
-							        // Specify the validation error messages
-							        messages: {
-							            firstname: "Please enter your first name",
-							            lastname: "Please enter your last name",
-							            password: {
-							                required: "Please provide a password",
-							                minlength: "Your password must be at least 5 characters long"
-							            },
-							            email: "Please enter a valid email address",
-							            agree: "Please accept our policy"
-							        },
-							        
-							        submitHandler: function(form) {
-							            form.submit();
-							        }
-							    });
-
-							  };
 					// process the form
 					$scope.processForm = function() {
 						 if ($("#loginForm").valid()){
-					           alert("Submitting...");
+					          // alert("Submitting...");
 					       }
 						$http(
 								{
@@ -260,17 +221,19 @@ scotchApp
 									}
 								}).success(function(data) {
 							console.log(data);
-
-							if (!data.jsonMap.success) {
-								// if not successful, bind errors to error
-								// variables
-								$scope.errorName = data.jsonMap.errorName;
-								$scope.messages = "";
-							} else {
-								// if successful, bind success message to
-								// message
-								$scope.messages = data.jsonMap.messages;
-								$scope.errorName = "";
+							if(data.jsonMap!= undefined)
+							{
+								if (!data.jsonMap.success) {
+									// if not successful, bind errors to error
+									// variables
+									$scope.errorName = data.jsonMap.errorName;
+									$scope.messages = "";
+								} else {
+									// if successful, bind success message to
+									// message
+									$scope.messages = data.jsonMap.messages;
+									$scope.errorName = "";
+								}
 							}
 						});
 
@@ -285,6 +248,9 @@ scotchApp
 
 					// process the form
 					$scope.signup = function() {
+						if ($("#signupForm").valid()){
+					          // alert("Submitting...");
+					     }
 						$scope.formData.propCityId = $scope.formData.propCity.cityId
 						$scope.formData.propCity = $scope.formData.propCity.cityName;
 						$http(
@@ -297,15 +263,17 @@ scotchApp
 									}
 								}).success(function(data) {
 							console.log(data);
-
-							if (!data.jsonMap.success) {
-								// if not successful, bind errors to error variables
-								$scope.errorName = data.jsonMap.errorName;
-								$scope.messages = "";
-							} else {
-								// if successful, bind success message to message
-								$scope.messages = data.jsonMap.messages;
-								$scope.errorName = "";
+							if(data.jsonMap!= undefined)
+							{
+								if (!data.jsonMap.success) {
+									// if not successful, bind errors to error variables
+									$scope.errorName = data.jsonMap.errorName;
+									$scope.messages = "";
+								} else {
+									// if successful, bind success message to message
+									$scope.messages = data.jsonMap.messages;
+									$scope.errorName = "";
+								}
 							}
 						});
 
@@ -447,6 +415,9 @@ scotchApp
 					});
 					// function to process the form
 					$scope.processForm = function() {
+						if ($("#postRequirement").valid()){
+					          // alert("Submitting...");
+					       }
 						var fd = new FormData();
 						$scope.formData.propertyFeatureInfo.propertyMandateInfo.city = $scope.formData.propertyFeatureInfo.propertyMandateInfo.city.cityId;
 						fd.append('jsonData', angular.toJson($scope.formData));

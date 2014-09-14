@@ -1,17 +1,18 @@
+<script src="js/validation/validation_rules.js"></script> 
 <!-- Mandate Property Info starts -->
 <div class="row" ng-controller="requirementController">
 	<div class="col-sm-8 col-sm-offset-2">	  			
 		<div id="form-container">  
 			<div class="cBoxOut" ng-controller="CountryCntrl">
-			  	<form method="post" ng-submit="submitForm()" name="signupForm">
+			  	<form method="post" ng-submit="submitForm()" name="signupForm" id="postRequirement">
 					<h2>Post Requirement</h2>
 					<div class="cBox registrForm">
 						<ul>
 	        				<li class="all">* denotes mandatory fields</li>
 	        				<li>
 	          					<label>I want to <em>*</em> : </label>
-	          					<input type="radio" ng-model="formData.requirementInfo.purchaseType" value="1" >Sale 
-	           					<input type="radio" ng-model="formData.requirementInfo.purchaseType" value="2" >Rent Out
+	          					<input type="radio" ng-model="formData.requirementInfo.purchaseType" value="1" name="purchaseType">Sale 
+	           					<input type="radio" ng-model="formData.requirementInfo.purchaseType" value="2" name="purchaseType">Rent Out
 	        				</li>
 	        				<li>
 	          					<label>Property Type <em>*</em> :</label>
@@ -68,11 +69,12 @@
 	   						</li>
 	   						<li ng-controller="AreaUnits">
 	    						<label>Covered Area <em>*</em> : </label>
-	    						<input id="minCoveredArea" type="text" ng-model="formData.requirementInfo.minCoveredArea">
+	    						<input id="minCoveredArea" type="text" ng-model="formData.requirementInfo.minCoveredArea" name="minCoveredArea">
 	    						To
-	    						<input id="maxCoveredArea" type="text" ng-model="formData.requirementInfo.maxCoveredArea">
+	    						<input id="maxCoveredArea" type="text" ng-model="formData.requirementInfo.maxCoveredArea" name="maxCoveredArea">
 			    				<select id="selectCoveredArea" ng-model="formData.requirementInfo.coveredAreaUnit"
-			    					ng-options="areaUnit.value for areaUnit in areaUnits track by areaUnit.value">
+			    					ng-options="areaUnit.value for areaUnit in areaUnits track by areaUnit.value" name="coveredAreaUnit">
+			    					<option value=''></option>
 								</select>
 	   						</li>
 	   		
@@ -88,8 +90,8 @@
 	   						
 	   						<li>
 			   					<label>Best deal from Agent/Builder<em style="color:Red">*</em> :</label>
-			    				<input type="radio" ng-model="formData.requirementInfo.dealingType" value="true" >Yes 
-	           					<input type="radio" ng-model="formData.requirementInfo.dealingType" value="false" >No
+			    				<input type="radio" ng-model="formData.requirementInfo.dealingType" value="true" name="dealingType">Yes 
+	           					<input type="radio" ng-model="formData.requirementInfo.dealingType" value="false" name="dealingType">No
 			 				</li>
 			 				
 			 				<li ng-controller="BedBathNoList">
