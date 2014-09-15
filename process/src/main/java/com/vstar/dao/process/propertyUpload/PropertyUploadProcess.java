@@ -23,6 +23,7 @@ import com.vstar.process.masterData.model.LocalityModel;
 import com.vstar.process.masterData.model.PropertyTypeModel;
 import com.vstar.process.propertyDetailInfo.PropertyFeatureInfo;
 import com.vstar.process.propertyDetailInfo.PropertyMandateInfo;
+import com.vstar.process.propertyDetailInfo.RegistrationInfo;
 import com.vstar.process.propertyDetailInfo.RequirementInfo;
 import com.vstar.process.propertyDetailInfo.ResidentialPropInfo;
 
@@ -43,6 +44,32 @@ public class PropertyUploadProcess
   private PropRequirementDao propRequirementDao;
   private ReqPropTypeDaoProcess reqPropTypeDaoProcess;
   private PropRequirementDaoProcess propRequirementDaoProcess;
+  private RegistrationProcess registrationProcess;
+  
+  /**
+   * Saving user info with property
+   * @param propertyFeatureInfo
+   * @param registrationInfo
+   * @return
+   */
+  public boolean savePropertyWithUserDetails(PropertyFeatureInfo propertyFeatureInfo, RegistrationInfo registrationInfo)
+  {
+    boolean savedSuccess = savePropertyDetails(propertyFeatureInfo);
+    registrationProcess.saveUserWithExtension(registrationInfo);
+    return savedSuccess;
+  }
+  
+  
+  /**
+   * Saving user info with requirement
+   * @param requirementInfo
+   * @param registrationInfo
+   */
+  public void saveRequirementWithUserDetails(RequirementInfo requirementInfo, RegistrationInfo registrationInfo)
+  {
+    saveRequirementDetails(requirementInfo);
+    registrationProcess.saveUserWithExtension(registrationInfo);
+  }
   
   /**
    * Save Property Details
@@ -90,7 +117,6 @@ public class PropertyUploadProcess
    */
   public boolean saveRequirementDetails(RequirementInfo requirementInfo)
   {
-    propInfoDao = new PropInfoDao();
     try
     {
       propRequirementDao = new PropRequirementDao();
@@ -391,6 +417,16 @@ public class PropertyUploadProcess
   public void setPropRequirementDaoProcess(PropRequirementDaoProcess propRequirementDaoProcess)
   {
     this.propRequirementDaoProcess = propRequirementDaoProcess;
+  }
+
+  public RegistrationProcess getRegistrationProcess()
+  {
+    return registrationProcess;
+  }
+
+  public void setRegistrationProcess(RegistrationProcess registrationProcess)
+  {
+    this.registrationProcess = registrationProcess;
   }
 
 }

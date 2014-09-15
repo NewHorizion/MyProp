@@ -1,26 +1,22 @@
 	<div class="form-group has-feedback">
-		<input class="" type="radio" name="userType"
-			ng-model="formData.registrationInfo.userType" value="owner" checked="checked"/>&nbsp;Owner
-		&nbsp;&nbsp;&nbsp; <input class="" type="radio" name="userType"
-			ng-model="formData.registrationInfo.userType" value="agent" />&nbsp;Agent
-		&nbsp;&nbsp;&nbsp; <input class="" type="radio" name="userType"
-			ng-model="formData.registrationInfo.userType" value="builder" />&nbsp;Buider 
+		<input class="" type="radio" ng-model="formData.registrationInfo.userType" value="owner" checked="checked"/>&nbsp;Owner
+		<input class="" type="radio" ng-model="formData.registrationInfo.userType" value="agent" />&nbsp;Agent
+		<input class="" type="radio" ng-model="formData.registrationInfo.userType" value="builder" id="userType"/>&nbsp;Buider 
 	</div>
 
 	<div class="form-group has-feedback">
-		<input class="form-control input-lg" type="text" name="userName"
-			ng-model="formData.registrationInfo.userName" placeholder="Name"/>
+		<input class="form-control input-lg" type="text" 
+			ng-model="formData.registrationInfo.userName" placeholder="Name" id="displayName"/>
 	</div>
 
 	<div class="form-group has-feedback">
 		<input unique-email class="form-control input-lg" type="email"
-			name="emailId" ng-model="formData.registrationInfo.emailId" placeholder="Email"
-			 autofocus /> 
+			ng-model="formData.registrationInfo.emailId" placeholder="Email" autofocus id="email"/> 
 	</div>
 
 	<div class="form-group has-feedback">
 		<input password-strength class="form-control input-lg" type="password"
-			name="password" ng-model="formData.registrationInfo.password" placeholder="Password"/>
+			ng-model="formData.registrationInfo.password" placeholder="Password" id="password"/>
 	</div>
 
 	<div class="form-group has-feedback" 
@@ -28,16 +24,12 @@
 		<select class="form-control input-lg" placeholder="city"
 			ng-model="formData.registrationInfo.cityId"
 			ng-options="city.cityName group by city.stateName for city in locations" 
-			name="city">
+			id="city">
 			<option value=''></option>
 		</select> 
 	</div>
 
 	<div class="form-group has-feedback">
-		<input class="form-control input-lg" type="text" name="mobileNumber"
-			ng-model="formData.registrationInfo.mobileNumber" placeholder="Mobile No" maxlength="10"/>
+		<input class="form-control input-lg" type="text"
+			ng-model="formData.registrationInfo.mobileNumber" placeholder="Mobile No" id="mobileNo" maxlength="10"/>
 	</div>
-	<div class="form-group has-feedback">
-            <input class="form-control input-lg" type="text" name="landlineNumber" 
-            ng-model="formData.registrationInfo.landlineNumber" placeholder="Landline No" maxlength="10">
-     </div>
