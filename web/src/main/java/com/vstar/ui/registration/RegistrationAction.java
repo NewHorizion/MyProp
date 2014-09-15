@@ -7,25 +7,27 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.vstar.dao.PropUsersDao;
 import com.vstar.dao.process.PropUserDaoExtnProcess;
 import com.vstar.dao.process.PropUsersDaoProcess;
+import com.vstar.process.propertyDetailInfo.RegistrationInfo;
 
 @SuppressWarnings("serial")
 public class RegistrationAction extends ActionSupport {
 	private Map<String, Object> jsonMap = new LinkedHashMap<String, Object>();
-	private String userType;
+	/*private String userType;
 	private String displayName;
 	private String email;
 	private String password;
 	private long propCityId;
 	private String mobileNo;
-	private String landLineNo;
+	private String landLineNo;*/
+	private RegistrationInfo registrationInfo;
 	private PropUsersDaoProcess propUsersDaoProcess;
 	private PropUserDaoExtnProcess propUserDaoExtnProcess;
 
 	public String save() {
-		propUsersDaoProcess.createUser(email, password, true , userType);
+		propUsersDaoProcess.createUser(registrationInfo.getEmailId(), registrationInfo.getPassword(), true , registrationInfo.getUserType());
 		jsonMap.put("success", true);
-		jsonMap.put("messages", "Welcome " + displayName + "!!!!");
-		PropUsersDao userExtn = new PropUsersDao(email, userType, displayName, mobileNo, landLineNo, propCityId);
+		jsonMap.put("messages", "Welcome " + registrationInfo.getUserName() + "!!!!");
+		PropUsersDao userExtn = new PropUsersDao(registrationInfo.getEmailId(), registrationInfo.getUserType(), registrationInfo.getUserName(), registrationInfo.getMobileNumber(), registrationInfo.getLandlineNumber(), registrationInfo.getCityId());
 		propUserDaoExtnProcess.addUpdatePropUsersDaoExtn(userExtn);
 		return SUCCESS;
 	}
@@ -38,111 +40,7 @@ public class RegistrationAction extends ActionSupport {
 		this.jsonMap = jsonMap;
 	}
 
-	/**
-	 * @return the password
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * @param password
-	 *            the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	/**
-	 * @return the userType
-	 */
-	public String getUserType() {
-		return userType;
-	}
-
-	/**
-	 * @param userType
-	 *            the userType to set
-	 */
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
-
-	/**
-	 * @return the displayName
-	 */
-	public String getDisplayName() {
-		return displayName;
-	}
-
-	/**
-	 * @param displayName
-	 *            the displayName to set
-	 */
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
-	}
-
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @param email
-	 *            the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	/**
-	 * @return the propCityId
-	 */
-	public long getPropCityId() {
-		return propCityId;
-	}
-
-	/**
-	 * @param propCityId
-	 *            the propCityId to set
-	 */
-	public void setPropCityId(long propCityId) {
-		this.propCityId = propCityId;
-	}
-
-	/**
-	 * @return the mobileNo
-	 */
-	public String getMobileNo() {
-		return mobileNo;
-	}
-
-	/**
-	 * @param mobileNo
-	 *            the mobileNo to set
-	 */
-	public void setMobileNo(String mobileNo) {
-		this.mobileNo = mobileNo;
-	}
-
-	/**
-	 * @return the landLineNo
-	 */
-	public String getLandLineNo() {
-		return landLineNo;
-	}
-
-	/**
-	 * @param landLineNo
-	 *            the landLineNo to set
-	 */
-	public void setLandLineNo(String landLineNo) {
-		this.landLineNo = landLineNo;
-	}
-
+	
 	/**
 	 * @return the propUsersDaoProcess
 	 */
@@ -172,5 +70,14 @@ public class RegistrationAction extends ActionSupport {
 			PropUserDaoExtnProcess propUserDaoExtnProcess) {
 		this.propUserDaoExtnProcess = propUserDaoExtnProcess;
 	}
+
+	public RegistrationInfo getRegistrationInfo() {
+		return registrationInfo;
+	}
+
+	public void setRegistrationInfo(RegistrationInfo registrationInfo) {
+		this.registrationInfo = registrationInfo;
+	}
+	
 	
 }

@@ -251,13 +251,16 @@ scotchApp
 						if ($("#signupForm").valid()){
 					          // alert("Submitting...");
 					     }
-						$scope.formData.propCityId = $scope.formData.propCity.cityId
-						$scope.formData.propCity = $scope.formData.propCity.cityName;
+						
+						$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.cityId
+						$scope.formData.registrationInfo.cityName = $scope.formData.registrationInfo.cityName;
+						var fd = new FormData();
+						fd.append('jsonData', angular.toJson($scope.formData));
 						$http(
 								{
 									method : 'POST',
 									url : 'webservice/Registration.action',
-									data : $.param($scope.formData), // pass in data as strings
+									data : fd, // pass in data as strings
 									headers : {
 										'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8'
 									}

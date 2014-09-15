@@ -32,8 +32,8 @@
     
         // Specify the validation rules
         rules: {
-        	displayName: "required",
-        	email : {
+        	userName: "required",
+        	emailId : {
         		required:true,
         		email:true
         	},
@@ -42,12 +42,12 @@
                 minlength: 5
             },
             city : "required",
-            mobileNo : {
+            mobileNumber : {
                 required : true,
                 minlength:10,
                 number : true
             },
-            landLineNo: {
+            landlineNumber: {
                 required : true,
                 minlength:10,
                 number : true
@@ -57,8 +57,8 @@
         
         // Specify the validation error messages
         messages: {
-        	displayName: "Please enter your name.",
-        	email : {
+        	userName: "Please enter your name.",
+        	emailId : {
         		required : "Please enter your email id.",
         		email : "Please enter a valid email address."
         	},
@@ -67,12 +67,12 @@
                  minlength: "Your password must be at least 5 characters long."
              },
              city :  "Please select your city.",
-             mobileNo : {
+             mobileNumber : {
             	 required : "Please enter your mobile no.",
             	 minlength : "Please enter valid mobile no.",
             	 number : "Please enter valid mobile no."
              },
-             landLineNo: {
+             landlineNumber: {
             	 required : "Please enter your land line no.",
             	 minLenght : "Please enter valid land line no.",
             	 number : "Please enter valid land line no."
