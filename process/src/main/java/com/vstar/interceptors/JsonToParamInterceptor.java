@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
@@ -13,7 +15,7 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.opensymphony.xwork2.interceptor.NoParameters;
 
 public class JsonToParamInterceptor extends AbstractInterceptor {
-
+  protected Log logger = LogFactory.getLog(this.getClass());
 	protected Map<String, Object> retrieveParameters(ActionContext ac) {
 		return ac.getParameters();
 	}
@@ -61,6 +63,9 @@ public class JsonToParamInterceptor extends AbstractInterceptor {
 															.setParameter(name,
 																	value);
 												} catch (Exception e) {
+												  logger.info("Field "+ 
+                              json.getString(field
+                                  .getName()));
 													ac.getConversionErrors()
 															.put(jsonData[0],
 																	method.getReturnType()

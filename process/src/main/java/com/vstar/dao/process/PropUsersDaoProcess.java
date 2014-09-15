@@ -36,7 +36,7 @@ public class PropUsersDaoProcess
 						 accountNonExpired, 
 						 credentialsNonExpired, 
 						 accountNonLocked, 
-						 AuthorityUtils.createAuthorityList("ROLE_USER") );
+						 AuthorityUtils.createAuthorityList(userRole) );
  
 		if( this.saltSource != null )
 		{
@@ -53,7 +53,7 @@ public class PropUsersDaoProcess
                                     				 accountNonExpired, 
                                     				 credentialsNonExpired, 
                                     				 accountNonLocked, 
-                                    				 AuthorityUtils.createAuthorityList("ROLE_USER")  );
+                                    				 AuthorityUtils.createAuthorityList(userRole)  );
  
 		// if the user extists, delete it 
 		if( !userDetailsManager.userExists( userHashedPassword.getUsername() ) )

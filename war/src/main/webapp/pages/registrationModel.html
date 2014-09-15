@@ -22,8 +22,8 @@
 	<div class="form-group has-feedback" 
 		ng-controller="CountryCntrl">
 		<select class="form-control input-lg" placeholder="city"
-			ng-model="formData.registrationInfo.cityId"
-			ng-options="city.cityName group by city.stateName for city in locations" 
+			ng-model="formData.registrationInfo.city"
+			ng-options="city.cityName group by city.stateName for city in locations track by city.cityId" 
 			id="city">
 			<option value=''></option>
 		</select> 

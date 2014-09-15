@@ -189,9 +189,10 @@ scotchApp
 						});
 					});
 					// function to process the form
-					$scope.submitForm = function() {
+					$scope.processForm = function() {
 						var fd = new FormData();
 						$scope.formData.requirementInfo.city = $scope.formData.requirementInfo.city.cityId;
+						$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.city.cityId;
 						fd.append('jsonData', angular.toJson($scope.formData));
 
 						// remove comment to append a file to the request
