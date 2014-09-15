@@ -156,6 +156,7 @@ public class MasterDataConverter {
 					propertyTypeModel.setId(jaxbPropertyType.getId());
 					propertyTypeModel.setLabel(jaxbPropertyType.getType());
 					propertyTypeModel.setCategoryName(jaxbPropertyType.getCategoryName());
+					propertyTypeModel.setTicket(false);
 					propertyTypes.add(propertyTypeModel);
 				}
 				masterDataMap.put("propertyTypes", propertyTypes);

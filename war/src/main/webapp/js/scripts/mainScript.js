@@ -46,6 +46,23 @@ scotchApp
 				url : '/postProperty',
 				templateUrl : 'pages/postProperty.html'
 			})
+			
+			// url for reuqirement
+			.state('requirement', {
+				url : '/requirementForm',
+				templateUrl : 'pages/requirementForm.html',
+				controller : 'requirementController'
+			})
+			
+			.state('requirement.requirementDetails', {
+				url : '/requirementDetails',
+				templateUrl : 'pages/requirementDetail.html'
+			})
+			
+			.state('requirement.postRequirement', {
+				url : '/postRequirement',
+				templateUrl : 'pages/postRequirement.html'
+			})
 
 			// route for the home page
 			.state('home', {
@@ -94,11 +111,11 @@ scotchApp
 			})
 
 			// route for post requirement
-			.state('requirement', {
+			/*.state('requirement', {
 				url : '/requirement',
 				templateUrl : 'pages/postRequirement.html',
 				controller : 'requirementController'
-			})
+			})*/
 			// route for the registration page
 			.state('viewDetails', {
 				url : '/viewDetails',

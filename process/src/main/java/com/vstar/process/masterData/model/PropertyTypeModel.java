@@ -4,6 +4,7 @@ public class PropertyTypeModel {
 	private Integer id;
 	private String label;
 	private String categoryName;
+	private boolean ticket;
 
 	public Integer getId() {
 		return id;
@@ -29,6 +30,16 @@ public class PropertyTypeModel {
   public void setCategoryName(String categoryName)
   {
     this.categoryName = categoryName;
+  }
+
+  public boolean isTicket()
+  {
+    return ticket;
+  }
+
+  public void setTicket(boolean ticket)
+  {
+    this.ticket = ticket;
   }
 
 }

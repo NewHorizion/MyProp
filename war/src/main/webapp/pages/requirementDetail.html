@@ -1,0 +1,119 @@
+<script src="js/validation/validation_rules.js"></script> 
+<!-- Mandate Property Info starts -->		
+		<div id="form-container">  
+			<div class="cBoxOut" ng-controller="CountryCntrl">
+					<h2>Post Requirement</h2>
+					<div class="cBox registrForm">
+						<ul>
+	        				<li class="all">* denotes mandatory fields</li>
+	        				<li>
+	          					<label>I want to <em>*</em> : </label>
+	          					<input type="radio" ng-model="formData.requirementInfo.purchaseType" value="1" name="purchaseType">Sale 
+	           					<input type="radio" ng-model="formData.requirementInfo.purchaseType" value="2" name="purchaseType">Rent Out
+	        				</li>
+	        				<li>
+	          					<label>Property Type <em>*</em> :</label>
+								<div style="float:left;">
+						        	<div
+										multi-select 
+					    				input-model="propertyTypes"
+					    				button-label="label"         
+					    				item-label="label" 
+					    				tick-property="ticked" 
+					    				helper-elements="filter reset"
+					    				max-labels="1"
+					    				max-Height = "200px;"
+					    				default-label="--Select--"
+					    				on-item-click="itemSelect( data )"
+					    				output-model="formData.requirementInfo.propertyTypes">
+									</div> 
+								</div>
+	        				</li>
+	        				<br/><br/><br/>
+	        				<li>
+	          					<h5>Property Location </h5>
+					        </li>  
+	        				<li>
+	        					<label>City <em>*</em>:</label>
+								<city-ctrl city-model-name="formData.requirementInfo.city"
+									locations="locations"></city-ctrl>
+							</li>
+							<li>
+								<label>Location <em>*</em>:</label>
+								<!-- <select id="localities" placeholder="Locality"
+									ng-model="formData.propertyFeatureInfo.propertyMandateInfo.locality"
+									ng-options="locality.localityId as locality.localityName group by locality.cityName for locality in formData.propertyFeatureInfo.propertyMandateInfo.city.localities">
+									<option value=''>Select</option>
+								</select> -->
+								<div style="float:left;">
+									<div 
+	    								multi-select 
+	    								input-model="formData.requirementInfo.city.localities"
+	    								button-label="label"         
+	    								item-label="label" 
+	    								tick-property="ticked" 
+	    								helper-elements="filter reset"
+	    								max-labels="1"
+	    								max-Height = "200px;"
+	    								default-label="Select"
+	    								output-model="formData.requirementInfo.locations">
+	    							</div>
+    							</div>
+	        				</li>
+	        				<br/><br/><br/>
+	        				<li>
+	    						<h5>Property Area Info </h5>
+	   						</li>
+	   						<li ng-controller="AreaUnits">
+	    						<label>Covered Area <em>*</em> : </label>
+	    						<input id="minCoveredArea" type="text" ng-model="formData.requirementInfo.minCoveredArea" name="minCoveredArea">
+	    						To
+	    						<input id="maxCoveredArea" type="text" ng-model="formData.requirementInfo.maxCoveredArea" name="maxCoveredArea">
+			    				<select id="selectCoveredArea" ng-model="formData.requirementInfo.coveredAreaUnit"
+			    					ng-options="areaUnit.value for areaUnit in areaUnits track by areaUnit.value" name="coveredAreaUnit">
+			    					<option value=''></option>
+								</select>
+	   						</li>
+	   		
+	   						<li>
+	    						<h5>Property Price</h5>
+	    					</li>
+	    					<li>
+	    						<label>Expected Price <em>*</em> : </label>
+		     					<rent-budget-ctrl rent-model-name="formData.requirementInfo.minBudget" rent-budgets="rentBudgets"></rent-budget-ctrl>
+		     					To
+		     					<rent-budget-ctrl rent-model-name="formData.requirementInfo.maxBudget" rent-budgets="rentBudgets"></rent-budget-ctrl>          
+	   						</li>
+	   						
+	   						<li>
+			   					<label>Best deal from Agent/Builder<em style="color:Red">*</em> :</label>
+			    				<input type="radio" ng-model="formData.requirementInfo.dealingType" value="true" name="dealingType">Yes 
+	           					<input type="radio" ng-model="formData.requirementInfo.dealingType" value="false" name="dealingType">No
+			 				</li>
+			 				
+			 				<li ng-controller="BedBathNoList">
+								<label>No. of Bedrooms<em>*</em> :</label>
+								<bedroom-no-ctrl bed-model-name="formData.requirementInfo.minBedrooms" room-nos="roomNos"></bedroom-no-ctrl>
+								To
+								<bedroom-no-ctrl bed-model-name="formData.requirementInfo.maxBedrooms" room-nos="roomNos"></bedroom-no-ctrl>
+								<!-- <div style="float:left;">
+									<div 
+	    								multi-select 
+	    								input-model="roomNos"
+	    								button-label="label"         
+	    								item-label="label" 
+	    								tick-property="ticked" 
+	    								helper-elements="filter reset"
+	    								max-labels="1"
+	    								max-Height = "200px;"
+	    								default-label="--Select--"
+	    								output-model="formData.dealingType.bedrooms">
+	    							</div>
+    							</div> -->
+							</li>
+							<br/><br/><br/>
+						</ul>
+					</div>
+ 		</div>
+ </div>
+<!-- Mandate Property Info Ends-->
