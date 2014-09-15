@@ -27,5 +27,7 @@
     <mapping class="com.vstar.dao.PropLocationInfoDao"/>
     <mapping class="com.vstar.dao.ReqPropTypeDao"/>
     <mapping class="com.vstar.dao.PropRequirementDao"/>
+    <mapping class="com.vstar.dao.PropOwnerDao"/>
+    <mapping class="com.vstar.dao.RequirementOwnerDao"/>
   </session-factory>
 </hibernate-configuration>
