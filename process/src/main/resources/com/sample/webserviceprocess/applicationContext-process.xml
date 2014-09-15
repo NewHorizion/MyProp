@@ -106,6 +106,16 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	
+	<bean id="propOwnerDaoProcess"
+		class="com.vstar.dao.process.PropOwnerDaoProcess">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="requirementOwnerDaoProcess"
+		class="com.vstar.dao.process.RequirementOwnerDaoProcess">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
 	<bean id="registrationProcess"
 		class="com.vstar.dao.process.propertyUpload.RegistrationProcess">
 		<property name="propUserDaoExtnProcess" ref="propUserDaoExtnProcess" />

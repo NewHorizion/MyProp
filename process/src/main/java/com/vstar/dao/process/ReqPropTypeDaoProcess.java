@@ -8,7 +8,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.vstar.dao.PropRequirementDao;
 import com.vstar.dao.ReqPropTypeDao;
 
 /**

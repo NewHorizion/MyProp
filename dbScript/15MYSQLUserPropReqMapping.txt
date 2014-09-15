@@ -1,0 +1,24 @@
+/*Mapping owner with property*/
+
+CREATE TABLE prop_owner
+(
+  prop_owner_id int(11) not null,
+  prop_info_id int(11) not null,
+  username varchar(50) not null,
+  primary key (`prop_owner_id`),
+  CONSTRAINT `prop_owner_ibfk_1` FOREIGN KEY (`prop_info_Id`) REFERENCES `prop_info` (`prop_info_Id`),
+  CONSTRAINT `prop_owner_ibfk_2` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
+)
+
+
+/*Mapping owner with requirement*/
+
+CREATE TABLE requirement_owner
+(
+  requirement_owner_id int(11) not null,
+  prop_requirement_id int(11) not null,
+  username varchar(50) not null,
+  primary key (`requirement_owner_id`),
+  CONSTRAINT `requirement_owner_ibfk_1` FOREIGN KEY (`prop_requirement_id`) REFERENCES `prop_requirement` (`prop_requirement_id`),
+  CONSTRAINT `requirement_owner_ibfk_2` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
+)
