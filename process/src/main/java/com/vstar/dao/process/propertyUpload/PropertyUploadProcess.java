@@ -4,20 +4,24 @@ import com.vstar.dao.PropAreaDao;
 import com.vstar.dao.PropFeaturesDao;
 import com.vstar.dao.PropInfoDao;
 import com.vstar.dao.PropLocationInfoDao;
+import com.vstar.dao.PropOwnerDao;
 import com.vstar.dao.PropPriceDao;
 import com.vstar.dao.PropRequirementDao;
 import com.vstar.dao.PropTermsCondDao;
 import com.vstar.dao.PropTransactionDao;
 import com.vstar.dao.ReqPropTypeDao;
+import com.vstar.dao.RequirementOwnerDao;
 import com.vstar.dao.process.PropAreaDaoProcess;
 import com.vstar.dao.process.PropFeaturesDaoProcess;
 import com.vstar.dao.process.PropInfoDaoProcess;
 import com.vstar.dao.process.PropLocationInfoDaoProcess;
+import com.vstar.dao.process.PropOwnerDaoProcess;
 import com.vstar.dao.process.PropPriceDaoProcess;
 import com.vstar.dao.process.PropRequirementDaoProcess;
 import com.vstar.dao.process.PropTermsCondDaoProcess;
 import com.vstar.dao.process.PropTransactionDaoProcess;
 import com.vstar.dao.process.ReqPropTypeDaoProcess;
+import com.vstar.dao.process.RequirementOwnerDaoProcess;
 import com.vstar.exception.GenericProcessException;
 import com.vstar.process.masterData.model.LocalityModel;
 import com.vstar.process.masterData.model.PropertyTypeModel;
@@ -45,6 +49,8 @@ public class PropertyUploadProcess
   private ReqPropTypeDaoProcess reqPropTypeDaoProcess;
   private PropRequirementDaoProcess propRequirementDaoProcess;
   private RegistrationProcess registrationProcess;
+  private PropOwnerDaoProcess propOwnerDaoProcess;
+  private RequirementOwnerDaoProcess requirementOwnerDaoProcess;
   
   /**
    * Saving user info with property
@@ -56,6 +62,10 @@ public class PropertyUploadProcess
   {
     boolean savedSuccess = savePropertyDetails(propertyFeatureInfo);
     registrationProcess.saveUserWithExtension(registrationInfo);
+    PropOwnerDao propOwnerDao = new PropOwnerDao();
+    propOwnerDao.setPropInfoDao(propInfoDao);
+    propOwnerDao.setUserName(registrationInfo.getEmailId());
+    propOwnerDaoProcess.addUpdatePropOwnerDao(propOwnerDao);
     return savedSuccess;
   }
   
@@ -69,6 +79,11 @@ public class PropertyUploadProcess
   {
     saveRequirementDetails(requirementInfo);
     registrationProcess.saveUserWithExtension(registrationInfo);
+    RequirementOwnerDao requirementOwnerDao = new RequirementOwnerDao();
+    requirementOwnerDao.setPropRequirementDao(propRequirementDao);
+    requirementOwnerDao.setUserName(registrationInfo.getEmailId());
+    requirementOwnerDaoProcess.addUpdateRequirementOwnerDao(requirementOwnerDao);
+    
   }
   
   /**
@@ -427,6 +442,30 @@ public class PropertyUploadProcess
   public void setRegistrationProcess(RegistrationProcess registrationProcess)
   {
     this.registrationProcess = registrationProcess;
+  }
+
+
+  public PropOwnerDaoProcess getPropOwnerDaoProcess()
+  {
+    return propOwnerDaoProcess;
+  }
+
+
+  public void setPropOwnerDaoProcess(PropOwnerDaoProcess propOwnerDaoProcess)
+  {
+    this.propOwnerDaoProcess = propOwnerDaoProcess;
+  }
+
+
+  public RequirementOwnerDaoProcess getRequirementOwnerDaoProcess()
+  {
+    return requirementOwnerDaoProcess;
+  }
+
+
+  public void setRequirementOwnerDaoProcess(RequirementOwnerDaoProcess requirementOwnerDaoProcess)
+  {
+    this.requirementOwnerDaoProcess = requirementOwnerDaoProcess;
   }
 
 }

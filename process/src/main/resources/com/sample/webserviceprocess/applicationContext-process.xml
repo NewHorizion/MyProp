@@ -134,6 +134,8 @@
 		<property name="reqPropTypeDaoProcess" ref="reqPropTypeDaoProcess" />
 		<property name="propRequirementDaoProcess" ref="propRequirementDaoProcess" />
 		<property name="registrationProcess" ref="registrationProcess" />
+		<property name="propOwnerDaoProcess" ref="propOwnerDaoProcess" />
+		<property name="requirementOwnerDaoProcess" ref="requirementOwnerDaoProcess" />
 	</bean>
 	
 </beans>
