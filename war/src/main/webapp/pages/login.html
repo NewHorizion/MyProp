@@ -15,16 +15,8 @@
 </div>
 <!-- FORM -->
 <form id="loginForm" ng-submit="processForm()">
-<!-- NAME -->
-<div id="name-group" class="form-group" ng-class="{ 'has-error' : errorName }">
-<label>User Name</label>
-<input type="text" name="userName" class="form-control" placeholder="username" ng-model="formData.username">
-</div>
 
-<div id="superhero-group" class="form-group" ng-class="{ 'has-error' : errorName }">
-<label>Password</label>
-<input type="password" name="password" class="form-control" placeholder="password" ng-model="formData.password">
-</div>
+<ng-include src="'pages/loginModel.html'"> </ng-include>
 
 <!-- SUBMIT BUTTON -->
 <button type="submit" class="btn btn-success btn-lg btn-block">

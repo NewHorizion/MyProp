@@ -1,6 +1,14 @@
-<div class="text-center">
-    <span class="glyphicon glyphicon-heart"></span>
-    <h3>Thanks For Your Money!</h3>
-    <ng-include src="'pages/registrationModel.html'"> </ng-include>
+<div class="text-center cBoxOut">
+    <h3>Select Your Profile!</h3>
+    <div>
+    	<h6><input type="radio" name="newUser" ng-model="formData.registrationInfo.newUser" value="true" >New User 
+        <input type="radio" name="newUser" ng-model="formData.registrationInfo.newUser" value="false" >Existing User</h6>
+    </div>
+    <div ng-show="formData.registrationInfo.newUser == 'true'">
+    	<ng-include src="'pages/registrationModel.html'"> </ng-include>
+    </div>
+    <div ng-show="formData.registrationInfo.newUser == 'false'">
+    	<ng-include src="'pages/loginModel.html'"></ng-include>
+    </div>
     <button type="submit" class="btn btn-danger">Submit</button>
 </div>

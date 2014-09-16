@@ -13,6 +13,7 @@ public class RegistrationInfo
   private String password;
   private String emailId;
   private String landlineNumber;
+  private boolean newUser;
 
   public String getUserType()
   {
@@ -83,5 +84,13 @@ public class RegistrationInfo
   {
     this.landlineNumber = landlineNumber;
   }
+
+public boolean isNewUser() {
+	return newUser;
+}
+
+public void setNewUser(boolean newUser) {
+	this.newUser = newUser;
+}
 
 }
