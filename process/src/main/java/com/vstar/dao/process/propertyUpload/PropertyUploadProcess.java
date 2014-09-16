@@ -254,11 +254,11 @@ public class PropertyUploadProcess
     try
     {
       propFeaturesDao.setBedRooms(Integer
-        .parseInt(residentialPropInfo.getNoOfBedRooms().getValue()));
+        .parseInt(residentialPropInfo.getNoOfBedRooms().getLabel()));
       propFeaturesDao.setBathRooms(Integer.parseInt(residentialPropInfo.getNoOfBathRooms()
-        .getValue()));
+        .getLabel()));
       propFeaturesDao.setBalconies(Integer.parseInt(residentialPropInfo.getNoOfBalonies()
-        .getValue()));
+        .getLabel()));
       propFeaturesDao.setFurnished(residentialPropInfo.getFurnishedStatus().getValue());
       propFeaturesDao.setAvailFloor(Integer.parseInt(residentialPropInfo.getFloorNumber()
         .getValue()));
