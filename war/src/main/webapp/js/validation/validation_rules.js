@@ -103,7 +103,24 @@
         	coveredAreaUnit : "required",
         	rentBudget : "required",
         	dealingType : "required",
-        	bedModelName : "required"
+        	bedModelName : "required",
+        	userName: "required",
+        	emailId : {
+        		required:true,
+        		email:true
+        	},
+        	password: {
+                required: true,
+                minlength: 5
+            },
+            city : "required",
+            mobileNumber : {
+                required : true,
+                minlength:10,
+                number : true
+            },
+            userType : "required"
+        		
         },
         
         // Specify the validation error messages
@@ -121,7 +138,23 @@
         	coveredAreaUnit : "Please select covered area unit.",
         	rentBudget : "Please select expected price.",
         	dealingType : "Please select dealing type.",
-        	bedModelName : "Please select no of rooms."
+        	bedModelName : "Please select no of rooms.",
+        	userName: "Please enter your name.",
+        	emailId : {
+        		required : "Please enter your email id.",
+        		email : "Please enter a valid email address."
+        	},
+        	 password: {
+                 required: "Please provide a password.",
+                 minlength: "Your password must be at least 5 characters long."
+             },
+             city :  "Please select your city.",
+             mobileNumber : {
+            	 required : "Please enter your mobile no.",
+            	 minlength : "Please enter valid mobile no.",
+            	 number : "Please enter valid mobile no."
+             },
+             userType : "Please select user type."
         },
         
         submitHandler: function (form) {
