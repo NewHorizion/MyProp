@@ -16,9 +16,9 @@
         
         // Specify the validation error messages
         messages: {
-        	userName: "Please enter user name",
+        	userName: "Please enter user name.",
             password: {
-                required: "Please enter your password",
+                required: "Please enter your password.",
                 minlength: "Your password must be at least 5 characters long"
             }
         },
@@ -48,7 +48,6 @@
                 number : true
             },
             landlineNumber: {
-                required : true,
                 minlength:10,
                 number : true
             },
@@ -73,8 +72,7 @@
             	 number : "Please enter valid mobile no."
              },
              landlineNumber: {
-            	 required : "Please enter your land line no.",
-            	 minLenght : "Please enter valid land line no.",
+            	 minlength : "Please enter valid land line no.",
             	 number : "Please enter valid land line no."
              },
              userType : "Please select user type."
