@@ -436,11 +436,12 @@ scotchApp
 					});
 					// function to process the form
 					$scope.processForm = function() {
-						if ($("#postRequirement").valid()){
+						//if ($("#postRequirement").valid()){
 					          // alert("Submitting...");
-					       }
+					      // }
 						var fd = new FormData();
 						$scope.formData.propertyFeatureInfo.propertyMandateInfo.city = $scope.formData.propertyFeatureInfo.propertyMandateInfo.city.cityId;
+						$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.city.cityId;
 						fd.append('jsonData', angular.toJson($scope.formData));
 
 						//remove comment to append a file to the request

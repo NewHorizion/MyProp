@@ -1,0 +1,2 @@
+alter table prop_transaction
+modify possession_status varchar(30) 
