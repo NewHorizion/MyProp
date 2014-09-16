@@ -229,14 +229,17 @@ scotchApp
 						 if ($("#loginForm").valid()){
 					          // alert("Submitting...");
 					       }
+						 var fd = new FormData(); 
+						 fd.append('jsonData', angular.toJson($scope.formData));
 						$http(
 								{
 									method : 'POST',
 									url : 'webservice/Login.action',
-									data : $.param($scope.formData), // pass in data as strings
 									headers : {
-										'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8'
-									}
+										'Content-Type' : undefined
+									},
+									transformRequest : angular.identity,
+									data : fd
 								}).success(function(data) {
 							console.log(data);
 							if(data.jsonMap!= undefined)
@@ -266,22 +269,23 @@ scotchApp
 
 					// process the form
 					$scope.signup = function() {
-						if ($("#signupForm").valid()){
+						/*if ($("#signupForm").valid()){
 					          // alert("Submitting...");
-					     }
+					     }*/
 						
-						$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.cityId
-						$scope.formData.registrationInfo.cityName = $scope.formData.registrationInfo.cityName;
+						$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.city.cityId
+						$scope.formData.registrationInfo.cityName = $scope.formData.registrationInfo.city.cityName;
 						var fd = new FormData();
 						fd.append('jsonData', angular.toJson($scope.formData));
 						$http(
 								{
 									method : 'POST',
 									url : 'webservice/Registration.action',
-									data : fd, // pass in data as strings
 									headers : {
-										'Content-Type' : 'application/x-www-form-urlencoded;charset=utf-8'
-									}
+										'Content-Type' : undefined
+									},
+									transformRequest : angular.identity,
+									data : fd
 								}).success(function(data) {
 							console.log(data);
 							if(data.jsonMap!= undefined)

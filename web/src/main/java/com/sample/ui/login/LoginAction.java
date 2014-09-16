@@ -15,30 +15,30 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.vstar.process.propertyDetailInfo.RegistrationInfo;
 
 public class LoginAction extends ActionSupport {
 
 	AuthenticationManager authenticationManager;
-	private String username;
-	private String password;
 	private Map<String, Object> jsonMap = new LinkedHashMap<String, Object>();
 	private ApplicationEventPublisher eventPublisher;
+	private RegistrationInfo registrationInfo;
 
 	private SessionAuthenticationStrategy sas;
 
 	public String login () 
  {
 
-		if (null != username && null != password) {
+		if (null != registrationInfo.getUserName() && null != registrationInfo.getPassword()) {
 			try {
 				Authentication authentication = authenticationManager
 						.authenticate(new UsernamePasswordAuthenticationToken(
-								username, password));
+								registrationInfo.getUserName(), registrationInfo.getPassword()));
 				SecurityContextHolder.getContext().setAuthentication(
 						authentication);
 				if (authentication.isAuthenticated()) {
 					jsonMap.put("success", true);
-					jsonMap.put("messages", "Welcome " + username + "!!!!");
+					jsonMap.put("messages", "Welcome " + registrationInfo.getUserName() + "!!!!");
 				}
 			    // Fire auth event
 			    if (this.eventPublisher != null)
@@ -72,22 +72,6 @@ public class LoginAction extends ActionSupport {
 		this.authenticationManager = authenticationManager;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public Map<String, Object> getJsonMap() {
 		return jsonMap;
 	}
@@ -110,6 +94,14 @@ public class LoginAction extends ActionSupport {
 
 	public void setSas(SessionAuthenticationStrategy sas) {
 		this.sas = sas;
+	}
+
+	public RegistrationInfo getRegistrationInfo() {
+		return registrationInfo;
+	}
+
+	public void setRegistrationInfo(RegistrationInfo registrationInfo) {
+		this.registrationInfo = registrationInfo;
 	}
 
 }
