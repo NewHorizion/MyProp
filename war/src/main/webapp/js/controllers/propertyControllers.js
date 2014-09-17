@@ -9,15 +9,15 @@ propertyControllers.controller('propertyController', ['$scope', '$rootScope', 'p
         $scope.findImages = function () { 
         	 var getCustomer = new Object();
              getCustomer.id = 12;
-        	propertyService.findPropertyImages(getCustomer,$scope.importCustomersCompleted, $scope.importCustomersError);
+        	propertyService.findPropertyImages(getCustomer,$scope.findImagesCompleted, $scope.findImagesError);
         }
 
-        $scope.importCustomersCompleted = function (response) {
+        $scope.findImagesCompleted = function (response) {
         	$scope.slides = response.images;
         	$scope.myInterval = -2;
         }
 
-        $scope.importCustomersError = function (response) {
+        $scope.findImagesError = function (response) {
             alertsService.RenderErrorMessage(response.ReturnMessage);
         }
 
