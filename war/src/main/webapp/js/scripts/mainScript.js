@@ -2,7 +2,7 @@
 var scotchApp = angular.module('scotchApp',
 		[ 'multi-select', 'fileAppDir', 'ngAnimate', 'ui.router', 'flow',
 				'checklist-model', 'ng.httpLoader', 'PropertySearchServices',
-				'ajaxService', 'PropertyServices', 'blockUI','alertsService','ui.bootstrap']);
+				'ajaxService', 'PropertyServices', 'blockUI','alertsService','ui.bootstrap','propertyControllers']);
 scotchApp.config(function(blockUIConfigProvider) {
 
 	// Change the default overlay message
@@ -413,6 +413,20 @@ scotchApp.controller('latestSearchCntrl', function($scope, propertyService,alert
 		propertyService.findLatest($scope.getLatestPropCompleted,
 				$scope.getLatestPropError);
 	}
+	$scope.openModal = function () {
+
+	    var modalInstance = $modal.open({
+	        templateUrl: 'pages/gallery.html',
+	        controller: 'propertyController',
+	        windowClass: 'app-modal-window-Gallery'
+	    });
+
+	    modalInstance.result.then(function (productID) {
+
+	    }, function () {
+	        // function executed on modal dismissal
+	    });
+	};
 	$scope.getLatestPropCompleted = function(response) {
 		$scope.latestProperties = response.latestProperties;
 	}
@@ -602,7 +616,7 @@ scotchApp
 scotchApp.controller('TabsCtrl', [ '$scope', function($scope) {
 	$scope.tabs = [ {
 		title : 'Rent',
-		url : 'pages/homePageContent.html'
+		url : 'pages/propertyListing.html'
 	}, {
 		title : 'Buy',
 		url : 'pages/ajax.html'

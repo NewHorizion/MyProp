@@ -38,6 +38,11 @@ public class PropertySearchServiceImpl implements PropertySearchService {
 	public String getLatestProperties() {
 		return propertySearchProcess.findLatestProperties();
 	}
+	
+	@Override
+	public String getPropertyImages(long propertyId) {
+		return propertySearchProcess.findPropertyImages(propertyId);
+	}
 
 	@Override
 	public String getRentedProperties() {

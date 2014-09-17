@@ -1,0 +1,18 @@
+    <div class="carousel-container" data-ng-app="scotchApp" data-ng-controller="propertyController" ng-init="findImages()">
+    
+      <div id="carousel">
+        <div class="carousel-feature" ng-repeat="slide in slides">
+          <img class="carousel-image" alt="Image Caption" ng-src="{{slide.path}}">
+          <div class="carousel-caption">
+            <p>
+              This area is typically used to display captions associated with the images. They are set to hide and fade in on rotation.
+            </p>
+          </div>
+        </div>
+    
+      </div>
+    
+      <div id="carousel-left"><img src="images/arrow-left.png" /></div>
+      <div id="carousel-right"><img src="images/arrow-right.png" /></div>
+    </div>
+  

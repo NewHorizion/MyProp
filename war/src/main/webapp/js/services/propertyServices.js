@@ -24,5 +24,9 @@ PropertySearchServices.service('propertyService', ['ajaxService', function prope
   self.propertiesAvailableForSell = function(successFunction, errorFunction) {
 	  ajaxService.AjaxGet("openService/search/latest", successFunction, errorFunction);
   }
+  
+  self.findPropertyImages = function(propertyId,successFunction, errorFunction) {
+	  ajaxService.AjaxGetWithData(propertyId,"openService/search/listImages", successFunction, errorFunction);
+  }
 
 }]);

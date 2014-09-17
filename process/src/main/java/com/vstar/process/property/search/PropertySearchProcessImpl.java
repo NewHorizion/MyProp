@@ -8,6 +8,7 @@ import java.util.Properties;
 
 import com.google.gson.Gson;
 import com.vstar.dao.process.PropertiesConstants;
+import com.vstar.process.masterData.model.ImageGalleryModel;
 import com.vstar.process.masterData.model.PropertyDetailsModel;
 
 public class PropertySearchProcessImpl implements PropertySearchProcess {
@@ -101,6 +102,43 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
 		String json = gson.toJson(mapRecentProperties);
 		return json;
 	}
+	
+
+	@Override
+	public String findPropertyImages(long id) {
+		Map<String, Object> mapRecentProperties = new LinkedHashMap<String, Object>();
+		final String APPLICATION_CONTEXT_PATH = mergedProperties
+				.getProperty(PropertiesConstants.APPLICATION_CONTEXR_PATH);
+		final String OUTSIDE_WAR_IMAGES_PATH = mergedProperties
+				.getProperty(PropertiesConstants.OUTSIDE_WAR_IMAGES_PATH);
+		List<ImageGalleryModel> images = new ArrayList<ImageGalleryModel>();
+		ImageGalleryModel image1  = new ImageGalleryModel();
+		image1.setImageId(1);
+		image1.setTitle("First");
+		image1.setSummary("summary1");
+		image1.setPath(APPLICATION_CONTEXT_PATH
+				+ OUTSIDE_WAR_IMAGES_PATH + "/1.jpg");
+		images.add(image1);
+		ImageGalleryModel image2  = new ImageGalleryModel(); 
+		image2.setImageId(2);
+		image2.setTitle("Second");
+		image2.setSummary("summary2");
+		image2.setPath(APPLICATION_CONTEXT_PATH
+				+ OUTSIDE_WAR_IMAGES_PATH + "/3.jpg");
+		images.add(image2);
+		ImageGalleryModel image3  = new ImageGalleryModel(); 
+		image3.setImageId(1);
+		image3.setTitle("third");
+		image3.setSummary("summary3");
+		image3.setPath(APPLICATION_CONTEXT_PATH
+				+ OUTSIDE_WAR_IMAGES_PATH + "/2.jpg");
+		images.add(image3);
+		mapRecentProperties.put("images", images);
+		Gson gson = new Gson();
+		String json  = gson.toJson(mapRecentProperties);
+		return json;
+		
+	}
 
 	/**
 	 * @return
@@ -115,5 +153,6 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
 	public void setMergedProperties(Properties mergedProperties) {
 		this.mergedProperties = mergedProperties;
 	}
+
 
 }

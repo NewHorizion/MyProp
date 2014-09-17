@@ -1,0 +1,36 @@
+
+<div id="wrapper">
+	<section id="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="clearfix"></div>
+					<div class="row">
+						<section ng-controller="latestSearchCntrl" ng-init="initializeController()">
+							<ul id="">
+
+								<li ng-repeat="property in latestProperties" class="col-lg-6 design">
+									<div class="listinfo">
+									<a
+									title="Portfolio name" class="anchorCursor" ng-click="openModal()"> 
+										<img ng-src="{{property.propertyImagePath}}" alt=""
+											class="listingimage" />
+									</a>
+										<h3>{{property.propertyTitle}}</h3>
+										<p>Project : {{ property.projectName }}</p>
+										<span class="price">{{property.rateSqft}}</span> <span
+											class="media"> <img src="images/icon_img.jpg" alt=""
+											width="19" height="15" onclick= "openModal()" /> 12 Images <img
+											src="images/videos_icon.jpg" alt="" width="21" height="18" /></span>
+										1 Video
+									</div>
+								</li>
+							</ul>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
