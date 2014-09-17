@@ -2,7 +2,8 @@
 var scotchApp = angular.module('scotchApp',
 		[ 'multi-select', 'fileAppDir', 'ngAnimate', 'ui.router', 'flow',
 				'checklist-model', 'ng.httpLoader', 'PropertySearchServices',
-				'ajaxService', 'PropertyServices', 'blockUI','alertsService','ui.bootstrap','propertyControllers']);
+				'ajaxService', 'PropertyServices', 'blockUI','alertsService','ui.bootstrap','propertyControllers',
+				'LoginServices']);
 scotchApp.config(function(blockUIConfigProvider) {
 
 	// Change the default overlay message
@@ -201,62 +202,38 @@ scotchApp
 						});
 						fd.append("files", oBlob, $scope.files);
 
-						$http({
-							method : 'POST',
-							url : "webservice/UploadRequirementAction.action",
-							headers : {
-								'Content-Type' : undefined
-							},
-							transformRequest : angular.identity,
-							data : fd
-						})
-
-						.success(function(data, status, headers, config) {
-							alert("success!");
-						}).error(function(data, status, headers, config) {
-							alert("failed!");
-						});
+						$scope.initializeController = function() {
+							propertyService.postProperty($scope.formData, $scope.getPostSuccess,
+								$scope.getPostError);
+						}
+						$scope.getPostSuccess = function(response) {
+							
+						}
+						$scope.getPostError = function(response) {
+						    alertsService.RenderErrorMessage("error in reqiuest");
+						}
 					};
 				});
 
 scotchApp
 		.controller(
 				'loginController',
-				function($scope, $http) {
+				function($scope, $http, loginService) {
 					$scope.formData = {};
 					// process the form
 					$scope.processForm = function() {
 						 if ($("#loginForm").valid()){
 					          // alert("Submitting...");
 					       }
-						 var fd = new FormData(); 
-						 fd.append('jsonData', angular.toJson($scope.formData));
-						$http(
-								{
-									method : 'POST',
-									url : 'webservice/Login.action',
-									headers : {
-										'Content-Type' : undefined
-									},
-									transformRequest : angular.identity,
-									data : fd
-								}).success(function(data) {
-							console.log(data);
-							if(data.jsonMap!= undefined)
-							{
-								if (!data.jsonMap.success) {
-									// if not successful, bind errors to error
-									// variables
-									$scope.errorName = data.jsonMap.errorName;
-									$scope.messages = "";
-								} else {
-									// if successful, bind success message to
-									// message
-									$scope.messages = data.jsonMap.messages;
-									$scope.errorName = "";
-								}
-							}
-						});
+						 loginService.login($scope.formData, $scope.getSuccessLogin,
+									$scope.getErrorLogin);
+						
+						 $scope.getSuccessLogin = function(response) {
+							
+						 }
+						 $scope.getErrorLogin = function(response) {
+						    alertsService.RenderErrorMessage("error in reqiuest");
+						 }
 
 					};
 				});
@@ -275,32 +252,15 @@ scotchApp
 						
 						$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.city.cityId
 						$scope.formData.registrationInfo.cityName = $scope.formData.registrationInfo.city.cityName;
-						var fd = new FormData();
-						fd.append('jsonData', angular.toJson($scope.formData));
-						$http(
-								{
-									method : 'POST',
-									url : 'webservice/Registration.action',
-									headers : {
-										'Content-Type' : undefined
-									},
-									transformRequest : angular.identity,
-									data : fd
-								}).success(function(data) {
-							console.log(data);
-							if(data.jsonMap!= undefined)
-							{
-								if (!data.jsonMap.success) {
-									// if not successful, bind errors to error variables
-									$scope.errorName = data.jsonMap.errorName;
-									$scope.messages = "";
-								} else {
-									// if successful, bind success message to message
-									$scope.messages = data.jsonMap.messages;
-									$scope.errorName = "";
-								}
-							}
-						});
+						loginService.registration($scope.formData, $scope.getSuccessRegister,
+								$scope.getErrorRegister);
+					
+						$scope.getSuccessRegister = function(response) {
+							
+						}
+						$scope.getErrorRegister = function(response) {
+							alertsService.RenderErrorMessage("error in reqiuest");
+						}
 
 					};
 				});
@@ -439,7 +399,7 @@ scotchApp.controller('latestSearchCntrl', function($scope, propertyService,alert
 scotchApp
 		.controller(
 				'postPropertyController',
-				function($scope, $http) {
+				function($scope, $http, propertyService) {
 
 					// we will store all of our form data in this object
 					$scope.formData = {};
@@ -467,22 +427,17 @@ scotchApp
 							type : "text/plain"
 						});
 						fd.append("files", oBlob, $scope.files);
+						$scope.initializeController = function() {
+							propertyService.postProperty($scope.formData, $scope.getPostSuccess,
+								$scope.getPostError);
+						}
+						$scope.getPostSuccess = function(response) {
+							
+						}
+						$scope.getPostError = function(response) {
+						    alertsService.RenderErrorMessage("error in reqiuest");
+						}
 
-						$http({
-							method : 'POST',
-							url : "webservice/UploadPropertyAction.action",
-							headers : {
-								'Content-Type' : undefined
-							},
-							transformRequest : angular.identity,
-							data : fd
-						})
-
-						.success(function(data, status, headers, config) {
-							alert("success!");
-						}).error(function(data, status, headers, config) {
-							alert("failed!");
-						});
 					};
 					
 					// Watch the value of property type selected

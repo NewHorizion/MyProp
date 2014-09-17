@@ -18,6 +18,32 @@ ajaxServices.service('ajaxService', ['$http', 'blockUI', function ($http, blockU
             }, 1000);
 
         }
+        
+        this.AjaxPostContentType = function (data, route, successFunction, errorFunction) {
+            blockUI.start();
+            setTimeout(function () {
+            	var fd = new FormData(); 
+				fd.append('jsonData', angular.toJson(data));
+				$http(
+						{
+							method : 'POST',
+							url : route,
+							headers : {
+								'Content-Type' : undefined
+							},
+							transformRequest : angular.identity,
+							data : fd
+						}).success(function (response, status, headers, config) {
+		                    blockUI.stop();
+		                    successFunction(response);
+		                }).error(function (response) {
+		                    blockUI.stop();                   
+		                    if (response.IsAuthenicated == false) { window.location = "/index.html"; }
+		                    errorFunction(response);
+		                });
+            }, 1000);
+
+        }
 
         this.AjaxPostWithNoAuthenication = function (data, route, successFunction, errorFunction) {
             blockUI.start();
