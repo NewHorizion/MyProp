@@ -1,7 +1,13 @@
  // When the browser is ready...
 
   $(function() {
-  
+	  var login_form = $("#loginForm");
+	  $('#login_button').click(function()
+	  {
+		  login_form.validate();
+	  });
+
+  /*
     // Setup form validation on the #login-form element
     $("#loginForm").validate({
     
@@ -162,5 +168,5 @@
         invalidHandler: function (form) {
         }
     });
-
+*/
   });

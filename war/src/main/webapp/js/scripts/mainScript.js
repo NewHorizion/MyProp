@@ -222,9 +222,9 @@ scotchApp
 					$scope.formData = {};
 					// process the form
 					$scope.processForm = function() {
-						 if ($("#loginForm").valid()){
-					          // alert("Submitting...");
-					       }
+						 if ($("#loginForm").valid()==false){
+					          return false;
+					     }
 						 loginService.login($scope.formData, $scope.getSuccessLogin,
 									$scope.getErrorLogin);
 						
