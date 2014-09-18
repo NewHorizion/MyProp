@@ -368,13 +368,29 @@ scotchApp.controller('searchResultController', function($scope, $http,
 	$scope.properties = searchService.getSearchResponse();
 });
 
-scotchApp.controller('latestSearchCntrl', function($scope, propertyService,alertsService) {
+scotchApp.controller('latestSearchCntrl', function($scope, propertyService,imageService,alertsService,$modal) {
 	$scope.initializeController = function() {
 		propertyService.findLatest($scope.getLatestPropCompleted,
 				$scope.getLatestPropError);
 	}
-	$scope.openModal = function () {
+	
+	 $scope.findImagesCompleted = function (response) {
+     	$scope.images = response.images;
+     	imageService.saveImageResponse (response);
+     	$scope.myInterval = -2;
+     }
 
+     $scope.findImagesError = function (response) {
+         alertsService.RenderErrorMessage(response.ReturnMessage);
+     }
+		
+	$scope.openModal = function () {
+	    
+          var getCustomer = new Object();
+          getCustomer.id = 12;
+        propertyService.findPropertyImages(getCustomer,$scope.findImagesCompleted, $scope.findImagesError);
+    
+       
 	    var modalInstance = $modal.open({
 	        templateUrl: 'pages/gallery.html',
 	        controller: 'propertyController',

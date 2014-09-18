@@ -27,3 +27,17 @@ PropertySearchServices.factory('searchService', function () {
         }
     };
 });
+
+PropertySearchServices.factory('imageService', function () {
+    var imageResponse = {};
+
+    return {
+        saveImageResponse:function (data) {
+        	imageResponse = data;
+            console.log(data);
+        },
+        getImageResponse:function () {
+            return imageResponse;
+        }
+    };
+});

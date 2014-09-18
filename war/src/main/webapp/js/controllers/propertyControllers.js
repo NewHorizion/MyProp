@@ -1,24 +1,56 @@
 "use strict";
-var propertyControllers = angular.module('propertyControllers', ['ajaxService','PropertyServices']);
+var propertyControllers = angular.module('propertyControllers', ['ajaxService','PropertySearchServices']);
 
-propertyControllers.controller('propertyController', ['$scope', '$rootScope', 'propertyService', 'alertsService', function ($scope, $rootScope, propertyService, alertsService) {
+propertyControllers.controller('propertyController', ['$scope', '$rootScope', 'imageService', 'alertsService', function ($scope, $rootScope, imageService, alertsService)
+     {
+    var response = imageService.getImageResponse(); 
+	$scope.images = response.images;
+    }]).directive('slider', function ($timeout) {
+    	  return {
+    		    restrict: 'AE',
+    			replace: true,
+    			scope:{
+    				images: '='
+    			},
+    		    link: function (scope, elem, attrs) {
+    			
+    				scope.currentIndex=0;
 
-        $rootScope.closeAlert = alertsService.closeAlert;
-
-
-        $scope.findImages = function () { 
-        	 var getCustomer = new Object();
-             getCustomer.id = 12;
-        	propertyService.findPropertyImages(getCustomer,$scope.findImagesCompleted, $scope.findImagesError);
-        }
-
-        $scope.findImagesCompleted = function (response) {
-        	$scope.slides = response.images;
-        	$scope.myInterval = -2;
-        }
-
-        $scope.findImagesError = function (response) {
-            alertsService.RenderErrorMessage(response.ReturnMessage);
-        }
-
-    }]);
+    				scope.next=function(){
+    					scope.currentIndex<scope.images.length-1?scope.currentIndex++:scope.currentIndex=0;
+    				};
+    				
+    				scope.prev=function(){
+    					scope.currentIndex>0?scope.currentIndex--:scope.currentIndex=scope.images.length-1;
+    				};
+    				
+    				scope.$watch('currentIndex',function(){
+    					scope.images.forEach(function(image){
+    						image.visible=false;
+    					});
+    					scope.images[scope.currentIndex].visible=true;
+    				});
+    				
+    				/* Start: For Automatic slideshow*/
+    				
+    				var timer;
+    				
+    				var sliderFunc=function(){
+    					timer=$timeout(function(){
+    						scope.next();
+    						timer=$timeout(sliderFunc,5000);
+    					},5000);
+    				};
+    				
+    				sliderFunc();
+    				
+    				scope.$on('$destroy',function(){
+    					$timeout.cancel(timer);
+    				});
+    				
+    				/* End : For Automatic slideshow*/
+    				
+    		    },
+    			templateUrl:'pages/slider.html'
+    		  }
+    		});
