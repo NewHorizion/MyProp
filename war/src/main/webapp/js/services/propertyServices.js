@@ -34,7 +34,7 @@ PropertySearchServices.service('propertyService', ['ajaxService', function prope
     };
     
     self.postRequirement = function(formData, successFunction, errorFunction) {
-      ajaxService.AjaxPostContentType(formData, "webservice/UploadPropertyAction.action", successFunction, errorFunction);
+      ajaxService.AjaxPostContentType(formData, "webservice/UploadRequirementAction.action", successFunction, errorFunction);
     };
     
 }]);

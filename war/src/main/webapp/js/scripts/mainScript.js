@@ -176,9 +176,10 @@ scotchApp.controller('contactController', function($scope) {
 scotchApp
 		.controller(
 				'requirementController',
-				function($scope, $http) {
+				function($scope, $http, loginService, propertyService) {
 					// we will store all of our form data in this object
 					$scope.formData = {};
+					$scope.reqData = {};
 					$scope.files = [];
 
 					// listen for the file selected event
@@ -192,26 +193,41 @@ scotchApp
 					// function to process the form
 					$scope.processForm = function() {
 						var fd = new FormData();
-						$scope.formData.requirementInfo.city = $scope.formData.requirementInfo.city.cityId;
-						$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.city.cityId;
-						fd.append('jsonData', angular.toJson($scope.formData));
-
+						$scope.reqData.requirementInfo.city = $scope.reqData.requirementInfo.city.cityId;
+						if ($scope.formData.registrationInfo.newUser == 'true')
+						{
+							$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.city.cityId;
+						} 
+						
 						// remove comment to append a file to the request
 						var oBlob = new Blob([ 'test' ], {
 							type : "text/plain"
 						});
 						fd.append("files", oBlob, $scope.files);
-
-						$scope.initializeController = function() {
-							propertyService.postProperty($scope.formData, $scope.getPostSuccess,
-								$scope.getPostError);
+						$scope.postReqSuccess = function(response) {
+							alert('post');
 						}
-						$scope.getPostSuccess = function(response) {
-							
+						$scope.getpostReqError = function(response) {
+						    alert("error in reqiuest");
 						}
-						$scope.getPostError = function(response) {
-						    alertsService.RenderErrorMessage("error in reqiuest");
+						$scope.postRequirement = function(response) {
+							propertyService.postRequirement($scope.reqData, $scope.postReqSuccess,
+									$scope.getpostReqError);
 						}
+						$scope.getErrorLogin = function(response) {
+							alertsService.RenderErrorMessage("error in reqiuest");
+						}
+						if ($scope.formData.registrationInfo.newUser == 'false')
+						{
+							loginService.login($scope.formData, $scope.postRequirement,
+									$scope.getErrorLogin);
+						}
+						else
+						{
+							loginService.registration($scope.formData, $scope.postRequirement,
+									$scope.getErrorRegister);
+						}
+					
 					};
 				});
 
@@ -225,24 +241,44 @@ scotchApp
 						 if ($("#loginForm").valid()==false){
 					          return false;
 					     }
-						 loginService.login($scope.formData, $scope.getSuccessLogin,
-									$scope.getErrorLogin);
-						
 						 $scope.getSuccessLogin = function(response) {
-							
+							alert('alert');
 						 }
 						 $scope.getErrorLogin = function(response) {
 						    alertsService.RenderErrorMessage("error in reqiuest");
 						 }
-
+						 loginService.login($scope.formData, $scope.getSuccessLogin,
+									$scope.getErrorLogin);
+						
 					};
 				});
 
+function GenericController($scope, loginService){
+	$scope.getSuccessLogin = function(response) {
+		return "success";
+	}
+	$scope.getErrorLogin = function(response) {
+		alertsService.RenderErrorMessage("error in reqiuest");
+	}
+	$scope.getSuccessRegister = function(response) {
+		loginService.login($scope.formData, $scope.getSuccessLogin,
+			$scope.getErrorLogin);
+	}
+	$scope.getErrorRegister = function(response) {
+		alertsService.RenderErrorMessage("error in reqiuest");
+	}
+	$scope.register = function()
+	{
+		loginService.registration($scope.formData, $scope.getSuccessRegister,
+			$scope.getErrorRegister);
+	}
+};
+
 scotchApp
 		.controller(
-				'registrationController',
-				function($scope, $http) {
+				'registrationController', function($scope, $http, $injector) {
 					$scope.formData = {};
+					$injector.invoke(GenericController, this, {$scope: $scope});
 
 					// process the form
 					$scope.signup = function() {
@@ -252,16 +288,8 @@ scotchApp
 						
 						$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.city.cityId
 						$scope.formData.registrationInfo.cityName = $scope.formData.registrationInfo.city.cityName;
-						loginService.registration($scope.formData, $scope.getSuccessRegister,
-								$scope.getErrorRegister);
-					
-						$scope.getSuccessRegister = function(response) {
-							
-						}
-						$scope.getErrorRegister = function(response) {
-							alertsService.RenderErrorMessage("error in reqiuest");
-						}
-
+						// Register & Logged-IN
+						$scope.register();
 					};
 				});
 
@@ -415,7 +443,7 @@ scotchApp.controller('latestSearchCntrl', function($scope, propertyService,image
 scotchApp
 		.controller(
 				'postPropertyController',
-				function($scope, $http, propertyService) {
+				function($scope, $http, propertyService, loginService) {
 
 					// we will store all of our form data in this object
 					$scope.formData = {};
@@ -435,7 +463,10 @@ scotchApp
 					      // }
 						var fd = new FormData();
 						$scope.formData.propertyFeatureInfo.propertyMandateInfo.city = $scope.formData.propertyFeatureInfo.propertyMandateInfo.city.cityId;
-						$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.city.cityId;
+						if ($scope.formData.registrationInfo.newUser == 'true')
+						{
+							$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.city.cityId;
+						}
 						fd.append('jsonData', angular.toJson($scope.formData));
 
 						//remove comment to append a file to the request
@@ -443,17 +474,30 @@ scotchApp
 							type : "text/plain"
 						});
 						fd.append("files", oBlob, $scope.files);
-						$scope.initializeController = function() {
-							propertyService.postProperty($scope.formData, $scope.getPostSuccess,
+						$scope.postProperty = function() {
+							$scope.getPostSuccess = function(response) {
+								
+							}
+							$scope.getPostError = function(response) {
+							    alertsService.RenderErrorMessage("error in reqiuest");
+							}
+							propertyService.postProperty($scope.formData.propertyFeatureInfo, $scope.getPostSuccess,
 								$scope.getPostError);
 						}
-						$scope.getPostSuccess = function(response) {
-							
-						}
-						$scope.getPostError = function(response) {
+						
+						$scope.getErrorLogin = function(response) {
 						    alertsService.RenderErrorMessage("error in reqiuest");
 						}
-
+						if ($scope.formData.registrationInfo.newUser == 'false')
+						{
+							loginService.login($scope.formData.registrationInfo, $scope.postProperty,
+									$scope.getErrorLogin);
+						}
+						else
+						{
+							loginService.registration($scope.formData.registrationInfo, $scope.postRequirement,
+									$scope.getErrorLogin);
+						}
 					};
 					
 					// Watch the value of property type selected

@@ -12,5 +12,13 @@ LoginServices.service('loginService', ['ajaxService', function propertyService(a
   self.registration = function(formData, successFunction, errorFunction) {
 	  ajaxService.AjaxPostContentType(formData, "webservice/Registration.action", successFunction, errorFunction);
   };
+  
+  /*self.register = function(formData) {
+	  return ajaxService.AjaxPostContentWithoutResponse(formData, "webservice/Registration.action");
+  };
+  
+  self.loggedin = function(formData) {
+	  return ajaxService.AjaxPostContentWithoutResponse(formData, "webservice/Login.action");
+  };*/
 
 }]);

@@ -19,17 +19,16 @@ public class UploadPropertyAction extends ActionSupport
   private MultipartFile[] files;
   private PropertyUploadProcess propertyUploadProcess;
   private RequirementInfo requirementInfo;
-  private RegistrationInfo registrationInfo;
 
   public String save()
   {
-    boolean savedSuccess = propertyUploadProcess.savePropertyWithUserDetails(propertyFeatureInfo, registrationInfo);
+    boolean savedSuccess = propertyUploadProcess.savePropertyWithUserDetails(propertyFeatureInfo);
     return SUCCESS;
   }
   
   public String saveRequirement()
   {
-    propertyUploadProcess.saveRequirementWithUserDetails(requirementInfo, registrationInfo); 
+    propertyUploadProcess.saveRequirementWithUserDetails(requirementInfo); 
     return SUCCESS;
   }
 
@@ -91,16 +90,6 @@ public class UploadPropertyAction extends ActionSupport
   public void setRequirementInfo(RequirementInfo requirementInfo)
   {
     this.requirementInfo = requirementInfo;
-  }
-
-  public RegistrationInfo getRegistrationInfo()
-  {
-    return registrationInfo;
-  }
-
-  public void setRegistrationInfo(RegistrationInfo registrationInfo)
-  {
-    this.registrationInfo = registrationInfo;
   }
 
 }

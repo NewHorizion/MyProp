@@ -1,5 +1,7 @@
 package com.vstar.dao.process.propertyUpload;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.vstar.dao.PropAreaDao;
 import com.vstar.dao.PropFeaturesDao;
 import com.vstar.dao.PropInfoDao;
@@ -51,6 +53,7 @@ public class PropertyUploadProcess
   private RegistrationProcess registrationProcess;
   private PropOwnerDaoProcess propOwnerDaoProcess;
   private RequirementOwnerDaoProcess requirementOwnerDaoProcess;
+  private UserProcess userProcess;
   
   /**
    * Saving user info with property
@@ -58,14 +61,19 @@ public class PropertyUploadProcess
    * @param registrationInfo
    * @return
    */
-  public boolean savePropertyWithUserDetails(PropertyFeatureInfo propertyFeatureInfo, RegistrationInfo registrationInfo)
+  public boolean savePropertyWithUserDetails(PropertyFeatureInfo propertyFeatureInfo)
   {
     boolean savedSuccess = savePropertyDetails(propertyFeatureInfo);
-    registrationProcess.saveUserWithExtension(registrationInfo);
-    PropOwnerDao propOwnerDao = new PropOwnerDao();
-    propOwnerDao.setPropInfoDao(propInfoDao);
-    propOwnerDao.setUserName(registrationInfo.getEmailId());
-    propOwnerDaoProcess.addUpdatePropOwnerDao(propOwnerDao);
+    //registrationProcess.saveUserWithExtension(registrationInfo);
+    UserDetails userDetails = userProcess.findLoggedInUserId();
+    if (userDetails instanceof UserDetails)
+    {
+    	//registrationProcess.saveUserWithExtension(registrationInfo);
+    	PropOwnerDao propOwnerDao = new PropOwnerDao();
+        propOwnerDao.setPropInfoDao(propInfoDao);
+        propOwnerDao.setUserName(userDetails.getUsername());
+        propOwnerDaoProcess.addUpdatePropOwnerDao(propOwnerDao);
+    }
     return savedSuccess;
   }
   
@@ -75,15 +83,18 @@ public class PropertyUploadProcess
    * @param requirementInfo
    * @param registrationInfo
    */
-  public void saveRequirementWithUserDetails(RequirementInfo requirementInfo, RegistrationInfo registrationInfo)
+  public void saveRequirementWithUserDetails(RequirementInfo requirementInfo)
   {
     saveRequirementDetails(requirementInfo);
-    registrationProcess.saveUserWithExtension(registrationInfo);
-    RequirementOwnerDao requirementOwnerDao = new RequirementOwnerDao();
-    requirementOwnerDao.setPropRequirementDao(propRequirementDao);
-    requirementOwnerDao.setUserName(registrationInfo.getEmailId());
-    requirementOwnerDaoProcess.addUpdateRequirementOwnerDao(requirementOwnerDao);
-    
+    UserDetails userDetails = userProcess.findLoggedInUserId();
+    if (userDetails instanceof UserDetails)
+    {
+    	//registrationProcess.saveUserWithExtension(registrationInfo);
+        RequirementOwnerDao requirementOwnerDao = new RequirementOwnerDao();
+        requirementOwnerDao.setPropRequirementDao(propRequirementDao);
+        requirementOwnerDao.setUserName(userDetails.getUsername());
+        requirementOwnerDaoProcess.addUpdateRequirementOwnerDao(requirementOwnerDao);
+    }
   }
   
   /**
@@ -467,5 +478,15 @@ public class PropertyUploadProcess
   {
     this.requirementOwnerDaoProcess = requirementOwnerDaoProcess;
   }
+
+
+public UserProcess getUserProcess() {
+	return userProcess;
+}
+
+
+public void setUserProcess(UserProcess userProcess) {
+	this.userProcess = userProcess;
+}
 
 }

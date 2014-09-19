@@ -32,6 +32,7 @@ ajaxServices.service('ajaxService', ['$http', 'blockUI', function ($http, blockU
 								'Content-Type' : undefined
 							},
 							transformRequest : angular.identity,
+							async : false,
 							data : fd
 						}).success(function (response, status, headers, config) {
 		                    blockUI.stop();
@@ -44,6 +45,31 @@ ajaxServices.service('ajaxService', ['$http', 'blockUI', function ($http, blockU
             }, 1000);
 
         }
+        
+        /*this.AjaxPostContentWithoutResponse = function (data, route) {
+            blockUI.start();
+            setTimeout(function () {
+            	var fd = new FormData(); 
+				fd.append('jsonData', angular.toJson(data));
+				$http(
+						{
+							method : 'POST',
+							url : route,
+							headers : {
+								'Content-Type' : undefined
+							},
+							transformRequest : angular.identity,
+							async : false,
+							data : fd
+						}).success(function (response, status, headers, config) {
+							blockUI.stop();
+		                    return "success";
+		                }).error(function (response) {
+		                    return "error";
+		                });
+            }, 1000);
+
+        }*/
 
         this.AjaxPostWithNoAuthenication = function (data, route, successFunction, errorFunction) {
             blockUI.start();
