@@ -12,7 +12,7 @@
 		</repository>
 
 		<repository>
-			<id>local</id>
+			<id>ProductRepo</id>
 			<name>Maven Repository Switchboard</name>
 			<layout>default</layout>
 			<url>https://raw.github.com/vineetInd/releases/master</url>
