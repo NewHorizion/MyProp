@@ -1,6 +1,6 @@
 
 <select id="city" placeholder="city"
 	ng-model="cityModelName"
-	ng-options="city.cityName group by city.stateName for city in locations track by city.cityId" name="city">
-	<option value=''>Select</option>
+	ng-options="city.cityName group by city.stateName for city in locations track by city.cityId" name="city" required="true">
+	<option value="">Select</option>
 </select>

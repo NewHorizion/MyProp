@@ -1,12 +1,70 @@
  // When the browser is ready...
 
   $(function() {
-	  var login_form = $("#loginForm");
-	  $('#login_button').click(function()
-	  {
-		  login_form.validate();
+	  
+	  // Login page validation
+	  var login_form = $( "#loginForm" );
+	  var login_msg = {
+			  userName : "Please enter username!",
+			  password : "Please enter password!"
+	  };
+	  $( "#login_button" ).click(function() {
+		  login_form.validate({
+	  		messages :login_msg
+	  	});
 	  });
+	  
+	  // Registration page validation
+	  var signupForm = $("#signupForm");
+	  $( "#reg_button" ).click(function() {
+		  signupForm.validate({
+	  		//messages :login_msg
+	  	});
+	  });
+	  
+	  //Post Requirement
+	  var postRequirement = $("#postRequirement");
+	  $( "#postRequirement_button" ).click(function() {
+		  postRequirement.validate({
+			  errorElement: "label",
+			  errorPlacement: function(error, element) {
+					error.appendTo(element.parent("li").next("li"));
+					error.css("text-align","left"); 
+				},
 
+	  		//messages :login_msg
+	  	});
+	  });
+	  $( "#postRequirement_button2" ).click(function() {
+		  postRequirement.validate({
+			  //
+	  		});
+	  });
+	  
+	  var postpropertyform = $("#post_property_form");
+	  $( "#prop_detail_next").click(function() {
+		  postpropertyform.validate({
+			  errorElement: "label",
+			  errorPlacement: function(error, element) {
+					error.appendTo(element.parent("li").next("li"));
+					error.css("text-align","left"); 
+				},
+
+	  		//messages :login_msg
+	  	});
+	  });
+	  $( "#features_next_button").click(function() {
+		  postpropertyform.validate({
+			  errorElement: "label",
+			  errorPlacement: function(error, element) {
+					error.appendTo(element.parent("li").next("li"));
+					error.css("text-align","left"); 
+				},
+
+	  		//messages :login_msg
+	  	});
+	  });
+	  
   /*
     // Setup form validation on the #login-form element
     $("#loginForm").validate({

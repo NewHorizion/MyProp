@@ -8,9 +8,10 @@
 	        				<li class="all">* denotes mandatory fields</li>
 	        				<li>
 	          					<label>I want to <em>*</em> : </label>
-	          					<input type="radio" ng-model="reqData.requirementInfo.purchaseType" value="1" name="purchaseType">Sale 
+	          					<input type="radio" ng-model="reqData.requirementInfo.purchaseType" value="1" name="purchaseType" required="true">Sale 
 	           					<input type="radio" ng-model="reqData.requirementInfo.purchaseType" value="2" name="purchaseType">Rent Out
 	        				</li>
+	        				<li style="margin-left: 225px"></li>
 	        				<li>
 	          					<label>Property Type <em>*</em> :</label>
 								<div style="float:left;">
@@ -30,6 +31,7 @@
 								</div>
 	        				</li>
 	        				<br/><br/><br/>
+	        				<li style="margin-left: 225px"></li>
 	        				<li>
 	          					<h5>Property Location </h5>
 					        </li>  
@@ -38,6 +40,7 @@
 								<city-ctrl city-model-name="reqData.requirementInfo.city"
 									locations="locations"></city-ctrl>
 							</li>
+							<li style="margin-left: 225px"></li>
 							<li>
 								<label>Location <em>*</em>:</label>
 								<!-- <select id="localities" placeholder="Locality"
@@ -61,20 +64,21 @@
     							</div>
 	        				</li>
 	        				<br/><br/><br/>
+	        				<li style="margin-left: 225px"></li>
 	        				<li>
 	    						<h5>Property Area Info </h5>
 	   						</li>
 	   						<li ng-controller="AreaUnits">
 	    						<label>Covered Area <em>*</em> : </label>
-	    						<input id="minCoveredArea" type="text" ng-model="reqData.requirementInfo.minCoveredArea" name="minCoveredArea">
+	    						<input id="minCoveredArea" type="text" ng-model="reqData.requirementInfo.minCoveredArea" name="minCoveredArea" required="true" number="true">
 	    						To
-	    						<input id="maxCoveredArea" type="text" ng-model="reqData.requirementInfo.maxCoveredArea" name="maxCoveredArea">
+	    						<input id="maxCoveredArea" type="text" ng-model="reqData.requirementInfo.maxCoveredArea" name="maxCoveredArea" required="true" number="true">
 			    				<select id="selectCoveredArea" ng-model="reqData.requirementInfo.coveredAreaUnit"
-			    					ng-options="areaUnit.value for areaUnit in areaUnits track by areaUnit.value" name="coveredAreaUnit">
+			    					ng-options="areaUnit.value for areaUnit in areaUnits track by areaUnit.value" name="coveredAreaUnit" required="true">
 			    					<option value=''></option>
 								</select>
 	   						</li>
-	   		
+	   						<li style="margin-left: 225px"></li><br/><br/><br/>
 	   						<li>
 	    						<h5>Property Price</h5>
 	    					</li>
@@ -84,13 +88,14 @@
 		     					To
 		     					<rent-budget-ctrl rent-model-name="reqData.requirementInfo.maxBudget" rent-budgets="rentBudgets"></rent-budget-ctrl>          
 	   						</li>
-	   						
+	   						<li style="margin-left: 225px"></li>
 	   						<li>
 			   					<label>Best deal from Agent/Builder<em style="color:Red">*</em> :</label>
-			    				<input type="radio" ng-model="reqData.requirementInfo.dealingType" value="true" name="dealingType">Yes 
+			    				<input type="radio" ng-model="reqData.requirementInfo.dealingType" value="true" name="dealingType" required="true">Yes 
 	           					<input type="radio" ng-model="reqData.requirementInfo.dealingType" value="false" name="dealingType">No
 			 				</li>
-			 				
+			 				<li style="margin-left: 225px"></li>
+			 				<br/>
 			 				<li ng-controller="BedBathNoList">
 								<label>No. of Bedrooms<em>*</em> :</label>
 								<bedroom-no-ctrl bed-model-name="reqData.requirementInfo.minBedrooms" room-nos="roomNos"></bedroom-no-ctrl>
@@ -112,6 +117,7 @@
     							</div> -->
 							</li>
 							<br/><br/><br/>
+							<li style="margin-left: 225px"></li>
 						</ul>
 					</div>
  		</div>
@@ -119,7 +125,8 @@
 <!-- Mandate Property Info Ends-->
 
 <div class="col-xs-6 col-xs-offset-3">
-    <a ui-sref="requirement.postRequirement" class="btn btn-block btn-info">
+<!-- ui-sref="requirement.postRequirement"  -->
+    <button class="btn btn-block btn-info" id="postRequirement_button">
     Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
-    </a>
+    </button>
 </div>

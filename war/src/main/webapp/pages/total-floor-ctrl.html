@@ -1,3 +1,6 @@
-<select ng-model="formData.propertyFeatureInfo.residentialPropInfo.totalFloor" ng-options="floorNo.value for floorNo in floorNos track by floorNo.value">
+<select ng-model="formData.propertyFeatureInfo.residentialPropInfo.totalFloor" 
+ng-options="floorNo.value for floorNo in floorNos track by floorNo.value"
+name="totalFloor"
+required="true">
 	<option value="">Select</option>
 </select>

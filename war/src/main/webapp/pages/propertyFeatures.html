@@ -1,3 +1,4 @@
+<script src="js/validation/validation_rules.js"></script>
 <div class="cBoxOut">
 	<h2 class="text-center">Property Important Features</h2>
 
@@ -14,64 +15,64 @@
 					<label>No. of Bedrooms<em>*</em> :</label>
 					<bedroom-no-ctrl bed-model-name="formData.propertyFeatureInfo.residentialPropInfo.noOfBedRooms" room-nos="roomNos"></bedroom-no-ctrl>
 				</li>
-				
+				<li style="margin-left: 225px;height:21px"></li>
 				<li ng-controller="BedBathNoList" ng-show="displayBathroom">
 					<label>No. of Bathrooms<em>*</em> :</label>
 					<bathroom-no-ctrl></bathroom-no-ctrl>
 				</li>
-				
+				<li style="margin-left: 225px;height:21px"></li>
 				<li ng-controller="BedBathNoList" ng-show="displayBalcony">
 					<label>No. of Balconies<em>*</em> :</label>
 					<balcony-no-ctrl></balcony-no-ctrl>
 				</li>
-				
+				<li style="margin-left: 225px;height:21px"></li>
 				<li ng-controller="FurnishedStatuses" ng-show="displayFurnished">
 					<label>Furnished Status<em>*</em> :</label>
 					<select id="furnished" ng-model="formData.propertyFeatureInfo.residentialPropInfo.furnishedStatus"
-						ng-options="furnishedStatus.value for furnishedStatus in furnishedStatuses track by furnishedStatus.value">
+						ng-options="furnishedStatus.value for furnishedStatus in furnishedStatuses track by furnishedStatus.value" name="furnishedStatus" required="true">
 						<option value="">Select</option>
 					</select>
 				</li>
-				
+				<li style="margin-left: 225px;height:21px"></li>
 				<li ng-controller="FloorNoList" ng-show="displayFloorNo">
 					<label>Floor No<em>*</em> :</label>
 					<floor-no-ctrl></floor-no-ctrl>
 				</li>
-				
+				<li style="margin-left: 225px;height:21px"></li>
 				<li ng-controller="FloorNoList" ng-show="displayTotalFloor">
 					<label>Total Floor<em>*</em> :</label>
 					<total-floor-ctrl></total-floor-ctrl>
 				</li>
-			
+			<li style="margin-left: 225px;height:21px"></li>
 			</div>
 			
 			<li>
 				<label>Possession Status<em>*</em> :</label>
-				<input class="" type="radio" name="possessionStatus" ng-model="formData.propertyFeatureInfo.residentialPropInfo.possessionStatus" value="Under Construction" >Under Construction
-            	<input class="" type="radio" name="possessionStatus" ng-model="formData.propertyFeatureInfo.residentialPropInfo.possessionStatus" value="Ready to Move" >Ready to Move
+				<input class="" type="radio" name="possessionStatus" ng-model="formData.propertyFeatureInfo.residentialPropInfo.possessionStatus" value="Under Construction" required="true">Under Construction
+            	<input class="" type="radio" name="possessionStatus" ng-model="formData.propertyFeatureInfo.residentialPropInfo.possessionStatus" value="Ready to Move" required="true">Ready to Move
 			</li>
-			
+			<li style="margin-left: 225px;height:21px"></li>
 			<li>
 				<label>Available From<em>*</em> :</label>
 				<select id="availableFrom" ng-model="formData.propertyFeatureInfo.residentialPropInfo.availableFrom"
-					ng-options="">
+					ng-options="" required="true">
 					<option value=''>Select</option>
 				</select>
 			</li>
-			
+			<li style="margin-left: 225px;height:21px"></li>
 			<li>
 			   	<label for="keyword">Brief Description <em>*</em> : <br>
 			    	[ e.g. East-facing, fully furnished bungalow with 5 
 			    	BHK and power back-up, located in premium locality, for immediate sale ]</label>
-			    <textarea cols="30" rows="5" id="txtPropertyDescription" ng-model="formData.propertyFeatureInfo.residentialPropInfo.propertyDescription"></textarea>
-			    <input value="300" style="BORDER-TOp-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; WIDTH: 30px; BACKGROUND-COLOR: #fff; BORDER-RIGHT-WIDTH: 0px" size="4" readonly="readOnly" name="detailDescCounter" maxlength="4" id="detailDescCounter">characters left
+			    <textarea cols="30" rows="5" id="txtPropertyDescription" ng-model="formData.propertyFeatureInfo.residentialPropInfo.propertyDescription" name="propertyDescription" required="true"></textarea>
+			    <input value="300" style="BORDER-TOp-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; WIDTH: 30px; BACKGROUND-COLOR: #fff; BORDER-RIGHT-WIDTH: 0px" size="4" readonly="readOnly" name="detailDescCounter" maxlength="4" id="detailDescCounter" >characters left
 		 	</li>
-		 
+		 <li style="margin-left: 225px;height:21px"></li>
 		 	<li>
 		   		<label>I want to deal with Agent<em style="color:Red">*</em> :</label>
-		    	<input type="checkbox" value="Yes" ng-model="formData.propertyFeatureInfo.residentialPropInfo.dealingType">Yes
+		    	<input type="checkbox" value="Yes" ng-model="formData.propertyFeatureInfo.residentialPropInfo.dealingType" name="dealingType" required="true">Yes
 		 	</li>
-			
+			<li style="margin-left: 225px;height:21px"></li>
 			<li>
 		   		<h3>Amenities </h3>
 		  	</li>
@@ -94,6 +95,7 @@
 				</div>
 			</li>
 			<br/><br/><br/>
+			<li style="margin-left: 225px;height:21px"></li>
   			<li ng-controller="ExtAmenityCtrl">
   				<label><b>External Amenities :</b></label>
 	        	<div style="float:left;">
@@ -112,6 +114,7 @@
 				</div>
   			</li>
   			<br/><br/><br/>
+  			<li style="margin-left: 225px;height:21px"></li>
   			<li>
    				<h3>Property Snapshot </h3>
   			</li>
@@ -119,19 +122,19 @@
 			   	<label for="keyword">Landmarks &amp; Neighbourhood : <br>
 			    	[ We strongly recommend you to mention landmark(s) 
 			    	near your property ] </label>
-			    <textarea cols="50" rows="5" ng-model="formData.propertyFeatureInfo.residentialPropInfo.landmarks" id="txtLandmarks"></textarea>
+			    <textarea cols="50" rows="5" ng-model="formData.propertyFeatureInfo.residentialPropInfo.landmarks" name="landmarks" id="txtLandmarks" required="true"></textarea>
 			    <input name="landmarksCounter" value="3000" size="4" maxlength="4" readonly="readOnly" style="BORDER-TOp-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; WIDTH: 30px; BACKGROUND-COLOR: #fff; BORDER-RIGHT-WIDTH: 0px" id="landmarksCounter">
 			    characters left
 			</li>
-			
+			<li style="margin-left: 225px;height:21px"></li>
 			<li>
 			   <label for="keyword">Terms &amp; Conditions : <br>
 			        [ Please mention if there are any specific terms of 
 			        your offer e.g. - 11 months, company lease or Bank/ School employees preferred ]</label>
-			    <textarea cols="40" rows="8" ng-model="formData.propertyFeatureInfo.residentialPropInfo.termsNConditions" id="txtTermsConditions" class="big_txt"></textarea> <br>
+			    <textarea cols="40" rows="8" ng-model="formData.propertyFeatureInfo.residentialPropInfo.termsNConditions" name="termsNConditions" id="txtTermsConditions" class="big_txt" required="true"></textarea> <br>
 			    <input name="termsCounter" value="500" size="4" maxlength="4" readonly="readOnly" style="BORDER-TOp-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; WIDTH: 30px; BACKGROUND-COLOR: #fff; BORDER-RIGHT-WIDTH: 0px" id="termsCounter">characters left
 		  </li>
-			
+			<li style="margin-left: 225px;height:21px"></li>
 		</ul>
           
 <!-- Residential Info Ends -->
@@ -140,8 +143,11 @@
 </div>		
 <div class="form-group row">
 <div class="col-xs-6 col-xs-offset-3">
-    <a ui-sref="form.postProperty" class="btn btn-block btn-info">
+<button class="btn btn-block btn-info" id="features_next_button">
     Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
-    </a>
+    </button>
+    <!-- <a ui-sref="form.postProperty" class="btn btn-block btn-info">
+    Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a> -->
 </div>
 </div>

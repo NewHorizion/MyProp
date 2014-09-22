@@ -1,16 +1,14 @@
-.field { margin-left: .5em; float: left; }
-.field, label { float: left; font-family: Arial, Helvetica, sans-serif; font-size: small; }
-br { clear: both; }
-input { border: 1px solid black; margin-bottom: .5em;  }
-input.error { border: 1px solid red; }
-label.error {
-	background: url('../images/validation/unchecked.gif') no-repeat;
-	padding-left: 16px;
-	margin-left: .3em;
-}
-label.valid {
-	background: url('../images/validation/checked.gif') no-repeat;
-	display: block;
-	width: 16px;
-	height: 16px;
-}
+	label.error {
+		background:url("../images/validation/unchecked.gif") no-repeat 0px 0px;
+		padding-left: 16px;
+		font-style: italic;
+		color: red;
+	}
+	label.success {
+		background:url("../images/validation/checked.gif") no-repeat 0px 0px;
+		padding-left: 16px;
+	}
+	label.error {
+		display: none;
+	}
+	

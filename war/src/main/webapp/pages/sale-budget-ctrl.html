@@ -1,6 +1,8 @@
 
 <select id="saleBudgets" placeholder="saleBudgets"
 	ng-model="saleModelName"
-	ng-options="saleBudget.value for saleBudget in saleBudgets track by saleBudget.id">
-	<option value=''>Select</option>
+	ng-options="saleBudget.value for saleBudget in saleBudgets track by saleBudget.id"
+	name="saleModelName"
+	reuired="true">
+	<option value="">Select</option>
 </select>

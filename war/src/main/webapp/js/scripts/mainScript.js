@@ -282,10 +282,9 @@ scotchApp
 
 					// process the form
 					$scope.signup = function() {
-						/*if ($("#signupForm").valid()){
-					          // alert("Submitting...");
-					     }*/
-						
+						if ($("#signupForm").valid()==false){
+					          return false;
+					     }
 						$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.city.cityId
 						$scope.formData.registrationInfo.cityName = $scope.formData.registrationInfo.city.cityName;
 						// Register & Logged-IN

@@ -1,5 +1,5 @@
 <select id="propertyType" ng-model="propertyModelName"
-	ng-options="propertyType.id as propertyType.label group by propertyType.categoryName for propertyType in propertyTypes">
-	<option value=''>Select</option>
+	ng-options="propertyType.id as propertyType.label group by propertyType.categoryName for propertyType in propertyTypes" required="true" name="propertyType">
+	<option value="">Select</option>
 </select>
 
