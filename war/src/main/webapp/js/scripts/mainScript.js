@@ -205,6 +205,12 @@ scotchApp
 						});
 						fd.append("files", oBlob, $scope.files);
 						
+						$scope.postRequirement = function(response) {
+							alert('loogedin');
+						 }
+						 $scope.getErrorLogin = function(response) {
+						    
+						 }
 						if ($scope.formData.registrationInfo.newUser == 'false')
 						{
 							loginService.login($scope.formData, $scope.postRequirement,
@@ -241,7 +247,7 @@ scotchApp
 					};
 				});
 
-function GenericController($scope, loginService){
+/*function GenericController($scope, loginService){
 	$scope.getSuccessLogin = function(response) {
 		return "success";
 	}
@@ -261,12 +267,12 @@ function GenericController($scope, loginService){
 			$scope.getErrorRegister);
 	}
 };
-
+*/
 scotchApp
 		.controller(
-				'registrationController', function($scope, $http, $injector) {
+				'registrationController', function($scope, $http, loginService) {
 					$scope.formData = {};
-					$injector.invoke(GenericController, this, {$scope: $scope});
+					//$injector.invoke(GenericController, this, {$scope: $scope});
 
 					// process the form
 					$scope.signup = function() {
@@ -276,7 +282,14 @@ scotchApp
 						$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.city.cityId
 						$scope.formData.registrationInfo.cityName = $scope.formData.registrationInfo.city.cityName;
 						// Register & Logged-IN
-						$scope.register();
+						$scope.getSuccessRegister = function(response) {
+							alert('success');
+						}
+						$scope.getErrorRegister = function(response) {
+							alertsService.RenderErrorMessage("error in reqiuest");
+						}
+						loginService.registration($scope.formData, $scope.getSuccessRegister,
+								$scope.getErrorRegister);
 					};
 				});
 

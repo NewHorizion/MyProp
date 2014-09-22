@@ -5,7 +5,9 @@ import java.util.Map;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.vstar.dao.process.propertyUpload.RegistrationProcess;
+import com.vstar.process.propertyDetailInfo.PropertyFeatureInfo;
 import com.vstar.process.propertyDetailInfo.RegistrationInfo;
+import com.vstar.process.propertyDetailInfo.RequirementInfo;
 
 @SuppressWarnings("serial")
 public class RegistrationAction extends ActionSupport
@@ -13,6 +15,8 @@ public class RegistrationAction extends ActionSupport
   private Map<String, Object> jsonMap = new LinkedHashMap<String, Object>();
   private RegistrationInfo registrationInfo;
   private RegistrationProcess registrationProcess;
+  private PropertyFeatureInfo propertyFeatureInfo;
+  private RequirementInfo requirementInfo;
 
   public String save()
   {
@@ -52,5 +56,21 @@ public class RegistrationAction extends ActionSupport
   {
     this.registrationProcess = registrationProcess;
   }
+
+public PropertyFeatureInfo getPropertyFeatureInfo() {
+	return propertyFeatureInfo;
+}
+
+public void setPropertyFeatureInfo(PropertyFeatureInfo propertyFeatureInfo) {
+	this.propertyFeatureInfo = propertyFeatureInfo;
+}
+
+public RequirementInfo getRequirementInfo() {
+	return requirementInfo;
+}
+
+public void setRequirementInfo(RequirementInfo requirementInfo) {
+	this.requirementInfo = requirementInfo;
+}
 
 }

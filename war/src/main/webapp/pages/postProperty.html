@@ -4,10 +4,10 @@
     	<h6><input type="radio" name="newUser" ng-model="formData.registrationInfo.newUser" value="true" >New User 
         <input type="radio" name="newUser" ng-model="formData.registrationInfo.newUser" value="false" >Existing User</h6>
     </div>
-    <div ng-show="formData.newUser == 'true'">
+    <div ng-show="formData.registrationInfo.newUser == 'true'">
     	<ng-include src="'pages/registrationModel.html'"> </ng-include>
     </div>
-    <div ng-show="formData.newUser == 'false'">
+    <div ng-show="formData.registrationInfo.newUser == 'false'">
     	<ng-include src="'pages/loginModel.html'"></ng-include>
     </div>
     <button type="submit" class="btn btn-danger">Submit</button>

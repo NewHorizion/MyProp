@@ -67,7 +67,8 @@
 		</action>
 		
 		<action name="Registration" class="com.vstar.ui.registration.RegistrationAction" method="save">
-			<result type="json"/>
+			<result name="success" type="chain">Login</result>
+			<result name="input" type="json"></result>
 		</action>
 		
 	</package>
