@@ -3,7 +3,7 @@
   $(function() {
 	  
 	  // Login page validation
-	  var login_form = $( "#loginForm" );
+	  var login_form = $("#loginForm" );
 	  var login_msg = {
 			  userName : "Please enter username!",
 			  password : "Please enter password!"
@@ -15,10 +15,18 @@
 	  });
 	  
 	  // Registration page validation
+	  var reg_msg = {
+			  userType : "Please select user type!",
+			  userName : "Please enter username!",
+			  emailId : "Please enter e-mail id!",
+			  password : "Please enter your password!",
+			  city : "Please select your city!",
+			  mobileNumber : "Please select your mobile no!"
+	  };
 	  var signupForm = $("#signupForm");
 	  $( "#reg_button" ).click(function() {
 		  signupForm.validate({
-	  		//messages :login_msg
+	  		messages :reg_msg
 	  	});
 	  });
 	  
