@@ -83,10 +83,11 @@ public class PropertyUploadProcess
    * @param requirementInfo
    * @param registrationInfo
    */
-  public void saveRequirementWithUserDetails(RequirementInfo requirementInfo)
+  public long saveRequirementWithUserDetails(RequirementInfo requirementInfo)
   {
     saveRequirementDetails(requirementInfo);
-    UserDetails userDetails = userProcess.findLoggedInUserId();
+    return propRequirementDao.getPropRequirementId();
+    /*UserDetails userDetails = userProcess.findLoggedInUserId();
     if (userDetails instanceof UserDetails)
     {
     	//registrationProcess.saveUserWithExtension(registrationInfo);
@@ -94,7 +95,7 @@ public class PropertyUploadProcess
         requirementOwnerDao.setPropRequirementDao(propRequirementDao);
         requirementOwnerDao.setUserName(userDetails.getUsername());
         requirementOwnerDaoProcess.addUpdateRequirementOwnerDao(requirementOwnerDao);
-    }
+    }*/
   }
   
   /**

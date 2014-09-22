@@ -38,4 +38,16 @@ public interface VstarConstants
 		public static final String BUILDER = "Builder";
 		public static final String BROKER = "Broker";
 	}
+	
+	/**
+	 * Action Result Types
+	 *
+	 */
+	public interface ActionResultTypes
+	{
+		public static final String REQUIREMENT = "requirement";
+		public static final String PROPERTY = "property";
+		public static final String REGISTRATION = "register";
+		public static final String LOGIN = "login";
+	}
 }

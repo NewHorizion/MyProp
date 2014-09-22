@@ -12,10 +12,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.vstar.common.VstarConstants;
+import com.vstar.dao.process.propertyUpload.UserProcess;
+import com.vstar.process.propertyDetailInfo.PropertyFeatureInfo;
 import com.vstar.process.propertyDetailInfo.RegistrationInfo;
+import com.vstar.process.propertyDetailInfo.RequirementInfo;
 
 public class LoginAction extends ActionSupport {
 
@@ -25,6 +30,10 @@ public class LoginAction extends ActionSupport {
 	private RegistrationInfo registrationInfo;
 
 	private SessionAuthenticationStrategy sas;
+	
+	private UserProcess userProcess;
+	private PropertyFeatureInfo propertyFeatureInfo;
+	private RequirementInfo requirementInfo;
 
 	public String login () 
  {
@@ -58,6 +67,14 @@ public class LoginAction extends ActionSupport {
 		} else {
 			jsonMap.put("success", false);
 			jsonMap.put("errorName", "Invalid user name or password !!");
+		}
+		if (propertyFeatureInfo != null)
+		{
+			return VstarConstants.ActionResultTypes.PROPERTY;
+		}
+		if (requirementInfo != null)
+		{
+			return VstarConstants.ActionResultTypes.REQUIREMENT;
 		}
 
 		return SUCCESS;
@@ -102,6 +119,30 @@ public class LoginAction extends ActionSupport {
 
 	public void setRegistrationInfo(RegistrationInfo registrationInfo) {
 		this.registrationInfo = registrationInfo;
+	}
+
+	public UserProcess getUserProcess() {
+		return userProcess;
+	}
+
+	public void setUserProcess(UserProcess userProcess) {
+		this.userProcess = userProcess;
+	}
+
+	public PropertyFeatureInfo getPropertyFeatureInfo() {
+		return propertyFeatureInfo;
+	}
+
+	public void setPropertyFeatureInfo(PropertyFeatureInfo propertyFeatureInfo) {
+		this.propertyFeatureInfo = propertyFeatureInfo;
+	}
+
+	public RequirementInfo getRequirementInfo() {
+		return requirementInfo;
+	}
+
+	public void setRequirementInfo(RequirementInfo requirementInfo) {
+		this.requirementInfo = requirementInfo;
 	}
 
 }

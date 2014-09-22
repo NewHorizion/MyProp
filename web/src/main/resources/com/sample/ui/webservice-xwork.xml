@@ -51,11 +51,7 @@
 			<result name="success">../index.html</result>
 		</action>
 		
-		<action name="Login" class="com.sample.ui.login.LoginAction" method="login">
-			<result type="json"/>
-		</action>
-		
-		<action name="Registration" class="com.vstar.ui.registration.RegistrationAction" method="save">
+		<action name="UploadRequirementAction" class="com.sample.ui.VstarProperty.UploadPropertyAction" method="saveRequirement">
 			<result type="json"/>
 		</action>
 		
@@ -63,7 +59,14 @@
 			<result type="json"/>
 		</action>
 		
-		<action name="UploadRequirementAction" class="com.sample.ui.VstarProperty.UploadPropertyAction" method="saveRequirement">
+		<action name="Login" class="com.sample.ui.login.LoginAction" method="login">
+			<result name="input" type="json"></result>
+			<result name="success" type="json"></result>
+			<result name="requirement" type="chain">UploadRequirementAction</result>
+			<result name="property" type="chain">UploadPropertyAction</result>
+		</action>
+		
+		<action name="Registration" class="com.vstar.ui.registration.RegistrationAction" method="save">
 			<result type="json"/>
 		</action>
 		

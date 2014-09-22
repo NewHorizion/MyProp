@@ -8,8 +8,8 @@
 	        				<li class="all">* denotes mandatory fields</li>
 	        				<li>
 	          					<label>I want to <em>*</em> : </label>
-	          					<input type="radio" ng-model="reqData.requirementInfo.purchaseType" value="1" name="purchaseType" required="true">Sale 
-	           					<input type="radio" ng-model="reqData.requirementInfo.purchaseType" value="2" name="purchaseType">Rent Out
+	          					<input type="radio" ng-model="formData.requirementInfo.purchaseType" value="1" name="purchaseType" required="true">Sale 
+	           					<input type="radio" ng-model="formData.requirementInfo.purchaseType" value="2" name="purchaseType">Rent Out
 	        				</li>
 	        				<li style="margin-left: 225px"></li>
 	        				<li>
@@ -26,7 +26,7 @@
 					    				max-Height = "200px;"
 					    				default-label="--Select--"
 					    				on-item-click="itemSelect( data )"
-					    				output-model="reqData.requirementInfo.propertyTypes">
+					    				output-model="formData.requirementInfo.propertyTypes">
 									</div> 
 								</div>
 	        				</li>
@@ -37,7 +37,7 @@
 					        </li>  
 	        				<li>
 	        					<label>City <em>*</em>:</label>
-								<city-ctrl city-model-name="reqData.requirementInfo.city"
+								<city-ctrl city-model-name="formData.requirementInfo.city"
 									locations="locations"></city-ctrl>
 							</li>
 							<li style="margin-left: 225px"></li>
@@ -51,7 +51,7 @@
 								<div style="float:left;">
 									<div 
 	    								multi-select 
-	    								input-model="reqData.requirementInfo.city.localities"
+	    								input-model="formData.requirementInfo.city.localities"
 	    								button-label="label"         
 	    								item-label="label" 
 	    								tick-property="ticked" 
@@ -59,7 +59,7 @@
 	    								max-labels="1"
 	    								max-Height = "200px;"
 	    								default-label="Select"
-	    								output-model="reqData.requirementInfo.locations">
+	    								output-model="formData.requirementInfo.locations">
 	    							</div>
     							</div>
 	        				</li>
@@ -70,10 +70,10 @@
 	   						</li>
 	   						<li ng-controller="AreaUnits">
 	    						<label>Covered Area <em>*</em> : </label>
-	    						<input id="minCoveredArea" type="text" ng-model="reqData.requirementInfo.minCoveredArea" name="minCoveredArea" required="true" number="true">
+	    						<input id="minCoveredArea" type="text" ng-model="formData.requirementInfo.minCoveredArea" name="minCoveredArea" required="true" number="true">
 	    						To
-	    						<input id="maxCoveredArea" type="text" ng-model="reqData.requirementInfo.maxCoveredArea" name="maxCoveredArea" required="true" number="true">
-			    				<select id="selectCoveredArea" ng-model="reqData.requirementInfo.coveredAreaUnit"
+	    						<input id="maxCoveredArea" type="text" ng-model="formData.requirementInfo.maxCoveredArea" name="maxCoveredArea" required="true" number="true">
+			    				<select id="selectCoveredArea" ng-model="formData.requirementInfo.coveredAreaUnit"
 			    					ng-options="areaUnit.value for areaUnit in areaUnits track by areaUnit.value" name="coveredAreaUnit" required="true">
 			    					<option value=''></option>
 								</select>
@@ -84,23 +84,23 @@
 	    					</li>
 	    					<li>
 	    						<label>Expected Price <em>*</em> : </label>
-		     					<rent-budget-ctrl rent-model-name="reqData.requirementInfo.minBudget" rent-budgets="rentBudgets"></rent-budget-ctrl>
+		     					<rent-budget-ctrl rent-model-name="formData.requirementInfo.minBudget" rent-budgets="rentBudgets"></rent-budget-ctrl>
 		     					To
-		     					<rent-budget-ctrl rent-model-name="reqData.requirementInfo.maxBudget" rent-budgets="rentBudgets"></rent-budget-ctrl>          
+		     					<rent-budget-ctrl rent-model-name="formData.requirementInfo.maxBudget" rent-budgets="rentBudgets"></rent-budget-ctrl>          
 	   						</li>
 	   						<li style="margin-left: 225px"></li>
 	   						<li>
 			   					<label>Best deal from Agent/Builder<em style="color:Red">*</em> :</label>
-			    				<input type="radio" ng-model="reqData.requirementInfo.dealingType" value="true" name="dealingType" required="true">Yes 
-	           					<input type="radio" ng-model="reqData.requirementInfo.dealingType" value="false" name="dealingType">No
+			    				<input type="radio" ng-model="formData.requirementInfo.dealingType" value="true" name="dealingType" required="true">Yes 
+	           					<input type="radio" ng-model="formData.requirementInfo.dealingType" value="false" name="dealingType">No
 			 				</li>
 			 				<li style="margin-left: 225px"></li>
 			 				<br/>
 			 				<li ng-controller="BedBathNoList">
 								<label>No. of Bedrooms<em>*</em> :</label>
-								<bedroom-no-ctrl bed-model-name="reqData.requirementInfo.minBedrooms" room-nos="roomNos"></bedroom-no-ctrl>
+								<bedroom-no-ctrl bed-model-name="formData.requirementInfo.minBedrooms" room-nos="roomNos"></bedroom-no-ctrl>
 								To
-								<bedroom-no-ctrl bed-model-name="reqData.requirementInfo.maxBedrooms" room-nos="roomNos"></bedroom-no-ctrl>
+								<bedroom-no-ctrl bed-model-name="formData.requirementInfo.maxBedrooms" room-nos="roomNos"></bedroom-no-ctrl>
 								<!-- <div style="float:left;">
 									<div 
 	    								multi-select 
