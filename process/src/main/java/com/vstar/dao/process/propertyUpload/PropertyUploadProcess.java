@@ -1,5 +1,7 @@
 package com.vstar.dao.process.propertyUpload;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.vstar.dao.PropAreaDao;
@@ -29,7 +31,6 @@ import com.vstar.process.masterData.model.LocalityModel;
 import com.vstar.process.masterData.model.PropertyTypeModel;
 import com.vstar.process.propertyDetailInfo.PropertyFeatureInfo;
 import com.vstar.process.propertyDetailInfo.PropertyMandateInfo;
-import com.vstar.process.propertyDetailInfo.RegistrationInfo;
 import com.vstar.process.propertyDetailInfo.RequirementInfo;
 import com.vstar.process.propertyDetailInfo.ResidentialPropInfo;
 
@@ -54,25 +55,33 @@ public class PropertyUploadProcess
   private PropOwnerDaoProcess propOwnerDaoProcess;
   private RequirementOwnerDaoProcess requirementOwnerDaoProcess;
   private UserProcess userProcess;
+  protected Log logger = LogFactory.getLog(this.getClass());
   
   /**
    * Saving user info with property
    * @param propertyFeatureInfo
-   * @param registrationInfo
    * @return
+   * @throws GenericProcessException
    */
   public boolean savePropertyWithUserDetails(PropertyFeatureInfo propertyFeatureInfo)
+  	throws GenericProcessException
   {
     boolean savedSuccess = savePropertyDetails(propertyFeatureInfo);
-    //registrationProcess.saveUserWithExtension(registrationInfo);
     UserDetails userDetails = userProcess.findLoggedInUserId();
     if (userDetails instanceof UserDetails)
     {
-    	//registrationProcess.saveUserWithExtension(registrationInfo);
+      try
+      {
     	PropOwnerDao propOwnerDao = new PropOwnerDao();
         propOwnerDao.setPropInfoDao(propInfoDao);
         propOwnerDao.setUserName(userDetails.getUsername());
         propOwnerDaoProcess.addUpdatePropOwnerDao(propOwnerDao);
+      }
+      catch (Exception e)
+      {
+    	logger.info("Exception in savePropertyWithUserDetails(): "+e);
+        throw new GenericProcessException("Exception in savePropertyWithUserDetails() saving Property Owner details");
+      }
     }
     return savedSuccess;
   }
@@ -81,29 +90,38 @@ public class PropertyUploadProcess
   /**
    * Saving user info with requirement
    * @param requirementInfo
-   * @param registrationInfo
+   * @throws GenericProcessException
    */
-  public long saveRequirementWithUserDetails(RequirementInfo requirementInfo)
+  public void saveRequirementWithUserDetails(RequirementInfo requirementInfo)
+  	throws GenericProcessException
   {
     saveRequirementDetails(requirementInfo);
-    return propRequirementDao.getPropRequirementId();
-    /*UserDetails userDetails = userProcess.findLoggedInUserId();
+    UserDetails userDetails = userProcess.findLoggedInUserId();
     if (userDetails instanceof UserDetails)
     {
-    	//registrationProcess.saveUserWithExtension(registrationInfo);
+      try
+      {
         RequirementOwnerDao requirementOwnerDao = new RequirementOwnerDao();
         requirementOwnerDao.setPropRequirementDao(propRequirementDao);
         requirementOwnerDao.setUserName(userDetails.getUsername());
         requirementOwnerDaoProcess.addUpdateRequirementOwnerDao(requirementOwnerDao);
-    }*/
+      }
+      catch (Exception e)
+      {
+    	logger.info("Exception in saveRequirementWithUserDetails(): "+e);
+      	throw new GenericProcessException("Exception in saveRequirementWithUserDetails() saving Requirment Owner details");
+      }
+    }
   }
   
   /**
    * Save Property Details
    * @param propertyFeatureInfo
    * @return
+   * @throws GenericProcessException
    */
   public boolean savePropertyDetails(PropertyFeatureInfo propertyFeatureInfo)
+		  throws GenericProcessException
   {
     propInfoDao = new PropInfoDao();
     try
@@ -111,18 +129,20 @@ public class PropertyUploadProcess
       savePropertyMandateInfos(propertyFeatureInfo.getPropertyMandateInfo());
       savePropertyFeatureInfo(propertyFeatureInfo.getResidentialPropInfo());
     }
-    catch(GenericProcessException e)
+    catch(Exception e)
     {
-      //Log the exception
+    	logger.info("Exception in savePropertyDetails(): "+e);
+    	throw new GenericProcessException("Exception in savePropertyDetails() saving Property Mandate info");
     }
     // Saving Property Master table
     try
     {
       propInfoDao = propInfoDaoProcess.addUpdatePropInfoDao(propInfoDao);
     }
-    catch(GenericProcessException e)
+    catch(Exception e)
     {
-      //Log the exception
+      logger.info("Exception in savePropertyDetails() in saving addUpdatePropInfoDao: "+e);
+      throw new GenericProcessException("Exception in savePropertyDetails() saving Master Property info");
     }
     
     // Saving Property Location Info
@@ -132,7 +152,8 @@ public class PropertyUploadProcess
     }
     catch(GenericProcessException e)
     {
-      //Log the exception
+      logger.info("Exception in savePropertyDetails() in saving savePropertyLocationInfo: "+e);
+      throw new GenericProcessException("Exception in savePropertyDetails() saving Property Location info");
     }
     return true;
   }
@@ -141,8 +162,10 @@ public class PropertyUploadProcess
    * Saving Requirement Details
    * @param propertyMandateInfo
    * @return
+   * @throws GenericProcessException
    */
   public boolean saveRequirementDetails(RequirementInfo requirementInfo)
+  	throws GenericProcessException
   {
     try
     {
@@ -151,9 +174,10 @@ public class PropertyUploadProcess
       createReqLocations(requirementInfo.getLocations(), requirementInfo.getCity());
       createReqPropTypes(requirementInfo.getPropertyTypes());
     }
-    catch(GenericProcessException e)
+    catch(Exception e)
     {
-      //Log the exception
+      logger.info("Exception in saveRequirementDetails() : "+e);
+      throw new GenericProcessException("Exception in saveRequirementDetails() saving Requirement info");
     }
     return true;
   }
@@ -161,49 +185,71 @@ public class PropertyUploadProcess
   /**
    * Creating Requirement Property Types Mapping
    * @param propertyTypes
+   * @throws GenericProcessException
    */
   private void createReqPropTypes(PropertyTypeModel[] propertyTypes)
+  	throws GenericProcessException
   {
-    ReqPropTypeDao reqPropTypeDao = null;
-    for(PropertyTypeModel propertyType : propertyTypes)
-    {
-      reqPropTypeDao = new ReqPropTypeDao();
-      reqPropTypeDao.setPropRequirementDao(propRequirementDao);
-      reqPropTypeDao.setPropTypeId(propertyType.getId());
-      reqPropTypeDaoProcess.addUpdateReqPropTypeDao(reqPropTypeDao);
-    }
+	try
+	{
+      ReqPropTypeDao reqPropTypeDao = null;
+      for(PropertyTypeModel propertyType : propertyTypes)
+      {
+        reqPropTypeDao = new ReqPropTypeDao();
+        reqPropTypeDao.setPropRequirementDao(propRequirementDao);
+        reqPropTypeDao.setPropTypeId(propertyType.getId());
+        reqPropTypeDaoProcess.addUpdateReqPropTypeDao(reqPropTypeDao);
+      }
+	}
+	catch(Exception e)
+	{
+	  logger.info("Exception in createReqPropTypes() : "+e);
+	  throw new GenericProcessException("Exception in createReqPropTypes() saving Requirement Property Types");
+	}
   }
   
   /**
    * Saving Property Requirement Details
    * @param requirementInfo
+   * @throws GenericProcessException
    */
   private void savePropertyReqDetails(RequirementInfo requirementInfo)
+  	throws GenericProcessException
   {
-    propRequirementDao.setMinCoveredArea(requirementInfo.getMinCoveredArea());
-    propRequirementDao.setMaxCoveredArea(requirementInfo.getMaxCoveredArea());
-    propRequirementDao.setCoveredAreaUnit(requirementInfo.getCoveredAreaUnit() != null
-      ? requirementInfo.getCoveredAreaUnit().getValue()
-      : null);
-    propRequirementDao.setMinPlotArea(requirementInfo.getMinPlotArea());
-    propRequirementDao.setMaxPlotArea(requirementInfo.getMaxPlotArea());
-    propRequirementDao.setPlotAreaUnit(requirementInfo.getPlotAreaUnit() != null ? requirementInfo
-      .getPlotAreaUnit().getValue() : null);
-    propRequirementDao.setMinBudget(Long.parseLong(requirementInfo.getMinBudget().getId()));
-    propRequirementDao.setMaxBudget(Long.parseLong(requirementInfo.getMaxBudget().getId()));
-    propRequirementDao.setDealingType(requirementInfo.getDealingType());
-    propRequirementDao.setMinBedrooms(Integer.parseInt(requirementInfo.getMinBedrooms().getId()));
-    propRequirementDao.setMaxBedrooms(Integer.parseInt(requirementInfo.getMaxBedrooms().getId()));
-    propRequirementDao.setPropPurchaseId(requirementInfo.getPurchaseType());
-    propRequirementDao = propRequirementDaoProcess.addUpdatePropRequirementDao(propRequirementDao);
+    try
+    {
+      propRequirementDao.setMinCoveredArea(requirementInfo.getMinCoveredArea());
+      propRequirementDao.setMaxCoveredArea(requirementInfo.getMaxCoveredArea());
+      propRequirementDao.setCoveredAreaUnit(requirementInfo.getCoveredAreaUnit() != null
+        ? requirementInfo.getCoveredAreaUnit().getValue()
+        : null);
+      propRequirementDao.setMinPlotArea(requirementInfo.getMinPlotArea());
+      propRequirementDao.setMaxPlotArea(requirementInfo.getMaxPlotArea());
+      propRequirementDao.setPlotAreaUnit(requirementInfo.getPlotAreaUnit() != null ? requirementInfo
+        .getPlotAreaUnit().getValue() : null);
+      propRequirementDao.setMinBudget(Long.parseLong(requirementInfo.getMinBudget().getId()));
+      propRequirementDao.setMaxBudget(Long.parseLong(requirementInfo.getMaxBudget().getId()));
+      propRequirementDao.setDealingType(requirementInfo.getDealingType());
+      propRequirementDao.setMinBedrooms(Integer.parseInt(requirementInfo.getMinBedrooms().getId()));
+      propRequirementDao.setMaxBedrooms(Integer.parseInt(requirementInfo.getMaxBedrooms().getId()));
+      propRequirementDao.setPropPurchaseId(requirementInfo.getPurchaseType());
+      propRequirementDao = propRequirementDaoProcess.addUpdatePropRequirementDao(propRequirementDao);
+	}
+    catch(Exception e)
+    {
+      logger.info("Exception in savePropertyReqDetails() : "+e);
+      throw new GenericProcessException("Exception in savePropertyReqDetails() saving Requirement Details");
+    }
   }
   
   /**
    * Creating Requirement & Location Mapping
    * @param locations
    * @param cityId
+   * @throws GenericProcessException
    */
   private void createReqLocations(LocalityModel[] locations, int cityId)
+  	throws GenericProcessException
   {
     PropLocationInfoDao propLocationInfoDao = null;
     for(LocalityModel location : locations)
@@ -216,9 +262,10 @@ public class PropertyUploadProcess
         propLocationInfoDao.setPropRequirementDao(propRequirementDao);
         propLocationInfoDaoProcess.addUpdatePropAreaDao(propLocationInfoDao);
       }
-      catch (GenericProcessException e)
+      catch (Exception e)
       {
-        // Log the exception
+    	logger.info("Exception in createReqLocations() : "+e);
+        throw new GenericProcessException("Exception in createReqLocations() saving Requirement Location infos");
       }
     }
     
@@ -228,8 +275,10 @@ public class PropertyUploadProcess
   /**
    * Saving Property Location Info
    * @param propertyMandateInfo
+   * @throws GenericProcessException
    */
   private void savePropertyLocationInfo(PropertyMandateInfo propertyMandateInfo)
+  	throws GenericProcessException
   {
     PropLocationInfoDao propLocationInfoDao = new PropLocationInfoDao();
     try
@@ -249,15 +298,17 @@ public class PropertyUploadProcess
       propLocationInfoDao.setPropInfoDao(propInfoDao);
       propLocationInfoDaoProcess.addUpdatePropAreaDao(propLocationInfoDao);
     }
-    catch (GenericProcessException e)
+    catch (Exception e)
     {
-      // Log the exception
+      logger.info("Exception in savePropertyLocationInfo() : "+e);
+      throw new GenericProcessException("Exception in createReqLocations() saving Property Location infos");
     }
   }
   
   /**
    * Saving Residential Property Info
    * @param residentialPropInfo
+   * @throws GenericProcessException
    */
   public void savePropertyFeatureInfo(ResidentialPropInfo residentialPropInfo)
   {
@@ -265,23 +316,42 @@ public class PropertyUploadProcess
     PropFeaturesDao propFeaturesDao = new PropFeaturesDao();
     try
     {
-      propFeaturesDao.setBedRooms(Integer
-        .parseInt(residentialPropInfo.getNoOfBedRooms().getLabel()));
-      propFeaturesDao.setBathRooms(Integer.parseInt(residentialPropInfo.getNoOfBathRooms()
-        .getLabel()));
-      propFeaturesDao.setBalconies(Integer.parseInt(residentialPropInfo.getNoOfBalonies()
-        .getLabel()));
-      propFeaturesDao.setFurnished(residentialPropInfo.getFurnishedStatus().getValue());
-      propFeaturesDao.setAvailFloor(Integer.parseInt(residentialPropInfo.getFloorNumber()
-        .getValue()));
-      propFeaturesDao.setTotalFloors(Integer.parseInt(residentialPropInfo.getTotalFloor()
-        .getValue()));
+      if (null != residentialPropInfo.getNoOfBedRooms()) 
+      {
+	    propFeaturesDao.setBedRooms(Integer.parseInt(residentialPropInfo.getNoOfBedRooms()
+		  .getLabel()));
+	  }
+      if (null != residentialPropInfo.getNoOfBathRooms())
+      {
+    	propFeaturesDao.setBathRooms(Integer.parseInt(residentialPropInfo.getNoOfBathRooms()
+    	  .getLabel()));  
+      }
+      if (null != residentialPropInfo.getNoOfBalonies())
+      {
+        propFeaturesDao.setBalconies(Integer.parseInt(residentialPropInfo.getNoOfBalonies()
+          .getLabel()));
+      }
+      if (null != residentialPropInfo.getFurnishedStatus())
+      {
+        propFeaturesDao.setFurnished(residentialPropInfo.getFurnishedStatus().getValue());
+      }
+      if (null != residentialPropInfo.getFloorNumber())
+      {
+        propFeaturesDao.setAvailFloor(Integer.parseInt(residentialPropInfo.getFloorNumber()
+          .getValue()));
+      }
+      if (null != residentialPropInfo.getTotalFloor())
+      {
+        propFeaturesDao.setTotalFloors(Integer.parseInt(residentialPropInfo.getTotalFloor()
+          .getValue()));
+      }
       propFeaturesDao = propFeaturesDaoProcess.addUpdatePropFeaturesDao(propFeaturesDao);
       propInfoDao.setPropFeatures(propFeaturesDao);
     }
-    catch (GenericProcessException e)
+    catch (Exception e)
     {
-      // Log the exception
+      logger.info("Exception in savePropertyFeatureInfo() in saving addUpdatePropFeaturesDao() : "+e);
+      throw new GenericProcessException("Exception in savePropertyFeatureInfo() saving Property Feature infos");
     }
 
     // Saving Property transactions
@@ -293,9 +363,10 @@ public class PropertyUploadProcess
         .addUpdatePropTransactionDao(propTransactionDao);
       propInfoDao.setPropTransaction(propTransactionDao);
     }
-    catch (GenericProcessException e)
+    catch (Exception e)
     {
-      // Log the exception
+      logger.info("Exception in savePropertyFeatureInfo() in saving addUpdatePropTransactionDao() : "+e);
+      throw new GenericProcessException("Exception in savePropertyFeatureInfo() saving Property Transaction infos");
     }
 
     // Saving Property TermsNConditions
@@ -308,17 +379,20 @@ public class PropertyUploadProcess
       propTermsCondDao = propTermsCondDaoProcess.addUpdatePropTermsCondDao(propTermsCondDao);
       propInfoDao.setPropTermsCond(propTermsCondDao);
     }
-    catch (GenericProcessException e)
+    catch (Exception e)
     {
-      // Log the exception
+      logger.info("Exception in savePropertyFeatureInfo() in saving addUpdatePropTermsCondDao() : "+e);
+      throw new GenericProcessException("Exception in savePropertyFeatureInfo() saving Property Terms & Conditions");
     }
   }
   
   /**
    * Saving Property Mandatory Information
    * @param propertyMandateInfo
+   * @throws GenericProcessException
    */
   public void savePropertyMandateInfos(PropertyMandateInfo propertyMandateInfo)
+  	throws GenericProcessException
   {
     try
     {
@@ -331,15 +405,22 @@ public class PropertyUploadProcess
       // Saving Property Area Info
       PropAreaDao propAreaDao = new PropAreaDao();
       propAreaDao.setCoveredArea(propertyMandateInfo.getCoveredArea());
-      propAreaDao.setCoveredAreaUnit(propertyMandateInfo.getCoveredAreaUnit().getValue());
+      if (null != propertyMandateInfo.getCoveredAreaUnit())
+      {
+    	  propAreaDao.setCoveredAreaUnit(propertyMandateInfo.getCoveredAreaUnit().getValue());
+      }
       propAreaDao.setPlotArea(propertyMandateInfo.getPlotArea());
-      propAreaDao.setPlotAreaUnit(propertyMandateInfo.getPlotAreaUnit().getValue());
+      if (null != propertyMandateInfo.getPlotAreaUnit())
+      {
+    	  propAreaDao.setPlotAreaUnit(propertyMandateInfo.getPlotAreaUnit().getValue());
+      }
       propAreaDao = propAreaDaoProcess.addUpdatePropAreaDao(propAreaDao);
       propInfoDao.setPropArea(propAreaDao);
     }
-    catch (GenericProcessException e)
+    catch (Exception e)
     {
-      // Log the exception
+      logger.info("Exception in savePropertyMandateInfos() : "+e);
+      throw new GenericProcessException("Exception in savePropertyMandateInfos() saving Property Mandate infos");
     }
 
     try
@@ -350,9 +431,10 @@ public class PropertyUploadProcess
       propPriceDao = propPriceDaoProcess.addUpdatePropPriceDao(propPriceDao);
       propInfoDao.setPropPrice(propPriceDao);
     }
-    catch (GenericProcessException e)
+    catch (Exception e)
     {
-      // Log the exception
+      logger.info("Exception in savePropertyMandateInfos() in addUpdatePropPriceDao() : "+e);
+      throw new GenericProcessException("Exception in savePropertyMandateInfos() saving Property Price infos");
     }
   }
 
