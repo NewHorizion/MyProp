@@ -1,0 +1,5 @@
+ALTER TABLE prop_features
+ADD inhouse_amenities varchar(500)
+
+ALTER TABLE prop_features
+ADD external_amenities varchar(1000)

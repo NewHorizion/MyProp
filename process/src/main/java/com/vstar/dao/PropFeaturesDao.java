@@ -48,6 +48,11 @@ public class PropFeaturesDao implements java.io.Serializable
   private String custom3;
   @Column(name = "custom4", length = 10)
   private String custom4;
+  @Column(name = "inhouse_amenities", length = 500)
+  private String inhouseAmenities;
+  @Column(name = "external_amenities", length = 1000)
+  private String externalAmenities;
+  
 
   public PropFeaturesDao()
   {
@@ -210,4 +215,20 @@ public class PropFeaturesDao implements java.io.Serializable
   {
     this.custom4 = custom4;
   }
+
+public String getInhouseAmenities() {
+	return inhouseAmenities;
+}
+
+public void setInhouseAmenities(String inhouseAmenities) {
+	this.inhouseAmenities = inhouseAmenities;
+}
+
+public String getExternalAmenities() {
+	return externalAmenities;
+}
+
+public void setExternalAmenities(String externalAmenities) {
+	this.externalAmenities = externalAmenities;
+}
 }

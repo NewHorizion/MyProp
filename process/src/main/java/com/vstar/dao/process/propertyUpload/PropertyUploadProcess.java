@@ -33,6 +33,7 @@ import com.vstar.process.propertyDetailInfo.PropertyFeatureInfo;
 import com.vstar.process.propertyDetailInfo.PropertyMandateInfo;
 import com.vstar.process.propertyDetailInfo.RequirementInfo;
 import com.vstar.process.propertyDetailInfo.ResidentialPropInfo;
+import com.vstar.process.propertyDetailInfo.ResidentialUnits;
 
 /**
  * Process for saving property details
@@ -344,6 +345,25 @@ public class PropertyUploadProcess
       {
         propFeaturesDao.setTotalFloors(Integer.parseInt(residentialPropInfo.getTotalFloor()
           .getValue()));
+      }
+      StringBuffer amenBuffer = null;
+      if (null != residentialPropInfo.getInHouseAmenities())
+      {
+    	amenBuffer = new StringBuffer();
+        for (ResidentialUnits inhouseAmen : residentialPropInfo.getInHouseAmenities())
+        {
+    	  amenBuffer.append(inhouseAmen.getLabel() + ";");
+        }
+        propFeaturesDao.setInhouseAmenities(amenBuffer.toString());
+      }
+      if (null != residentialPropInfo.getExternalAmenities())
+      {
+    	amenBuffer = new StringBuffer();
+        for (ResidentialUnits extAmen : residentialPropInfo.getExternalAmenities())
+        {
+    	  amenBuffer.append(extAmen.getLabel() + ";");
+        }
+        propFeaturesDao.setExternalAmenities(amenBuffer.toString());
       }
       propFeaturesDao = propFeaturesDaoProcess.addUpdatePropFeaturesDao(propFeaturesDao);
       propInfoDao.setPropFeatures(propFeaturesDao);

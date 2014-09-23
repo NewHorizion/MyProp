@@ -19,8 +19,8 @@ public class ResidentialPropInfo
   private String landmarks;
   private boolean dealingType;
   private String termsNConditions;
-  private String[] inHouseAmenities;
-  private String[] externalAmenities;
+  private ResidentialUnits[] inHouseAmenities;
+  private ResidentialUnits[] externalAmenities;
 
   public ResidentialUnits getFurnishedStatus()
   {
@@ -142,22 +142,22 @@ public class ResidentialPropInfo
     this.termsNConditions = termsNConditions;
   }
 
-  public String[] getInHouseAmenities()
+  public ResidentialUnits[] getInHouseAmenities()
   {
     return inHouseAmenities;
   }
 
-  public void setInHouseAmenities(String[] inHouseAmenities)
+  public void setInHouseAmenities(ResidentialUnits[] inHouseAmenities)
   {
     this.inHouseAmenities = inHouseAmenities;
   }
 
-  public String[] getExternalAmenities()
+  public ResidentialUnits[] getExternalAmenities()
   {
     return externalAmenities;
   }
 
-  public void setExternalAmenities(String[] externalAmenities)
+  public void setExternalAmenities(ResidentialUnits[] externalAmenities)
   {
     this.externalAmenities = externalAmenities;
   }
