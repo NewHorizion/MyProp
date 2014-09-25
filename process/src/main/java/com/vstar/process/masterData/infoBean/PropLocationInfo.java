@@ -20,6 +20,24 @@ public class PropLocationInfo
     this.locationId = locationId;
     this.locationName = locationName;
   }
+  
+  /**
+   * Equating two objects
+   * 
+   * @param propLocationInfo
+   * @return
+   */
+  @Override
+  public boolean equals(Object object)
+  {
+    if(object == null)
+      return false;
+    if(!(object instanceof PropLocationInfo)) 
+      return false;
+
+    PropLocationInfo propLocationInfo = (PropLocationInfo) object;
+    return this.locationId == propLocationInfo.locationId;
+  }
 
   public long getLocationId()
   {

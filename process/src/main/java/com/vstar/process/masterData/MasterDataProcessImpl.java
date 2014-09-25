@@ -20,10 +20,10 @@ public class MasterDataProcessImpl implements MasterDataProcess {
 	private Properties mergedProperties;
 	private final String JAXB_MASTER_DATA_PACKAGE = "com.vstar.process.jaxb";
 	private PropLocationDataProcessImpl propLocationDataProcessImpl;
-
+	public static Map<String, Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>>> countries = null;
+	
 	@Override
 	public Map<String, Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>>> getLocationMasterData() {
-	  Map<String, Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>>> countries = null;
 
 		/*Map<String, List<String>> statesMap = new LinkedHashMap<String, List<String>>();
 		List<String> MaharashtraCities = new ArrayList<String>();

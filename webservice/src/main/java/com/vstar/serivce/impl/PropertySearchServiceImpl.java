@@ -24,11 +24,8 @@ public class PropertySearchServiceImpl implements PropertySearchService {
 	@Produces("application/json")
 	@Path("/properties")
 	public String findProperties() {
-		List<Map<String, String>> searchProperties = propertySearchProcess
+		return propertySearchProcess
 				.findProperty();
-		Gson gson = new Gson();
-		String json = gson.toJson(searchProperties);
-		return json;
 	}
 
 	@Transactional

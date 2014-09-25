@@ -39,6 +39,7 @@
 	<bean id="propertySearchProcess"
 		class="com.vstar.process.property.search.PropertySearchProcessImpl">
 		<property name="mergedProperties" ref="mergedProperties"></property>
+		<property name="propInfoDaoProcess" ref="propInfoDaoProcess"></property>
 	</bean>
 
 	<bean id="masterDataInitializedListener" class="com.vstar.process.listeners.MasterDataInitialized">

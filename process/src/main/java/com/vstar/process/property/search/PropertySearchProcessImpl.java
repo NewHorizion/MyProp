@@ -6,7 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.cxf.tools.util.PropertyUtil;
+
 import com.google.gson.Gson;
+import com.vstar.common.PropertyTypeEnum;
+import com.vstar.common.PropertyUtility;
+import com.vstar.dao.PropInfoDao;
+import com.vstar.dao.process.PropInfoDaoProcess;
 import com.vstar.dao.process.PropertiesConstants;
 import com.vstar.process.masterData.model.ImageGalleryModel;
 import com.vstar.process.masterData.model.PropertyDetailsModel;
@@ -14,43 +20,46 @@ import com.vstar.process.masterData.model.PropertyDetailsModel;
 public class PropertySearchProcessImpl implements PropertySearchProcess {
 
 	private Properties mergedProperties;
+	private PropInfoDaoProcess propInfoDaoProcess;
 
 	@Override
-	public List<Map<String, String>> findProperty() {
+	public String findProperty() 
+	{
 		final String APPLICATION_CONTEXT_PATH = mergedProperties
 				.getProperty(PropertiesConstants.APPLICATION_CONTEXR_PATH);
 		final String OUTSIDE_WAR_IMAGES_PATH = mergedProperties
 				.getProperty(PropertiesConstants.OUTSIDE_WAR_IMAGES_PATH);
-		List<Map<String, String>> searchProperties = new ArrayList<Map<String, String>>();
-		Map<String, String> property1 = new LinkedHashMap<String, String>();
-		property1.put("propertyTitle",
-				"2 BHK Multistorey Apartment in Rajarajeshwari Nagar");
-		property1.put("projectName", "Lavkins Shelter");
-		property1.put("developerName", "VS Shelters");
-		property1.put("propPrice", "42.85 Lac(s) (Negotiable)");
-		property1.put("rateSqft", "3,860/Sq-ft");
-		property1.put("propertyImagePath",APPLICATION_CONTEXT_PATH
-				+ OUTSIDE_WAR_IMAGES_PATH + "/thumb.jpg");
-		searchProperties.add(property1);
-		Map<String, String> property2 = new LinkedHashMap<String, String>();
-		property2.put("propertyTitle",
-				"2 BHK Multistorey Apartment in Banashankari Stage 3");
-		property2.put("projectName", "Sapthagiri Nagar");
-		property2.put("developerName", "Bhagini Developers");
-		property2.put("propPrice", "42.0 Lac(s)");
-		property2.put("rateSqft", "3,677");
-		property2.put("propertyImagePath",APPLICATION_CONTEXT_PATH
-				+ OUTSIDE_WAR_IMAGES_PATH + "/thumb.jpg");
-		searchProperties.add(property2);
-		searchProperties.add(property2);
-		searchProperties.add(property2);
-		searchProperties.add(property2);
-		searchProperties.add(property2);
-		searchProperties.add(property2);
-		searchProperties.add(property2);
-		searchProperties.add(property2);
-		searchProperties.add(property2);
-		return searchProperties;
+		List<PropertyDetailsModel> searchProperties = new ArrayList<PropertyDetailsModel>();
+		List<PropInfoDao> propInfoDaos = propInfoDaoProcess.getAllPropInfoDaos();
+		PropertyDetailsModel propertyDetailsModel = null;
+		for (PropInfoDao propInfoDao : propInfoDaos) {
+			propertyDetailsModel = new PropertyDetailsModel();
+			try {
+				propertyDetailsModel
+						.setPropertyTitle(PropertyUtility.getTitle(propInfoDao
+								.getPropFeatures().getBedRooms(), propInfoDao
+								.getPropType(), propInfoDao.getPropInfoId()));
+				propertyDetailsModel.setProjectName(propInfoDao
+						.getPropTransaction().getTransactionType());
+				propertyDetailsModel
+						.setPropertyPrice(String.valueOf(propInfoDao
+								.getPropPrice().getExpectedPrice()));
+				propertyDetailsModel.setPerSqFtRate(String.valueOf(propInfoDao
+						.getPropPrice().getExpectedPrice()));
+				propertyDetailsModel
+						.setPropertyImagePath(APPLICATION_CONTEXT_PATH
+								+ OUTSIDE_WAR_IMAGES_PATH + "/thumb.jpg");
+				searchProperties.add(propertyDetailsModel);
+			} catch (Exception e) {
+				// Log the exception
+			}
+		}
+		//property1.put("developerName", "VS Shelters");
+		Map<String, List<PropertyDetailsModel>> mapRecentProperties = new LinkedHashMap<String, List<PropertyDetailsModel>>();
+		mapRecentProperties.put("searchProperties", searchProperties);
+    Gson gson = new Gson();
+    String json = gson.toJson(mapRecentProperties);
+		return json;
 	}
 
 	/*
@@ -61,47 +70,45 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
 	 * ()
 	 */
 	@Override
-	public String findLatestProperties() {
-		final String APPLICATION_CONTEXT_PATH = mergedProperties
-				.getProperty(PropertiesConstants.APPLICATION_CONTEXR_PATH);
-		final String OUTSIDE_WAR_IMAGES_PATH = mergedProperties
-				.getProperty(PropertiesConstants.OUTSIDE_WAR_IMAGES_PATH);
-		Map<String, Object> mapRecentProperties = new LinkedHashMap<String, Object>();
-		List<PropertyDetailsModel> latestProperties = new ArrayList<PropertyDetailsModel>();
-		PropertyDetailsModel property1 = new PropertyDetailsModel();
-		property1.setDeveloperName("VS Shelters");
-		property1.setPerSqFtRate("3,860/Sq-ft");
-		property1.setProjectName("Lavkins Shelter");
-		property1
-				.setPropertyDescription("Cherished dreams, blissful mornings, laughter and memories. Shades of bliss overwhelm your shines");
-		property1.setPropertyThumbImagePath(APPLICATION_CONTEXT_PATH
-				+ OUTSIDE_WAR_IMAGES_PATH + "/thumb.jpg");
-		property1
-				.setPropertyTitle("2 BHK Multistorey Apartment in Rajarajeshwari Nagar");
-		property1.setPropertyPrice("42.85 Lac(s) (Negotiable)");
-		latestProperties.add(property1);
-		
-		PropertyDetailsModel property2 = new PropertyDetailsModel();
-		property2.setDeveloperName("Bhagini Developers");
-		property2.setPerSqFtRate("3,677/Sq-ft");
-		property2.setProjectName("Sapthagiri Nagar");
-		property2
-				.setPropertyDescription("Cherished dreams, blissful mornings, laughter and memories. Shades of bliss overwhelm your shines");
-		property2.setPropertyThumbImagePath(APPLICATION_CONTEXT_PATH
-				+ OUTSIDE_WAR_IMAGES_PATH + "/thumb2.gif");
-		property2
-				.setPropertyTitle("2 BHK Multistorey Apartment in Banashankari Stage 3");
-		property2.setPropertyPrice("42.85 Lac(s) (Negotiable)");
-		latestProperties.add(property2	);
-		latestProperties.add(property2	);
-		latestProperties.add(property2	);
-		
-		
-		mapRecentProperties.put("latestProperties", latestProperties);
-		Gson gson = new Gson();
-		String json = gson.toJson(mapRecentProperties);
-		return json;
-	}
+  public String findLatestProperties()
+  {
+    final String APPLICATION_CONTEXT_PATH = mergedProperties
+      .getProperty(PropertiesConstants.APPLICATION_CONTEXR_PATH);
+    final String OUTSIDE_WAR_IMAGES_PATH = mergedProperties
+      .getProperty(PropertiesConstants.OUTSIDE_WAR_IMAGES_PATH);
+    Map<String, Object> mapRecentProperties = new LinkedHashMap<String, Object>();
+    List<PropertyDetailsModel> latestProperties = new ArrayList<PropertyDetailsModel>();
+    ;
+    List<PropInfoDao> propInfoDaos = propInfoDaoProcess.getAllPropInfoDaos();
+    PropertyDetailsModel propertyDetailsModel = null;
+    for (PropInfoDao propInfoDao : propInfoDaos)
+    {
+      propertyDetailsModel = new PropertyDetailsModel();
+      try
+      {
+        propertyDetailsModel
+          .setPropertyTitle(PropertyUtility.getTitle(propInfoDao.getPropFeatures().getBedRooms(),
+            propInfoDao.getPropType(), propInfoDao.getPropInfoId()));
+        propertyDetailsModel.setProjectName(propInfoDao.getPropTransaction().getTransactionType());
+        propertyDetailsModel.setPropertyPrice(String.valueOf(propInfoDao.getPropPrice()
+          .getExpectedPrice()));
+        propertyDetailsModel.setPerSqFtRate(String.valueOf(propInfoDao.getPropPrice()
+          .getExpectedPrice()));
+        propertyDetailsModel.setPropertyImagePath(APPLICATION_CONTEXT_PATH
+          + OUTSIDE_WAR_IMAGES_PATH + "/thumb.jpg");
+        latestProperties.add(propertyDetailsModel);
+      }
+      catch (Exception e)
+      {
+        // Log the exception
+      }
+    }
+
+    mapRecentProperties.put("latestProperties", latestProperties);
+    Gson gson = new Gson();
+    String json = gson.toJson(mapRecentProperties);
+    return json;
+  }
 	
 
 	@Override
@@ -152,6 +159,14 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
 	 */
 	public void setMergedProperties(Properties mergedProperties) {
 		this.mergedProperties = mergedProperties;
+	}
+
+	public PropInfoDaoProcess getPropInfoDaoProcess() {
+		return propInfoDaoProcess;
+	}
+
+	public void setPropInfoDaoProcess(PropInfoDaoProcess propInfoDaoProcess) {
+		this.propInfoDaoProcess = propInfoDaoProcess;
 	}
 
 
