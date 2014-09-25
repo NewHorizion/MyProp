@@ -223,6 +223,27 @@ scotchApp
 						}
 					
 					};
+					
+					/*$scope.$watch( 'formData.requirementInfo.propertyTypes' , function( selectedVal ) {
+						if (selectedVal !== undefined)
+						{
+							if (selectedVal == '5' || selectedVal == '16'
+									|| selectedVal == '20' || selectedVal == '21' || selectedVal == '23' 
+									|| selectedVal == '24' || selectedVal == '9' || selectedVal == '10' 
+									|| selectedVal == '12' || selectedVal == '13' || selectedVal == '17'
+									|| selectedVal == '14' || selectedVal == '15' || selectedVal == '25'
+									|| selectedVal == '22')
+							{
+								$scope.displayFeatures = false;
+								
+							}
+							else
+							{
+								$scope.displayBedroom = true;
+							}
+						}
+							
+		            }, true);*/
 				});
 
 scotchApp

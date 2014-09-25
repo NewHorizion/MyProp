@@ -82,11 +82,17 @@
 	   						<li>
 	    						<h5>Property Price</h5>
 	    					</li>
-	    					<li>
+	    					<li ng-hide="formData.requirementInfo.purchaseType == '1' || formData.requirementInfo.purchaseType == ''">
 	    						<label>Expected Price <em>*</em> : </label>
 		     					<rent-budget-ctrl rent-model-name="formData.requirementInfo.minBudget" rent-budgets="rentBudgets"></rent-budget-ctrl>
 		     					To
 		     					<rent-budget-ctrl rent-model-name="formData.requirementInfo.maxBudget" rent-budgets="rentBudgets"></rent-budget-ctrl>          
+	   						</li>
+	   						<li ng-show="formData.requirementInfo.purchaseType=='1'">
+	    						<label>Expected Price <em>*</em> : </label>
+		     					<rent-budget-ctrl rent-model-name="formData.requirementInfo.minBudget" rent-budgets="saleBudgets"></rent-budget-ctrl>
+		     					To
+		     					<rent-budget-ctrl rent-model-name="formData.requirementInfo.maxBudget" rent-budgets="saleBudgets"></rent-budget-ctrl>          
 	   						</li>
 	   						<li style="margin-left: 225px"></li>
 	   						<li>
@@ -97,7 +103,7 @@
 			 				<li style="margin-left: 225px"></li>
 			 				<br/>
 			 				<li ng-controller="BedBathNoList">
-								<label>No. of Bedrooms<em>*</em> :</label>
+								<label>No. of Bedrooms :</label>
 								<bedroom-no-ctrl bed-model-name="formData.requirementInfo.minBedrooms" room-nos="roomNos"></bedroom-no-ctrl>
 								To
 								<bedroom-no-ctrl bed-model-name="formData.requirementInfo.maxBedrooms" room-nos="roomNos"></bedroom-no-ctrl>
