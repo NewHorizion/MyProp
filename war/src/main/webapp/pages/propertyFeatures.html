@@ -89,7 +89,7 @@
     				max-labels="1"
     				max-Height = "200px;"
     				default-label="--InHouse Amenities--"
-    				output-model="formData.propertyFeatureInfo.residentialPropInfo.inHouseAmenities"
+    				output-model="formData.propertyFeatureInfo.residentialPropInfo.inHouseAmenitie"
     				on-item-click="itemSelect( data )">
 				</div>
 				</div>
@@ -109,7 +109,7 @@
     				max-labels="1"
     				max-Height = "200px;"
     				default-label="--External Amenities--"
-    				output-model="formData.propertyFeatureInfo.residentialPropInfo.externalAmenities">
+    				output-model="formData.propertyFeatureInfo.residentialPropInfo.externalAmenitie">
 				</div> 
 				</div>
   			</li>
@@ -133,6 +133,10 @@
 			        your offer e.g. - 11 months, company lease or Bank/ School employees preferred ]</label>
 			    <textarea cols="40" rows="8" ng-model="formData.propertyFeatureInfo.residentialPropInfo.termsNConditions" name="termsNConditions" id="txtTermsConditions" class="big_txt" required="true"></textarea> <br>
 			    <input name="termsCounter" value="500" size="4" maxlength="4" readonly="readOnly" style="BORDER-TOp-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; WIDTH: 30px; BACKGROUND-COLOR: #fff; BORDER-RIGHT-WIDTH: 0px" id="termsCounter">characters left
+		  </li>
+		  <li>
+			   <label for="keyword">Images: <br></label>
+			<input type="file" file-upload multiple accept="image/*"/>
 		  </li>
 			<li style="margin-left: 225px;height:21px"></li>
 		</ul>

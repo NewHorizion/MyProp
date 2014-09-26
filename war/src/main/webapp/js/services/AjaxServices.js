@@ -46,13 +46,19 @@ ajaxServices.service('ajaxService', ['$http', 'blockUI', function ($http, blockU
 
         }
         
-        /*this.AjaxPostContentWithoutResponse = function (data, route) {
-            blockUI.start();
-            setTimeout(function () {
-            	var fd = new FormData(); 
-				fd.append('jsonData', angular.toJson(data));
-				$http(
-						{
+
+			        this.uploadImages = function(data, route, successFunction,
+					errorFunction) {
+				var files = data.files;
+				data.files = null;
+				setTimeout(function() {
+					for ( var i = 0; i < files.length; i++) {
+						blockUI.start();
+
+						var fd = new FormData();
+						fd.append("files", files[i], files[i].name);
+						fd.append('jsonData', angular.toJson(data));
+						$http({
 							method : 'POST',
 							url : route,
 							headers : {
@@ -61,15 +67,32 @@ ajaxServices.service('ajaxService', ['$http', 'blockUI', function ($http, blockU
 							transformRequest : angular.identity,
 							async : false,
 							data : fd
-						}).success(function (response, status, headers, config) {
+						}).success(function(response, status, headers, config) {
 							blockUI.stop();
-		                    return "success";
-		                }).error(function (response) {
-		                    return "error";
-		                });
-            }, 1000);
+							successFunction(response);
+						}).error(function(response) {
+							blockUI.stop();
+							if (response.IsAuthenicated == false) {
+								window.location = "/index.html";
+							}
+							errorFunction(response);
+						});
+					}
+				}, 1000);
 
-        }*/
+			}
+        
+        /*
+		 * this.AjaxPostContentWithoutResponse = function (data, route) {
+		 * blockUI.start(); setTimeout(function () { var fd = new FormData();
+		 * fd.append('jsonData', angular.toJson(data)); $http( { method :
+		 * 'POST', url : route, headers : { 'Content-Type' : undefined },
+		 * transformRequest : angular.identity, async : false, data : fd
+		 * }).success(function (response, status, headers, config) {
+		 * blockUI.stop(); return "success"; }).error(function (response) {
+		 * return "error"; }); }, 1000);
+		 *  }
+		 */
 
         this.AjaxPostWithNoAuthenication = function (data, route, successFunction, errorFunction) {
             blockUI.start();

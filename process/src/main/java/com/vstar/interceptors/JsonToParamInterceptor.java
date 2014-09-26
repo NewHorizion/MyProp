@@ -1,5 +1,6 @@
 package com.vstar.interceptors;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -15,7 +16,8 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.opensymphony.xwork2.interceptor.NoParameters;
 
 public class JsonToParamInterceptor extends AbstractInterceptor {
-  protected Log logger = LogFactory.getLog(this.getClass());
+	protected Log logger = LogFactory.getLog(this.getClass());
+
 	protected Map<String, Object> retrieveParameters(ActionContext ac) {
 		return ac.getParameters();
 	}
@@ -33,10 +35,30 @@ public class JsonToParamInterceptor extends AbstractInterceptor {
 			Gson gson = new Gson();
 
 			if (parameters != null) {
-
 				try {
 					for (Object param : parameters.keySet()) {
 						String key = (String) param;
+						if (key.contains("file")) {
+							
+							for (Field field : actionFields) {
+								for (Method method : actionMethods) {
+									if (method.getName().equalsIgnoreCase(
+											("set"+key))) {
+										try {
+											ac.getValueStack().setParameter(
+													key, parameters.get(param));
+										} catch (Exception e) {
+											logger.info("Field ");
+											ac.getConversionErrors().put(
+													key,
+													method.getReturnType()
+															.getClass());
+										}
+									}
+								}
+
+							}
+						}
 						if ("jsonData".equals(key)) {
 
 							String[] jsonData = (String[]) parameters
@@ -44,7 +66,7 @@ public class JsonToParamInterceptor extends AbstractInterceptor {
 							JSONObject json = new JSONObject(jsonData[0]);
 							if (null != json) {
 								for (Field field : actionFields) {
-									if (json.has(field.getName())) {
+									if (json.has(field.getName()) && !"files".equalsIgnoreCase(field.getName())) {
 										for (Method method : actionMethods) {
 											if (method
 													.getName()
@@ -63,9 +85,9 @@ public class JsonToParamInterceptor extends AbstractInterceptor {
 															.setParameter(name,
 																	value);
 												} catch (Exception e) {
-												  logger.info("Field "+ 
-                              json.getString(field
-                                  .getName()));
+													logger.info("Field "
+															+ json.getString(field
+																	.getName()));
 													ac.getConversionErrors()
 															.put(jsonData[0],
 																	method.getReturnType()

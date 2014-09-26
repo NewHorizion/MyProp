@@ -3,7 +3,7 @@ var scotchApp = angular.module('scotchApp',
 		[ 'multi-select', 'fileAppDir', 'ngAnimate', 'ui.router', 'flow',
 				'checklist-model', 'ng.httpLoader', 'PropertySearchServices',
 				'ajaxService', 'PropertyServices', 'blockUI','alertsService','ui.bootstrap','propertyControllers',
-				'LoginServices']);
+				'LoginServices','ImageServices']);
 scotchApp.config(function(blockUIConfigProvider) {
 
 	// Change the default overlay message
@@ -187,7 +187,7 @@ scotchApp
 						$scope.$apply(function() {
 							// add the file object to the scope's files
 							// collection
-							$scope.files.push(args.file);
+							$scope.formData.files.push(args.file);
 						});
 					});
 					// function to process the form
@@ -464,11 +464,12 @@ scotchApp.controller('latestSearchCntrl', function($scope, propertyService,image
 scotchApp
 		.controller(
 				'postPropertyController',
-				function($scope, $http, propertyService, loginService) {
+				function($scope, $http, propertyService, loginService,imageService) {
 
 					// we will store all of our form data in this object
 					$scope.formData = {};
 					$scope.files = [];
+					$scope.formData.files=[];
 
 					//listen for the file selected event
 					$scope.$on("fileSelected", function(event, args) {
@@ -488,29 +489,31 @@ scotchApp
 						{
 							$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.city.cityId;
 						}
-						fd.append('jsonData', angular.toJson($scope.formData));
-
-						//remove comment to append a file to the request
-						var oBlob = new Blob([ 'test' ], {
-							type : "text/plain"
-						});
-						fd.append("files", oBlob, $scope.files);
-						$scope.postProperty = function() {
-							alert('submit');
+                        $scope.imageUploadSuccessFull = function (response)
+                        {
+                        	alert ("post property Successfull");
+                        }
+						$scope.postProperty = function(response) {
+						     //propertyId = response.propertyId;
+						     if (null!=$scope.files)
+						    	 {
+						    	    $scope.formData.files = $scope.files;
+						    	 	imageService.uploadImages($scope.formData,$scope.imageUploadSuccessFull,$scope.error)
+						    	 }
 						}
 						
-						$scope.getErrorLogin = function(response) {
+						$scope.error = function(response) {
 						    alertsService.RenderErrorMessage("error in reqiuest");
 						}
 						if ($scope.formData.registrationInfo.newUser == 'false')
 						{
 							loginService.login($scope.formData, $scope.postProperty,
-									$scope.getErrorLogin);
+									$scope.error);
 						}
 						else
 						{
 							loginService.registration($scope.formData, $scope.postProperty,
-									$scope.getErrorLogin);
+									$scope.error);
 						}
 					};
 					
