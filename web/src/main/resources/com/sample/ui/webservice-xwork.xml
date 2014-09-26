@@ -70,7 +70,14 @@
 			<result name="success" type="chain">Login</result>
 			<result name="input" type="json"></result>
 		</action>
-		
+		<action name="UploadData" class="com.vstar.common.DataUploadAction">  
+            <interceptor-ref name="fileUpload">  
+                <param name="maximumSize">2097152</param>  
+  			</interceptor-ref>  
+            <interceptor-ref name="defaultStack"></interceptor-ref>  
+            <result name="success">/data-upload.jsp</result>  
+            <result name="input">/data-upload.jsp</result>  
+        </action> 
 	</package>
 
 </struts>
