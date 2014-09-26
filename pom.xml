@@ -15,7 +15,7 @@
 			<id>local</id>
 			<name>Maven Repository Switchboard</name>
 			<layout>default</layout>
-			<url>https://raw.github.com/vineetInd/releases/tree/master</url>
+			<url>https://raw.github.com/vineetInd/releases/master</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
