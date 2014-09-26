@@ -1,4 +1,4 @@
-package com.vstar.common;
+package com.vstar.ui.common;
 
 import java.io.File;
 import java.io.FileInputStream;

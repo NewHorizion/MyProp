@@ -1,4 +1,4 @@
-package com.vstar.common;
+package com.vstar.ui.common;
 
 /**
  * 
