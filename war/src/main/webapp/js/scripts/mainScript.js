@@ -417,7 +417,7 @@ scotchApp.controller('searchResultController', function($scope, $http,
 	$scope.properties = searchService.getSearchResponse();
 });
 
-scotchApp.controller('latestSearchCntrl', function($scope, propertyService,imageService,alertsService,$modal) {
+scotchApp.controller('latestSearchCntrl', function($scope, propertyService,GalleryImageService,alertsService,$modal) {
 	$scope.initializeController = function() {
 		propertyService.findLatest($scope.getLatestPropCompleted,
 				$scope.getLatestPropError);
@@ -425,8 +425,19 @@ scotchApp.controller('latestSearchCntrl', function($scope, propertyService,image
 	
 	 $scope.findImagesCompleted = function (response) {
      	$scope.images = response.images;
-     	imageService.saveImageResponse (response);
+     	GalleryImageService.saveImageResponse (response);
      	$scope.myInterval = -2;
+	    var modalInstance = $modal.open({
+	        templateUrl: 'pages/gallery.html',
+	        controller: 'propertyController',
+	        windowClass: 'app-modal-window-Gallery'
+	    });
+
+	    modalInstance.result.then(function (productID) {
+
+	    }, function () {
+	        // function executed on modal dismissal
+	    });
      }
 
      $scope.findImagesError = function (response) {
@@ -440,17 +451,7 @@ scotchApp.controller('latestSearchCntrl', function($scope, propertyService,image
         propertyService.findPropertyImages(getCustomer,$scope.findImagesCompleted, $scope.findImagesError);
     
        
-	    var modalInstance = $modal.open({
-	        templateUrl: 'pages/gallery.html',
-	        controller: 'propertyController',
-	        windowClass: 'app-modal-window-Gallery'
-	    });
 
-	    modalInstance.result.then(function (productID) {
-
-	    }, function () {
-	        // function executed on modal dismissal
-	    });
 	};
 	$scope.getLatestPropCompleted = function(response) {
 		$scope.latestProperties = response.latestProperties;

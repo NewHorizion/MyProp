@@ -1,10 +1,19 @@
 "use strict";
 var propertyControllers = angular.module('propertyControllers', ['ajaxService','PropertySearchServices']);
 
-propertyControllers.controller('propertyController', ['$scope', '$rootScope', 'imageService', 'alertsService', function ($scope, $rootScope, imageService, alertsService)
+propertyControllers.controller('propertyController', ['$scope', '$rootScope', 'GalleryImageService', 'alertsService', function ($scope, $rootScope, GalleryImageService, alertsService)
      {
-    var response = imageService.getImageResponse(); 
-	$scope.images = response.images;
+	$scope.images = [];
+    var response = GalleryImageService.getImageResponse(); 
+    if (null!=response.images)
+    	{
+    	  var images = response.images;
+    	  for (var i=0;i<images.length;i++)
+    		  {
+    		  $scope.images.push (images[i]);
+    		  }
+    	}
+	//$scope.images = response.images;
     }]).directive('slider', function ($timeout) {
     	  return {
     		    restrict: 'AE',

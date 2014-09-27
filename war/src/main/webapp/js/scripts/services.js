@@ -28,7 +28,7 @@ PropertySearchServices.factory('searchService', function () {
     };
 });
 
-PropertySearchServices.factory('imageService', function () {
+PropertySearchServices.factory('GalleryImageService', function () {
     var imageResponse = {};
 
     return {
