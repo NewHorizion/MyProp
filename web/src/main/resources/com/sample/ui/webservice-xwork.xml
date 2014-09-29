@@ -77,7 +77,8 @@
             <interceptor-ref name="fileUpload">  
                 <param name="maximumSize">2097152</param>  
   			</interceptor-ref>  
-            <interceptor-ref name="defaultStack"></interceptor-ref>  
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <interceptor-ref name="webservicesample-stack"></interceptor-ref>  
             <result name="success">/data-upload.jsp</result>  
             <result name="input">/data-upload.jsp</result>  
         </action> 

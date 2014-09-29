@@ -14,11 +14,12 @@ public class ResidentialPropInfo
   private ResidentialUnits floorNumber;
   private ResidentialUnits totalFloor;
   private String possessionStatus;
-  private Date availableFrom;
+  private String availableFrom;
   private String propertyDescription;
   private String landmarks;
   private boolean dealingType;
   private String termsNConditions;
+  private String builderSociety;
   private ResidentialUnits[] inHouseAmenities;
   private ResidentialUnits[] externalAmenities;
 
@@ -42,17 +43,17 @@ public class ResidentialPropInfo
     this.possessionStatus = possessionStatus;
   }
 
-  public Date getAvailableFrom()
-  {
-    return availableFrom;
-  }
+  
 
-  public void setAvailableFrom(Date availableFrom)
-  {
-    this.availableFrom = availableFrom;
-  }
+  public String getAvailableFrom() {
+	return availableFrom;
+}
 
-  public ResidentialUnits getNoOfBedRooms()
+public void setAvailableFrom(String availableFrom) {
+	this.availableFrom = availableFrom;
+}
+
+public ResidentialUnits getNoOfBedRooms()
   {
     return noOfBedRooms;
   }
@@ -161,4 +162,19 @@ public class ResidentialPropInfo
   {
     this.externalAmenities = externalAmenities;
   }
+
+/**
+ * @return the builderSociety
+ */
+public String getBuilderSociety() {
+	return builderSociety;
+}
+
+/**
+ * @param builderSociety the builderSociety to set
+ */
+public void setBuilderSociety(String builderSociety) {
+	this.builderSociety = builderSociety;
+}
+  
 }

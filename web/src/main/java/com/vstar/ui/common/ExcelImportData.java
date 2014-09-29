@@ -98,7 +98,7 @@ public class ExcelImportData
       COLUMN_14, COLUMN_15, COLUMN_16, COLUMN_17, COLUMN_18, COLUMN_19, COLUMN_20, COLUMN_21,
       COLUMN_22, COLUMN_23, COLUMN_24, COLUMN_25, COLUMN_26, COLUMN_27, COLUMN_28, COLUMN_29,
       COLUMN_30, COLUMN_31, COLUMN_32, COLUMN_33, COLUMN_34, COLUMN_35, COLUMN_36, COLUMN_37,
-      COLUMN_38};
+      COLUMN_38,COLUMN_39,COLUMN_40};
   /**
    * Column start row for data in Excel file. Offset for Title and Header rows.
    * Assumption is to begin at 0.
@@ -109,7 +109,7 @@ public class ExcelImportData
   /**
    * Max number of Columns. Assumption is to begin at 0.
    */
-  public static final int MAX_COL_NUM = 37;
+  public static final int MAX_COL_NUM = 39;
   /**
    * Max number of Rows. Assumption is to begin at START_COL.
    */

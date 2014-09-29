@@ -19,7 +19,7 @@ public class RegistrationProcess
       PropUsersDao userExtn = new PropUsersDao(registrationInfo.getEmailId(),
         registrationInfo.getUserType(), registrationInfo.getUserName(),
         registrationInfo.getMobileNumber(), registrationInfo.getLandlineNumber(),
-        registrationInfo.getCityId());
+        registrationInfo.getCityId(),registrationInfo.getCompanyName());
       propUserDaoExtnProcess.addUpdatePropUsersDaoExtn(userExtn);
       return registrationInfo.getEmailId();
     }

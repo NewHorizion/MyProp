@@ -39,6 +39,8 @@ public class PropTransactionDao implements java.io.Serializable
   private String custom3;
   @Column(name = "custom4", length = 10)
   private String custom4;
+  @Column(name = "builderSociety", length = 45)
+  private String builderSociety;
 
   public PropTransactionDao()
   {
@@ -62,13 +64,14 @@ public class PropTransactionDao implements java.io.Serializable
    * @param custom4
    */
   public PropTransactionDao(int propTransactionId, String transactionType, String possessionStatus,
-      Date availableFrom, Date createdDate, String custom1, String custom2, String custom3,
+      Date availableFrom, String builderSociety, Date createdDate, String custom1, String custom2, String custom3,
       String custom4)
   {
     this.propTransactionId = propTransactionId;
     this.transactionType = transactionType;
     this.possessionStatus = possessionStatus;
     this.availableFrom = availableFrom;
+    this.builderSociety = builderSociety;
     this.createdDate = createdDate;
     this.custom1 = custom1;
     this.custom2 = custom2;
@@ -165,4 +168,19 @@ public class PropTransactionDao implements java.io.Serializable
   {
     this.custom4 = custom4;
   }
+
+/**
+ * @return the builderSociety
+ */
+public String getBuilderSociety() {
+	return builderSociety;
+}
+
+/**
+ * @param builderSociety the builderSociety to set
+ */
+public void setBuilderSociety(String builderSociety) {
+	this.builderSociety = builderSociety;
+}
+  
 }

@@ -47,7 +47,6 @@ public class PropStateDaoProcess
     List<PropStateDao> propStateDaos = new ArrayList<PropStateDao>();
     Session session = sessionFactory.getCurrentSession();
     Query query = session.createQuery("from PropStateDao");
-    System.out.print("hjjjjjjjj" + query.getQueryString());
     propStateDaos = query.list();
     return propStateDaos;
   }
@@ -67,6 +66,25 @@ public class PropStateDaoProcess
     return propStateDao;
   }
 
+  /**
+   * @param stateName
+   * @return
+   */
+  public PropStateDao getPropStateDaoByName(String stateName) throws HibernateException
+  {
+    PropStateDao propStateDao = null;
+    Session session = sessionFactory.getCurrentSession();
+    String queryString = "from PropStateDao where stateName = :stateName";
+    Query query = session.createQuery(queryString);
+    query.setString("stateName", stateName);
+    List<PropStateDao> states = query.list();
+    if(states!=null && states.size()>0)
+    {
+    	propStateDao = states.get(0);
+    }
+    return propStateDao;
+  }
+  
   /**
    * @return the sessionFactory
    */

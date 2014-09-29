@@ -65,6 +65,9 @@ public class PropInfoDao implements java.io.Serializable
   private String custom3;
   @Column(name = "custom4", length = 10)
   private String custom4;
+  @Column(name = "negotiable", length = 15)
+  private String negotiable;
+  
 
   public PropInfoDao()
   {
@@ -95,7 +98,7 @@ public class PropInfoDao implements java.io.Serializable
    */
   public PropInfoDao(int propInfoId, PropPriceDao propPrice, PropTermsCondDao propTermsCond,
       Integer propPurchaseType, PropFeaturesDao propFeatures, PropAreaDao propArea, Integer propType,
-      PropTransactionDao propTransaction, String transactionType, Date createdDate, String custom1,
+      PropTransactionDao propTransaction, String transactionType, String negotiable, Date createdDate, String custom1,
       String custom2, String custom3, String custom4)
   {
     this.propInfoId = propInfoId;
@@ -108,6 +111,7 @@ public class PropInfoDao implements java.io.Serializable
     this.propTransaction = propTransaction;
     this.transactionType = transactionType;
     this.createdDate = createdDate;
+    this.negotiable=negotiable;
     this.custom1 = custom1;
     this.custom2 = custom2;
     this.custom3 = custom3;
@@ -253,4 +257,19 @@ public class PropInfoDao implements java.io.Serializable
   {
     this.transactionType = transactionType;
   }
+
+/**
+ * @return the negotiable
+ */
+public String getNegotiable() {
+	return negotiable;
+}
+
+/**
+ * @param negotiable the negotiable to set
+ */
+public void setNegotiable(String negotiable) {
+	this.negotiable = negotiable;
+}
+  
 }

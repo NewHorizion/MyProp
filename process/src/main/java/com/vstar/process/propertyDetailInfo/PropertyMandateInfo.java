@@ -18,6 +18,7 @@ public class PropertyMandateInfo {
 	private ResidentialUnits plotAreaUnit;
 	private String city;
 	private String locality;
+	private String negotiable;
 
 	public int getPurchaseType() {
 		return purchaseType;
@@ -113,6 +114,20 @@ public class PropertyMandateInfo {
 
 	public void setPlotAreaUnit(ResidentialUnits plotAreaUnit) {
 		this.plotAreaUnit = plotAreaUnit;
+	}
+
+	/**
+	 * @return the negotiable
+	 */
+	public String getNegotiable() {
+		return negotiable;
+	}
+
+	/**
+	 * @param negotiable the negotiable to set
+	 */
+	public void setNegotiable(String negotiable) {
+		this.negotiable = negotiable;
 	}
 	
 }

@@ -84,6 +84,28 @@ public class PropCityDaoProcess
     propCityDao = (PropCityDao) query.uniqueResult();
     return propCityDao;
   }
+  
+  /**
+   * Returning Cities by StateId,cityName
+   * 
+   * @return
+   * @throws HibernateException
+   */
+  public PropCityDao getPropCityByStateIdCityName(long stateId, String cityName) throws HibernateException
+  {
+    PropCityDao propCityDao = null;
+    Session session = sessionFactory.getCurrentSession();
+    Criteria criteria = session.createCriteria(PropCityDao.class);
+    criteria.add(Restrictions.eq("propState.propStateId", stateId));
+    criteria.add(Restrictions.eq("cityName", cityName));
+    List<PropCityDao>propCityDaos = criteria.list();
+    if(propCityDaos!=null && propCityDaos.size()>0)
+    {
+    	propCityDao = propCityDaos.get(0);
+    }
+    return propCityDao;
+  }
+  
 
   /**
    * @return the sessionFactory

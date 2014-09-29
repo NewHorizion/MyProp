@@ -27,6 +27,8 @@ public class PropUsersDao implements java.io.Serializable
   private String landLineNo;
   @Column(name = "prop_city_Id")
   private long propCityId;
+  @Column(name = "companyName")
+  private String companyName;
 
   public PropUsersDao()
   {
@@ -38,7 +40,7 @@ public class PropUsersDao implements java.io.Serializable
   }
 
   public PropUsersDao(String userId, String userType, String userName, String mobileNo,
-      String landLineNo, long propCityId)
+      String landLineNo, long propCityId, String companyName)
   {
     this.userId = userId;
     this.userType = userType;
@@ -46,6 +48,7 @@ public class PropUsersDao implements java.io.Serializable
     this.mobileNo = mobileNo;
     this.landLineNo = landLineNo;
     this.propCityId = propCityId;
+    this.companyName = companyName;
   }
 
   /**
@@ -143,4 +146,19 @@ public class PropUsersDao implements java.io.Serializable
   {
     this.propCityId = propCityId;
   }
+
+/**
+ * @return the companyName
+ */
+public String getCompanyName() {
+	return companyName;
+}
+
+/**
+ * @param companyName the companyName to set
+ */
+public void setCompanyName(String companyName) {
+	this.companyName = companyName;
+}
+  
 }

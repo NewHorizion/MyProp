@@ -379,6 +379,7 @@ public class PropertyUploadProcess
     try
     {
       propTransactionDao.setPossessionStatus(residentialPropInfo.getPossessionStatus());
+      propTransactionDao.setBuilderSociety(residentialPropInfo.getBuilderSociety());
       propTransactionDao = propTransactionDaoProcess
         .addUpdatePropTransactionDao(propTransactionDao);
       propInfoDao.setPropTransaction(propTransactionDao);
@@ -433,6 +434,10 @@ public class PropertyUploadProcess
       if (null != propertyMandateInfo.getPlotAreaUnit())
       {
     	  propAreaDao.setPlotAreaUnit(propertyMandateInfo.getPlotAreaUnit().getValue());
+      }
+      if(null!=propertyMandateInfo.getNegotiable())
+      {
+    	  propInfoDao.setNegotiable(propertyMandateInfo.getNegotiable());
       }
       propAreaDao = propAreaDaoProcess.addUpdatePropAreaDao(propAreaDao);
       propInfoDao.setPropArea(propAreaDao);
