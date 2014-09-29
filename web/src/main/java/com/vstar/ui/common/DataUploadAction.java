@@ -145,7 +145,8 @@ public class DataUploadAction extends ActionSupport implements
 			ResidentialUnits coveredUnit = new ResidentialUnits();
 			coveredUnit.setValue(row.getCoveredAreaUnit());
 			propertyMandateInfo.setCoveredAreaUnit(coveredUnit);
-			propertyMandateInfo.setLocality(row.getLocation());
+			//TODO: location
+			propertyMandateInfo.setLocality(null);
 			if(!ValidationUtil.isNullEmpty(row.getPlotArea()))
 			{
 				propertyMandateInfo.setPlotArea(Integer.parseInt(row.getPlotArea()));
@@ -160,6 +161,7 @@ public class DataUploadAction extends ActionSupport implements
 			
 			//TODO: set location
 			PropLocationInfo propLocationInfo = new PropLocationInfo();
+			propLocationInfo.setLocationName(row.getLocation());
 			propertyMandateInfo.setPropLocationInfo(propLocationInfo);
 			propertyMandateInfo.setPropPrice(formatMoney(row.getExpectedPrice()));
 			
@@ -219,7 +221,7 @@ public class DataUploadAction extends ActionSupport implements
 			propertyFeatureInfo.setPropertyMandateInfo(propertyMandateInfo);
 			propertyFeatureInfo.setResidentialPropInfo(residentialPropInfo);
 			
-			boolean propertyCreated = propertyUploadProcess.savePropertyWithUserDetails(propertyFeatureInfo);
+			boolean propertyCreated = propertyUploadProcess.savePropertyDetails(propertyFeatureInfo);
 			
 		}
 	}

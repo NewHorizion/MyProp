@@ -11,10 +11,10 @@ import com.vstar.process.masterData.infoBean.PropStateInfo;
 
 public class PropertyUtility
 {
-  public static String getTitle(int bedroom, int propertyType, int locationId) throws Exception
+  public static String getTitle(String bedroom, int propertyType, int locationId) throws Exception
   {
     StringBuffer title = new StringBuffer();
-    if (bedroom != 0)
+    if (bedroom != null)
     {
       title.append(bedroom + " BHK ");
     }
