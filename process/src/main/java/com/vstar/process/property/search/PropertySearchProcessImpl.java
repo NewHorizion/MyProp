@@ -6,11 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.cxf.tools.util.PropertyUtil;
-
 import com.google.gson.Gson;
-import com.vstar.common.PropertyTypeEnum;
-import com.vstar.common.PropertyUtility;
 import com.vstar.dao.PropInfoDao;
 import com.vstar.dao.process.PropInfoDaoProcess;
 import com.vstar.dao.process.PropertiesConstants;
@@ -25,36 +21,14 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
 	@Override
 	public String findProperty() 
 	{
-		final String APPLICATION_CONTEXT_PATH = mergedProperties
-				.getProperty(PropertiesConstants.APPLICATION_CONTEXR_PATH);
-		final String OUTSIDE_WAR_IMAGES_PATH = mergedProperties
-				.getProperty(PropertiesConstants.OUTSIDE_WAR_IMAGES_PATH);
-		List<PropertyDetailsModel> searchProperties = new ArrayList<PropertyDetailsModel>();
-		List<PropInfoDao> propInfoDaos = propInfoDaoProcess.getAllPropInfoDaos();
-		PropertyDetailsModel propertyDetailsModel = null;
-		for (PropInfoDao propInfoDao : propInfoDaos) {
-			propertyDetailsModel = new PropertyDetailsModel();
-			try {
-				propertyDetailsModel
-						.setPropertyTitle(PropertyUtility.getTitle(propInfoDao
-								.getPropFeatures().getBedRooms(), propInfoDao
-								.getPropType(), propInfoDao.getPropInfoId()));
-				propertyDetailsModel.setProjectName(propInfoDao
-						.getPropTransaction().getTransactionType());
-				propertyDetailsModel
-						.setPropertyPrice(String.valueOf(propInfoDao
-								.getPropPrice().getExpectedPrice()));
-				propertyDetailsModel.setPerSqFtRate(String.valueOf(propInfoDao
-						.getPropPrice().getExpectedPrice()));
-				propertyDetailsModel
-						.setPropertyImagePath(APPLICATION_CONTEXT_PATH
-								+ OUTSIDE_WAR_IMAGES_PATH + "/thumb.jpg");
-				searchProperties.add(propertyDetailsModel);
-			} catch (Exception e) {
-				// Log the exception
-			}
-		}
-		//property1.put("developerName", "VS Shelters");
+		List<PropertyDetailsModel> searchProperties = null;
+		
+		String whereClause = "prop_price.expected_price between 800000 and 1000000";
+		List<Object> customResults = propInfoDaoProcess.callingMainSearchSP(whereClause);
+    if (null != customResults && customResults.size() > 0)
+    {
+      searchProperties = ResultSetTransformProcess.transformMainSearch(customResults, mergedProperties);
+    }
 		Map<String, List<PropertyDetailsModel>> mapRecentProperties = new LinkedHashMap<String, List<PropertyDetailsModel>>();
 		mapRecentProperties.put("searchProperties", searchProperties);
     Gson gson = new Gson();
@@ -86,9 +60,9 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
       propertyDetailsModel = new PropertyDetailsModel();
       try
       {
-        propertyDetailsModel
+        /*propertyDetailsModel
           .setPropertyTitle(PropertyUtility.getTitle(propInfoDao.getPropFeatures().getBedRooms(),
-            propInfoDao.getPropType(), propInfoDao.getPropInfoId()));
+            propInfoDao.getPropType(), propInfoDao.getPropInfoId()));*/
         propertyDetailsModel.setProjectName(propInfoDao.getPropTransaction().getTransactionType());
         propertyDetailsModel.setPropertyPrice(String.valueOf(propInfoDao.getPropPrice()
           .getExpectedPrice()));

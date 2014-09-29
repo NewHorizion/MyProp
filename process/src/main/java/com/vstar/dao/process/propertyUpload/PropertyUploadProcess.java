@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.vstar.dao.PropAreaDao;
 import com.vstar.dao.PropFeaturesDao;
+import com.vstar.dao.PropImageDao;
 import com.vstar.dao.PropInfoDao;
 import com.vstar.dao.PropLocationInfoDao;
 import com.vstar.dao.PropOwnerDao;
@@ -17,6 +18,7 @@ import com.vstar.dao.ReqPropTypeDao;
 import com.vstar.dao.RequirementOwnerDao;
 import com.vstar.dao.process.PropAreaDaoProcess;
 import com.vstar.dao.process.PropFeaturesDaoProcess;
+import com.vstar.dao.process.PropImageDaoProcess;
 import com.vstar.dao.process.PropInfoDaoProcess;
 import com.vstar.dao.process.PropLocationInfoDaoProcess;
 import com.vstar.dao.process.PropOwnerDaoProcess;
@@ -57,6 +59,21 @@ public class PropertyUploadProcess
   private RequirementOwnerDaoProcess requirementOwnerDaoProcess;
   private UserProcess userProcess;
   protected Log logger = LogFactory.getLog(this.getClass());
+  private PropImageDaoProcess propImageDaoProcess;
+  
+  /**
+   * Saving image path with property
+   * 
+   * @param propertyId
+   * @param fileName
+   */
+  public void savePropertyImageUrl(String propertyId, String fileName)
+  {
+    PropImageDao propImageDao = new PropImageDao();
+    propImageDao.setImage(fileName);
+    propImageDao.setPropInfoId(Integer.parseInt(propertyId));
+    propImageDaoProcess.addUpdatePropImageDao(propImageDao);
+  }
   
   /**
    * Saving user info with property
@@ -64,7 +81,7 @@ public class PropertyUploadProcess
    * @return
    * @throws GenericProcessException
    */
-  public boolean savePropertyWithUserDetails(PropertyFeatureInfo propertyFeatureInfo)
+  public int savePropertyWithUserDetails(PropertyFeatureInfo propertyFeatureInfo)
   	throws GenericProcessException
   {
     boolean savedSuccess = savePropertyDetails(propertyFeatureInfo);
@@ -84,7 +101,7 @@ public class PropertyUploadProcess
         throw new GenericProcessException("Exception in savePropertyWithUserDetails() saving Property Owner details");
       }
     }
-    return savedSuccess;
+    return propInfoDao.getPropInfoId();
   }
   
   
@@ -595,6 +612,16 @@ public UserProcess getUserProcess() {
 
 public void setUserProcess(UserProcess userProcess) {
 	this.userProcess = userProcess;
+}
+
+public PropImageDaoProcess getPropImageDaoProcess()
+{
+  return propImageDaoProcess;
+}
+
+public void setPropImageDaoProcess(PropImageDaoProcess propImageDaoProcess)
+{
+  this.propImageDaoProcess = propImageDaoProcess;
 }
 
 }

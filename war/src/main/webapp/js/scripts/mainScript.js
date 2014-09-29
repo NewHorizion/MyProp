@@ -495,7 +495,7 @@ scotchApp
                         	alert ("post property Successfull");
                         }
 						$scope.postProperty = function(response) {
-						     //propertyId = response.propertyId;
+						     $scope.formData.propertyId = response.propertyId;
 						     if (null!=$scope.files)
 						    	 {
 						    	    $scope.formData.files = $scope.files;

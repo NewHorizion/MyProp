@@ -7,6 +7,8 @@ public class PropertyDetailsModel {
 	private String propertyPrice;
 	private String perSqFtRate;
 	private String propertyDescription;
+	private String coveredArea;
+	private String plotArea;
 	private String propertyImagePath;
 	private String propertyThumbImagePath;
 
@@ -73,5 +75,25 @@ public class PropertyDetailsModel {
 	public void setPropertyThumbImagePath(String propertyThumbImagePath) {
 		this.propertyThumbImagePath = propertyThumbImagePath;
 	}
+
+  public String getCoveredArea()
+  {
+    return coveredArea;
+  }
+
+  public void setCoveredArea(String coveredArea)
+  {
+    this.coveredArea = coveredArea;
+  }
+
+  public String getPlotArea()
+  {
+    return plotArea;
+  }
+
+  public void setPlotArea(String plotArea)
+  {
+    this.plotArea = plotArea;
+  }
 
 }

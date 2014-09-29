@@ -7,8 +7,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.context.support.AbstractXmlApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.vstar.dao.PropInfoDao;
 
@@ -69,6 +67,20 @@ public class PropInfoDaoProcess
     propInfoDao = (PropInfoDao) query.uniqueResult();
     return propInfoDao;
   }
+  
+  /**
+   * @param whereClause
+   * @return
+   */
+  public List callingMainSearchSP(String whereClause) throws HibernateException
+  {
+    Session session = sessionFactory.getCurrentSession();
+    Query querySP = session.createSQLQuery("CALL mainSearch (:whereClause)");
+    querySP.setString("whereClause", whereClause);
+    List customResult = querySP.list();
+    return customResult;
+  }
+  
   /**
    * @return the sessionFactory
    */
