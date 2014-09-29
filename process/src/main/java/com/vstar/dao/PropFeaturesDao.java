@@ -27,17 +27,17 @@ public class PropFeaturesDao implements java.io.Serializable
   @Column(name = "prop_feature_Id", unique = true, nullable = false)
   private int propFeatureId;
   @Column(name = "bed_Rooms")
-  private Integer bedRooms;
+  private String bedRooms;
   @Column(name = "bath_Rooms")
-  private Integer bathRooms;
+  private String bathRooms;
   @Column(name = "balconies")
-  private Integer balconies;
+  private String balconies;
   @Column(name = "furnished")
   private String furnished;
   @Column(name = "age_Of_Const", length = 10)
   private String ageOfConst;
   @Column(name = "avail_Floor")
-  private Integer availFloor;
+  private String availFloor;
   @Column(name = "total_Floors")
   private Integer totalFloors;
   @Column(name = "custom1", length = 10)
@@ -78,8 +78,8 @@ public class PropFeaturesDao implements java.io.Serializable
    * @param custom3
    * @param custom4
    */
-  public PropFeaturesDao(int propFeatureId, Integer bedRooms, Integer bathRooms, Integer balconies,
-      String furnished, String ageOfConst, Integer availFloor, Integer totalFloors, String custom1,
+  public PropFeaturesDao(int propFeatureId, String bedRooms, String bathRooms, String balconies,
+      String furnished, String ageOfConst, String availFloor, Integer totalFloors, String custom1,
       String custom2, String custom3, String custom4)
   {
     this.propFeatureId = propFeatureId;
@@ -106,32 +106,32 @@ public class PropFeaturesDao implements java.io.Serializable
     this.propFeatureId = propFeatureId;
   }
 
-  public Integer getBedRooms()
+  public String getBedRooms()
   {
     return this.bedRooms;
   }
 
-  public void setBedRooms(Integer bedRooms)
+  public void setBedRooms(String bedRooms)
   {
     this.bedRooms = bedRooms;
   }
 
-  public Integer getBathRooms()
+  public String getBathRooms()
   {
     return this.bathRooms;
   }
 
-  public void setBathRooms(Integer bathRooms)
+  public void setBathRooms(String bathRooms)
   {
     this.bathRooms = bathRooms;
   }
 
-  public Integer getBalconies()
+  public String getBalconies()
   {
     return this.balconies;
   }
 
-  public void setBalconies(Integer balconies)
+  public void setBalconies(String balconies)
   {
     this.balconies = balconies;
   }
@@ -156,12 +156,12 @@ public class PropFeaturesDao implements java.io.Serializable
     this.ageOfConst = ageOfConst;
   }
 
-  public Integer getAvailFloor()
+  public String getAvailFloor()
   {
     return this.availFloor;
   }
 
-  public void setAvailFloor(Integer availFloor)
+  public void setAvailFloor(String availFloor)
   {
     this.availFloor = availFloor;
   }

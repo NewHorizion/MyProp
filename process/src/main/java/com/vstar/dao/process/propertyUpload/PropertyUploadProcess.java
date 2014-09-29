@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.vstar.common.ValidationUtil;
 import com.vstar.dao.PropAreaDao;
 import com.vstar.dao.PropFeaturesDao;
 import com.vstar.dao.PropImageDao;
@@ -336,18 +337,45 @@ public class PropertyUploadProcess
     {
       if (null != residentialPropInfo.getNoOfBedRooms()) 
       {
-	    propFeaturesDao.setBedRooms(Integer.parseInt(residentialPropInfo.getNoOfBedRooms()
-		  .getLabel()));
+    	  if(!ValidationUtil.isNullEmpty(residentialPropInfo.getNoOfBedRooms()
+    			  .getLabel()))
+    	  {
+		    propFeaturesDao.setBedRooms(residentialPropInfo.getNoOfBedRooms()
+			  .getLabel());
+    	  }
+    	  else
+    	  {
+    		  propFeaturesDao.setBedRooms(residentialPropInfo.getNoOfBedRooms()
+    				  .getValue()); 
+    	  }
 	  }
       if (null != residentialPropInfo.getNoOfBathRooms())
       {
-    	propFeaturesDao.setBathRooms(Integer.parseInt(residentialPropInfo.getNoOfBathRooms()
-    	  .getLabel()));  
+    	  if(!ValidationUtil.isNullEmpty(residentialPropInfo.getNoOfBathRooms()
+    			  .getLabel()))
+    	  {
+    		  propFeaturesDao.setBathRooms(residentialPropInfo.getNoOfBathRooms()
+    		    	  .getLabel()); 
+    	  }
+    	  else
+    	  {
+    		  propFeaturesDao.setBathRooms(residentialPropInfo.getNoOfBathRooms()
+    		    	  .getValue()); 
+    	  }
+    	 
       }
       if (null != residentialPropInfo.getNoOfBalonies())
       {
-        propFeaturesDao.setBalconies(Integer.parseInt(residentialPropInfo.getNoOfBalonies()
-          .getLabel()));
+    	  if(!ValidationUtil.isNullEmpty(residentialPropInfo.getNoOfBalonies()
+    			  .getLabel()))
+    	  {
+    		  propFeaturesDao.setBalconies(residentialPropInfo.getNoOfBalonies()
+    				  .getLabel());
+    	  }else
+    	  {
+    		  propFeaturesDao.setBalconies(residentialPropInfo.getNoOfBalonies()
+    		          .getValue());
+    	  }
       }
       if (null != residentialPropInfo.getFurnishedStatus())
       {
@@ -355,8 +383,8 @@ public class PropertyUploadProcess
       }
       if (null != residentialPropInfo.getFloorNumber())
       {
-        propFeaturesDao.setAvailFloor(Integer.parseInt(residentialPropInfo.getFloorNumber()
-          .getValue()));
+        propFeaturesDao.setAvailFloor(residentialPropInfo.getFloorNumber()
+          .getValue());
       }
       if (null != residentialPropInfo.getTotalFloor())
       {
@@ -369,7 +397,15 @@ public class PropertyUploadProcess
     	amenBuffer = new StringBuffer();
         for (ResidentialUnits inhouseAmen : residentialPropInfo.getInHouseAmenities())
         {
-    	  amenBuffer.append(inhouseAmen.getLabel() + ";");
+          if(!ValidationUtil.isNullEmpty(inhouseAmen.getLabel()))
+      	  {
+        		amenBuffer.append(inhouseAmen.getLabel() + ";");
+      	  }
+          else
+          {
+        	  amenBuffer.append(inhouseAmen.getValue() + ";");
+          }
+    	  
         }
         propFeaturesDao.setInhouseAmenities(amenBuffer.toString());
       }
@@ -378,7 +414,14 @@ public class PropertyUploadProcess
     	amenBuffer = new StringBuffer();
         for (ResidentialUnits extAmen : residentialPropInfo.getExternalAmenities())
         {
-    	  amenBuffer.append(extAmen.getLabel() + ";");
+        	if(!ValidationUtil.isNullEmpty(extAmen.getLabel()))
+        	{
+        		amenBuffer.append(extAmen.getLabel() + ";");
+        	}
+        	else
+        	{
+        		amenBuffer.append(extAmen.getValue() + ";");
+        	}
         }
         propFeaturesDao.setExternalAmenities(amenBuffer.toString());
       }
