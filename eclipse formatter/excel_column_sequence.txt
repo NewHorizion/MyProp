@@ -1,0 +1,40 @@
+Login Name	
+User Name	
+Company Name	
+Email Id	
+Password	
+Contact	
+Landline Number	
+State	
+City	
+User Type	
+Purchase Type	
+Property Type	
+Transaction Type	
+Property State	
+Property City	
+Location	
+Builder/ Society	
+Property Address	
+Covered Area	
+Covered Area Unit	
+Plot Area	
+Plot Area Unit	
+Expected Price	
+Unit Price	
+Negotiable	
+No of Bedrooms	
+No of Bathrooms	
+No of Balconies	
+Furnished Status	
+Floor No	
+Facing	
+Total Floor	
+Possession Status	
+Possession By	
+Deal with Agent	
+Brief Description	
+Landmarks	
+Terms & Conditions	
+InHouse Amenities	
+External Amenities
