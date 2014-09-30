@@ -20,6 +20,9 @@
 	<bean id="propCityDaoProcess" class="com.vstar.dao.process.PropCityDaoProcess">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="propCompanyDaoProcess" class="com.vstar.dao.process.PropCompanyDaoProcess">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 	
 	<bean id="propLocationDaoProcess" class="com.vstar.dao.process.PropLocationDaoProcess">
 		<property name="sessionFactory" ref="sessionFactory"></property>
@@ -125,6 +128,7 @@
 		class="com.vstar.dao.process.propertyUpload.RegistrationProcess">
 		<property name="propUserDaoExtnProcess" ref="propUserDaoExtnProcess" />
 		<property name="propUsersDaoProcess" ref="propUsersDaoProcess" />
+		<property name="propCompanyDaoProcess" ref="propCompanyDaoProcess" />
 	</bean>
     
     <bean id="propertyUploadProcess"

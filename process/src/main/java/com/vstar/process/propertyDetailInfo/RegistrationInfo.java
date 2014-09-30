@@ -14,6 +14,16 @@ public class RegistrationInfo {
 	private String landlineNumber;
 	private boolean newUser;
 	private String companyName;
+	
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	private Long companyId;
 
 	public String getUserType() {
 		return userType;
@@ -78,20 +88,6 @@ public class RegistrationInfo {
 	public void setNewUser(boolean newUser) {
 		this.newUser = newUser;
 	}
-
-	/**
-	 * @return the companyName
-	 */
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	/**
-	 * @param companyName
-	 *            the companyName to set
-	 */
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
+	
 
 }
