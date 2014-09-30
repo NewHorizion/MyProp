@@ -29,5 +29,6 @@
     <mapping class="com.vstar.dao.PropRequirementDao"/>
     <mapping class="com.vstar.dao.PropOwnerDao"/>
     <mapping class="com.vstar.dao.RequirementOwnerDao"/>
+    <mapping class="com.vstar.dao.PropCompanyDao"/>
   </session-factory>
 </hibernate-configuration>
