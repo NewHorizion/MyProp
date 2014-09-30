@@ -2,7 +2,10 @@ package com.vstar.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -27,8 +30,10 @@ public class PropUsersDao implements java.io.Serializable
   private String landLineNo;
   @Column(name = "prop_city_Id")
   private long propCityId;
-  @Column(name = "companyId")
-  private long companyId;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "companyId")
+  private PropCompanyDao propCompanyDao;
+  
 
   public PropUsersDao()
   {
@@ -40,7 +45,7 @@ public class PropUsersDao implements java.io.Serializable
   }
 
   public PropUsersDao(String userId, String userType, String userName, String mobileNo,
-      String landLineNo, long propCityId, long companyId)
+      String landLineNo, long propCityId, PropCompanyDao propCompanyDao)
   {
     this.userId = userId;
     this.userType = userType;
@@ -48,7 +53,7 @@ public class PropUsersDao implements java.io.Serializable
     this.mobileNo = mobileNo;
     this.landLineNo = landLineNo;
     this.propCityId = propCityId;
-    this.companyId = companyId;
+    this.propCompanyDao = propCompanyDao;
   }
 
   /**
@@ -147,13 +152,22 @@ public class PropUsersDao implements java.io.Serializable
     this.propCityId = propCityId;
   }
 
-public long getCompanyId() {
-	return companyId;
-}
+  /**
+   * @return the propCompanyDao
+   */
+  public PropCompanyDao getPropCompanyDao()
+  {
+    return propCompanyDao;
+  }
 
-public void setCompanyId(long companyId) {
-	this.companyId = companyId;
-}
-  
+  /**
+   * @param propCompanyDao the propCompanyDao to set
+   */
+  public void setPropCompanyDao(PropCompanyDao propCompanyDao)
+  {
+    this.propCompanyDao = propCompanyDao;
+  }
+
+
   
 }

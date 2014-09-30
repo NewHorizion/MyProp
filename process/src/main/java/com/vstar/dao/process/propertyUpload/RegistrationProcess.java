@@ -17,8 +17,7 @@ public class RegistrationProcess
 
   public String saveUserWithExtension(RegistrationInfo registrationInfo)
   {
-    try
-    {
+    
       PropCompanyDao propCompanyDao  = propCompanyDaoProcess.getPropCompanyDaoByName(registrationInfo.getCompanyName());
       if(propCompanyDao==null)
       {
@@ -30,16 +29,10 @@ public class RegistrationProcess
       PropUsersDao userExtn = new PropUsersDao(registrationInfo.getEmailId(),
         registrationInfo.getUserType(), registrationInfo.getUserName(),
         registrationInfo.getMobileNumber(), registrationInfo.getLandlineNumber(),
-        registrationInfo.getCityId(),propCompanyDao.getCompanyId());
+        registrationInfo.getCityId(),propCompanyDao);
       propUserDaoExtnProcess.addUpdatePropUsersDaoExtn(userExtn);
       return registrationInfo.getEmailId();
     }
-    catch (GenericProcessException e)
-    {
-      // Log the exception
-    }
-    return null;
-  }
 
   public PropUsersDaoProcess getPropUsersDaoProcess()
   {

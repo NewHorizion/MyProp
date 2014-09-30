@@ -105,7 +105,7 @@ public class ExcelImportData
    * 
    * A1 == (0,0) B1 == (0,1) A3 == (2,0)
    */
-  public static final int START_COL = 2;
+  public static final int START_COL = 1;
   /**
    * Max number of Columns. Assumption is to begin at 0.
    */

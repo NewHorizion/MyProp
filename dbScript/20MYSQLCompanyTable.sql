@@ -15,3 +15,10 @@ ALTER TABLE `property_master`.`prop_users` CHANGE COLUMN `companyName` `companyI
     REFERENCES `prop_company` (`companyId`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT;
+    
+    
+update prop_state set state_Name = 'Haryana' where state_Name = 'Harayana';
+
+ALTER TABLE `property_master`.`prop_features` MODIFY COLUMN `furnished` VARCHAR(15);
+
+ALTER TABLE `property_master`.`prop_terms_cond` MODIFY COLUMN `description` VARCHAR(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL;

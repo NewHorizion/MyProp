@@ -3,7 +3,7 @@ insert into prop_country values(2, 'India', '2014-08-21')
 
 insert into prop_state values('3', 'Andaman & Nicobar', '2014-08-21', '2'),
 ('4', 'Andhra Pradesh', '2014-08-21', '2'),
-('5', 'Harayana', '2014-08-21', '2'),
+('5', 'Haryana', '2014-08-21', '2'),
 ('6', 'Delhi NCR', '2014-08-21', '2'),
 ('7', 'Maharastra', '2014-08-21', '2'),
 ('8', 'Kerala', '2014-08-21', '2'),

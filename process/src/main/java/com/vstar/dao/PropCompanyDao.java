@@ -4,10 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 /**
  * State Information
@@ -15,9 +19,14 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "prop_company", catalog = "property_master")
+@GenericGenerator(name = "PropMasterInfo", strategy = "org.hibernate.id.enhanced.TableGenerator", parameters = {
+    @Parameter(name = "segment_value", value = "Prop_Master_Info"),
+    @Parameter(name = "increment_size", value = "10"),
+    @Parameter(name = "optimizer", value = "pooled")})
 public class PropCompanyDao implements java.io.Serializable {
 	private static final long serialVersionUID = 3942227844296108153L;
 	@Id
+	@GeneratedValue(generator = "PropMasterInfo")
 	@Column(name = "companyId", unique = true, nullable = false)
 	private Long companyId;
 	@Column(name = "companyName", length = 45)
