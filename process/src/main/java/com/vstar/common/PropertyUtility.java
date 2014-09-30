@@ -11,15 +11,17 @@ import com.vstar.process.masterData.infoBean.PropStateInfo;
 
 public class PropertyUtility
 {
-  public static String getTitle(String bedroom, int propertyType, int locationId) throws Exception
+  public static String getTitle(Integer bedroom, String propertyType, String locationName) throws Exception
   {
     StringBuffer title = new StringBuffer();
-    if (bedroom != null)
+    if (null != bedroom)
     {
       title.append(bedroom + " BHK ");
     }
-    title.append(PropertyTypeEnum.valueOf(propertyType));
-    Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>> stateMap = MasterDataProcessImpl.countries
+    title.append(propertyType);
+    title.append(" in " + locationName);
+    return title.toString();
+    /*Map<PropStateInfo, Map<PropCityInfo, List<PropLocationInfo>>> stateMap = MasterDataProcessImpl.countries
       .get("India");
     Set<PropStateInfo> propStateInfos = stateMap.keySet();
     Map<PropCityInfo, List<PropLocationInfo>> cityMap = null;
@@ -43,8 +45,6 @@ public class PropertyUtility
         if (propLocationInfo != null)
           break;
       }
-    }
-    title.append(" in " + propLocationInfo.getLocationName());
-    return title.toString();
+    }*/
   }
 }

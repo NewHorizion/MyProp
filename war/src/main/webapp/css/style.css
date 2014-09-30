@@ -2531,3 +2531,14 @@ font-family: 'Open Sans', sans-serif;
 .slide.ng-hide-add,.slide.ng-hide-remove.ng-hide-remove-active {
   opacity:1;
 }
+
+
+.searchli {
+  height: 200px;
+  border-bottom: 1px solid gray;
+}
+
+#fixed {
+    height: 700px;
+    overflow: auto;
+}

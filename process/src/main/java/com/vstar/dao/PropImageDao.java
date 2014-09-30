@@ -4,13 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 /**
  * Property Images info
@@ -18,15 +19,19 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "prop_image", catalog = "property_master")
+@GenericGenerator(name = "PropImage", strategy = "org.hibernate.id.enhanced.TableGenerator", parameters = {
+  @Parameter(name = "segment_value", value = "Prop_Image"),
+  @Parameter(name = "increment_size", value = "10"),
+  @Parameter(name = "optimizer", value = "pooled")})
 public class PropImageDao implements java.io.Serializable
 {
   private static final long serialVersionUID = -7000748785610300982L;
   @Id
+  @GeneratedValue(generator = "PropImage")
   @Column(name = "prop_Image_Id", unique = true, nullable = false)
   private int propImageId;
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "prop_Info_Id")
-  private PropInfoDao propInfo;
+  @Column(name = "prop_Info_Id")
+  private int propInfoId;
   @Column(name = "image", length = 20)
   private String image;
   @Column(name = "description", length = 50)
@@ -63,11 +68,11 @@ public class PropImageDao implements java.io.Serializable
    * @param custom3
    * @param custom4
    */
-  public PropImageDao(int propImageId, PropInfoDao propInfo, String image, String description,
+  public PropImageDao(int propImageId, int propInfoId, String image, String description,
       Date createdDate, String custom1, String custom2, String custom3, String custom4)
   {
     this.propImageId = propImageId;
-    this.propInfo = propInfo;
+    this.propInfoId = propInfoId;
     this.image = image;
     this.description = description;
     this.createdDate = createdDate;
@@ -85,16 +90,6 @@ public class PropImageDao implements java.io.Serializable
   public void setPropImageId(int propImageId)
   {
     this.propImageId = propImageId;
-  }
-
-  public PropInfoDao getPropInfo()
-  {
-    return this.propInfo;
-  }
-
-  public void setPropInfo(PropInfoDao propInfo)
-  {
-    this.propInfo = propInfo;
   }
 
   public String getImage()
@@ -165,5 +160,15 @@ public class PropImageDao implements java.io.Serializable
   public void setCustom4(String custom4)
   {
     this.custom4 = custom4;
+  }
+
+  public int getPropInfoId()
+  {
+    return propInfoId;
+  }
+
+  public void setPropInfoId(int propInfoId)
+  {
+    this.propInfoId = propInfoId;
   }
 }

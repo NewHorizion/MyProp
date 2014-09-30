@@ -1,0 +1,28 @@
+CALL mainSearch('prop_price.expected_price between 800000 and 1000000')
+
+/*DELIMITER $$
+CREATE PROCEDURE mainSearch(IN whereCl varchar(500))
+    BEGIN
+      DECLARE _statement VARCHAR(2000);
+      SET _statement = 'SELECT prop_features.bed_rooms, prop_type.type_desc, prop_location.locality_name,
+        prop_transaction.society_project, prop_price.expected_price,prop_price.price_per_sqr_ft,
+        CONCAT(CAST(prop_area.covered_area AS char), " ", prop_area.covered_area_unit) area_info,
+        CONCAT(CAST(prop_area.plot_area AS char), " ", prop_area.plot_area_unit) plot_info
+        FROM prop_info prop_info
+        INNER JOIN prop_features prop_features ON prop_features.prop_feature_id = prop_info.prop_feature_id
+        INNER JOIN prop_location_info prop_location_info ON prop_location_info.prop_info_id = prop_info.prop_info_id
+        INNER JOIN prop_location prop_location ON prop_location.prop_location_id = prop_location_info.prop_location_id
+        INNER JOIN prop_type prop_type ON prop_type.prop_type_id = prop_info.prop_type_id
+        INNER JOIN prop_price prop_price ON prop_price.prop_sale_price_id = prop_info.prop_sale_price_id
+        INNER JOIN prop_transaction prop_transaction ON prop_info.prop_transaction_id = prop_transaction.prop_transaction_id
+        INNER JOIN prop_area prop_area ON prop_area.prop_area_id = prop_info.prop_area_id
+        WHERE ';
+      SET _statement = CONCAT(_statement, whereCl);
+      SET @statement = _statement;
+      PREPARE dynquery FROM @statement;
+      EXECUTE dynquery;
+      DEALLOCATE PREPARE dynquery;
+    END$$
+DELIMITER;*/
+
+/*drop procedure mainSearch*/

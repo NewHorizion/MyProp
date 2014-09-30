@@ -389,8 +389,8 @@ scotchApp
 										'Content-Type' : 'application/json'
 									}
 								}).success(function(data) {
-							$scope.properties = data;
-							searchService.saveSearchResponse(data);
+							$scope.properties = data.searchProperties;
+							searchService.saveSearchResponse(data.searchProperties);
 							if ($location.path().indexOf('/search') < 0)
 								$location.path('search', false);
 						});
@@ -415,6 +415,26 @@ scotchApp
 scotchApp.controller('searchResultController', function($scope, $http,
 		searchService) {
 	$scope.properties = searchService.getSearchResponse();
+	$scope.displaySearchProps =[];
+	 var counter = 0;
+	    $scope.loadMore = function() {
+	        for (var i = 0; i <5; i++) {
+	            $scope.displaySearchProps.push($scope.properties[counter]);
+	            counter ++;
+	        }
+	    };
+	    
+	    $scope.loadMore();
+}).directive('whenScrolled', function() {
+    return function(scope, elm, attr) {
+        var raw = elm[0];
+        
+        elm.bind('scroll', function() {
+            if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+                scope.$apply(attr.whenScrolled);
+            }
+        });
+    };
 });
 
 scotchApp.controller('latestSearchCntrl', function($scope, propertyService,GalleryImageService,alertsService,$modal) {
@@ -495,7 +515,7 @@ scotchApp
                         	alert ("post property Successfull");
                         }
 						$scope.postProperty = function(response) {
-						     //propertyId = response.propertyId;
+						     $scope.formData.propertyId = response.propertyId;
 						     if (null!=$scope.files)
 						    	 {
 						    	    $scope.formData.files = $scope.files;
