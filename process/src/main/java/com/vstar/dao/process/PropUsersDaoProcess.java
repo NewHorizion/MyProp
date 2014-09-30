@@ -27,7 +27,7 @@ public class PropUsersDaoProcess
  
 	public void createUser( String userName,String password, boolean enabled , String userRole)
 	{
-		
+		try{
 		Object salt = null; 
  
 		user = new User( userName, 
@@ -65,7 +65,10 @@ public class PropUsersDaoProcess
 			
 		}
  
-		
+		}catch(Exception e)
+		{
+		  e.printStackTrace();
+		}
  
 	}
 

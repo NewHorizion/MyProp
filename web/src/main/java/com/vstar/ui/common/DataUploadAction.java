@@ -138,7 +138,7 @@ public class DataUploadAction extends ActionSupport implements ServletRequestAwa
       propertyMandateInfo.setLocality(null);
       if (!ValidationUtil.isNullEmpty(row.getPlotArea()))
       {
-        propertyMandateInfo.setPlotArea(Integer.parseInt(row.getPlotArea()));
+        propertyMandateInfo.setPlotArea(Double.valueOf(row.getPlotArea()).intValue());
       }
       ResidentialUnits areaUnit = new ResidentialUnits();
       areaUnit.setValue(row.getPlotAreaUnit());
@@ -223,7 +223,7 @@ public class DataUploadAction extends ActionSupport implements ServletRequestAwa
       }
       else
       {
-        double lacs = Double.valueOf(moneyInput.toLowerCase().replace("lacs", "").replace(",", "")
+        double lacs = Double.valueOf(moneyInput.toLowerCase().replace("lacs", "").replace("lac", "").replace(",", "")
             .replace(" ", ""));
         money = (long) lacs * lacDigit;
       }

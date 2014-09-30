@@ -388,8 +388,11 @@ public class PropertyUploadProcess
       }
       if (null != residentialPropInfo.getTotalFloor())
       {
+        if(!ValidationUtil.isNullEmpty(residentialPropInfo.getTotalFloor()
+            .getValue())){
         propFeaturesDao.setTotalFloors(Integer.parseInt(residentialPropInfo.getTotalFloor()
           .getValue()));
+        }
       }
       StringBuffer amenBuffer = null;
       if (null != residentialPropInfo.getInHouseAmenities())

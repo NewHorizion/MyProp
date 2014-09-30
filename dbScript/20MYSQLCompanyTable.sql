@@ -22,3 +22,8 @@ update prop_state set state_Name = 'Haryana' where state_Name = 'Harayana';
 ALTER TABLE `property_master`.`prop_features` MODIFY COLUMN `furnished` VARCHAR(15);
 
 ALTER TABLE `property_master`.`prop_terms_cond` MODIFY COLUMN `description` VARCHAR(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL;
+
+insert into prop_type values(26,'Plot',1);
+insert into prop_type values(27,'Builder Floor',1);
+
+ALTER TABLE `property_master`.`prop_users` MODIFY COLUMN `mobileNo` VARCHAR(45) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL;

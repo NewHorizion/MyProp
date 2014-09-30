@@ -32,8 +32,10 @@ public enum PropertyTypeEnum
 	IndustrialBuilding(22, "Industrial Building", PropertyCategoryEnum.Commercial), 
 	IndustrialShed(23, "Industrial Shed", PropertyCategoryEnum.Commercial),
 	AgriculturalLand(24, "Agricultural Land", PropertyCategoryEnum.Agriculture), 
-	FarmHouse(25, "Farm House", PropertyCategoryEnum.Agriculture);
-
+	FarmHouse(25, "Farm House", PropertyCategoryEnum.Agriculture),
+	Plot(26, "Plot", PropertyCategoryEnum.Residential),
+	BuilderFloor(27, "Builder Floor", PropertyCategoryEnum.Residential);
+	
 	private int value;
 
 	private String typeName;
