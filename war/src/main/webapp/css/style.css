@@ -2314,6 +2314,7 @@ cursor: hand;
 	float: left;
 	border: 5px solid #a5a192;
 	margin-right: 15px;
+	width: 10.5em;
 }
 .listingbtns {
 	float: right;

@@ -11,7 +11,8 @@ public class PropertyDetailsModel {
 	private String plotArea;
 	private String propertyImagePath;
 	private String propertyThumbImagePath;
-
+    private String propertyId; 
+    
 	public String getPropertyTitle() {
 		return propertyTitle;
 	}
@@ -95,5 +96,13 @@ public class PropertyDetailsModel {
   {
     this.plotArea = plotArea;
   }
+
+public String getPropertyId() {
+	return propertyId;
+}
+
+public void setPropertyId(String propertyId) {
+	this.propertyId = propertyId;
+}
 
 }

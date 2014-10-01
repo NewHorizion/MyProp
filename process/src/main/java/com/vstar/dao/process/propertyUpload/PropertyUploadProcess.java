@@ -70,9 +70,10 @@ public class PropertyUploadProcess
    */
   public void savePropertyImageUrl(String propertyId, String fileName)
   {
+	PropInfoDao propertyInfo= propInfoDaoProcess.getPropInfoDaoById (Integer.parseInt(propertyId));
     PropImageDao propImageDao = new PropImageDao();
     propImageDao.setImage(fileName);
-    propImageDao.setPropInfoId(Integer.parseInt(propertyId));
+    propImageDao.setPropInfoId(propertyInfo);
     PropImageDao prop = propImageDaoProcess.addUpdatePropImageDao(propImageDao);
   }
   

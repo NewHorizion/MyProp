@@ -2,7 +2,6 @@ package com.sample.ui;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.sample.service.CalculatorCXFService;
-import com.sample.service.pojo.AttachementData;
 import com.sample.service.pojo.CalculatorParams;
 
 public class CalculatorAction extends ActionSupport {

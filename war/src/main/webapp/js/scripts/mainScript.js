@@ -464,11 +464,10 @@ scotchApp.controller('latestSearchCntrl', function($scope, propertyService,Galle
          alertsService.RenderErrorMessage(response.ReturnMessage);
      }
 		
-	$scope.openModal = function () {
-	    
-          var getCustomer = new Object();
-          getCustomer.id = 12;
-        propertyService.findPropertyImages(getCustomer,$scope.findImagesCompleted, $scope.findImagesError);
+	$scope.openModal = function (propertyId) {
+          var property = new Object();
+          property.id = propertyId;
+        propertyService.findPropertyImages(property,$scope.findImagesCompleted, $scope.findImagesError);
     
        
 
