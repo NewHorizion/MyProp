@@ -6,64 +6,120 @@
 				<h3 class="search-heading">
 					<i class="fa fa-search"></i>Find Your Home
 				</h3>
-				<div class="col-lg-8 box-blue">
+				<div class="col-lg-8 box-blue" ng-controller="CountryCntrl">
 					<form id="searchForm" method="post" class="validateform"
 						name="send-contact">
+						<h6><input type="radio" ng-model="formData.purchaseType" value="1" name="purchaseType" checked>Sale 
+	           			<input type="radio" ng-model="formData.purchaseType" value="2" name="purchaseType">Rent Out</h6>
 						<div class="row col-lg-12">
 							<div class="col-lg-4 field">
-								<div class="form-group move-down">
-									<label for="Autocomplete2">City</label>
-									<city-ctrl city-model-name="formData.city"
-										locations="locations"></city-ctrl>
+								<label>Property Type &nbsp;&nbsp; :</label>
+								<div style="float:left;">
+						        	<div
+										multi-select 
+					    				input-model="propertyTypes"
+					    				button-label="label"         
+					    				item-label="label" 
+					    				tick-property="ticked" 
+					    				helper-elements="filter reset"
+					    				max-labels="1"
+					    				max-Height = "200px;"
+					    				default-label="--Select--"
+					    				on-item-click="itemSelect( data )"
+					    				output-model="formData.propertyTypes">
+									</div> 
 								</div>
 							</div>
 							<div class="col-lg-4 field">
-
-								<div class="form-group move-down">
-									<label for="Autocomplete2">Locations</label> <input type="text"
-										auto-complete ui-items="formData.city.localities"
-										ng-model="formData.locations" />
-								</div>
+								<label>City </label>
+								<city-ctrl city-model-name="formData.city"
+									locations="locations"></city-ctrl>
 							</div>
 							<div class="col-lg-4 field">
-								<div class="form-group move-down">
-									<label for="Autocomplete2">Property Type</label>
-									<property-ctrl
-										property-model-name="formData.propertyFeatureInfo.propertyMandateInfo.propertyTypeId"
-										property-types="propertyTypes"></property-ctrl>
-								</div>
+								<label>Location</label><br/>
+								<div style="float:left;">
+									<div 
+	    								multi-select 
+	    								input-model="formData.city.localities"
+	    								button-label="label"         
+	    								item-label="label" 
+	    								tick-property="ticked" 
+	    								helper-elements="filter reset"
+	    								max-labels="1"
+	    								max-Height = "200px;"
+	    								default-label="Select"
+	    								output-model="formData.locations">
+	    							</div>
+    							</div>
 							</div>
 						</div>
 
 						<div class="row col-lg-12">
 							<div class="col-lg-3 field">
-								<div class="form-group move-down">
-									<label for="Autocomplete2">&#8377; Min Budger</label>
-									<div ng-controller="CountryCntrl"><rent-budget-ctrl rent-model-name="rent" rent-budgets="rentBudgets"></rent-budget-ctrl></div>
+								<div ng-hide="formData.purchaseType == '1' || formData.purchaseType == ''">
+									<label>Min-Max Budget </label>
+									<!-- <div style="float:left;">
+										<div 
+		    								multi-select 
+		    								input-model="rentBudgets"
+		    								button-label="value"         
+		    								item-label="value" 
+		    								tick-property="ticked" 
+		    								helper-elements="filter reset"
+		    								max-labels="1"
+		    								max-Height = "200px;"
+		    								default-label="Select"
+		    								output-model="formData.minBudget">
+		    							</div>
+	    							</div> -->
+		     						<rent-budget-ctrl rent-model-name="formData.minBudget" rent-budgets="rentBudgets"></rent-budget-ctrl>
+		     						To
+		     						<rent-budget-ctrl rent-model-name="formData.maxBudget" rent-budgets="rentBudgets"></rent-budget-ctrl>
+								</div>
+								<div ng-show="formData.purchaseType=='1'">
+									<label>Min-Max Budget </label>
+									<!-- <div style="float:left;">
+										<div 
+		    								multi-select 
+		    								input-model="saleBudgets"
+		    								button-label="value"         
+		    								item-label="value" 
+		    								tick-property="ticked" 
+		    								helper-elements="filter reset"
+		    								max-labels="1"
+		    								max-Height = "200px;"
+		    								default-label="Select"
+		    								output-model="formData.minBudget">
+		    							</div> -->
+		    							<sale-budget-ctrl sale-model-name="formData.minBudget" sale-budgets="saleBudgets"></sale-budget-ctrl>
+		     							To
+		     							<sale-budget-ctrl sale-model-name="formData.maxBudget" sale-budgets="saleBudgets"></sale-budget-ctrl>
+	    							</div>
 								</div>
 							</div>
 							<div class="col-lg-3 field">
-								<div class="form-group move-down">
-									<label for="Autocomplete2">&#8377; Max Budget</label>
-									<div ng-controller="CountryCntrl"><sale-budget-ctrl sale-model-name="sale" sale-budgets="saleBudgets"></sale-budget-ctrl></div>
+								<div id="bedrooms" ng-controller="BedBathNoList">
+									<label> Min-Max Bedrooms</label>
+									<!-- <div style="float:left;">
+										<div 
+		    								multi-select 
+		    								input-model="roomNos"
+		    								button-label="label"         
+		    								item-label="label" 
+		    								tick-property="ticked" 
+		    								helper-elements="filter reset"
+		    								max-labels="1"
+		    								max-Height = "200px;"
+		    								default-label="Select"
+		    								output-model="formData.minBedrooms">
+		    							</div>
+	    							</div> -->
+	    							<bedroom-no-ctrl bed-model-name="formData.minBedrooms" room-nos="roomNos"></bedroom-no-ctrl>
+								    To
+									<bedroom-no-ctrl bed-model-name="formData.maxBedrooms" room-nos="roomNos"></bedroom-no-ctrl>
 								</div>
 							</div>
-
-							<div class="col-lg-3 field" ng-controller="BedBathNoList">
-								<div class="form-group move-down">
-									<label>Bedroom</label>
-									<bedroom-no-ctrl></bedroom-no-ctrl>
-								</div>
-							</div>
-
-							<div class="col-lg-3 field">
-								<div class="form-group move-down">
-									<label for="Autocomplete2">Property Type</label>
-									<property-ctrl
-										property-model-name="formData.propertyFeatureInfo.propertyMandateInfo.propertyTypeId"
-										property-types="propertyTypes"></property-ctrl>
-								</div>
-							</div>
+							
 							<div class="col-lg-12 margintop10 field"
 								ng-controller="searchController">
 								<p>

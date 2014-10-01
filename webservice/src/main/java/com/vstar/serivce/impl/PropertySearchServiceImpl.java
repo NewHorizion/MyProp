@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 import com.vstar.process.property.search.PropertySearchProcess;
+import com.vstar.process.propertyDetailInfo.RequirementInfo;
 import com.vstar.serivce.PropertySearchService;
 
 public class PropertySearchServiceImpl implements PropertySearchService {
@@ -23,9 +24,11 @@ public class PropertySearchServiceImpl implements PropertySearchService {
 	@Consumes("application/json")
 	@Produces("application/json")
 	@Path("/properties")
-	public String findProperties() {
+	public String findProperties(String propertyTypes) {
+	  Gson gson = new Gson();
+	  RequirementInfo info = gson.fromJson(propertyTypes, RequirementInfo.class);
 		return propertySearchProcess
-				.findProperty();
+				.findProperty(info);
 	}
 
 	@Transactional

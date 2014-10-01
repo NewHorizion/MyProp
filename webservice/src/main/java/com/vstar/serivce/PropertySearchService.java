@@ -9,6 +9,8 @@ import javax.ws.rs.QueryParam;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.vstar.process.propertyDetailInfo.RequirementInfo;
+
 public interface PropertySearchService {
 	final String PROPERTY_ID ="propertyId"; 
 	@Transactional
@@ -16,7 +18,7 @@ public interface PropertySearchService {
 	@Consumes("application/json")
 	@Produces("application/json")
 	@Path("/search")
-    public String findProperties ();
+    public String findProperties (String info);
 	
 	@Transactional
 	@GET

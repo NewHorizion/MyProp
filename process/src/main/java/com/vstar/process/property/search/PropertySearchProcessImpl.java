@@ -7,11 +7,13 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.google.gson.Gson;
+import com.vstar.common.StoredProcedureConstants;
 import com.vstar.dao.PropInfoDao;
 import com.vstar.dao.process.PropInfoDaoProcess;
 import com.vstar.dao.process.PropertiesConstants;
 import com.vstar.process.masterData.model.ImageGalleryModel;
 import com.vstar.process.masterData.model.PropertyDetailsModel;
+import com.vstar.process.propertyDetailInfo.RequirementInfo;
 
 public class PropertySearchProcessImpl implements PropertySearchProcess {
 
@@ -19,22 +21,100 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
 	private PropInfoDaoProcess propInfoDaoProcess;
 
 	@Override
-	public String findProperty() 
-	{
-		List<PropertyDetailsModel> searchProperties = null;
-		
-		String whereClause = "prop_price.expected_price between 800000 and 1000000";
-		List<Object> customResults = propInfoDaoProcess.callingMainSearchSP(whereClause);
+	public String findProperty(RequirementInfo requirementInfo) 
+  {
+    List<PropertyDetailsModel> searchProperties = null;
+    StringBuffer whereClause = createWhereClause(requirementInfo);
+    List<Object> customResults = propInfoDaoProcess.callingMainSearchSP(whereClause.toString());
     if (null != customResults && customResults.size() > 0)
     {
-      searchProperties = ResultSetTransformProcess.transformMainSearch(customResults, mergedProperties);
+      searchProperties = ResultSetTransformProcess.transformMainSearch(customResults,
+        mergedProperties);
     }
-		Map<String, List<PropertyDetailsModel>> mapRecentProperties = new LinkedHashMap<String, List<PropertyDetailsModel>>();
-		mapRecentProperties.put("searchProperties", searchProperties);
+    Map<String, List<PropertyDetailsModel>> mapRecentProperties = new LinkedHashMap<String, List<PropertyDetailsModel>>();
+    mapRecentProperties.put("searchProperties", searchProperties);
     Gson gson = new Gson();
     String json = gson.toJson(mapRecentProperties);
-		return json;
-	}
+    return json;
+  }
+
+  /**
+   * Creating whereClause with entered infos
+   * 
+   * @param requirementInfo
+   * @return
+   */
+  private StringBuffer createWhereClause(RequirementInfo requirementInfo)
+  {
+    StringBuffer whereClause = new StringBuffer();
+
+    whereClause.append(StoredProcedureConstants.MainSearchConstants.PROP_PURCHASE_PROP_PURCHASE_ID
+      + requirementInfo.getPurchaseType());
+    if (null != requirementInfo.getPropertyTypes() && requirementInfo.getPropertyTypes().length > 0)
+    {
+      whereClause.append(" and ");
+      StringBuffer locationList = new StringBuffer();
+      locationList.append(StoredProcedureConstants.MainSearchConstants.PROP_TYPE_PROP_TYPE_ID
+        + " in (");
+      int propTypelenght = requirementInfo.getPropertyTypes().length - 1;
+      for (int i = 0; i <= propTypelenght; i++)
+      {
+        locationList.append(requirementInfo.getPropertyTypes()[i].getId());
+        if (propTypelenght != i)
+        {
+          locationList.append(",");
+        }
+      }
+      locationList.append(")");
+      whereClause.append(locationList);
+    }
+    if (null != requirementInfo.getLocations() && requirementInfo.getLocations().length > 0)
+    {
+      whereClause.append(" and ");
+      StringBuffer locationList = new StringBuffer();
+      locationList.append(StoredProcedureConstants.MainSearchConstants.PROP_LOC_PROP_LOC_ID
+        + " in (");
+      int propLoclenght = requirementInfo.getLocations().length - 1;
+      for (int i = 0; i <= propLoclenght; i++)
+      {
+        locationList.append(requirementInfo.getLocations()[i].getLocalityId());
+        if (propLoclenght != i)
+        {
+          locationList.append(",");
+        }
+      }
+      locationList.append(")");
+      whereClause.append(locationList);
+    }
+    else
+    {
+      if (0 != requirementInfo.getCity())
+      {
+        whereClause.append(" and ");
+        whereClause.append(StoredProcedureConstants.MainSearchConstants.PROP_CITY_PROP_CITY_ID
+          + requirementInfo.getCity());
+      }
+    }
+    if (null != requirementInfo.getMinBudget() && null != requirementInfo.getMaxBudget())
+    {
+      whereClause.append(" and ");
+      whereClause.append(StoredProcedureConstants.MainSearchConstants.PROP_PRICE_EXPECTED_PRICE);
+      whereClause.append(" between ");
+      whereClause.append(requirementInfo.getMinBudget().getId());
+      whereClause.append(" and ");
+      whereClause.append(requirementInfo.getMaxBudget().getId());
+    }
+    if (null != requirementInfo.getMinBedrooms() && null != requirementInfo.getMaxBedrooms())
+    {
+      whereClause.append(" and ");
+      whereClause.append(StoredProcedureConstants.MainSearchConstants.FEATURE_BED_ROOMS);
+      whereClause.append(" between ");
+      whereClause.append(requirementInfo.getMinBedrooms().getLabel());
+      whereClause.append(" and ");
+      whereClause.append(requirementInfo.getMaxBedrooms().getLabel());
+    }
+    return whereClause;
+  }
 
 	/*
 	 * (non-Javadoc)
@@ -86,7 +166,7 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
 	
 
 	@Override
-	public String findPropertyImages(long id) {
+	public String findPropertyImages(Long id) {
 		Map<String, Object> mapRecentProperties = new LinkedHashMap<String, Object>();
 		final String APPLICATION_CONTEXT_PATH = mergedProperties
 				.getProperty(PropertiesConstants.APPLICATION_CONTEXR_PATH);

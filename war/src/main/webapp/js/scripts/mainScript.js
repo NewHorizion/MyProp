@@ -379,6 +379,8 @@ scotchApp
 				'searchController',
 				function($scope, $http, $location, searchService,$modal) {
 					$scope.search = function() {
+						if ($scope.formData.city != null || $scope.formData.city != undefined)
+							$scope.formData.city = $scope.formData.city.cityId;
 						$http(
 								{
 									method : 'post',
