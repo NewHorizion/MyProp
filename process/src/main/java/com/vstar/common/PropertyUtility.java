@@ -1,17 +1,9 @@
 package com.vstar.common;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import com.vstar.process.masterData.MasterDataProcessImpl;
-import com.vstar.process.masterData.infoBean.PropCityInfo;
-import com.vstar.process.masterData.infoBean.PropLocationInfo;
-import com.vstar.process.masterData.infoBean.PropStateInfo;
 
 public class PropertyUtility
 {
-  public static String getTitle(Integer bedroom, String propertyType, String locationName) throws Exception
+  public static String getTitle(String bedroom, String propertyType, String locationName) throws Exception
   {
     StringBuffer title = new StringBuffer();
     if (null != bedroom)

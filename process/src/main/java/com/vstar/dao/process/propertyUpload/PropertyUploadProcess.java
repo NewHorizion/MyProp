@@ -73,7 +73,7 @@ public class PropertyUploadProcess
     PropImageDao propImageDao = new PropImageDao();
     propImageDao.setImage(fileName);
     propImageDao.setPropInfoId(Integer.parseInt(propertyId));
-    propImageDaoProcess.addUpdatePropImageDao(propImageDao);
+    PropImageDao prop = propImageDaoProcess.addUpdatePropImageDao(propImageDao);
   }
   
   /**

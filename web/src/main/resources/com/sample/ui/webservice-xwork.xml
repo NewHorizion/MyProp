@@ -10,7 +10,7 @@
 
 		<result-types>
 			<result-type name="json" class="org.apache.struts2.json.JSONResult" >
-			 <param name="includeProperties">json*</param>
+			 <param name="includeProperties">jsonMap,jsonMap.*</param>
 			</result-type>
 		</result-types>
 

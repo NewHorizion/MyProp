@@ -25,7 +25,7 @@ public class ResultSetTransformProcess
       propertyDetailsModel = new PropertyDetailsModel();
       try
       {
-        propertyDetailsModel.setPropertyTitle(PropertyUtility.getTitle((Integer) resultRow[0],
+        propertyDetailsModel.setPropertyTitle(PropertyUtility.getTitle((String) resultRow[0],
           (String) resultRow[1], (String) resultRow[2]));
         propertyDetailsModel.setProjectName((String) resultRow[3]);
         propertyDetailsModel.setPropertyPrice(String.valueOf(resultRow[4]));
@@ -38,6 +38,7 @@ public class ResultSetTransformProcess
       }
       catch (Exception e)
       {
+    	  System.out.println("SdsDsdsd");
         // Log the exception
       }
     }

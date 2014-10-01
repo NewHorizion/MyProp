@@ -6,7 +6,6 @@ import com.vstar.dao.PropUsersDao;
 import com.vstar.dao.process.PropCompanyDaoProcess;
 import com.vstar.dao.process.PropUserDaoExtnProcess;
 import com.vstar.dao.process.PropUsersDaoProcess;
-import com.vstar.exception.GenericProcessException;
 import com.vstar.process.propertyDetailInfo.RegistrationInfo;
 
 public class RegistrationProcess
@@ -17,9 +16,8 @@ public class RegistrationProcess
 
   public String saveUserWithExtension(RegistrationInfo registrationInfo)
   {
-    
       PropCompanyDao propCompanyDao  = propCompanyDaoProcess.getPropCompanyDaoByName(registrationInfo.getCompanyName());
-      if(propCompanyDao==null)
+      if(propCompanyDao==null && null!=registrationInfo.getCompanyName())
       {
     	  propCompanyDao = new PropCompanyDao(registrationInfo.getCompanyName(),new Date());
     	  propCompanyDao = propCompanyDaoProcess.addUpdatePropCompanyDao(propCompanyDao);
