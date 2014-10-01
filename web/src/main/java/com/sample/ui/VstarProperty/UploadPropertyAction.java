@@ -42,11 +42,11 @@ public class UploadPropertyAction extends ActionSupport
 
   private void saveFile(String propertyId) throws IOException
   {
-    String filePath = "E:\\PropertyImages\\" + propertyId + "\\";
+    String filePath = "G:\\PropertyImages\\" + propertyId + "\\";
     File fileToCreate = new File(filePath, filesFileName[0]);
     FileUtils.copyFile(this.files[0], fileToCreate);
     String fileName = filePath + filesFileName[0];
-    propertyUploadProcess.savePropertyImageUrl(propertyId, fileName);
+    propertyUploadProcess.savePropertyImageUrl(propertyId, propertyId+"//"+filesFileName[0]);
   }
 
   public String saveRequirement()
