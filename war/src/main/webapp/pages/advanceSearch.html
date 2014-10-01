@@ -54,48 +54,46 @@
 							</div>
 						</div>
 
-						<div class="row col-lg-12">
-							<div class="col-lg-3 field">
-								<div ng-hide="formData.purchaseType == '1' || formData.purchaseType == ''">
-									<label>Min-Max Budget </label>
-									<!-- <div style="float:left;">
-										<div 
-		    								multi-select 
-		    								input-model="rentBudgets"
-		    								button-label="value"         
-		    								item-label="value" 
-		    								tick-property="ticked" 
-		    								helper-elements="filter reset"
-		    								max-labels="1"
-		    								max-Height = "200px;"
-		    								default-label="Select"
-		    								output-model="formData.minBudget">
-		    							</div>
-	    							</div> -->
-		     						<rent-budget-ctrl rent-model-name="formData.minBudget" rent-budgets="rentBudgets"></rent-budget-ctrl>
-		     						To
-		     						<rent-budget-ctrl rent-model-name="formData.maxBudget" rent-budgets="rentBudgets"></rent-budget-ctrl>
-								</div>
-								<div ng-show="formData.purchaseType=='1'">
-									<label>Min-Max Budget </label>
-									<!-- <div style="float:left;">
-										<div 
-		    								multi-select 
-		    								input-model="saleBudgets"
-		    								button-label="value"         
-		    								item-label="value" 
-		    								tick-property="ticked" 
-		    								helper-elements="filter reset"
-		    								max-labels="1"
-		    								max-Height = "200px;"
-		    								default-label="Select"
-		    								output-model="formData.minBudget">
-		    							</div> -->
-		    							<sale-budget-ctrl sale-model-name="formData.minBudget" sale-budgets="saleBudgets"></sale-budget-ctrl>
-		     							To
-		     							<sale-budget-ctrl sale-model-name="formData.maxBudget" sale-budgets="saleBudgets"></sale-budget-ctrl>
+						<div class="col-lg-3 field">
+							<div ng-hide="formData.purchaseType == '1' || formData.purchaseType == ''">
+								<label>Min-Max Budget </label>
+								<!-- <div style="float:left;">
+									<div 
+	    								multi-select 
+	    								input-model="rentBudgets"
+	    								button-label="value"         
+	    								item-label="value" 
+	    								tick-property="ticked" 
+	    								helper-elements="filter reset"
+	    								max-labels="1"
+	    								max-Height = "200px;"
+	    								default-label="Select"
+	    								output-model="formData.minBudget">
 	    							</div>
-								</div>
+    							</div> -->
+	     						<rent-budget-ctrl rent-model-name="formData.minBudget" rent-budgets="rentBudgets"></rent-budget-ctrl>
+	     						To
+	     						<rent-budget-ctrl rent-model-name="formData.maxBudget" rent-budgets="rentBudgets"></rent-budget-ctrl>
+							</div>
+							<div ng-show="formData.purchaseType=='1'">
+								<label>Min-Max Budget </label>
+								<!-- <div style="float:left;">
+									<div 
+	    								multi-select 
+	    								input-model="saleBudgets"
+	    								button-label="value"         
+	    								item-label="value" 
+	    								tick-property="ticked" 
+	    								helper-elements="filter reset"
+	    								max-labels="1"
+	    								max-Height = "200px;"
+	    								default-label="Select"
+	    								output-model="formData.minBudget">
+	    							</div> -->
+	    							<sale-budget-ctrl sale-model-name="formData.minBudget" sale-budgets="saleBudgets"></sale-budget-ctrl>
+	     							To
+	     							<sale-budget-ctrl sale-model-name="formData.maxBudget" sale-budgets="saleBudgets"></sale-budget-ctrl>
+    							</div>
 							</div>
 							<div class="col-lg-3 field">
 								<div id="bedrooms" ng-controller="BedBathNoList">
@@ -119,7 +117,6 @@
 									<bedroom-no-ctrl bed-model-name="formData.maxBedrooms" room-nos="roomNos"></bedroom-no-ctrl>
 								</div>
 							</div>
-							
 							<div class="col-lg-12 margintop10 field"
 								ng-controller="searchController">
 								<p>
