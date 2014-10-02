@@ -17,6 +17,16 @@ public interface VstarConstants
 	}
 	
 	/**
+	 * Purchase type Sale/Rent
+	 *
+	 */
+	public interface PurchaseType
+  {
+    public static final String SALE = "Sale";
+    public static final String RENT = "Rent Out";
+  }
+	
+	/**
 	 * Property possession status
 	 *
 	 */

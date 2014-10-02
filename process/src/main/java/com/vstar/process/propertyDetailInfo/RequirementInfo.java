@@ -24,6 +24,8 @@ public class RequirementInfo
   private ResidentialUnits plotAreaUnit;
   private ResidentialUnits minBedrooms;
   private ResidentialUnits maxBedrooms;
+  private ResidentialUnits []budget;
+  private ResidentialUnits []bedroom;
 
   public int getMinCoveredArea()
   {
@@ -173,6 +175,26 @@ public class RequirementInfo
   public void setPropertyTypes(PropertyTypeModel[] propertyTypes)
   {
     this.propertyTypes = propertyTypes;
+  }
+
+  public ResidentialUnits[] getBudget()
+  {
+    return budget;
+  }
+
+  public void setBudget(ResidentialUnits[] budget)
+  {
+    this.budget = budget;
+  }
+
+  public ResidentialUnits[] getBedroom()
+  {
+    return bedroom;
+  }
+
+  public void setBedroom(ResidentialUnits[] bedroom)
+  {
+    this.bedroom = bedroom;
   }
 
 }

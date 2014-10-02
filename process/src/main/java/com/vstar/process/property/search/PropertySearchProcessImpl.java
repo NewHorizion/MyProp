@@ -95,23 +95,23 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
           + requirementInfo.getCity());
       }
     }
-    if (null != requirementInfo.getMinBudget() && null != requirementInfo.getMaxBudget())
+    if (null != requirementInfo.getBudget() && requirementInfo.getBudget().length > 0)
     {
       whereClause.append(" and ");
       whereClause.append(StoredProcedureConstants.MainSearchConstants.PROP_PRICE_EXPECTED_PRICE);
       whereClause.append(" between ");
-      whereClause.append(requirementInfo.getMinBudget().getId());
+      whereClause.append(requirementInfo.getBudget()[0].getId());
       whereClause.append(" and ");
-      whereClause.append(requirementInfo.getMaxBudget().getId());
+      whereClause.append(requirementInfo.getBudget()[1].getId());
     }
-    if (null != requirementInfo.getMinBedrooms() && null != requirementInfo.getMaxBedrooms())
+    if (null != requirementInfo.getBedroom() && requirementInfo.getBedroom().length > 0)
     {
       whereClause.append(" and ");
       whereClause.append(StoredProcedureConstants.MainSearchConstants.FEATURE_BED_ROOMS);
       whereClause.append(" between ");
-      whereClause.append(requirementInfo.getMinBedrooms().getLabel());
+      whereClause.append(requirementInfo.getBedroom()[0].getLabel());
       whereClause.append(" and ");
-      whereClause.append(requirementInfo.getMaxBedrooms().getLabel());
+      whereClause.append(requirementInfo.getBedroom()[1].getLabel());
     }
     return whereClause;
   }

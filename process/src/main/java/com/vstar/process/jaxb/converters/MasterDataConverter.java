@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.vstar.common.BudgetEnum;
 import com.vstar.common.PropertyCategoryEnum;
 import com.vstar.common.PropertyTypeEnum;
+import com.vstar.common.VstarConstants;
 import com.vstar.process.jaxb.Cities;
 import com.vstar.process.jaxb.Countries;
 import com.vstar.process.jaxb.Localities;
@@ -173,6 +174,9 @@ public class MasterDataConverter {
           rentBudgetModel = new BudgetModel();
           rentBudgetModel.setId(jaxbRentBudget.getId());
           rentBudgetModel.setValue(jaxbRentBudget.getType());
+          rentBudgetModel.setLabel(jaxbRentBudget.getType());
+          rentBudgetModel.setDisabled(false);
+          rentBudgetModel.setBudgetType(VstarConstants.PurchaseType.RENT);
           rentBudgets.add(rentBudgetModel);
         }
         masterDataMap.put("rentBudgets", rentBudgets);
@@ -189,6 +193,8 @@ public class MasterDataConverter {
           saleBudgetModel = new BudgetModel();
           saleBudgetModel.setId(jaxbSaleBudget.getId());
           saleBudgetModel.setValue(jaxbSaleBudget.getType());
+          saleBudgetModel.setLabel(jaxbSaleBudget.getType());
+          saleBudgetModel.setBudgetType(VstarConstants.PurchaseType.SALE);
           saleBudgets.add(saleBudgetModel);
         }
         masterDataMap.put("saleBudgets", saleBudgets);

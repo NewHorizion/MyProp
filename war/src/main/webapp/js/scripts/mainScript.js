@@ -318,6 +318,59 @@ scotchApp
 		.controller(
 				'CountryCntrl',
 				function($scope, $http, $location) {
+					$scope.$watch( 'formData.budget' , function( selectedVal ) {
+						var budgetArray = [];
+						if (selectedVal != undefined && selectedVal.length !== 0)
+						{
+							if (angular.equals(selectedVal[0].budgetType, 'Sale'))
+							{
+								budgetArray = $scope.saleBudgets;
+							}
+							else
+							{
+								budgetArray = $scope.rentBudgets;
+							}
+						}
+						if (selectedVal !== undefined && selectedVal.length !== 0)
+						{
+							if ($scope.formData.budget.length == 2)
+							{
+								angular.forEach(budgetArray, function (da) {
+			              				if (($scope.formData.budget != null || $scope.formData.budget != undefined)
+			              					&& !(angular.equals($scope.formData.budget[0].label, da.label)
+			              					|| angular.equals($scope.formData.budget[1].label, da.label))) {
+			              					da.disabled = true;
+			            		  		}
+			            		  	});
+							}
+							
+							if ($scope.formData.budget.length < 2)
+							{
+								angular.forEach(budgetArray, function (da) {
+			              				{
+			              					da.disabled = false;
+			            		  		}
+			            		  	});
+							}
+						}
+						else
+						{
+							budgetArray = $scope.saleBudgets;
+							angular.forEach(budgetArray, function (da) {
+	              				{
+	              					da.disabled = false;
+	            		  		}
+	            		  	});
+							budgetArray = $scope.rentBudgets;
+							angular.forEach(budgetArray, function (da) {
+	              				{
+	              					da.disabled = false;
+	            		  		}
+	            		  	});
+						}
+							
+		            }, true);
+
 					$http
 							.get(
 									'http://localhost:8080/webservicesample/openService/master/location')
@@ -359,8 +412,9 @@ scotchApp
 				restrict : 'E',
 				scope : {
 					rentModelName : '=',
-					rentBudgets : '='
+					rentBudgets : '=',
 				},
+				
 				templateUrl : 'pages/rent-budget-ctrl.html'
 			};
 		}).directive('saleBudgetCtrl', function() {

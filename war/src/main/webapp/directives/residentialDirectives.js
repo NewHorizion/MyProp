@@ -167,18 +167,51 @@ scotchApp
 
 scotchApp
 .controller('BedBathNoList', function($scope) {
+	$scope.$watch( 'formData.bedroom' , function( selectedVal ) {
+		if (selectedVal !== undefined && selectedVal.length !== 0)
+		{
+			if ($scope.formData.bedroom.length == 2)
+			{
+				angular.forEach($scope.roomNos, function (da) {
+	      				if (($scope.formData.bedroom != null || $scope.formData.bedroom != undefined)
+	      					&& !(angular.equals($scope.formData.bedroom[0].label, da.label)
+	      					|| angular.equals($scope.formData.bedroom[1].label, da.label))) {
+	      					da.disabled = true;
+	    		  		}
+	    		  	});
+			}
+			
+			if ($scope.formData.bedroom.length < 2)
+			{
+				angular.forEach($scope.roomNos, function (da) {
+	      				{
+	      					da.disabled = false;
+	    		  		}
+	    		  	});
+			}
+		}
+		else
+		{
+			angular.forEach($scope.roomNos, function (da) {
+					{
+						da.disabled = false;
+		  		}
+		  	});
+		}
+		
+	}, true);
   $scope.roomNos = [
-    { id: '1', label:'1', ticked: false},
-    { id: '2', label:'2', ticked: false},
-    { id: '3', label:'3', ticked: false},
-    { id: '4', label:'4', ticked: false},
-    { id: '5', label:'5', ticked: false},
-    { id: '6', label:'6', ticked: false},
-    { id: '7', label:'7', ticked: false},
-    { id: '8', label:'8', ticked: false},
-    { id: '9', label:'9', ticked: false},
-    { id: '10', label:'10', ticked: false},
-    { id: '11', label:'>10', ticked: false}
+    { id: '1', label:'1', ticked: false, disabled: false, selected: false},
+    { id: '2', label:'2', ticked: false, disabled: false, selected: false},
+    { id: '3', label:'3', ticked: false, disabled: false, selected: false},
+    { id: '4', label:'4', ticked: false, disabled: false, selected: false},
+    { id: '5', label:'5', ticked: false, disabled: false, selected: false},
+    { id: '6', label:'6', ticked: false, disabled: false, selected: false},
+    { id: '7', label:'7', ticked: false, disabled: false, selected: false},
+    { id: '8', label:'8', ticked: false, disabled: false, selected: false},
+    { id: '9', label:'9', ticked: false, disabled: false, selected: false},
+    { id: '10', label:'10', ticked: false, disabled: false, selected: false},
+    { id: '11', label:'>10', ticked: false, disabled: false, selected: false}
   ];
 }).directive('bedroomNoCtrl', function() {
 	return {
