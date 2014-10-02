@@ -33,7 +33,7 @@ public class ResultSetTransformProcess
         propertyDetailsModel.setCoveredArea(String.valueOf(resultRow[6]));
         propertyDetailsModel.setPlotArea(String.valueOf(resultRow[7]));
         propertyDetailsModel.setPropertyImagePath(APPLICATION_CONTEXT_PATH
-          + OUTSIDE_WAR_IMAGES_PATH + "/thumb.jpg");
+          + OUTSIDE_WAR_IMAGES_PATH + "/"+ resultRow[9]);
         propertyDetailModels.add(propertyDetailsModel);
       }
       catch (Exception e)
