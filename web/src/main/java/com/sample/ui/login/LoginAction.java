@@ -15,6 +15,8 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.vstar.common.VstarConstants;
+import com.vstar.dao.PropUsersDao;
+import com.vstar.dao.process.propertyUpload.RegistrationProcess;
 import com.vstar.dao.process.propertyUpload.UserProcess;
 import com.vstar.process.propertyDetailInfo.PropertyFeatureInfo;
 import com.vstar.process.propertyDetailInfo.RegistrationInfo;
@@ -32,6 +34,7 @@ public class LoginAction extends ActionSupport {
 	private UserProcess userProcess;
 	private PropertyFeatureInfo propertyFeatureInfo;
 	private RequirementInfo requirementInfo;
+	private RegistrationProcess registrationProcess;
 
 	public String login () 
  {
@@ -44,8 +47,11 @@ public class LoginAction extends ActionSupport {
 				SecurityContextHolder.getContext().setAuthentication(
 						authentication);
 				if (authentication.isAuthenticated()) {
+					PropUsersDao propUsersDao  = registrationProcess.getPropUserDaoExtnProcess().getPropUsersDaoExtnById(registrationInfo.getUserName());
 					jsonMap.put("success", true);
-					jsonMap.put("messages", "Welcome " + registrationInfo.getUserName() + "!!!!");
+					jsonMap.put("messages", "Welcome " + propUsersDao.getUserName() + "!!!!");
+					jsonMap.put(VstarConstants.Authentication.AUTHORIZED_USER,true);
+					jsonMap.put(VstarConstants.Authentication.USER_TYPE,propUsersDao.getUserType());
 				}
 			    // Fire auth event
 			    if (this.eventPublisher != null)
@@ -146,6 +152,14 @@ public class LoginAction extends ActionSupport {
 
 	public void setRequirementInfo(RequirementInfo requirementInfo) {
 		this.requirementInfo = requirementInfo;
+	}
+
+	public RegistrationProcess getRegistrationProcess() {
+		return registrationProcess;
+	}
+
+	public void setRegistrationProcess(RegistrationProcess registrationProcess) {
+		this.registrationProcess = registrationProcess;
 	}
 
 }

@@ -60,4 +60,10 @@ public interface VstarConstants
 		public static final String REGISTRATION = "register";
 		public static final String LOGIN = "login";
 	}
+	
+	public interface Authentication
+	{
+		public static final String AUTHORIZED_USER = "isAuthorized";
+		public static final String USER_TYPE = "userType";
+	}
 }
