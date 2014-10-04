@@ -131,9 +131,10 @@ scotchApp
 				controller : 'searchResultController'
 			})
 			
-			.state('admin', {
-				url : '/admin',
-				templateUrl: 'pages/adminHomePage.html' 
+			.state('user', {
+				url : '/user',
+				templateUrl: 'pages/userHomePage.html',
+				controller: 'userController'
 			});
 
 			$urlRouterProvider.otherwise('/home');
@@ -166,6 +167,12 @@ scotchApp
 // create the controller and inject Angular's $scope
 scotchApp.controller('mainController', function($scope) {
 	// create a message to display in our view
+	$scope.message = 'Everyone come and see how good I look!';
+});
+
+scotchApp.controller('userController', function($scope, $rootScope) {
+	// create a message to display in our view
+	$scope.userType = $rootScope.userType;
 	$scope.message = 'Everyone come and see how good I look!';
 });
 
@@ -254,7 +261,7 @@ scotchApp
 scotchApp
 		.controller(
 				'loginController',
-				function($scope, $http, loginService, $location) {
+				function($scope, $http, loginService, $location, $rootScope) {
 					$scope.formData = {};
 					// process the form
 					$scope.processForm = function() {
@@ -262,7 +269,8 @@ scotchApp
 //					          return false;
 //					     }
 						 $scope.getSuccessLogin = function(response) {
-							 $location.path('admin', false);
+							 $rootScope.userType = response.jsonMap.userType;
+							 $location.path('user', false);
 						 }
 						 $scope.getErrorLogin = function(response) {
 						    

@@ -1,58 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Template 1</title>
-<meta name="description" content="A description of your website">
-<meta name="keywords" content="keyword1, keyword2, keyword3">
-<link href="css/adminHP.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-
 <div id="wrapper"> 
 
-  <div id="header"> 
-
-    <div class="top_banner">
-      <h1>Enter Site Title</h1>
-      <p>Enter Site Slogan</p>
-    </div>
- 
-  </div>
-
-  <div id="page_content">
+  <div id="page_content" ng-controller='userController'>
 
     <div class="navigation">
       <ul>
         <li><a href="#">Home</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Products</a></li>
-        <li><a href="#">Clients</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Resources</a></li>
-        <li><a href="#">Extra</a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Post Property</a></li>
+        <li><a href="#">Post Requirement</a></li>
+        <li><a href="#">Messages</a></li>
       </ul>
     </div>
 
     <div class="left_side_bar"> 
 
       <div class="col_1">
-        <h1>Main Menu</h1>
+        <h1>Main Menu{{userType}}</h1>
         <div class="box">
           <ul>
-            <li><a href="#">Menu Item 1</a></li>
-            <li><a href="#">Menu Item 2</a></li>
-            <li><a href="#">Menu Item 3</a></li>
-            <li><a href="#">Menu Item 4</a></li>
-            <li><a href="#">Menu Item 5</a></li>
-            <li><a href="#">Menu Item 6</a></li>
-            <li><a href="#">Menu Item 7</a></li>
-            <li><a href="#">Menu Item 8</a></li>
-            <li><a href="#">Menu Item 9</a></li>
-            <li><a href="#">Menu Item 10</a></li>
-            <li><a href="#">Menu Item 11</a></li>
-            <li><a href="#">Menu Item 12</a></li>
+            <li><a href="#">Favorites</a></li>
+            <li><a href="#">Search Property</a></li>
+            <li><a href="#">Search Requirement</a></li>
+            <li><a href="#">Search Agent</a></li>
+            <li><a href="#">Search Builder</a></li>
+            <li><a href="#">Online Chat</a></li>
           </ul>
         </div>
       </div>
@@ -115,15 +86,6 @@ rutrum. Aenean imperdiet.</p><br>
 
     <div class="clear"></div>
     
-    <!--start footer from here-->
-    <div id="footer">Copyright &copy; 2014. Design by <a href="http://www.casino.biz" target="_blank">casino.biz</a><br>
-    
-    <!--DO NOT remove footer link-->
-    <!--Template designed by--><a href="http://www.casino.biz"><img src="images/footer.gif" class="copyright" alt="http://www.casino.biz"></a></div>
-	
-    <!--/. end footer from here-->
   </div>
 
 </div>
-
-</body></html>
