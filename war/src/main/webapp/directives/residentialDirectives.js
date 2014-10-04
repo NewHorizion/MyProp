@@ -167,39 +167,6 @@ scotchApp
 
 scotchApp
 .controller('BedBathNoList', function($scope) {
-	$scope.$watch( 'formData.bedroom' , function( selectedVal ) {
-		if (selectedVal !== undefined && selectedVal.length !== 0)
-		{
-			if ($scope.formData.bedroom.length == 2)
-			{
-				angular.forEach($scope.roomNos, function (da) {
-	      				if (($scope.formData.bedroom != null || $scope.formData.bedroom != undefined)
-	      					&& !(angular.equals($scope.formData.bedroom[0].label, da.label)
-	      					|| angular.equals($scope.formData.bedroom[1].label, da.label))) {
-	      					da.disabled = true;
-	    		  		}
-	    		  	});
-			}
-			
-			if ($scope.formData.bedroom.length < 2)
-			{
-				angular.forEach($scope.roomNos, function (da) {
-	      				{
-	      					da.disabled = false;
-	    		  		}
-	    		  	});
-			}
-		}
-		else
-		{
-			angular.forEach($scope.roomNos, function (da) {
-					{
-						da.disabled = false;
-		  		}
-		  	});
-		}
-		
-	}, true);
   $scope.roomNos = [
     { id: '1', label:'1', ticked: false, disabled: false, selected: false},
     { id: '2', label:'2', ticked: false, disabled: false, selected: false},

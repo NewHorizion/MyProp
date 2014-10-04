@@ -129,6 +129,11 @@ scotchApp
 				url : '/search',
 				templateUrl : 'pages/searchResult.html',
 				controller : 'searchResultController'
+			})
+			
+			.state('admin', {
+				url : '/admin',
+				templateUrl: 'pages/adminHomePage.html' 
 			});
 
 			$urlRouterProvider.otherwise('/home');
@@ -249,7 +254,7 @@ scotchApp
 scotchApp
 		.controller(
 				'loginController',
-				function($scope, $http, loginService) {
+				function($scope, $http, loginService, $location) {
 					$scope.formData = {};
 					// process the form
 					$scope.processForm = function() {
@@ -257,7 +262,7 @@ scotchApp
 //					          return false;
 //					     }
 						 $scope.getSuccessLogin = function(response) {
-							alert('loogedin');
+							 $location.path('admin', false);
 						 }
 						 $scope.getErrorLogin = function(response) {
 						    
@@ -318,6 +323,39 @@ scotchApp
 		.controller(
 				'CountryCntrl',
 				function($scope, $http, $location) {
+					$scope.$watch( 'formData.bedroom' , function( selectedVal ) {
+						if (selectedVal !== undefined && selectedVal.length !== 0)
+						{
+							if ($scope.formData.bedroom.length == 2)
+							{
+								angular.forEach($scope.roomNos, function (da) {
+					      				if (($scope.formData.bedroom != null || $scope.formData.bedroom != undefined)
+					      					&& !(angular.equals($scope.formData.bedroom[0].label, da.label)
+					      					|| angular.equals($scope.formData.bedroom[1].label, da.label))) {
+					      					da.disabled = true;
+					    		  		}
+					    		  	});
+							}
+							
+							if ($scope.formData.bedroom.length < 2)
+							{
+								angular.forEach($scope.roomNos, function (da) {
+					      				{
+					      					da.disabled = false;
+					    		  		}
+					    		  	});
+							}
+						}
+						else
+						{
+							angular.forEach($scope.roomNos, function (da) {
+									{
+										da.disabled = false;
+						  		}
+						  	});
+						}
+						
+					}, true);
 					$scope.$watch( 'formData.budget' , function( selectedVal ) {
 						var budgetArray = [];
 						if (selectedVal != undefined && selectedVal.length !== 0)

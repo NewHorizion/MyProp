@@ -82,6 +82,11 @@
             <result name="success">/data-upload.jsp</result>  
             <result name="input">/data-upload.jsp</result>  
         </action> 
+        
+        <action name="Welcome" class="com.sample.ui.login.LoginAction" method="welcome">
+			<result name="input" type="json"></result>
+			<result name="success" type="json"></result>
+		</action>
 	</package>
 
 </struts>
