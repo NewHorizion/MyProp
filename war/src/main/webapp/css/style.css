@@ -46,6 +46,7 @@ h1,h2, h3, h4, h5, h6 {
 .container {
 	padding:0 20px 0 20px;
 	position:relative;
+	width:100%;
 }
 
 #wrapper{
@@ -2447,11 +2448,13 @@ a.highlight {
 .box-banner  {
 	background: url(../images/fullBanner1.jpg) repeat-x;
 	padding: 20px 20px 30px;
+	width: 100%;
 }
 
 .box-blue {
 	background:#439FA5;
 	padding: 20px 20px 30px;
+	width:75%;
 }
 .btn-theme-orange{
     background: none repeat scroll 0 0 #d66112;

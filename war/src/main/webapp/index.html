@@ -94,27 +94,11 @@
 						</button>
 						<a class="navbar-brand" href="index.html"><span>My</span>Company</a>
 					</div>
-					<div class="navbar-collapse collapse ">
-						<ul class="nav navbar-nav">
-							<li class="active"><a ui-sref="home">Home</a></li>
-							<li class="dropdown"><a ui-sref="features"
-								class="dropdown-toggle " data-toggle="dropdown"
-								onmouseover="dropdown" data-hover="dropdown" data-delay="0"
-								data-close-others="false">Features <b
-									class=" icon-angle-down"></b></a>
-								<ul class="dropdown-menu">
-									<li><a href="pages/typography.html">Typography</a></li>
-									<li><a href="pages/components.html">Components</a></li>
-									<li><a href="pages/pricingbox.html">Pricing box</a></li>
-								</ul></li>
-							<li><a ui-sref="portfolio">Portfolio</a></li>
-							<li><a ui-sref="blog">Blog</a></li>
-							<li><a ui-sref="contact">Contact</a></li>
-							<li><a ui-sref="login">Login</a></li>
-							<li><a ui-sref="registration">Register</a></li>
-							<li><a ui-sref="form.propertyDetails">Post Property</a></li>
-							<li><a ui-sref="requirement.requirementDetails">Post Requirement</a></li>
-						</ul>
+					<div class="navbar-collapse" ng-show="$root.userType != undefined && $root.userType != ''">
+						<ng-include src="'pages/userNavigations.html'"> </ng-include>
+					</div>
+					<div class="navbar-collapse" ng-hide="$root.userType != undefined && $root.userType != ''">
+						<ng-include src="'pages/commonNavigations.html'"> </ng-include>
 					</div>
 				</div>
 			</div>
@@ -123,7 +107,9 @@
 
 		<!-- angular templating -->
 		<!-- this is where content will be injected -->
-		<ng-include src="'pages/advanceSearch.html'"> </ng-include>
+		<div ng-hide="$root.userType != undefined && $root.userType != ''">
+			<ng-include src="'pages/advanceSearch.html'"> </ng-include>
+		</div>
 		<div ui-view></div>
 		<script type="text/ng-template" id="example-loader.tpl.html">Loading {{title}}...</script>
 		<div ng-http-loader methods="GET" title="Foo" ttl="2"

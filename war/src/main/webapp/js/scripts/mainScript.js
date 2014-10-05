@@ -165,14 +165,13 @@ scotchApp
 						} ]);
 
 // create the controller and inject Angular's $scope
-scotchApp.controller('mainController', function($scope) {
+scotchApp.controller('mainController', function($scope, $rootScope) {
 	// create a message to display in our view
 	$scope.message = 'Everyone come and see how good I look!';
 });
 
 scotchApp.controller('userController', function($scope, $rootScope) {
 	// create a message to display in our view
-	$scope.userType = $rootScope.userType;
 	$scope.message = 'Everyone come and see how good I look!';
 });
 
