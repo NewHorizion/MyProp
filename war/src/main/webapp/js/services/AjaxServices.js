@@ -151,6 +151,17 @@ ajaxServices.service('ajaxService', ['$http', 'blockUI', function ($http, blockU
 
         }
 
+        this.AjaxWithUrl = function (route) {            
+            setTimeout(function () {
+                $http({ method: 'GET', url: route}).success(function (response, status, headers, config) {                 
+                    alert('logout');
+                }).error(function (response) {                  ;
+                    if (response.IsAuthenicated == false) { window.location = "/index.html"; }
+                    alert('error');
+                });
+            }, 0);
+
+        }
 
     }]);
 

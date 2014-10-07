@@ -3,7 +3,13 @@ package com.sample.ui.login;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -11,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -22,7 +29,8 @@ import com.vstar.process.propertyDetailInfo.PropertyFeatureInfo;
 import com.vstar.process.propertyDetailInfo.RegistrationInfo;
 import com.vstar.process.propertyDetailInfo.RequirementInfo;
 
-public class LoginAction extends ActionSupport {
+public class LoginAction extends ActionSupport 
+implements ServletResponseAware, ServletRequestAware{
 
 	AuthenticationManager authenticationManager;
 	private Map<String, Object> jsonMap = new LinkedHashMap<String, Object>();
@@ -35,6 +43,8 @@ public class LoginAction extends ActionSupport {
 	private PropertyFeatureInfo propertyFeatureInfo;
 	private RequirementInfo requirementInfo;
 	private RegistrationProcess registrationProcess;
+	private transient HttpServletRequest request;
+  private transient HttpServletResponse response;
 
 	public String login () 
  {
@@ -83,6 +93,24 @@ public class LoginAction extends ActionSupport {
 
 		return SUCCESS;
 	}
+	
+  /**
+   * Log out
+   */
+  public void logout()
+  {
+    HttpSession session = request.getSession(false);
+    if (session != null)
+    {
+      session.invalidate();
+    }
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (auth != null)
+    {
+      new SecurityContextLogoutHandler().logout(request, response, auth);
+    }
+    SecurityContextHolder.getContext().setAuthentication(null);
+  }
 	
 	public String welcome()
 	{
@@ -161,5 +189,18 @@ public class LoginAction extends ActionSupport {
 	public void setRegistrationProcess(RegistrationProcess registrationProcess) {
 		this.registrationProcess = registrationProcess;
 	}
+
+  @Override
+  public void setServletRequest(HttpServletRequest request)
+  {
+    this.request = request;
+  }
+
+  @Override
+  public void setServletResponse(HttpServletResponse response)
+  {
+    this.response = response;
+    
+  }
 
 }

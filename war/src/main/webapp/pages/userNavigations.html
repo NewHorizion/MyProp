@@ -1,8 +1,8 @@
-<ul class="nav navbar-nav">
+<ul class="nav navbar-nav" ng-controller='userController'>
 	<li><a href="#">Home</a></li>
 	<li><a href="#">Profile</a></li>
-	<li><a href="#">Post Property</a></li>
+	<li><a ui-sref="form.propertyDetails">Post Property</a></li>
 	<li><a href="#">Post Requirement</a></li>
 	<li><a href="#">Messages</a></li>
-	<li><a href="#">log out</a></li>
+	<li><a href="" ng-click="logout();">log out</a></li>
 </ul>

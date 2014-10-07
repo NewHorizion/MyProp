@@ -62,6 +62,12 @@
 		<action name="UploadImages" class="com.sample.ui.VstarProperty.UploadPropertyAction" method="uploadFiles">
 			<result type="json"/>
 		</action>
+		
+		<action name="LogoutAction" class="com.sample.ui.login.LoginAction" method="logout">
+			<result name="input" type="json"></result>
+			<result name="success" type="json"></result>
+		</action>
+		
 		<action name="Login" class="com.sample.ui.login.LoginAction" method="login">
 			<result name="input" type="json"></result>
 			<result name="success" type="json"></result>
