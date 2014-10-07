@@ -3,6 +3,7 @@
  <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <title>jqGrid Example</title>
+  <!-- http://shazsterblog.blogspot.in/2013/03/how-to-use-jqgrid-with-struts2-json.html -->
     <script type='text/javascript' src='http://code.jquery.com/jquery-1.6.2.js'></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">
