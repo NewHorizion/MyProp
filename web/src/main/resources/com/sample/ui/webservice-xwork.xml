@@ -16,6 +16,7 @@
 
 		<interceptors>
 			<interceptor-stack name="webservicesample-stack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
 			    <interceptor-ref name="hibernateTransactionManagement" />
 				<interceptor-ref name="params" />
 				<interceptor-ref name="fileUpload" />
@@ -64,14 +65,12 @@
 		</action>
 		
 		<action name="LogoutAction" class="com.sample.ui.login.LoginAction" method="logout">
-			<interceptor-ref name="defaultStack"></interceptor-ref>
             <interceptor-ref name="webservicesample-stack"></interceptor-ref>
 			<result name="input" type="json"></result>
 			<result name="success" type="json"></result>
 		</action>
 		
 		<action name="Login" class="com.sample.ui.login.LoginAction" method="login">
-			<interceptor-ref name="defaultStack"></interceptor-ref>
             <interceptor-ref name="webservicesample-stack"></interceptor-ref>
 			<result name="input" type="json"></result>
 			<result name="success" type="json"></result>
@@ -87,7 +86,6 @@
             <interceptor-ref name="fileUpload">  
                 <param name="maximumSize">2097152</param>  
   			</interceptor-ref>  
-            <interceptor-ref name="defaultStack"></interceptor-ref>
             <interceptor-ref name="webservicesample-stack"></interceptor-ref>  
             <result name="success">/data-upload.jsp</result>  
             <result name="input">/data-upload.jsp</result>  
