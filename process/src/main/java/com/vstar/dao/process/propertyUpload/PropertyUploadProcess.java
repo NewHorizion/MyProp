@@ -191,7 +191,7 @@ public class PropertyUploadProcess
     {
       propRequirementDao = new PropRequirementDao();
       savePropertyReqDetails(requirementInfo);
-      createReqLocations(requirementInfo.getLocations(), requirementInfo.getCity());
+      createReqLocations(requirementInfo.getLocations(), requirementInfo.getCityId());
       createReqPropTypes(requirementInfo.getPropertyTypes());
     }
     catch(Exception e)
