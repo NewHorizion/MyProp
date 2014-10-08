@@ -12,6 +12,7 @@ public class PropertyDetailsModel {
 	private String propertyImagePath;
 	private String propertyThumbImagePath;
     private String propertyId; 
+    private int totalImages;
     
 	public String getPropertyTitle() {
 		return propertyTitle;
@@ -103,6 +104,14 @@ public String getPropertyId() {
 
 public void setPropertyId(String propertyId) {
 	this.propertyId = propertyId;
+}
+
+public int getTotalImages() {
+	return totalImages;
+}
+
+public void setTotalImages(int totalImages) {
+	this.totalImages = totalImages;
 }
 
 }

@@ -88,11 +88,11 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
     }
     else
     {
-      if (0 != requirementInfo.getCity())
+      if (0 != requirementInfo.getCityId())
       {
         whereClause.append(" and ");
         whereClause.append(StoredProcedureConstants.MainSearchConstants.PROP_CITY_PROP_CITY_ID
-          + requirementInfo.getCity());
+          + requirementInfo.getCityId());
       }
     }
     if (null != requirementInfo.getBudget() && requirementInfo.getBudget().length > 0)

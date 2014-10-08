@@ -166,7 +166,13 @@ scotchApp
 
 
 scotchApp
-.controller('BedBathNoList', function($scope) {
+.controller('BedBathNoList', function($scope,searchDataService) {
+  $scope.formData = searchDataService.getSearchData();
+  $scope.$watch('formData', function(newValue, oldValue) {
+	  alert ("insidde wath bed");
+		searchDataService.saveSearchData($scope.formData);
+	});
+  
   $scope.roomNos = [
     { id: '1', label:'1', ticked: false, disabled: false, selected: false},
     { id: '2', label:'2', ticked: false, disabled: false, selected: false},

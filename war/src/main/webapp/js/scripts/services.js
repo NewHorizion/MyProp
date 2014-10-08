@@ -28,6 +28,21 @@ PropertySearchServices.factory('searchService', function () {
     };
 });
 
+PropertySearchServices.factory('searchDataService', function () {
+    var searchData = {};
+
+    return {
+        saveSearchData:function (data) {
+        	searchData = data;
+        	 sessionStorage.searchData =angular.toJson(data);
+            console.log(data);
+        },
+        getSearchData:function () {
+            return  angular.fromJson(sessionStorage.searchData);
+        }
+    };
+});
+
 PropertySearchServices.factory('GalleryImageService', function () {
     var imageResponse = {};
 

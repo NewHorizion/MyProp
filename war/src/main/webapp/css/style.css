@@ -379,7 +379,6 @@ section.callaction {
 }
 .box-gray  {
 	background: #f8f8f8;
-	padding: 20px 20px 30px;
 }
 .box-gray  h4,.box-gray  i {
 	margin-bottom: 20px;
@@ -2545,4 +2544,13 @@ font-family: 'Open Sans', sans-serif;
 #fixed {
     height: 700px;
     overflow: auto;
+}
+
+.widgetFixed {
+    height: 100px;
+    overflow: auto;
+}
+
+.widgetMarginBottom {
+    margin-bottom: 20px;
 }

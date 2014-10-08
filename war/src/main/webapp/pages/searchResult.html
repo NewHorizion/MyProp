@@ -1,185 +1,241 @@
-<head>
+	<head>
 <title>RealOne | Search Results</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript">
-$(document).ready(function () {
-    $('#searchdiv').hide();
-    $('a').click(function () {
-        $('#searchdiv').fadeIn('slow');
-    });
-    $('a#close').click(function () {
-        $('#searchdiv').fadeOut('slow');
-    })
-});
+	$(document).ready(function() {
+		$('#searchdiv').hide();
+		$('a').click(function() {
+			$('#searchdiv').fadeIn('slow');
+		});
+		$('a#close').click(function() {
+			$('#searchdiv').fadeOut('slow');
+		})
+	});
 </script>
 </head>
 <body>
-<section id="content">
-    <div class="container">
-    <div class = "row">
-    <div  class="col-lg-2">
-    </div>
-    <div  class="col-lg-6">
-    <div id="topcategorieslink" class="clear">
-      <h2>Filter Results</h2>
-      <ul>
-        <li><a href="#">By Price</a> </li>
-        <li><a href="#">By Date </a> </li>
-        <li><a href="#">By Relevance</a> </li>
-        <li><a class="highlight" href="#">Create Alerts</a> </li>
-        <li><a class="highlight anchorCursor" ng-click="click">Search Again</a> </li>
-      </ul>
-    </div>
-    <div class="clear">&nbsp;</div>
-    <div id="main">
-      <div id="searchdiv">
-        <div id="home_main">
-          <div id="search">
-            <div class="tab">
-              <h2>Search Property To Buy / Rent</h2>
-            </div>
-            <div class="container">
-              <form id="form1" action="#">
-                <table class="search_form" style="width:100%; border:none;">
-                  <tr>
-                    <td width="10%" class="label">Address</td>
-                    <td colspan="3"><label>
-                        <input type="text" name="textfield" id="textfield" class="text longfield" />
-                      </label></td>
-                  </tr>
-                  <tr>
-                    <td class="label">&nbsp;</td>
-                    <td colspan="3">Example : Kazhakuttom, PlaceName, Kerala, 695582 </td>
-                  </tr>
-                  <tr>
-                    <td class="label">Type</td>
-                    <td width="34%"><label>
-                        <select name="select" id="select" class="select_field">
-                          <option>Flat</option>
-                          <option>Apartment</option>
-                          <option>House</option>
-                          <option>Villa</option>
-                          <option>Land</option>
-                          <option>Estate</option>
-                        </select>
-                      </label></td>
-                    <td width="14%" class="label">Minimum Price Rs.</td>
-                    <td width="42%"><input type="text" name="textfield4" id="textfield4" class="text" /></td>
-                  </tr>
-                  <tr>
-                    <td class="label">To</td>
-                    <td><label>
-                        <select name="select2" id="select2" class="select_field">
-                          <option selected="selected">Buy</option>
-                          <option>Rent</option>
-                          <option>Search Both</option>
-                        </select>
-                      </label></td>
-                    <td class="label">Maximum Price Rs.</td>
-                    <td><input type="text" name="textfield2" id="textfield2" class="text" /></td>
-                  </tr>
-                  <tr>
-                    <td class="label">Bed Rooms</td>
-                    <td><label>
-                        <input type="text" name="textfield5" id="textfield5" class="text smalltextarea" />
-                      </label></td>
-                    <td class="label">Bathrooms</td>
-                    <td><input type="text" name="textfield3" id="textfield3" class="text" /></td>
-                  </tr>
-                  <tr>
-                    <td class="label">Lot Size</td>
-                    <td><label></label>
-                      <input type="text" name="textfield7" id="textfield7" class="text" /></td>
-                    <td class="label">UOM</td>
-                    <td><input name="" type="radio" value="" />
-                      </label>
-                      Cents /
-                      <input name="" type="radio" value="" />
-                      </label>
-                      Acres /
-                      <input name="" type="radio" value="" />
-                      Sq. Ft.</td>
-                  </tr>
-                  <tr>
-                    <td class="label">&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td colspan="2" class="label"><label> <a href="#" id="close" onclick="javascript:alert('hai');">
-                        <input type="image" src="images/searchbtn.gif" alt="search" name="button2" id="button2" value="Submit" />
-                        </a></label></td>
-                  </tr>
-                </table>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="clear">&nbsp;</div>
-      </div>
-      <h1>{{properties.length}} results Found</h1>
-      <div id="fixed" class="searchli" ng-controller="searchResultController"  when-scrolled="loadMore()">
-      <ul class="listing">
-        <li ng-repeat="property in displaySearchProps">
-          <div class="listinfo"> <img ng-src="{{property.propertyImagePath}}"alt="" class="listingimage" />
-            <h3>{{property.propertyTitle}}</h3>
-            <p>Project : {{ property.projectName }}</p>
-            <span class="price">{{property.rateSqft}}</span> <span class="media"> <img src="images/icon_img.jpg" alt="" width="19" height="15" /> 12 Images <img src="images/videos_icon.jpg" alt="" width="21" height="18" /></span> 1 Video</div>
-          <div class="listingbtns"> <span class="listbuttons"> <a ui-sref="viewDetails">View Details</a></span> <span class="listbuttons"> <a href="#">Add To Favorites</a></span> <span class="listbuttons"> <a href="#">Contact Seller</a></span></div>
-          <div class="clear">&nbsp;</div>
-        </li>
-      </ul>
-      </div>
-      
-      	<!-- <div id="pagination">
+	<section id="content">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3">
+					<h5 class="widgetheading">Refine Your Search</h5>
+					<div id="widget" class="widgetMarginBottom">
+						<div class="box-gray">
+							<label>&#8377; Budget </label> <span
+								style="float: right; font-size: 20px;">
+								<p class="anchorCursor" ng-model="collapsed"
+									ng-click="collapsed=!collapsed">
+									<strong ng-if="collapsed">- </strong> <strong
+										ng-if="!collapsed">+</strong>
+								</p>
+							</span>
+						</div>
+						<div ng-show="collapsed">
+							<select name="min">
+								<option selected="selected">Min</option>
+							</select> To <select name="min">
+								<option selected="selected">Min</option>
+							</select>
+						</div>
+					</div>
+					<div id="widget" class="widgetMarginBottom">
+						<div class="box-gray">
+							<label> <img src="images/icons/locality.png"
+								style="width: 20px; height: 14px;"> </img>Locality
+							</label> <span style="float: right; font-size: x-large;">
+								<p class="anchorCursor" ng-model="localityCollapsed"
+									ng-click="localityCollapsed=!localityCollapsed">
+									<strong ng-if="localityCollapsed">- </strong> <strong
+										ng-if="!localityCollapsed">+</strong>
+								</p>
+							</span>
+						</div>
+
+						<div ng-show="localityCollapsed" class="widgetFixed">
+						    <ul>
+						     <li ng-repeat="locality in formData.city.localities">
+						        <div> 
+						            <input type="checkbox" value="locality.value">
+						            <label>{{locality.label}}</label>
+						        </div>
+						     </li>  
+						    </ul>
+						</div>
+
+					</div>
+
+
+					<div id="widget" class="widgetMarginBottom">
+						<div class="box-gray">
+							<label><img src="images/icons/bedroom.jpg"
+								style="width: 20px; height: 14px;"> </img> Bedroom</label> <span
+								style="float: right; font-size: x-large;">
+								<p class="anchorCursor" ng-model="bedRoomCollapsed"
+									ng-click="bedRoomCollapsed=!bedRoomCollapsed">
+									<strong ng-if="bedRoomCollapsed">- </strong> <strong
+										ng-if="!bedRoomCollapsed">+</strong>
+								</p>
+							</span>
+						</div>
+							<div ng-show="bedRoomCollapsed">
+								<select name="min">
+									<option selected="selected">Min</option>
+								</select> To <select name="min">
+									<option selected="selected">Min</option>
+								</select>
+							</div>
+					</div>
+
+
+					<div id="widget" class="widgetMarginBottom">
+						<div class="box-gray">
+							<label> <img src="images/icons/propertyType.jpg"
+								style="width: 20px; height: 14px;"> </img> Property Type
+							</label> <span style="float: right; font-size: x-large;">
+								<p class="anchorCursor" ng-model="propertyTypeCollapsed"
+									ng-click="propertyTypeCollapsed=!propertyTypeCollapsed">
+									<strong ng-if="propertyTypeCollapsed">- </strong> <strong
+										ng-if="!propertyTypeCollapsed">+</strong>
+								</p>
+							</span>
+						</div>
+							<div ng-show="propertyTypeCollapsed">
+								<div multi-select input-model="propertyTypes"
+									button-label="label" item-label="label" tick-property="ticked"
+									helper-elements="filter reset" max-labels="1"
+									max-Height="200px;" default-label="--Property Type--"
+									on-item-click="itemSelect( data )"
+									output-model="formData.propertyTypes"></div>
+								<ul>
+									<li ng-repeat="propertyType in formData.propertyTypes">
+										<div class="box-gray">
+											{{propertyType.label}} <a class="anchorCursor" ng-click>X</a>
+										</div>
+									</li>
+								</ul>
+							</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div id="topcategorieslink" class="clear">
+						<ul>
+							<li><a href="#">By Price</a></li>
+							<li><a href="#">By Date </a></li>
+							<li><a href="#">By Relevance</a></li>
+							<li><a class="highlight" href="#">Create Alerts</a></li>
+							<li><a class="highlight anchorCursor" ng-click="click">Search
+									Again</a></li>
+						</ul>
+					</div>
+					<div class="clear">&nbsp;</div>
+					<div id="main">
+						<h1>{{properties.length}} results Found</h1>
+						<div id="fixed" class="searchlisting"
+							ng-controller="searchResultController" when-scrolled="loadMore()">
+							<ul class="listing">
+								<li ng-repeat="property in displaySearchProps">
+									<div class="listinfo">
+										<img ng-src="{{property.propertyImagePath}}" alt=""
+											class="listingimage" />
+										<h3>{{property.propertyTitle}}</h3>
+										<p>Project : {{ property.projectName }}</p>
+										<span class="price">{{property.rateSqft}}</span> <span
+											class="media"> <img src="images/icon_img.jpg" alt=""
+											width="19" height="15" /> 12 Images <img
+											src="images/videos_icon.jpg" alt="" width="21" height="18" /></span>
+										1 Video
+									</div>
+									<div class="listingbtns">
+										<span class="listbuttons"> <a ui-sref="viewDetails">View
+												Details</a></span> <span class="listbuttons"> <a href="#">Add
+												To Favorites</a></span> <span class="listbuttons"> <a href="#">Contact
+												Seller</a></span>
+									</div>
+									<div class="clear">&nbsp;</div>
+								</li>
+							</ul>
+						</div>
+
+						<!-- <div id="pagination">
 					<span class="all">Page 1 of 3</span>
 					<span class="current">1</span>
 					<a href="#" class="inactive">2</a>
 					<a href="#" class="inactive">3</a>
 				</div> -->
-    </div>
-    </div>
-    <div class="col-lg-4">
-	<aside class="right-sidebar">
-      <div class="block smsalert">
-        <p>Create a SMS Alert Filter and we will send you SMS alerts whenever a new lsting match your criteria. What are you waiting for ? It is <strong>absolutely FREE</strong>! Start saving time now!</p>
-        <p><a href="#"><img src="images/smsbutton.gif" alt="" /></a></p>
-      </div>
-      
-      <div class="widget">
-      <h5 class="widgetheading">Quick Links</h5>
-        <ul class="cat">
-          <li class="icon-angle-right"><a href="#">Pro Agent Account</a></li>
-          <li class="icon-angle-right"><a href="#">Find Agents</a></li>
-          <li class="icon-angle-right"><a href="#">Banking &amp; Finance Help</a></li>
-          <li class="icon-angle-right"><a href="#">Help &amp; Support</a></li>
-          <li class="icon-angle-right"><a href="#">SMS Alerts</a></li>
-          <li class="icon-angle-right"><a href="#">Email Alerts</a></li>
-          <li class="icon-angle-right"><a href="#">Advertising in RealOne</a></li>
-          <li class="icon-angle-right"><a href="#">Privacy Policy</a></li>
-        </ul>
-        <div class="clear">&nbsp;</div>
-      </div>
-      
-      <div class="widget" ng-controller="latestSearchCntrl">
-        <h2 class="sidebar_head"><span class="h2link"><a href="#">View More</a></span> Hot Properties </h2>
-        <ul class="propertys">
-          <li ng-repeat="property in latestProperties" class="property-listing">
-            <span> <img ng-src="{{property.propertyThumbImagePath}}" alt="" width="66" height="66" /> </span>
-            <h3><a href="#">{{property.propertyTitle}}</a></h3>
-            <p class="description"> {{property.propertyDescription}} <span class="price">{{property.propertyPrice}}</span> </p>
-            <div class="clear">&nbsp;</div>
-          </li>
-        </ul>
-      </div>
-  
-    <div id="widget">
-      <div class="block advert"> <img src="images/advertisehere.jpg" alt="" /> </div>
-      
-      <div class="block"> <img src="images/dreamcar.jpg" alt="" /> </div>
-      <div class="block"><img src="images/dreamcar.jpg" alt="" /></div>
-      <div class="block"><img src="images/dreamcar.jpg" alt="" /></div>
-    </div>
-    </aside>
-      </div>
-      </div>
-  </div>
-  
-</section>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<aside class="right-sidebar">
+						<div class="block smsalert">
+							<p>
+								Create a SMS Alert Filter and we will send you SMS alerts
+								whenever a new lsting match your criteria. What are you waiting
+								for ? It is <strong>absolutely FREE</strong>! Start saving time
+								now!
+							</p>
+							<p>
+								<a href="#"><img src="images/smsbutton.gif" alt="" /></a>
+							</p>
+						</div>
+
+						<div class="widget">
+							<h5 class="widgetheading">Quick Links</h5>
+							<ul class="cat">
+								<li class="icon-angle-right"><a href="#">Pro Agent
+										Account</a></li>
+								<li class="icon-angle-right"><a href="#">Find Agents</a></li>
+								<li class="icon-angle-right"><a href="#">Banking &amp;
+										Finance Help</a></li>
+								<li class="icon-angle-right"><a href="#">Help &amp;
+										Support</a></li>
+								<li class="icon-angle-right"><a href="#">SMS Alerts</a></li>
+								<li class="icon-angle-right"><a href="#">Email Alerts</a></li>
+								<li class="icon-angle-right"><a href="#">Advertising in
+										RealOne</a></li>
+								<li class="icon-angle-right"><a href="#">Privacy Policy</a></li>
+							</ul>
+							<div class="clear">&nbsp;</div>
+						</div>
+
+						<div class="widget" ng-controller="latestSearchCntrl">
+							<h2 class="sidebar_head">
+								<span class="h2link"><a href="#">View More</a></span> Hot
+								Properties
+							</h2>
+							<ul class="propertys">
+								<li ng-repeat="property in latestProperties"
+									class="property-listing"><span> <img
+										ng-src="{{property.propertyThumbImagePath}}" alt="" width="66"
+										height="66" />
+								</span>
+									<h3>
+										<a href="#">{{property.propertyTitle}}</a>
+									</h3>
+									<p class="description">
+										{{property.propertyDescription}} <span class="price">{{property.propertyPrice}}</span>
+									</p>
+									<div class="clear">&nbsp;</div></li>
+							</ul>
+						</div>
+
+						<div id="widget">
+							<div class="block advert">
+								<img src="images/advertisehere.jpg" alt="" />
+							</div>
+
+							<div class="block">
+								<img src="images/dreamcar.jpg" alt="" />
+							</div>
+							<div class="block">
+								<img src="images/dreamcar.jpg" alt="" />
+							</div>
+							<div class="block">
+								<img src="images/dreamcar.jpg" alt="" />
+							</div>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+
+	</section>

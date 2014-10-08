@@ -335,7 +335,11 @@ scotchApp
 scotchApp
 		.controller(
 				'CountryCntrl',
-				function($scope, $http, $location) {
+				function($scope, $http, $location,searchDataService) {
+					$scope.$watch('formData', function(newValue, oldValue) { 
+						searchDataService.saveSearchData($scope.formData);
+					});
+					
 					$scope.$watch( 'formData.bedroom' , function( selectedVal ) {
 						if (selectedVal !== undefined && selectedVal.length !== 0)
 						{
@@ -482,10 +486,15 @@ scotchApp
 scotchApp
 		.controller(
 				'searchController',
-				function($scope, $http, $location, searchService,$modal) {
+				function($scope, $http, $location, searchService,searchDataService,$modal) {
+					$scope.$watch('formData', function(newValue, oldValue) { 
+						searchDataService.saveSearchData($scope.formData);
+					});
+					
 					$scope.search = function() {
+						searchDataService.saveSearchData($scope.formData);
 						if ($scope.formData.city != null || $scope.formData.city != undefined)
-							$scope.formData.city = $scope.formData.city.cityId;
+							$scope.formData.cityId = $scope.formData.city.cityId;
 						$http(
 								{
 									method : 'post',
@@ -520,15 +529,22 @@ scotchApp
 				});
 
 scotchApp.controller('searchResultController', function($scope, $http,
-		searchService) {
+		searchService,searchDataService) {
+	$scope.formData = searchDataService.getSearchData();
+	$scope.collapsed = true;
+	$scope.bedRoomCollapsed = true;
+	$scope.localityCollapsed = true;
 	$scope.properties = searchService.getSearchResponse();
 	$scope.displaySearchProps =[];
 	 var counter = 0;
 	    $scope.loadMore = function() {
+	    	if($scope.prperties)
+	    		{
 	        for (var i = 0; i <5; i++) {
 	            $scope.displaySearchProps.push($scope.properties[counter]);
 	            counter ++;
 	        }
+	    		}
 	    };
 	    
 	    $scope.loadMore();
