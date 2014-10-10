@@ -264,11 +264,11 @@ h6 {
 
 .left_side_bar .col_1{
 	padding:0px 0 20px 0;
+	border:#A1A9AB solid 2px;
 }
 
 .left_side_bar .col_1 .box{
 	padding:10px 15px 5px;
-	border:#A1A9AB solid 2px;
 }
 
 .left_side_bar .col_1 .box ul{

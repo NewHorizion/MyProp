@@ -9,7 +9,7 @@
           <!-- add the active class if the state matches our ui-sref -->
           <div id="status-buttons" class="text-center">
               <a ui-sref-active="active" ui-sref=".requirementDetails"><span>Requirement</span></a>
-              <a ui-sref-active="active" ui-sref=".postRequirement"><span>Profile</span></a>
+              <a ng-show="$root.userType == undefined || $root.userType == ''" ui-sref-active="active" ui-sref=".postRequirement"><span>Profile</span></a>
           </div>
       </div>
       
@@ -17,9 +17,7 @@
       <form id="postRequirement" ng-submit="processForm()">
           <!-- our nested state views will be injected here -->
           <div id="form-views" ui-view></div>
-          <pre>
-  {{ formData }}
- </pre>
+       
       </form>
   
   </div>

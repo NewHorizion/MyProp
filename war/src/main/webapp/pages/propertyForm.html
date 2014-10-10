@@ -11,7 +11,7 @@
           <div id="status-buttons" class="text-center">
               <a ui-sref-active="active" ui-sref=".propertyDetails"><span>Property</span> </a>
               <a ui-sref-active="active" ui-sref=".upload"><span>Features</span></a>
-              <a ui-sref-active="active" ui-sref=".postProperty"><span>Profile</span></a>
+              <a ng-show="$root.userType == undefined || $root.userType == ''" ui-sref-active="active" ui-sref=".postProperty"><span>Profile</span></a>
           </div>
       </div>
       
@@ -19,9 +19,7 @@
       <form id="post_property_form" ng-submit="processForm()">
           <!-- our nested state views will be injected here -->
           <div id="form-views" ui-view></div>
-          <pre>
-  {{ formData }}
- </pre>
+       
       </form>
   
   </div>

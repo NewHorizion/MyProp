@@ -4,9 +4,9 @@
   <div id="page_content" ng-controller='userController'>
 
     <div class="left_side_bar"> 
-
+	  <h2></h2>
       <div class="col_1">
-        <h1>Main Menu{{userType}}</h1>
+        <h1>Main Menu</h1>
         <div class="box">
           <ul>
             <li><a href="#">Favorites</a></li>
@@ -18,40 +18,31 @@
           </ul>
         </div>
       </div>
-      
+      <h2></h2>
       <div class="col_1">
         <h1>Block</h1>
         <div class="box">
           <p>Enter Block content here...</p>
           <br>
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-Aenean commodo Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
- Aenean commodo</p>
+          <p>User specific information</p>
         </div>
-      </div>
+      </div> 
 
     </div>
 
     <div class="right_section">
       <div class="common_content">
-        <h2>Gallery</h2>
-        <hr>
-        
-        <p>
- <div>
-	<div ui-view></div>
-</div>
-</p>
-        
-<p>
- <div>
-	<table id="user_property"></table>
-  	<div id="user_property_pager"></div>
- </div>
-</p>
-        
-        
-        </div>
+        <h2></h2>
+		<p>
+		 <div id="mainContent">
+			<table id="user_property"></table>
+		  	<div id="user_property_pager"></div>
+		 </div>
+		</p>
+		
+		<div ui-view></div>
+	  </div>
+    </div>
       
     </div>
 
