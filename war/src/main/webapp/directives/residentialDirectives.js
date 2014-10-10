@@ -169,7 +169,6 @@ scotchApp
 .controller('BedBathNoList', function($scope,searchDataService) {
   $scope.formData = searchDataService.getSearchData();
   $scope.$watch('formData', function(newValue, oldValue) {
-	  alert ("insidde wath bed");
 		searchDataService.saveSearchData($scope.formData);
 	});
   

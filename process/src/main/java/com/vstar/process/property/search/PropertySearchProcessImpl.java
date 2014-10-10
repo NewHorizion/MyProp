@@ -45,76 +45,81 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
    * @return
    */
   private StringBuffer createWhereClause(RequirementInfo requirementInfo)
-  {
-    StringBuffer whereClause = new StringBuffer();
+ {
+		StringBuffer whereClause = new StringBuffer();
 
-    whereClause.append(StoredProcedureConstants.MainSearchConstants.PROP_PURCHASE_PROP_PURCHASE_ID
-      + requirementInfo.getPurchaseType());
-    if (null != requirementInfo.getPropertyTypes() && requirementInfo.getPropertyTypes().length > 0)
-    {
-      whereClause.append(" and ");
-      StringBuffer locationList = new StringBuffer();
-      locationList.append(StoredProcedureConstants.MainSearchConstants.PROP_TYPE_PROP_TYPE_ID
-        + " in (");
-      int propTypelenght = requirementInfo.getPropertyTypes().length - 1;
-      for (int i = 0; i <= propTypelenght; i++)
-      {
-        locationList.append(requirementInfo.getPropertyTypes()[i].getId());
-        if (propTypelenght != i)
-        {
-          locationList.append(",");
-        }
-      }
-      locationList.append(")");
-      whereClause.append(locationList);
-    }
-    if (null != requirementInfo.getLocations() && requirementInfo.getLocations().length > 0)
-    {
-      whereClause.append(" and ");
-      StringBuffer locationList = new StringBuffer();
-      locationList.append(StoredProcedureConstants.MainSearchConstants.PROP_LOC_PROP_LOC_ID
-        + " in (");
-      int propLoclenght = requirementInfo.getLocations().length - 1;
-      for (int i = 0; i <= propLoclenght; i++)
-      {
-        locationList.append(requirementInfo.getLocations()[i].getLocalityId());
-        if (propLoclenght != i)
-        {
-          locationList.append(",");
-        }
-      }
-      locationList.append(")");
-      whereClause.append(locationList);
-    }
-    else
-    {
-      if (0 != requirementInfo.getCityId())
-      {
-        whereClause.append(" and ");
-        whereClause.append(StoredProcedureConstants.MainSearchConstants.PROP_CITY_PROP_CITY_ID
-          + requirementInfo.getCityId());
-      }
-    }
-    if (null != requirementInfo.getBudget() && requirementInfo.getBudget().length > 0)
-    {
-      whereClause.append(" and ");
-      whereClause.append(StoredProcedureConstants.MainSearchConstants.PROP_PRICE_EXPECTED_PRICE);
-      whereClause.append(" between ");
-      whereClause.append(requirementInfo.getBudget()[0].getId());
-      whereClause.append(" and ");
-      whereClause.append(requirementInfo.getBudget()[1].getId());
-    }
-    if (null != requirementInfo.getBedroom() && requirementInfo.getBedroom().length > 0)
-    {
-      whereClause.append(" and ");
-      whereClause.append(StoredProcedureConstants.MainSearchConstants.FEATURE_BED_ROOMS);
-      whereClause.append(" between ");
-      whereClause.append(requirementInfo.getBedroom()[0].getLabel());
-      whereClause.append(" and ");
-      whereClause.append(requirementInfo.getBedroom()[1].getLabel());
-    }
-    return whereClause;
-  }
+		whereClause
+				.append(StoredProcedureConstants.MainSearchConstants.PROP_PURCHASE_PROP_PURCHASE_ID
+						+ requirementInfo.getPurchaseType());
+		if (null != requirementInfo.getPropertyTypes()
+				&& requirementInfo.getPropertyTypes().length > 0) {
+			whereClause.append(" and ");
+			StringBuffer propertyTypesList = new StringBuffer();
+			propertyTypesList
+					.append(StoredProcedureConstants.MainSearchConstants.PROP_TYPE_PROP_TYPE_ID
+							+ " in (");
+			int propTypelenght = requirementInfo.getPropertyTypes().length - 1;
+			for (int i = 0; i <= propTypelenght; i++) {
+				propertyTypesList.append(requirementInfo.getPropertyTypes()[i]
+						.getId());
+				if (propTypelenght != i) {
+					propertyTypesList.append(",");
+				}
+			}
+			propertyTypesList.append(")");
+			whereClause.append(propertyTypesList);
+		}
+		if (null != requirementInfo.getLocations()
+				&& requirementInfo.getLocations().length > 0) {
+			int matchLoop =0;
+			whereClause.append(" and ");
+			StringBuffer locationList = new StringBuffer();
+			locationList
+					.append(StoredProcedureConstants.MainSearchConstants.PROP_LOC_PROP_LOC_ID
+							+ " in (");
+			int propLoclenght = requirementInfo.getLocations().length - 1;
+			for (int i = 0; i <= propLoclenght; i++) {
+				if (requirementInfo.getLocations()[i].isTicked()) {
+					if (matchLoop >0) {
+						locationList.append(",");
+					}
+					locationList.append(requirementInfo.getLocations()[i]
+							.getLocalityId());
+					matchLoop++;
+				}
+			}
+			locationList.append(")");
+			whereClause.append(locationList);
+		} else {
+			if (0 != requirementInfo.getCityId()) {
+				whereClause.append(" and ");
+				whereClause
+						.append(StoredProcedureConstants.MainSearchConstants.PROP_CITY_PROP_CITY_ID
+								+ requirementInfo.getCityId());
+			}
+		}
+		if (null != requirementInfo.getBudget()
+				&& requirementInfo.getBudget().length > 0) {
+			whereClause.append(" and ");
+			whereClause
+					.append(StoredProcedureConstants.MainSearchConstants.PROP_PRICE_EXPECTED_PRICE);
+			whereClause.append(" between ");
+			whereClause.append(requirementInfo.getBudget()[0].getId());
+			whereClause.append(" and ");
+			whereClause.append(requirementInfo.getBudget()[1].getId());
+		}
+		if (null != requirementInfo.getBedroom()
+				&& requirementInfo.getBedroom().length > 0) {
+			whereClause.append(" and ");
+			whereClause
+					.append(StoredProcedureConstants.MainSearchConstants.FEATURE_BED_ROOMS);
+			whereClause.append(" between ");
+			whereClause.append(requirementInfo.getBedroom()[0].getLabel());
+			whereClause.append(" and ");
+			whereClause.append(requirementInfo.getBedroom()[1].getLabel());
+		}
+		return whereClause;
+	}
 
 	/*
 	 * (non-Javadoc)

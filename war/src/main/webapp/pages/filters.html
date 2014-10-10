@@ -1,0 +1,241 @@
+<h5 class="widgetheading">Refine Your Search</h5>
+<div id="widget" class="widgetMarginBottom">
+	<div class="box-gray">
+		<label>&#8377; Budget </label> <span
+			style="float: right; font-size: 20px;">
+			<p class="anchorCursor" ng-model="collapsed"
+				ng-click="collapsed=!collapsed">
+				<strong ng-if="collapsed">- </strong> <strong ng-if="!collapsed">+</strong>
+			</p>
+		</span>
+	</div>
+	<div ng-show="collapsed">
+		<select name="min">
+			<option selected="selected">Min</option>
+		</select> To <select name="min">
+			<option selected="selected">Min</option>
+		</select>
+	</div>
+</div>
+<div id="widget" class="widgetMarginBottom">
+	<div class="box-gray">
+		<label> <img src="images/icons/locality.png"
+			style="width: 20px; height: 14px;"> </img>Locality
+		</label> <span style="float: right; font-size: x-large;">
+			<p class="anchorCursor" ng-model="localityCollapsed"
+				ng-click="localityCollapsed=!localityCollapsed">
+				<strong ng-if="localityCollapsed">- </strong> <strong
+					ng-if="!localityCollapsed">+</strong>
+			</p>
+		</span>
+	</div>
+
+	<div ng-show="localityCollapsed" class="widgetFixed">
+		<ul>
+
+			<li ng-repeat="locality in formData.city.localities">
+				<div>
+					<input type="checkbox" value="true" ng-model="locality.ticked"
+						id="{{locality.localityId}}" checked="checked"
+						ng-click="filterResults()"> <label>{{locality.label}}</label>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+</div>
+
+
+<div id="widget" class="widgetMarginBottom">
+	<div class="box-gray">
+		<label><img src="images/icons/bedroom.jpg"
+			style="width: 20px; height: 14px;"> </img> Bedroom</label> <span
+			style="float: right; font-size: x-large;">
+			<p class="anchorCursor" ng-model="bedRoomCollapsed"
+				ng-click="bedRoomCollapsed=!bedRoomCollapsed">
+				<strong ng-if="bedRoomCollapsed">- </strong> <strong
+					ng-if="!bedRoomCollapsed">+</strong>
+			</p>
+		</span>
+	</div>
+	<div ng-show="bedRoomCollapsed">
+		<select name="min">
+			<option selected="selected">Min</option>
+		</select> To <select name="min">
+			<option selected="selected">Min</option>
+		</select>
+	</div>
+</div>
+
+
+<div id="widget" class="widgetMarginBottom">
+	<div class="box-gray">
+		<label> <img src="images/icons/propertyType.jpg"
+			style="width: 20px; height: 14px;"> </img> Property Type
+		</label> <span style="float: right; font-size: x-large;">
+			<p class="anchorCursor" ng-model="propertyTypeCollapsed"
+				ng-click="propertyTypeCollapsed=!propertyTypeCollapsed">
+				<strong ng-if="propertyTypeCollapsed">- </strong> <strong
+					ng-if="!propertyTypeCollapsed">+</strong>
+			</p>
+		</span>
+	</div>
+	<div ng-show="propertyTypeCollapsed">
+		<div multi-select input-model="propertyTypes" button-label="label"
+			item-label="label" tick-property="ticked"
+			helper-elements="filter reset" max-labels="1" max-Height="200px;"
+			default-label="--Property Type--" on-item-click="itemSelect( data )"
+			output-model="formData.propertyTypes"></div>
+		<ul>
+			<li ng-repeat="propertyType in formData.propertyTypes">
+				<div class="box-gray">
+					{{propertyType.label}} <a class="anchorCursor" ng-click>X</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+
+<div id="widget" class="widgetMarginBottom">
+	<div class="box-gray">
+		<label> <img src="images/icons/bathroom.jpg"
+			style="width: 20px; height: 14px;"> </img> Bathroom
+		</label> <span style="float: right; font-size: x-large;">
+			<p class="anchorCursor" ng-model="bathroomCollapsed"
+				ng-click="bathroomCollapsed=!bathroomCollapsed">
+				<strong ng-if="bathroomCollapsed">- </strong> <strong
+					ng-if="!bathroomCollapsed">+</strong>
+			</p>
+		</span>
+	</div>
+	<div ng-show="bathroomCollapsed">
+		<div multi-select input-model="propertyTypes" button-label="label"
+			item-label="label" tick-property="ticked"
+			helper-elements="filter reset" max-labels="1" max-Height="200px;"
+			default-label="--Property Type--" on-item-click="itemSelect( data )"
+			output-model="formData.propertyTypes"></div>
+		<ul>
+			<li ng-repeat="propertyType in formData.propertyTypes">
+				<div class="box-gray">
+					{{propertyType.label}} <a class="anchorCursor" ng-click>X</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+
+<div id="widget" class="widgetMarginBottom">
+	<div class="box-gray">
+		<label> <img src="images/icons/furnished.jpg"
+			style="width: 20px; height: 14px;"> </img> Furnishing
+		</label> <span style="float: right; font-size: x-large;">
+			<p class="anchorCursor" ng-model="furnishedCollapsed"
+				ng-click="furnishedCollapsed=!furnishedCollapsed">
+				<strong ng-if="furnishedCollapsed">- </strong> <strong
+					ng-if="!furnishedCollapsed">+</strong>
+			</p>
+		</span>
+	</div>
+	<div ng-show="furnishedCollapsed">
+		<div multi-select input-model="propertyTypes" button-label="label"
+			item-label="label" tick-property="ticked"
+			helper-elements="filter reset" max-labels="1" max-Height="200px;"
+			default-label="--Property Type--" on-item-click="itemSelect( data )"
+			output-model="formData.propertyTypes"></div>
+		<ul>
+			<li ng-repeat="propertyType in formData.propertyTypes">
+				<div class="box-gray">
+					{{propertyType.label}} <a class="anchorCursor" ng-click>X</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+
+<div id="widget" class="widgetMarginBottom">
+	<div class="box-gray">
+		<label> <img src="images/icons/floors.jpg"
+			style="width: 20px; height: 14px;"> </img> Floors
+		</label> <span style="float: right; font-size: x-large;">
+			<p class="anchorCursor" ng-model="floorsCollapsed"
+				ng-click="floorsCollapsed=!floorsCollapsed">
+				<strong ng-if="floorsCollapsed">- </strong> <strong
+					ng-if="!floorsCollapsed">+</strong>
+			</p>
+		</span>
+	</div>
+	<div ng-show="floorsCollapsed">
+		<div multi-select input-model="propertyTypes" button-label="label"
+			item-label="label" tick-property="ticked"
+			helper-elements="filter reset" max-labels="1" max-Height="200px;"
+			default-label="--Property Type--" on-item-click="itemSelect( data )"
+			output-model="formData.propertyTypes"></div>
+		<ul>
+			<li ng-repeat="propertyType in formData.propertyTypes">
+				<div class="box-gray">
+					{{propertyType.label}} <a class="anchorCursor" ng-click>X</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div id="widget" class="widgetMarginBottom">
+	<div class="box-gray">
+		<label> <img src="images/icons/ameneties.jpg"
+			style="width: 20px; height: 14px;"> </img> Ameneties
+		</label> <span style="float: right; font-size: x-large;">
+			<p class="anchorCursor" ng-model="amenetiesCollapsed"
+				ng-click="amenetiesCollapsed=!amenetiesCollapsed">
+				<strong ng-if="amenetiesCollapsed">- </strong> <strong
+					ng-if="!amenetiesCollapsed">+</strong>
+			</p>
+		</span>
+	</div>
+	<div ng-show="amenetiesCollapsed">
+		<div multi-select input-model="propertyTypes" button-label="label"
+			item-label="label" tick-property="ticked"
+			helper-elements="filter reset" max-labels="1" max-Height="200px;"
+			default-label="--Property Type--" on-item-click="itemSelect( data )"
+			output-model="formData.propertyTypes"></div>
+		<ul>
+			<li ng-repeat="propertyType in formData.propertyTypes">
+				<div class="box-gray">
+					{{propertyType.label}} <a class="anchorCursor" ng-click>X</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div id="widget" class="widgetMarginBottom">
+	<div class="box-gray">
+		<label> <img src="images/icons/area.jpg"
+			style="width: 20px; height: 14px;"> </img> Area (sq.ft.)
+		</label> <span style="float: right; font-size: x-large;">
+			<p class="anchorCursor" ng-model="areaCollapsed"
+				ng-click="areaCollapsed=!areaCollapsed">
+				<strong ng-if="areaCollapsed">- </strong> <strong
+					ng-if="!areaCollapsed">+</strong>
+			</p>
+		</span>
+	</div>
+	<div ng-show="areaCollapsed">
+		<div multi-select input-model="propertyTypes" button-label="label"
+			item-label="label" tick-property="ticked"
+			helper-elements="filter reset" max-labels="1" max-Height="200px;"
+			default-label="--Property Type--" on-item-click="itemSelect( data )"
+			output-model="formData.propertyTypes"></div>
+		<ul>
+			<li ng-repeat="propertyType in formData.propertyTypes">
+				<div class="box-gray">
+					{{propertyType.label}} <a class="anchorCursor" ng-click>X</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+

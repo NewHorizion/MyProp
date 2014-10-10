@@ -37,4 +37,9 @@ PropertySearchServices.service('propertyService', ['ajaxService', function prope
       ajaxService.AjaxPostContentType(formData, "webservice/UploadRequirementAction.action", successFunction, errorFunction);
     };
     
+    self.searchProperties = function (formData, successFunction, errorFunction)
+    {
+    	ajaxService.AjaxPost(formData, "http://localhost:8080/webservicesample/openService/search/properties", successFunction, errorFunction);
+    }
+    
 }]);

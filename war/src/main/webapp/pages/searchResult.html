@@ -18,120 +18,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3">
-					<h5 class="widgetheading">Refine Your Search</h5>
-					<div id="widget" class="widgetMarginBottom">
-						<div class="box-gray">
-							<label>&#8377; Budget </label> <span
-								style="float: right; font-size: 20px;">
-								<p class="anchorCursor" ng-model="collapsed"
-									ng-click="collapsed=!collapsed">
-									<strong ng-if="collapsed">- </strong> <strong
-										ng-if="!collapsed">+</strong>
-								</p>
-							</span>
-						</div>
-						<div ng-show="collapsed">
-							<select name="min">
-								<option selected="selected">Min</option>
-							</select> To <select name="min">
-								<option selected="selected">Min</option>
-							</select>
-						</div>
-					</div>
-					<div id="widget" class="widgetMarginBottom">
-						<div class="box-gray">
-							<label> <img src="images/icons/locality.png"
-								style="width: 20px; height: 14px;"> </img>Locality
-							</label> <span style="float: right; font-size: x-large;">
-								<p class="anchorCursor" ng-model="localityCollapsed"
-									ng-click="localityCollapsed=!localityCollapsed">
-									<strong ng-if="localityCollapsed">- </strong> <strong
-										ng-if="!localityCollapsed">+</strong>
-								</p>
-							</span>
-						</div>
-
-						<div ng-show="localityCollapsed" class="widgetFixed">
-						    <ul>
-						     <li ng-repeat="locality in formData.city.localities">
-						        <div> 
-						            <input type="checkbox" value="locality.value">
-						            <label>{{locality.label}}</label>
-						        </div>
-						     </li>  
-						    </ul>
-						</div>
-
-					</div>
-
-
-					<div id="widget" class="widgetMarginBottom">
-						<div class="box-gray">
-							<label><img src="images/icons/bedroom.jpg"
-								style="width: 20px; height: 14px;"> </img> Bedroom</label> <span
-								style="float: right; font-size: x-large;">
-								<p class="anchorCursor" ng-model="bedRoomCollapsed"
-									ng-click="bedRoomCollapsed=!bedRoomCollapsed">
-									<strong ng-if="bedRoomCollapsed">- </strong> <strong
-										ng-if="!bedRoomCollapsed">+</strong>
-								</p>
-							</span>
-						</div>
-							<div ng-show="bedRoomCollapsed">
-								<select name="min">
-									<option selected="selected">Min</option>
-								</select> To <select name="min">
-									<option selected="selected">Min</option>
-								</select>
-							</div>
-					</div>
-
-
-					<div id="widget" class="widgetMarginBottom">
-						<div class="box-gray">
-							<label> <img src="images/icons/propertyType.jpg"
-								style="width: 20px; height: 14px;"> </img> Property Type
-							</label> <span style="float: right; font-size: x-large;">
-								<p class="anchorCursor" ng-model="propertyTypeCollapsed"
-									ng-click="propertyTypeCollapsed=!propertyTypeCollapsed">
-									<strong ng-if="propertyTypeCollapsed">- </strong> <strong
-										ng-if="!propertyTypeCollapsed">+</strong>
-								</p>
-							</span>
-						</div>
-							<div ng-show="propertyTypeCollapsed">
-								<div multi-select input-model="propertyTypes"
-									button-label="label" item-label="label" tick-property="ticked"
-									helper-elements="filter reset" max-labels="1"
-									max-Height="200px;" default-label="--Property Type--"
-									on-item-click="itemSelect( data )"
-									output-model="formData.propertyTypes"></div>
-								<ul>
-									<li ng-repeat="propertyType in formData.propertyTypes">
-										<div class="box-gray">
-											{{propertyType.label}} <a class="anchorCursor" ng-click>X</a>
-										</div>
-									</li>
-								</ul>
-							</div>
-					</div>
+					<ng-include src="'pages/filters.html'"> </ng-include>
 				</div>
 				<div class="col-lg-6">
-					<div id="topcategorieslink" class="clear">
-						<ul>
-							<li><a href="#">By Price</a></li>
-							<li><a href="#">By Date </a></li>
-							<li><a href="#">By Relevance</a></li>
-							<li><a class="highlight" href="#">Create Alerts</a></li>
-							<li><a class="highlight anchorCursor" ng-click="click">Search
-									Again</a></li>
-						</ul>
-					</div>
-					<div class="clear">&nbsp;</div>
-					<div id="main">
+					<div>
 						<h1>{{properties.length}} results Found</h1>
 						<div id="fixed" class="searchlisting"
-							ng-controller="searchResultController" when-scrolled="loadMore()">
+							 when-scrolled="loadMore()">
 							<ul class="listing">
 								<li ng-repeat="property in displaySearchProps">
 									<div class="listinfo">
