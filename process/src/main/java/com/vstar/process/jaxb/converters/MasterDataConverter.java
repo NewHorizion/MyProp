@@ -176,6 +176,7 @@ public class MasterDataConverter {
           rentBudgetModel.setValue(jaxbRentBudget.getType());
           rentBudgetModel.setLabel(jaxbRentBudget.getType());
           rentBudgetModel.setDisabled(false);
+          rentBudgetModel.setTicked(false);
           rentBudgetModel.setBudgetType(VstarConstants.PurchaseType.RENT);
           rentBudgets.add(rentBudgetModel);
         }
@@ -194,6 +195,7 @@ public class MasterDataConverter {
           saleBudgetModel.setId(jaxbSaleBudget.getId());
           saleBudgetModel.setValue(jaxbSaleBudget.getType());
           saleBudgetModel.setLabel(jaxbSaleBudget.getType());
+          saleBudgetModel.setTicked(false);
           saleBudgetModel.setBudgetType(VstarConstants.PurchaseType.SALE);
           saleBudgets.add(saleBudgetModel);
         }

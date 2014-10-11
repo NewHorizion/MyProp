@@ -167,11 +167,7 @@ scotchApp
 
 scotchApp
 .controller('BedBathNoList', function($scope,searchDataService) {
-  $scope.formData = searchDataService.getSearchData();
-  $scope.$watch('formData', function(newValue, oldValue) {
-		searchDataService.saveSearchData($scope.formData);
-	});
-  
+  //$scope.formData = searchDataService.getSearchData();
   $scope.roomNos = [
     { id: '1', label:'1', ticked: false, disabled: false, selected: false},
     { id: '2', label:'2', ticked: false, disabled: false, selected: false},
@@ -185,6 +181,11 @@ scotchApp
     { id: '10', label:'10', ticked: false, disabled: false, selected: false},
     { id: '11', label:'>10', ticked: false, disabled: false, selected: false}
   ];
+  if ($scope.formData !=undefined)
+  {
+  $scope.formData.bedroom = $scope.roomNos;
+  searchDataService.saveSearchData($scope.formData);
+  }
 }).directive('bedroomNoCtrl', function() {
 	return {
 		restrict: 'E',

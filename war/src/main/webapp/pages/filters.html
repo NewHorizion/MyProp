@@ -59,11 +59,14 @@
 		</span>
 	</div>
 	<div ng-show="bedRoomCollapsed">
-		<select name="min">
-			<option selected="selected">Min</option>
-		</select> To <select name="min">
-			<option selected="selected">Min</option>
-		</select>
+	
+		<li ng-repeat="bedroom in formData.bedroom">
+				<div>
+					<input type="checkbox" value="true" ng-model="bedroom.ticked"
+						id="{{bedroom.id}}" checked="checked"
+						ng-click="filterResults()"> <label>{{bedroom.label}} Bhk</label>
+				</div>
+			</li>
 	</div>
 </div>
 
@@ -81,14 +84,14 @@
 		</span>
 	</div>
 	<div ng-show="propertyTypeCollapsed">
-		<div multi-select input-model="propertyTypes" button-label="label"
+		<div multi-select input-model="formData.propertyTypesMaster" button-label="label"
 			item-label="label" tick-property="ticked"
 			helper-elements="filter reset" max-labels="1" max-Height="200px;"
 			default-label="--Property Type--" on-item-click="itemSelect( data )"
 			output-model="formData.propertyTypes"></div>
 		<ul>
 			<li ng-repeat="propertyType in formData.propertyTypes">
-				<div class="box-gray">
+				<div class="box-gray" ng-if="propertyType.ticked==true">
 					{{propertyType.label}} <a class="anchorCursor" ng-click>X</a>
 				</div>
 			</li>

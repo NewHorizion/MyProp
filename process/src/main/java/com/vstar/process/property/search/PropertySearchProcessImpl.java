@@ -14,6 +14,7 @@ import com.vstar.dao.process.PropertiesConstants;
 import com.vstar.process.masterData.model.ImageGalleryModel;
 import com.vstar.process.masterData.model.PropertyDetailsModel;
 import com.vstar.process.propertyDetailInfo.RequirementInfo;
+import com.vstar.process.propertyDetailInfo.ResidentialUnits;
 
 public class PropertySearchProcessImpl implements PropertySearchProcess {
 
@@ -100,27 +101,75 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
 		}
 		if (null != requirementInfo.getBudget()
 				&& requirementInfo.getBudget().length > 0) {
-			whereClause.append(" and ");
 			whereClause
-					.append(StoredProcedureConstants.MainSearchConstants.PROP_PRICE_EXPECTED_PRICE);
-			whereClause.append(" between ");
-			whereClause.append(requirementInfo.getBudget()[0].getId());
-			whereClause.append(" and ");
-			whereClause.append(requirementInfo.getBudget()[1].getId());
+			.append(createWhereConditions(
+					StoredProcedureConstants.MainSearchConstants.PROP_PRICE_EXPECTED_PRICE,
+					fetchSelectedData(requirementInfo.getBudget())));
 		}
 		if (null != requirementInfo.getBedroom()
 				&& requirementInfo.getBedroom().length > 0) {
-			whereClause.append(" and ");
 			whereClause
-					.append(StoredProcedureConstants.MainSearchConstants.FEATURE_BED_ROOMS);
-			whereClause.append(" between ");
-			whereClause.append(requirementInfo.getBedroom()[0].getLabel());
-			whereClause.append(" and ");
-			whereClause.append(requirementInfo.getBedroom()[1].getLabel());
+			.append(createWhereConditions(
+					StoredProcedureConstants.MainSearchConstants.FEATURE_BED_ROOMS,
+					fetchSelectedData(requirementInfo.getBedroom())));
 		}
 		return whereClause;
 	}
-
+  
+  /**
+ * @param columnName
+ * @param selectedValues
+ * @return
+ */
+private StringBuffer createWhereConditions (String columnName, List<ResidentialUnits> selectedValues)
+ {
+		StringBuffer whereClause = null;
+		if (null != columnName && null != selectedValues) {
+			whereClause = new StringBuffer();
+			if (selectedValues.size() == 2) {
+				whereClause.append(" and ");
+				whereClause.append(columnName);
+				whereClause.append(" between ");
+				whereClause.append(selectedValues.get(0).getId());
+				whereClause.append(" and ");
+				whereClause.append(selectedValues.get(1).getId());
+			}
+			if (selectedValues.size() > 2) {
+				int matchLoop = 0;
+				whereClause.append(" and ");
+				StringBuffer inClauseList = new StringBuffer();
+				inClauseList.append(columnName + " in (");
+				for (ResidentialUnits residentialUnit : selectedValues) {
+					if (matchLoop > 0) {
+						inClauseList.append(",");
+					}
+					inClauseList.append(residentialUnit.getId());
+					matchLoop++;
+				}
+				inClauseList.append(")");
+				whereClause.append(inClauseList);
+			}
+		}
+		return whereClause;
+	}
+    
+   /**
+ * @param residentialUnits
+ * @return
+ */
+private List<ResidentialUnits> fetchSelectedData (ResidentialUnits [] residentialUnits)
+ {
+		List<ResidentialUnits> selectedValues = null;
+		if (null != residentialUnits && residentialUnits.length > 0) {
+			selectedValues = new ArrayList<ResidentialUnits>();
+			for (ResidentialUnits residentialUnit : residentialUnits) {
+				if (residentialUnit.isTicked()) {
+					selectedValues.add(residentialUnit);
+				}
+			}
+		}
+		return selectedValues;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 

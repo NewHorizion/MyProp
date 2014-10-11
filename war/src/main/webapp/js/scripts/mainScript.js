@@ -364,96 +364,6 @@ scotchApp
 		.controller(
 				'CountryCntrl',
 				function($scope, $http, $location,searchDataService) {
-					$scope.$watch('formData', function(newValue, oldValue) { 
-						searchDataService.saveSearchData($scope.formData);
-					});
-					
-					$scope.$watch( 'formData.bedroom' , function( selectedVal ) {
-						if (selectedVal !== undefined && selectedVal.length !== 0)
-						{
-							if ($scope.formData.bedroom.length == 2)
-							{
-								angular.forEach($scope.roomNos, function (da) {
-					      				if (($scope.formData.bedroom != null || $scope.formData.bedroom != undefined)
-					      					&& !(angular.equals($scope.formData.bedroom[0].label, da.label)
-					      					|| angular.equals($scope.formData.bedroom[1].label, da.label))) {
-					      					da.disabled = true;
-					    		  		}
-					    		  	});
-							}
-							
-							if ($scope.formData.bedroom.length < 2)
-							{
-								angular.forEach($scope.roomNos, function (da) {
-					      				{
-					      					da.disabled = false;
-					    		  		}
-					    		  	});
-							}
-						}
-						else
-						{
-							angular.forEach($scope.roomNos, function (da) {
-									{
-										da.disabled = false;
-						  		}
-						  	});
-						}
-						
-					}, true);
-					$scope.$watch( 'formData.budget' , function( selectedVal ) {
-						var budgetArray = [];
-						if (selectedVal != undefined && selectedVal.length !== 0)
-						{
-							if (angular.equals(selectedVal[0].budgetType, 'Sale'))
-							{
-								budgetArray = $scope.saleBudgets;
-							}
-							else
-							{
-								budgetArray = $scope.rentBudgets;
-							}
-						}
-						if (selectedVal !== undefined && selectedVal.length !== 0)
-						{
-							if ($scope.formData.budget.length == 2)
-							{
-								angular.forEach(budgetArray, function (da) {
-			              				if (($scope.formData.budget != null || $scope.formData.budget != undefined)
-			              					&& !(angular.equals($scope.formData.budget[0].label, da.label)
-			              					|| angular.equals($scope.formData.budget[1].label, da.label))) {
-			              					da.disabled = true;
-			            		  		}
-			            		  	});
-							}
-							
-							if ($scope.formData.budget.length < 2)
-							{
-								angular.forEach(budgetArray, function (da) {
-			              				{
-			              					da.disabled = false;
-			            		  		}
-			            		  	});
-							}
-						}
-						else
-						{
-							budgetArray = $scope.saleBudgets;
-							angular.forEach(budgetArray, function (da) {
-	              				{
-	              					da.disabled = false;
-	            		  		}
-	            		  	});
-							budgetArray = $scope.rentBudgets;
-							angular.forEach(budgetArray, function (da) {
-	              				{
-	              					da.disabled = false;
-	            		  		}
-	            		  	});
-						}
-							
-		            }, true);
-
 					$http
 							.get(
 									'http://localhost:8080/webservicesample/openService/master/location')
@@ -465,7 +375,9 @@ scotchApp
 							});
 					$scope.visible = true;
 					$scope.properties = [];
-
+					$scope.propertyTypesMaster = [];
+					$scope.propertyTypesMaster = $scope.propertyTypes;
+					//searchDataService.saveSearchData($scope.propertyTypesMaster);
 				}).directive('cityCtrl', function() {
 			return {
 				restrict : 'E',
@@ -515,10 +427,6 @@ scotchApp
 		.controller(
 				'searchController',
 				function($scope, $http, $location, searchService,searchDataService,$modal) {
-					$scope.$watch('formData', function(newValue, oldValue) { 
-						searchDataService.saveSearchData($scope.formData);
-					});
-					
 					$scope.search = function() {
 						searchDataService.saveSearchData($scope.formData);
 						if ($scope.formData.city != null || $scope.formData.city != undefined)
@@ -591,7 +499,7 @@ scotchApp
 					}
 
 					$scope.findpropsError = function(response) {
-						alertsService.RenderErrorMessage("error in reqiuest");
+						alertsService.RenderErrorMessage("error in request");
 					}
 
 					$scope.filterResults = function() {

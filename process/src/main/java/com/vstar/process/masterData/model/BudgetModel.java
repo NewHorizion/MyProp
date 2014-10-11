@@ -6,8 +6,9 @@ public class BudgetModel {
 	private String label;
 	private boolean selected;
 	private boolean disabled;
-	//Capturing Sale or Rent
+	// Capturing Sale or Rent
 	private String budgetType;
+	private boolean ticked;
 
 	public Integer getId() {
 		return id;
@@ -25,44 +26,44 @@ public class BudgetModel {
 		this.value = value;
 	}
 
-  public String getLabel()
-  {
-    return label;
-  }
+	public String getLabel() {
+		return label;
+	}
 
-  public void setLabel(String label)
-  {
-    this.label = label;
-  }
+	public void setLabel(String label) {
+		this.label = label;
+	}
 
-  public boolean isDisabled()
-  {
-    return disabled;
-  }
+	public boolean isDisabled() {
+		return disabled;
+	}
 
-  public void setDisabled(boolean disabled)
-  {
-    this.disabled = disabled;
-  }
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
 
-  public boolean isSelected()
-  {
-    return selected;
-  }
+	public boolean isSelected() {
+		return selected;
+	}
 
-  public void setSelected(boolean selected)
-  {
-    this.selected = selected;
-  }
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
 
-  public String getBudgetType()
-  {
-    return budgetType;
-  }
+	public String getBudgetType() {
+		return budgetType;
+	}
 
-  public void setBudgetType(String budgetType)
-  {
-    this.budgetType = budgetType;
-  }
+	public void setBudgetType(String budgetType) {
+		this.budgetType = budgetType;
+	}
+
+	public boolean isTicked() {
+		return ticked;
+	}
+
+	public void setTicked(boolean ticked) {
+		this.ticked = ticked;
+	}
 
 }

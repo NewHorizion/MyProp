@@ -4,6 +4,7 @@ public class ResidentialUnits {
 	private String id;
 	private String value;
 	private String label;
+	private boolean ticked;
 
 	public String getValue() {
 		return value;
@@ -21,14 +22,20 @@ public class ResidentialUnits {
 		this.id = id;
 	}
 
-  public String getLabel()
-  {
-    return label;
-  }
+	public String getLabel() {
+		return label;
+	}
 
-  public void setLabel(String label)
-  {
-    this.label = label;
-  }
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public boolean isTicked() {
+		return ticked;
+	}
+
+	public void setTicked(boolean ticked) {
+		this.ticked = ticked;
+	}
 
 }

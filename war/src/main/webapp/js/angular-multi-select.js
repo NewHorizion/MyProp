@@ -61,6 +61,7 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
             disableProperty : '@',
             groupProperty   : '@',
             maxHeight       : '@',
+            maxItemClicked  : '@',
 
             // callbacks
             onClose         : '&',            
@@ -430,9 +431,9 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
                 angular.forEach( $scope.inputModel, function( value, key ) {
                     if ( typeof value !== 'undefined' ) {                   
                         if ( typeof value[ $scope.groupProperty ] === 'undefined' ) {
-                            if ( value[ $scope.tickProperty ] === true ) {
+                            //if ( value[ $scope.tickProperty ] === true ) {
                                 $scope.selectedItems.push( value );                               
-                            }
+                            //}
                         }
                     }
                 });                                
@@ -455,20 +456,48 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
 
                 $scope.varButtonLabel   = '';                
                 ctr                     = 0;                  
-
+                var selectedItemsLength = 0;
+                angular.forEach( $scope.selectedItems, function (value,key)
+                {
+                	 if ( typeof value !== 'undefined' && value.ticked == true)
+                	   {
+                	    	    selectedItemsLength++; 
+                	   }
+                });
+                
+                if ($scope.maxItemClicked !=undefined && selectedItemsLength>=$scope.maxItemClicked && $scope.maxItemClicked>0)
+            	{
+            	
+						angular.forEach($scope.selectedItems, function (value,key) {
+			      				if ( typeof value != undefined && value.ticked==false)
+			      					{
+			      					value.disabled = true;
+			    		  		}
+			    		  	});
+            	
+            	}
+                else 
+                	{
+                	angular.forEach($scope.selectedItems, function (value,key) {
+	      				if ( typeof value != undefined )
+	      					{
+	      					value.disabled = false;
+	    		  		}
+	    		  	});
+                	}
                 // refresh button label...
-                if ( $scope.selectedItems.length === 0 ) {
+                if ( selectedItemsLength === 0 ) {
                     // https://github.com/isteven/angular-multi-select/pull/19                    
                     $scope.varButtonLabel = ( typeof $scope.defaultLabel !== 'undefined' ) ? $scope.defaultLabel : 'None selected';
                 }
                 else {                
-                    var tempMaxLabels = $scope.selectedItems.length;
+                    var tempMaxLabels = selectedItemsLength;
                     if ( typeof $scope.maxLabels !== 'undefined' && $scope.maxLabels !== '' ) {
                         tempMaxLabels = $scope.maxLabels;
                     }
 
                     // if max amount of labels displayed..
-                    if ( $scope.selectedItems.length > tempMaxLabels ) {
+                    if ( selectedItemsLength > tempMaxLabels ) {
                         $scope.more = true;
                     }
                     else {
@@ -476,7 +505,7 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
                     }                
                 
                     angular.forEach( $scope.selectedItems, function( value, key ) {
-                        if ( typeof value !== 'undefined' ) {                        
+                        if ( typeof value !== 'undefined' && value.ticked==true) {                        
                             if ( ctr < tempMaxLabels ) {                            
                                 $scope.varButtonLabel += ( $scope.varButtonLabel.length > 0 ? '</div>, <div class="buttonLabel">' : '<div class="buttonLabel">') + $scope.writeLabel( value, 'buttonLabel' );
                             }
@@ -489,7 +518,8 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
                         if (tempMaxLabels > 0) {
                             $scope.varButtonLabel += ', ... ';
                         }
-                        $scope.varButtonLabel += '(Total: ' + $scope.selectedItems.length + ')';                        
+                    
+                        $scope.varButtonLabel += '(Total: ' + selectedItemsLength + ')';
                     }
                 }
                 $scope.varButtonLabel = $sce.trustAsHtml( $scope.varButtonLabel + '<span class="caret"></span>' );                
@@ -520,7 +550,7 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
                 angular.forEach( temp, function( value2, key2 ) {
                     if ( typeof value2 !== 'undefined' ) {                        
                         angular.forEach( item, function( value1, key1 ) {                    
-                            if ( key1 == value2 ) {
+                            if ( key1 == value2) {
                                 label += '&nbsp;' + value1;        
                             }
                         });                    
@@ -842,7 +872,9 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
               		angular.forEach(newVal, function (item) {
               			angular.forEach(data, function (da) {
               				if (angular.equals(item.label, da.label)) {
+              					 if (item.ticked==true){
               					item.ticked = true;
+              					 }
             		  			}
               				});
             		  	});
