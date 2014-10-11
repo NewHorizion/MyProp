@@ -556,65 +556,37 @@ scotchApp
 					};
 				});
 
-
-scotchApp
-		.controller(
-				'searchResultController',
-				function($scope, propertyService, $http, searchService,
-						searchDataService) {
-					$scope.formData = searchDataService.getSearchData();
-					$scope.collapsed = true;
-					$scope.bedRoomCollapsed = true;
-					$scope.localityCollapsed = true;
-					$scope.properties = searchService.getSearchResponse();
-					$scope.displaySearchProps = [];
-					var counter = 0;
-					$scope.loadMore = function() {
-						if ($scope.properties) {
-							for ( var i = 0; i < $scope.properties.length; i++) {
-
-								$scope.displaySearchProps
-										.push($scope.properties[counter]);
-								counter++;
-								if (i>0 && i % 5 == 0) {
-									break;
-								}
-							}
-						}
-					};
-
-					$scope.findPropsCompleted = function(response) {
-						counter = 0;
-						$scope.displaySearchProps = [];
-						$scope.properties = response.searchProperties;
-						$scope.loadMore();
-					}
-
-					$scope.findpropsError = function(response) {
-						alertsService.RenderErrorMessage("error in reqiuest");
-					}
-
-					$scope.filterResults = function() {
-						if ($scope.formData) {
-							$scope.formData.locations = $scope.formData.city.localities;
-							propertyService.searchProperties($scope.formData,
-									$scope.findPropsCompleted,
-									$scope.findpropsError);
-						}
-					};
-
-					$scope.loadMore();
-				}).directive('whenScrolled', function() {
-			return function(scope, elm, attr) {
-				var raw = elm[0];
-
-				elm.bind('scroll', function() {
-					if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
-						scope.$apply(attr.whenScrolled);
-					}
-				});
-			};
-		});
+scotchApp.controller('searchResultController', function($scope, $http,
+		searchService,searchDataService) {
+	$scope.formData = searchDataService.getSearchData();
+	$scope.collapsed = true;
+	$scope.bedRoomCollapsed = true;
+	$scope.localityCollapsed = true;
+	$scope.properties = searchService.getSearchResponse();
+	$scope.displaySearchProps =[];
+	 var counter = 0;
+	    $scope.loadMore = function() {
+	    	if($scope.prperties)
+	    		{
+	        for (var i = 0; i <5; i++) {
+	            $scope.displaySearchProps.push($scope.properties[counter]);
+	            counter ++;
+	        }
+	    		}
+	    };
+	    
+	    $scope.loadMore();
+}).directive('whenScrolled', function() {
+    return function(scope, elm, attr) {
+        var raw = elm[0];
+        
+        elm.bind('scroll', function() {
+            if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+                scope.$apply(attr.whenScrolled);
+            }
+        });
+    };
+});
 
 scotchApp.controller('latestSearchCntrl', function($scope, propertyService,GalleryImageService,alertsService,$modal) {
 	$scope.initializeController = function() {
