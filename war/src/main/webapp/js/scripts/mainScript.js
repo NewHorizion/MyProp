@@ -471,6 +471,8 @@ scotchApp
 				function($scope, propertyService, $http, searchService,
 						searchDataService) {
 					$scope.formData = searchDataService.getSearchData();
+					$scope.selectedPropertyTypes = $scope.formData.propertyTypes;
+					$scope.selectedBudget = $scope.formData.budget;
 					$scope.collapsed = true;
 					$scope.bedRoomCollapsed = true;
 					$scope.localityCollapsed = true;

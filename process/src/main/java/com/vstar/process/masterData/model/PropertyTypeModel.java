@@ -4,7 +4,7 @@ public class PropertyTypeModel {
 	private Integer id;
 	private String label;
 	private String categoryName;
-	private boolean ticket;
+	private boolean ticked;
 
 	public Integer getId() {
 		return id;
@@ -22,24 +22,20 @@ public class PropertyTypeModel {
 		this.label = label;
 	}
 
-  public String getCategoryName()
-  {
-    return categoryName;
-  }
+	public String getCategoryName() {
+		return categoryName;
+	}
 
-  public void setCategoryName(String categoryName)
-  {
-    this.categoryName = categoryName;
-  }
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 
-  public boolean isTicket()
-  {
-    return ticket;
-  }
+	public boolean isTicked() {
+		return ticked;
+	}
 
-  public void setTicket(boolean ticket)
-  {
-    this.ticket = ticket;
-  }
+	public void setTicked(boolean ticked) {
+		this.ticked = ticked;
+	}
 
 }

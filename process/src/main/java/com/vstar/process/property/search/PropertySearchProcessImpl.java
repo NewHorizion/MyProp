@@ -8,6 +8,7 @@ import java.util.Properties;
 
 import com.google.gson.Gson;
 import com.vstar.common.StoredProcedureConstants;
+import com.vstar.common.impl.CreateConditionObjectFactory;
 import com.vstar.dao.PropInfoDao;
 import com.vstar.dao.process.PropInfoDaoProcess;
 import com.vstar.dao.process.PropertiesConstants;
@@ -22,57 +23,62 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
 	private PropInfoDaoProcess propInfoDaoProcess;
 
 	@Override
-	public String findProperty(RequirementInfo requirementInfo) 
-  {
-    List<PropertyDetailsModel> searchProperties = null;
-    StringBuffer whereClause = createWhereClause(requirementInfo);
-    List<Object> customResults = propInfoDaoProcess.callingMainSearchSP(whereClause.toString());
-    if (null != customResults && customResults.size() > 0)
-    {
-      searchProperties = ResultSetTransformProcess.transformMainSearch(customResults,
-        mergedProperties);
-    }
-    Map<String, List<PropertyDetailsModel>> mapRecentProperties = new LinkedHashMap<String, List<PropertyDetailsModel>>();
-    mapRecentProperties.put("searchProperties", searchProperties);
-    Gson gson = new Gson();
-    String json = gson.toJson(mapRecentProperties);
-    return json;
-  }
+	public String findProperty(RequirementInfo requirementInfo) {
+		List<PropertyDetailsModel> searchProperties = null;
+		StringBuffer whereClause = createWhereClause(requirementInfo);
+		List<Object> customResults = propInfoDaoProcess
+				.callingMainSearchSP(whereClause.toString());
+		if (null != customResults && customResults.size() > 0) {
+			searchProperties = ResultSetTransformProcess.transformMainSearch(
+					customResults, mergedProperties);
+		}
+		Map<String, List<PropertyDetailsModel>> mapRecentProperties = new LinkedHashMap<String, List<PropertyDetailsModel>>();
+		mapRecentProperties.put("searchProperties", searchProperties);
+		Gson gson = new Gson();
+		String json = gson.toJson(mapRecentProperties);
+		return json;
+	}
 
-  /**
-   * Creating whereClause with entered infos
-   * 
-   * @param requirementInfo
-   * @return
-   */
-  private StringBuffer createWhereClause(RequirementInfo requirementInfo)
- {
+	/**
+	 * Creating whereClause with entered infos
+	 * 
+	 * @param requirementInfo
+	 * @return
+	 */
+	private StringBuffer createWhereClause(RequirementInfo requirementInfo) {
 		StringBuffer whereClause = new StringBuffer();
-
+		CreateConditionObjectFactory conditionFactory = new CreateConditionObjectFactory();
 		whereClause
 				.append(StoredProcedureConstants.MainSearchConstants.PROP_PURCHASE_PROP_PURCHASE_ID
 						+ requirementInfo.getPurchaseType());
 		if (null != requirementInfo.getPropertyTypes()
 				&& requirementInfo.getPropertyTypes().length > 0) {
-			whereClause.append(" and ");
 			StringBuffer propertyTypesList = new StringBuffer();
+			propertyTypesList.append(" and ");
 			propertyTypesList
 					.append(StoredProcedureConstants.MainSearchConstants.PROP_TYPE_PROP_TYPE_ID
 							+ " in (");
-			int propTypelenght = requirementInfo.getPropertyTypes().length - 1;
-			for (int i = 0; i <= propTypelenght; i++) {
-				propertyTypesList.append(requirementInfo.getPropertyTypes()[i]
-						.getId());
-				if (propTypelenght != i) {
-					propertyTypesList.append(",");
+			int propTypelength = requirementInfo.getPropertyTypes().length - 1;
+			int matchLoop = 0;
+			for (int i = 0; i <= propTypelength; i++) {
+				if (requirementInfo.getPropertyTypes()[i].isTicked()) {
+					if (matchLoop > 0) {
+						propertyTypesList.append(",");
+					}
+					propertyTypesList
+							.append(requirementInfo.getPropertyTypes()[i]
+									.getId());
+					matchLoop++;
 				}
 			}
 			propertyTypesList.append(")");
-			whereClause.append(propertyTypesList);
+			if (matchLoop > 0) {
+				whereClause.append(propertyTypesList);
+			}
 		}
 		if (null != requirementInfo.getLocations()
 				&& requirementInfo.getLocations().length > 0) {
-			int matchLoop =0;
+			int matchLoop = 0;
 			whereClause.append(" and ");
 			StringBuffer locationList = new StringBuffer();
 			locationList
@@ -81,7 +87,7 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
 			int propLoclenght = requirementInfo.getLocations().length - 1;
 			for (int i = 0; i <= propLoclenght; i++) {
 				if (requirementInfo.getLocations()[i].isTicked()) {
-					if (matchLoop >0) {
+					if (matchLoop > 0) {
 						locationList.append(",");
 					}
 					locationList.append(requirementInfo.getLocations()[i]
@@ -101,64 +107,33 @@ public class PropertySearchProcessImpl implements PropertySearchProcess {
 		}
 		if (null != requirementInfo.getBudget()
 				&& requirementInfo.getBudget().length > 0) {
-			whereClause
-			.append(createWhereConditions(
-					StoredProcedureConstants.MainSearchConstants.PROP_PRICE_EXPECTED_PRICE,
-					fetchSelectedData(requirementInfo.getBudget())));
+			StringBuffer createdWhereClause = conditionFactory
+					.createBetweenCondition(
+							StoredProcedureConstants.MainSearchConstants.PROP_PRICE_EXPECTED_PRICE,
+							fetchSelectedData(requirementInfo.getBudget()));
+			if (null != createdWhereClause) {
+				whereClause.append(createdWhereClause);
+			}
 		}
 		if (null != requirementInfo.getBedroom()
 				&& requirementInfo.getBedroom().length > 0) {
-			whereClause
-			.append(createWhereConditions(
-					StoredProcedureConstants.MainSearchConstants.FEATURE_BED_ROOMS,
-					fetchSelectedData(requirementInfo.getBedroom())));
-		}
-		return whereClause;
-	}
-  
-  /**
- * @param columnName
- * @param selectedValues
- * @return
- */
-private StringBuffer createWhereConditions (String columnName, List<ResidentialUnits> selectedValues)
- {
-		StringBuffer whereClause = null;
-		if (null != columnName && null != selectedValues) {
-			whereClause = new StringBuffer();
-			if (selectedValues.size() == 2) {
-				whereClause.append(" and ");
-				whereClause.append(columnName);
-				whereClause.append(" between ");
-				whereClause.append(selectedValues.get(0).getId());
-				whereClause.append(" and ");
-				whereClause.append(selectedValues.get(1).getId());
-			}
-			if (selectedValues.size() > 2) {
-				int matchLoop = 0;
-				whereClause.append(" and ");
-				StringBuffer inClauseList = new StringBuffer();
-				inClauseList.append(columnName + " in (");
-				for (ResidentialUnits residentialUnit : selectedValues) {
-					if (matchLoop > 0) {
-						inClauseList.append(",");
-					}
-					inClauseList.append(residentialUnit.getId());
-					matchLoop++;
-				}
-				inClauseList.append(")");
-				whereClause.append(inClauseList);
+			StringBuffer createdWhereClause = conditionFactory
+					.createInCondition(
+							StoredProcedureConstants.MainSearchConstants.FEATURE_BED_ROOMS,
+							fetchSelectedData(requirementInfo.getBedroom()));
+			if (null != createdWhereClause) {
+				whereClause.append(createdWhereClause);
 			}
 		}
 		return whereClause;
 	}
-    
-   /**
- * @param residentialUnits
- * @return
- */
-private List<ResidentialUnits> fetchSelectedData (ResidentialUnits [] residentialUnits)
- {
+
+	/**
+	 * @param residentialUnits
+	 * @return
+	 */
+	private List<ResidentialUnits> fetchSelectedData(
+			ResidentialUnits[] residentialUnits) {
 		List<ResidentialUnits> selectedValues = null;
 		if (null != residentialUnits && residentialUnits.length > 0) {
 			selectedValues = new ArrayList<ResidentialUnits>();
@@ -170,6 +145,7 @@ private List<ResidentialUnits> fetchSelectedData (ResidentialUnits [] residentia
 		}
 		return selectedValues;
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -178,46 +154,47 @@ private List<ResidentialUnits> fetchSelectedData (ResidentialUnits [] residentia
 	 * ()
 	 */
 	@Override
-  public String findLatestProperties()
-  {
-    final String APPLICATION_CONTEXT_PATH = mergedProperties
-      .getProperty(PropertiesConstants.APPLICATION_CONTEXR_PATH);
-    final String OUTSIDE_WAR_IMAGES_PATH = mergedProperties
-      .getProperty(PropertiesConstants.OUTSIDE_WAR_IMAGES_PATH);
-    Map<String, Object> mapRecentProperties = new LinkedHashMap<String, Object>();
-    List<PropertyDetailsModel> latestProperties = new ArrayList<PropertyDetailsModel>();
-    ;
-    List<PropInfoDao> propInfoDaos = propInfoDaoProcess.getAllPropInfoDaos();
-    PropertyDetailsModel propertyDetailsModel = null;
-    for (PropInfoDao propInfoDao : propInfoDaos)
-    {
-      propertyDetailsModel = new PropertyDetailsModel();
-      try
-      {
-        /*propertyDetailsModel
-          .setPropertyTitle(PropertyUtility.getTitle(propInfoDao.getPropFeatures().getBedRooms(),
-            propInfoDao.getPropType(), propInfoDao.getPropInfoId()));*/
-        propertyDetailsModel.setProjectName(propInfoDao.getPropTransaction().getTransactionType());
-        propertyDetailsModel.setPropertyPrice(String.valueOf(propInfoDao.getPropPrice()
-          .getExpectedPrice()));
-        propertyDetailsModel.setPerSqFtRate(String.valueOf(propInfoDao.getPropPrice()
-          .getExpectedPrice()));
-        propertyDetailsModel.setPropertyImagePath(APPLICATION_CONTEXT_PATH
-          + OUTSIDE_WAR_IMAGES_PATH + "/thumb.jpg");
-        latestProperties.add(propertyDetailsModel);
-      }
-      catch (Exception e)
-      {
-        // Log the exception
-      }
-    }
+	public String findLatestProperties() {
+		final String APPLICATION_CONTEXT_PATH = mergedProperties
+				.getProperty(PropertiesConstants.APPLICATION_CONTEXR_PATH);
+		final String OUTSIDE_WAR_IMAGES_PATH = mergedProperties
+				.getProperty(PropertiesConstants.OUTSIDE_WAR_IMAGES_PATH);
+		Map<String, Object> mapRecentProperties = new LinkedHashMap<String, Object>();
+		List<PropertyDetailsModel> latestProperties = new ArrayList<PropertyDetailsModel>();
+		;
+		List<PropInfoDao> propInfoDaos = propInfoDaoProcess
+				.getAllPropInfoDaos();
+		PropertyDetailsModel propertyDetailsModel = null;
+		for (PropInfoDao propInfoDao : propInfoDaos) {
+			propertyDetailsModel = new PropertyDetailsModel();
+			try {
+				/*
+				 * propertyDetailsModel
+				 * .setPropertyTitle(PropertyUtility.getTitle
+				 * (propInfoDao.getPropFeatures().getBedRooms(),
+				 * propInfoDao.getPropType(), propInfoDao.getPropInfoId()));
+				 */
+				propertyDetailsModel.setProjectName(propInfoDao
+						.getPropTransaction().getTransactionType());
+				propertyDetailsModel
+						.setPropertyPrice(String.valueOf(propInfoDao
+								.getPropPrice().getExpectedPrice()));
+				propertyDetailsModel.setPerSqFtRate(String.valueOf(propInfoDao
+						.getPropPrice().getExpectedPrice()));
+				propertyDetailsModel
+						.setPropertyImagePath(APPLICATION_CONTEXT_PATH
+								+ OUTSIDE_WAR_IMAGES_PATH + "/thumb.jpg");
+				latestProperties.add(propertyDetailsModel);
+			} catch (Exception e) {
+				// Log the exception
+			}
+		}
 
-    mapRecentProperties.put("latestProperties", latestProperties);
-    Gson gson = new Gson();
-    String json = gson.toJson(mapRecentProperties);
-    return json;
-  }
-	
+		mapRecentProperties.put("latestProperties", latestProperties);
+		Gson gson = new Gson();
+		String json = gson.toJson(mapRecentProperties);
+		return json;
+	}
 
 	@Override
 	public String findPropertyImages(Long id) {
@@ -227,32 +204,32 @@ private List<ResidentialUnits> fetchSelectedData (ResidentialUnits [] residentia
 		final String OUTSIDE_WAR_IMAGES_PATH = mergedProperties
 				.getProperty(PropertiesConstants.OUTSIDE_WAR_IMAGES_PATH);
 		List<ImageGalleryModel> images = new ArrayList<ImageGalleryModel>();
-		ImageGalleryModel image1  = new ImageGalleryModel();
+		ImageGalleryModel image1 = new ImageGalleryModel();
 		image1.setImageId(1);
 		image1.setTitle("First");
 		image1.setSummary("summary1");
-		image1.setPath(APPLICATION_CONTEXT_PATH
-				+ OUTSIDE_WAR_IMAGES_PATH + "/1.jpg");
+		image1.setPath(APPLICATION_CONTEXT_PATH + OUTSIDE_WAR_IMAGES_PATH
+				+ "/1.jpg");
 		images.add(image1);
-		ImageGalleryModel image2  = new ImageGalleryModel(); 
+		ImageGalleryModel image2 = new ImageGalleryModel();
 		image2.setImageId(2);
 		image2.setTitle("Second");
 		image2.setSummary("summary2");
-		image2.setPath(APPLICATION_CONTEXT_PATH
-				+ OUTSIDE_WAR_IMAGES_PATH + "/3.jpg");
+		image2.setPath(APPLICATION_CONTEXT_PATH + OUTSIDE_WAR_IMAGES_PATH
+				+ "/3.jpg");
 		images.add(image2);
-		ImageGalleryModel image3  = new ImageGalleryModel(); 
+		ImageGalleryModel image3 = new ImageGalleryModel();
 		image3.setImageId(1);
 		image3.setTitle("third");
 		image3.setSummary("summary3");
-		image3.setPath(APPLICATION_CONTEXT_PATH
-				+ OUTSIDE_WAR_IMAGES_PATH + "/2.jpg");
+		image3.setPath(APPLICATION_CONTEXT_PATH + OUTSIDE_WAR_IMAGES_PATH
+				+ "/2.jpg");
 		images.add(image3);
 		mapRecentProperties.put("images", images);
 		Gson gson = new Gson();
-		String json  = gson.toJson(mapRecentProperties);
+		String json = gson.toJson(mapRecentProperties);
 		return json;
-		
+
 	}
 
 	/**
@@ -276,6 +253,5 @@ private List<ResidentialUnits> fetchSelectedData (ResidentialUnits [] residentia
 	public void setPropInfoDaoProcess(PropInfoDaoProcess propInfoDaoProcess) {
 		this.propInfoDaoProcess = propInfoDaoProcess;
 	}
-
 
 }
