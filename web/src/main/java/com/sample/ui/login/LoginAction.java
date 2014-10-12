@@ -49,15 +49,15 @@ implements ServletResponseAware, ServletRequestAware{
 	public String login () 
  {
 
-		if (null != registrationInfo.getUserName() && null != registrationInfo.getPassword()) {
+		if (null != registrationInfo.getEmailId() && null != registrationInfo.getPassword()) {
 			try {
 				Authentication authentication = authenticationManager
 						.authenticate(new UsernamePasswordAuthenticationToken(
-								registrationInfo.getUserName(), registrationInfo.getPassword()));
+								registrationInfo.getEmailId(), registrationInfo.getPassword()));
 				SecurityContextHolder.getContext().setAuthentication(
 						authentication);
 				if (authentication.isAuthenticated()) {
-					PropUsersDao propUsersDao  = registrationProcess.getPropUserDaoExtnProcess().getPropUsersDaoExtnById(registrationInfo.getUserName());
+					PropUsersDao propUsersDao  = registrationProcess.getPropUserDaoExtnProcess().getPropUsersDaoExtnById(registrationInfo.getEmailId());
 					jsonMap.put("success", true);
 					jsonMap.put("messages", "Welcome " + propUsersDao.getUserName() + "!!!!");
 					jsonMap.put(VstarConstants.Authentication.AUTHORIZED_USER,true);

@@ -357,7 +357,7 @@ scotchApp
 */
 scotchApp
 		.controller(
-				'registrationController', function($scope, $http, loginService) {
+				'registrationController', function($scope, $http, loginService, $rootScope, $location) {
 					$('#mainContent').hide();
 					$scope.formData = {};
 					//$injector.invoke(GenericController, this, {$scope: $scope});
@@ -371,7 +371,12 @@ scotchApp
 						$scope.formData.registrationInfo.cityName = $scope.formData.registrationInfo.city.cityName;
 						// Register & Logged-IN
 						$scope.getSuccessRegister = function(response) {
-							alert('success');
+							if (response.jsonMap.userType == undefined || response.jsonMap.userType == '')
+							 {
+								 return;
+							 }
+							 $rootScope.userType = response.jsonMap.userType;
+							 $location.path('user', false);
 						}
 						$scope.getErrorRegister = function(response) {
 							alertsService.RenderErrorMessage("error in reqiuest");
