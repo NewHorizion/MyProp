@@ -13,8 +13,8 @@ LoginServices.service('loginService', ['ajaxService', function propertyService(a
 	  ajaxService.AjaxPostContentType(formData, "webservice/Registration.action", successFunction, errorFunction);
   };
   
-  self.logout = function(formData, successFunction, errorFunction) {
-	  ajaxService.AjaxWithUrl("webservice/LogoutAction.action");
+  self.logout = function(successFunction, errorFunction) {
+	  ajaxService.AjaxWithUrl("webservice/LogoutAction.action", successFunction, errorFunction);
   };
   
   /*self.register = function(formData) {

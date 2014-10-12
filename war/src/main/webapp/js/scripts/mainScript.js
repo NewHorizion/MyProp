@@ -145,7 +145,8 @@ scotchApp
 			
 			.state('user.propertyForm', {
 				url : '/propertyForm',
-				templateUrl: 'pages/propertyForm.html' 
+				templateUrl: 'pages/propertyForm.html',
+				controller : 'postPropertyController'
 			})
 			
 			.state('user.propertyForm.propertyDetails', {
@@ -162,6 +163,12 @@ scotchApp
 			.state('user.requirement.requirementDetails', {
 				url : '/requirementDetails',
 				templateUrl : 'pages/requirementDetail.html'
+			})
+			
+			.state('user.registration', {
+				url : '/registration',
+				templateUrl : 'pages/registration.html',
+				controller : 'registrationController'
 			});
 
 			$urlRouterProvider.otherwise('/home');
@@ -192,12 +199,20 @@ scotchApp
 						} ]);
 
 // create the controller and inject Angular's $scope
-scotchApp.controller('mainController', function($scope, $rootScope, loginService) {
+scotchApp.controller('mainController', function($scope, $rootScope, loginService, $location) {
 	// create a message to display in our view
 	$rootScope.userType = '';
+	$scope.logoutSuccess = function(response) {
+		$rootScope.userType = '';
+		$location.path('home', false);
+	}
+	$scope.logoutError = function(response) {
+	    
+	}
 	$scope.logout = function($http)
 	{
-		loginService.logout();
+		loginService.logout($scope.logoutSuccess,
+				$scope.logoutError);
 	}
 	$scope.message = 'Everyone come and see how good I look!';
 	
@@ -206,7 +221,7 @@ scotchApp.controller('mainController', function($scope, $rootScope, loginService
 scotchApp.controller('userController', function($scope, $rootScope) {
 	// create a message to display in our view
 	$scope.message = 'Everyone come and see how good I look!';
-	
+	$('#mainContent').show();
 });
 
 scotchApp.controller('aboutController', function($scope) {
@@ -222,6 +237,7 @@ scotchApp
 		.controller(
 				'requirementController',
 				function($scope, $http, loginService, propertyService) {
+					$('#mainContent').hide();
 					// we will store all of our form data in this object
 					$scope.formData = {};
 					$scope.reqData = {};
@@ -306,7 +322,7 @@ scotchApp
 							 $location.path('user', false);
 						 }
 						 $scope.getErrorLogin = function(response) {
-						    
+						    alert('Error');
 						 }
 						 loginService.login($scope.formData, $scope.getSuccessLogin,
 									$scope.getErrorLogin);
@@ -338,6 +354,7 @@ scotchApp
 scotchApp
 		.controller(
 				'registrationController', function($scope, $http, loginService) {
+					$('#mainContent').hide();
 					$scope.formData = {};
 					//$injector.invoke(GenericController, this, {$scope: $scope});
 
@@ -574,7 +591,7 @@ scotchApp
 		.controller(
 				'postPropertyController',
 				function($scope, $http, propertyService, loginService,imageService) {
-
+					$('#mainContent').hide();
 					// we will store all of our form data in this object
 					$scope.formData = {};
 					$scope.files = [];

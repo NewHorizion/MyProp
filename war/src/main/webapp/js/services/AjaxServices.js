@@ -151,13 +151,13 @@ ajaxServices.service('ajaxService', ['$http', 'blockUI', function ($http, blockU
 
         }
 
-        this.AjaxWithUrl = function (route) {            
+        this.AjaxWithUrl = function (route, successFunction, errorFunction) {            
             setTimeout(function () {
                 $http({ method: 'GET', url: route}).success(function (response, status, headers, config) {                 
-                    alert('logout');
+                	successFunction(response, status);
                 }).error(function (response) {                  ;
                     if (response.IsAuthenicated == false) { window.location = "/index.html"; }
-                    alert('error');
+                    errorFunction(response);
                 });
             }, 0);
 
