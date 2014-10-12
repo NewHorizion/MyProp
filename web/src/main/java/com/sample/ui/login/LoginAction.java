@@ -63,6 +63,10 @@ implements ServletResponseAware, ServletRequestAware{
 					jsonMap.put(VstarConstants.Authentication.AUTHORIZED_USER,true);
 					jsonMap.put(VstarConstants.Authentication.USER_TYPE,propUsersDao.getUserType());
 				}
+				else
+				{
+				  jsonMap.put("Invalid user name or password !!", true);
+				}
 			    // Fire auth event
 			    if (this.eventPublisher != null)
 			    {

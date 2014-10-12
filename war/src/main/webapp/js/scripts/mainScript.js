@@ -318,6 +318,10 @@ scotchApp
 //					          return false;
 //					     }
 						 $scope.getSuccessLogin = function(response) {
+							 if (response.jsonMap.userType == undefined || response.jsonMap.userType == '')
+							 {
+								 return;
+							 }
 							 $rootScope.userType = response.jsonMap.userType;
 							 $location.path('user', false);
 						 }
