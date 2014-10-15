@@ -1,6 +1,6 @@
 // create the module and name it scotchApp
 var scotchApp = angular.module('scotchApp',
-		[ 'userModule', 'anonymousModule', 'LoginServices', 'PropertySearchServices']);
+		[ 'userModule', 'anonymousModule','ui.router', 'flow', 'LoginServices', 'PropertySearchServices']);
 
 // create the controller and inject Angular's $scope
 scotchApp.controller('mainController', function($scope, $rootScope, loginService, $location) {

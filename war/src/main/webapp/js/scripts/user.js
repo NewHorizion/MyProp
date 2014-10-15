@@ -1,6 +1,6 @@
 // create the module and name it scotchApp
 var userModule = angular.module('userModule',
-		[ 'userControllers']);
+		[ 'userControllers','ui.router', 'flow',]);
 userModule.config(function(blockUIConfigProvider) {
 
 	// Change the default overlay message
