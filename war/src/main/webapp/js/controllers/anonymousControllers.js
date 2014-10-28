@@ -138,9 +138,9 @@ anonymousControllers
 
 					// process the form
 					$scope.signup = function() {
-						if ($("#signupForm").valid()==false){
+						/*if ($("#signupForm").valid()==false){
 					          return false;
-					     }
+					     }*/
 						$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.city.cityId
 						$scope.formData.registrationInfo.cityName = $scope.formData.registrationInfo.city.cityName;
 						// Register & Logged-IN
@@ -343,8 +343,15 @@ alertsService.RenderErrorMessage("error in reqiuest");
 anonymousControllers
 .controller(
 		'postPropertyController',
-		function($scope, $http, propertyService, loginService,imageService) {
+		function($scope, $http, $rootScope, propertyService, loginService,imageService) {
 			$('#mainContent').hide();
+			
+			if ($rootScope.userType != null && $rootScope.userType != undefined
+					&& $rootScope.userType != "")
+			{
+				$('#rootDiv').removeClass('col-sm-8');
+				$('#rootDiv').removeClass('col-sm-offset-2');
+			}
 			// we will store all of our form data in this object
 			$scope.formData = {};
 			$scope.files = [];

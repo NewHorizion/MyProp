@@ -1,7 +1,7 @@
 'use strict';
 var LoginServices = angular.module('LoginServices', ['ajaxService']);
 
-LoginServices.service('loginService', ['ajaxService', function propertyService(ajaxService) {
+LoginServices.service('loginService', ['ajaxService', function loginService(ajaxService) {
   var self = this;
 
   
@@ -15,6 +15,10 @@ LoginServices.service('loginService', ['ajaxService', function propertyService(a
   
   self.logout = function(successFunction, errorFunction) {
 	  ajaxService.AjaxWithUrl("webservice/LogoutAction.action", successFunction, errorFunction);
+  };
+  
+  self.updateProfile = function(formData, successFunction, errorFunction) {
+	  ajaxService.AjaxPostContentType(formData, "webservice/UpdateProfile.action", successFunction, errorFunction);
   };
   
   /*self.register = function(formData) {

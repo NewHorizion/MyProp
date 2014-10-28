@@ -134,6 +134,8 @@
 		<property name="propUserDaoExtnProcess" ref="propUserDaoExtnProcess" />
 		<property name="propUsersDaoProcess" ref="propUsersDaoProcess" />
 		<property name="propCompanyDaoProcess" ref="propCompanyDaoProcess" />
+		<property name="userProcess" ref="userProcess" />
+		<property name="propOwnerDaoProcess" ref="propOwnerDaoProcess" />
 	</bean>
     
     <bean id="propertyUploadProcess"

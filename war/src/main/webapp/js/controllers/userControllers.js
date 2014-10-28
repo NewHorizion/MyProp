@@ -3,7 +3,7 @@ var userControllers = angular.module('userControllers', [ 'multi-select',
 		'fileAppDir', 'ngAnimate', 'flow', 'checklist-model',
 		'ng.httpLoader', 'PropertySearchServices', 'ajaxService',
 		'PropertyServices', 'blockUI', 'alertsService', 'ui.bootstrap',
-		'propertyControllers', 'LoginServices', 'ImageServices' ]);
+		'propertyControllers', 'userServices', 'ImageServices' ]);
 
 
 userControllers.controller('userController', function($scope, $rootScope) {
@@ -15,7 +15,7 @@ userControllers.controller('userController', function($scope, $rootScope) {
 userControllers
 		.controller(
 				'requirementController',
-				function($scope, $http, loginService, propertyService) {
+				function($scope, $http, propertyService) {
 					$('#mainContent').hide();
 					// we will store all of our form data in this object
 					$scope.formData = {};
@@ -44,23 +44,6 @@ userControllers
 							type : "text/plain"
 						});
 						fd.append("files", oBlob, $scope.files);
-						
-						$scope.postRequirement = function(response) {
-							alert('loogedin');
-						 }
-						 $scope.getErrorLogin = function(response) {
-						    
-						 }
-						if ($scope.formData.registrationInfo.newUser == 'false')
-						{
-							loginService.login($scope.formData, $scope.postRequirement,
-									$scope.getErrorLogin);
-						}
-						else
-						{
-							loginService.registration($scope.formData, $scope.postRequirement,
-									$scope.getErrorRegister);
-						}
 					
 					};
 					
@@ -88,52 +71,53 @@ userControllers
 
 userControllers
 		.controller(
-				'registrationController', function($scope, $http, loginService, $rootScope, $location) {
+				'profileController', function($scope, $http, $rootScope, $location, userService) {
 					$('#mainContent').hide();
+					
 					$scope.formData = {};
 					//$injector.invoke(GenericController, this, {$scope: $scope});
 
+					$scope.successProfile = function(response)
+					{
+						$scope.formData.registrationInfo = response.jsonMap.registrationInfo;
+						$scope.formData.registrationInfo.city = $scope.formData.registrationInfo.cityId;
+					}
+					
+					$scope.errorProfile = function(response)
+					{
+						alert('error');
+					}
+					userService.profile($scope.successProfile, $scope.errorProfile);
+					
 					// process the form
-					$scope.signup = function() {
-						if ($("#signupForm").valid()==false){
+					$scope.updateProfile = function() {
+						/*if ($("#signupForm").valid()==false){
 					          return false;
-					     }
-						$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.city.cityId
-						$scope.formData.registrationInfo.cityName = $scope.formData.registrationInfo.city.cityName;
-						// Register & Logged-IN
+					     }*/
+						//$scope.formData.registrationInfo.cityId = $scope.formData.registrationInfo.city.cityId;
 						$scope.getSuccessRegister = function(response) {
-							if (response.jsonMap.userType == undefined || response.jsonMap.userType == '')
-							 {
-								 return;
-							 }
-							 $rootScope.userType = response.jsonMap.userType;
-							 $location.path('user', false);
+							alert('saved');
 						}
 						$scope.getErrorRegister = function(response) {
 							alertsService.RenderErrorMessage("error in reqiuest");
 						}
-						loginService.registration($scope.formData, $scope.getSuccessRegister,
+						userService.updateProfile($scope.formData, $scope.getSuccessRegister,
 								$scope.getErrorRegister);
+						
 					};
 					
-					$scope.successUpdate = function(){
-						alert('Updated');
-					}
-					
-					$scope.errorUpdate = function(){
-						alert('error');
-					}
-					
-					$scope.updateProfile = function(){
-						loginService.updateProfile($scope.formData, $scope.successUpdate,
-								$scope.errorUpdate);
-					};
 				});
 userControllers
 		.controller(
 				'postPropertyController',
-				function($scope, $http, propertyService, loginService,imageService) {
+				function($scope, $http, propertyService, imageService) {
 					$('#mainContent').hide();
+					
+					if ($root.userType != null && $root.userType != undefined)
+					{
+						$('#rootDiv').removeClass('col-sm-8');
+						$('#rootDiv').removeClass('col-sm-offset-2');
+					}
 					// we will store all of our form data in this object
 					$scope.formData = {};
 					$scope.files = [];
@@ -170,19 +154,6 @@ userControllers
 						    	 }
 						}
 						
-						$scope.error = function(response) {
-						    alertsService.RenderErrorMessage("error in reqiuest");
-						}
-						if ($scope.formData.registrationInfo.newUser == 'false')
-						{
-							loginService.login($scope.formData, $scope.postProperty,
-									$scope.error);
-						}
-						else
-						{
-							loginService.registration($scope.formData, $scope.postProperty,
-									$scope.error);
-						}
 					};
 					
 					// Watch the value of property type selected

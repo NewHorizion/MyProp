@@ -147,9 +147,12 @@
 </div>		
 <div class="form-group row">
 <div class="col-xs-6 col-xs-offset-3">
-<button class="btn btn-block btn-info" id="features_next_button">
-    Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+	<button ng-show="$root.userType == undefined || $root.userType == ''" class="btn btn-block btn-info" id="features_next_button">
+    	Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
     </button>
+    
+    <button ng-show="$root.userType != undefined && $root.userType != ''" type="submit" class="btn btn-danger">Submit</button>
+    
     <!-- <a ui-sref="form.postProperty" class="btn btn-block btn-info">
     Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
     </a> -->

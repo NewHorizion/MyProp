@@ -23,7 +23,24 @@ public class RegistrationAction extends ActionSupport
     registrationProcess.saveUserWithExtension(registrationInfo);
     jsonMap.put("success", true);
     jsonMap.put("messages", "Welcome " + registrationInfo.getUserName() + "!!!!");
-
+    return SUCCESS;
+  }
+  
+  public String profile()
+  {
+    registrationInfo = registrationProcess.getUserProfileInfo();
+    registrationInfo = new RegistrationInfo();
+    registrationInfo.setLandlineNumber("10000000");
+    registrationInfo.setMobileNumber("9898000000");
+    registrationInfo.setCityId(1);
+    registrationInfo.setUserType("agent");
+    jsonMap.put("registrationInfo", registrationInfo);
+    return SUCCESS;
+  }
+  
+  public String updateProfile()
+  {
+    registrationProcess.saveUserWithExtension(registrationInfo);
     return SUCCESS;
   }
 

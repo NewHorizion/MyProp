@@ -95,6 +95,17 @@
 			<result name="input" type="json"></result>
 			<result name="success" type="json"></result>
 		</action>
+		
+		<action name="Profile" class="com.vstar.ui.registration.RegistrationAction" method="profile">
+			<result name="success" type="json"></result>
+			<result name="input" type="json"></result>
+		</action>
+		
+		<action name="UpdateProfile" class="com.vstar.ui.registration.RegistrationAction" method="updateProfile">
+			<result name="success" type="json"></result>
+			<result name="input" type="json"></result>
+		</action>
+		
 		<!-- <action name="getUsersList" class="com.shazin.struts2hello.action.GetUsersListAction">
             <result type="json" name="success"></result>
         </action>   -->

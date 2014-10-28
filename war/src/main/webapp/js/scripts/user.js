@@ -52,10 +52,10 @@ userModule
 				templateUrl : 'pages/requirementDetail.html'
 			})
 			
-			.state('user.registration', {
-				url : '/registration',
-				templateUrl : 'pages/registration.html',
-				controller : 'registrationController'
+			.state('user.profile', {
+				url : '/profile',
+				templateUrl : 'pages/userProfile.html',
+				controller : 'profileController'
 			});
 
 			$urlRouterProvider.otherwise('/home');

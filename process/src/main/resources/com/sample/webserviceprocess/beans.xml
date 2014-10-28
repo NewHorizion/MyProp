@@ -99,6 +99,10 @@ p:targetDestination="test.cxf.jmstransport.queue" />
     <bean id="searchPropertyService" class="com.vstar.serivce.impl.PropertySearchServiceImpl">
         <property name="propertySearchProcess" ref="propertySearchProcess" />
     </bean>
+    
+    <bean id="userService" class="com.vstar.serivce.impl.UserServiceImpl">
+        <property name="registrationProcess" ref="registrationProcess" />
+    </bean>
 	<!-- End --> 
 	
 	<!-- Restful werservice server implementation -->
@@ -109,12 +113,17 @@ p:targetDestination="test.cxf.jmstransport.queue" />
 		</jaxrs:serviceBeans>
 	</jaxrs:server>
 	
-		<jaxrs:server id="searchService" address="/search">
+	<jaxrs:server id="searchService" address="/search">
 		<jaxrs:serviceBeans>
 			<ref bean="searchPropertyService" />
 		</jaxrs:serviceBeans>
 	</jaxrs:server>
 	
+	<jaxrs:server id="userServices" address="/user">
+		<jaxrs:serviceBeans>
+			<ref bean="userService" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
 	
 	<!-- End  -->
 

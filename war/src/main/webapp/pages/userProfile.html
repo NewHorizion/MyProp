@@ -1,0 +1,33 @@
+<script src="js/validation/validation_rules.js"></script>
+<div ng-controller="profileController">
+	<form method="post" ng-submit="updateProfile()" name="signupForm" id="signupForm"> 
+		<div class="form-group has-feedback">
+			<input class="" type="radio" ng-model="formData.registrationInfo.userType" ng-checked="formData.registrationInfo.userType == 'owner'" value="owner" name="userType" required="true"/><label>Owner</label>
+			<input class="" type="radio" ng-model="formData.registrationInfo.userType" ng-checked="formData.registrationInfo.userType == 'agent'" value="agent" name="userType"/><label>Agent</label>
+			<input class="" type="radio" ng-model="formData.registrationInfo.userType" ng-checked="formData.registrationInfo.userType == 'builder'" value="builder" name="userType"/><label>Buider</label>
+			<label for="userType" class="error">Please select user type</label> 
+		</div>
+	
+		<!-- <div class="form-group has-feedback" 
+			ng-controller="CountryCntrl">
+			<select class="form-control" placeholder="city"
+				ng-model="formData.registrationInfo.city"
+				ng-options="city.cityName group by city.stateName for city in locations track by city.cityId"  
+				name="city" required="true" >
+			</select> 
+		</div> -->
+	
+		<div class="form-group has-feedback">
+			<input class="form-control" type="text"
+				ng-model="formData.registrationInfo.mobileNumber" placeholder="Mobile No" name="mobileNumber" maxlength="10" required="true" number="true" minlength="10"/>
+		</div>
+		
+		<div class="form-group has-feedback">
+	      	<input class="form-control" type="text" 
+	      		ng-model="formData.registrationInfo.landlineNumber" placeholder="Landline No" name="landlineNumber" number="true" minlength="10">
+	    </div>
+	    
+	    <button type="submit" class="btn btn-lg btn-block btn-primary" id="reg_update">Update</button>
+	    
+	</form>
+</div>
