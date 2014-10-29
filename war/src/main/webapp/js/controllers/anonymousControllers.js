@@ -403,6 +403,30 @@ anonymousControllers
 				}
 			};
 			
+			$scope.processUserSubmit = function() {
+				//if ($("#postRequirement").valid()){
+			          // alert("Submitting...");
+			      // }
+				var fd = new FormData();
+				//$scope.formData.propertyFeatureInfo.propertyMandateInfo.city = $scope.formData.propertyFeatureInfo.propertyMandateInfo.city.cityId;
+				$scope.formData.propertyFeatureInfo.propertyMandateInfo.city = '1';
+				
+				$scope.postProperty = function(response) {
+				     $scope.formData.propertyId = response.jsonMap.propertyId;
+				     if (null!=$scope.files)
+				    	 {
+				    	    $scope.formData.files = $scope.files;
+				    	 	imageService.uploadImages($scope.formData,$scope.imageUploadSuccessFull,$scope.error)
+				    	 }
+				}
+				
+				$scope.error = function(response) {
+				    alertsService.RenderErrorMessage("error in reqiuest");
+				}
+				propertyService.postProperty($scope.formData, $scope.postProperty,
+						$scope.error);
+			};
+			
 			// Watch the value of property type selected
 			$scope.$watch( 'formData.propertyFeatureInfo.propertyMandateInfo.propertyTypeId' , function( selectedVal ) {
 				if (selectedVal !== undefined)
