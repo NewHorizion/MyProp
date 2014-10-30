@@ -51,14 +51,14 @@
 				<input class="" type="radio" name="possessionStatus" ng-model="formData.propertyFeatureInfo.residentialPropInfo.possessionStatus" value="Under Construction" required="true">Under Construction
             	<input class="" type="radio" name="possessionStatus" ng-model="formData.propertyFeatureInfo.residentialPropInfo.possessionStatus" value="Ready to Move" required="true">Ready to Move
 			</li>
-			<li style="margin-left: 225px;height:21px"></li>
+			<!-- <li style="margin-left: 225px;height:21px"></li>
 			<li>
 				<label>Available From<em>*</em> :</label>
 				<select id="availableFrom" ng-model="formData.propertyFeatureInfo.residentialPropInfo.availableFrom"
 					ng-options="" required="true">
 					<option value=''>Select</option>
 				</select>
-			</li>
+			</li> -->
 			<li style="margin-left: 225px;height:21px"></li>
 			<li>
 			   	<label for="keyword">Brief Description <em>*</em> : <br>
@@ -151,7 +151,7 @@
     	Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
     </button>
     
-    <button ng-show="$root.userType != undefined && $root.userType != ''" type="submit" class="btn btn-danger">Submit</button>
+    <button ng-show="$root.userType != undefined && $root.userType != ''" type="submit" ng-click="processUserSubmit();" class="btn btn-danger">Submit</button>
     
     <!-- <a ui-sref="form.postProperty" class="btn btn-block btn-info">
     Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>

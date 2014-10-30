@@ -18,8 +18,14 @@ anonymousControllers.controller('contactController', function($scope) {
 anonymousControllers
 		.controller(
 				'requirementController',
-				function($scope, $http, loginService, propertyService) {
+				function($scope, $http, $rootScope, loginService, propertyService) {
 					$('#mainContent').hide();
+					if ($rootScope.userType != null && $rootScope.userType != undefined
+							&& $rootScope.userType != "")
+					{
+						$('#rootDiv').removeClass('col-sm-8');
+						$('#rootDiv').removeClass('col-sm-offset-2');
+					}
 					// we will store all of our form data in this object
 					$scope.formData = {};
 					$scope.reqData = {};
@@ -63,6 +69,22 @@ anonymousControllers
 									$scope.getErrorRegister);
 						}
 
+					};
+					
+					$scope.processUserSubmit = function() {
+						var fd = new FormData();
+						$scope.formData.requirementInfo.city = $scope.formData.requirementInfo.city.cityId;
+
+						$scope.postRequirement = function(response) {
+							alert('loogedin');
+						}
+						
+						$scope.getErrorReq = function(response) {
+
+						}
+						propertyService.postRequirement($scope.formData,
+								$scope.postRequirement,
+								$scope.getErrorReq);
 					};
 
 					/*
