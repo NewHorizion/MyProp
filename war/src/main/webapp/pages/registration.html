@@ -1,0 +1,51 @@
+<section id="content">
+<div class="container">
+<div class="col-md-6 col-md-offset-3">
+
+<!-- PAGE TITLE -->
+<div class="page-header">
+<h1><span class="glyphicon glyphicon-tower"></span>Create your FREE Account</h1>
+</div>
+
+<!-- SHOW ERROR/SUCCESS MESSAGES -->
+<div id="messages" class="well" ng-show="messages">{{ messages }}</div>
+<div id="error-group" class="form-group" ng-class="{ 'has-error' : errorName }">
+<span class="help-block" ng-show="errorName">{{ errorName }}</span>
+</div>
+<!-- FORM -->
+<form ng-submit="processForm()">
+
+<!-- NAME -->
+<div id="name-group" class="form-group" ng-class="{ 'has-error' : errorName }">
+<label>User Name</label>
+<input type="text" name="userName" class="form-control" placeholder="User Name" ng-model="formData.userName">
+</div>
+
+<!-- ID -->
+<div id="name-group" class="form-group" ng-class="{ 'has-error' : errorName }">
+<label>User Id/Email</label>
+<input type="text" name="userId" class="form-control" placeholder="User Id" ng-model="formData.userId">
+</div>
+
+<div id="superhero-group" class="form-group" ng-class="{ 'has-error' : errorName }">
+<label>Password</label>
+<input type="password" name="password" class="form-control" placeholder="Password" ng-model="formData.password">
+</div>
+
+<!-- MOBILE -->
+<div id="name-group" class="form-group" ng-class="{ 'has-error' : errorName }">
+<label>Mobile</label>
+<input type="text" name="userMobile" class="form-control" placeholder="Mobile" ng-model="formData.userMobile">
+</div>
+
+
+<!-- SUBMIT BUTTON -->
+<button type="submit" class="btn btn-success btn-lg btn-block">
+<span class="glyphicon glyphicon-flash"></span> Register Now!
+</button>
+</form>
+
+</div>
+</div>
+</section>
+<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>

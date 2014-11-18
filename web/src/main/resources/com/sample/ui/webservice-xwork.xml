@@ -38,6 +38,10 @@
 		<action name="Login" class="com.sample.ui.login.LoginAction" method="login">
 			<result type="json"/>
 		</action>
+		<action name="Registration" class="com.vstar.ui.registration.RegistrationAction" method="save">
+			<result type="json"/>
+		</action>
+		
 		
 	</package>
 

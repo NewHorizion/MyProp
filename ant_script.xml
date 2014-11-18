@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MyApp" default="copyMyFiles" basedir=".">
+	<!--<property name="ear.name" value="bcbsmifp.ear" />-->
+	<property name="war.name" value="webservicesample" />
+	<property name="JBossHome.dir" value="D:\software\apache-tomcat-7.0.55"/>
+	<property name="serverBase.dir" value="${JBossHome.dir}\webapps" />
+	<property name="sourceBase.dir" value="E:\Test Project\MyProp" />
+	<!--<property name="war.dir" value="${serverBase.dir}\${ear.name}\${war.name}" /> -->
+	<property name="war.dir" value="${serverBase.dir}\${war.name}" />
+	<property name="destination_lib.dir" value="${war.dir}\WEB-INF\lib" />
+	<property name="destination_classes.dir" value="${war.dir}\WEB-INF\classes" />
+	<property name="destClass.dir.com" value="${destination_classes.dir}\com" />
+	<property name="destinationWebContent.dir" value="${war.dir}" />
+	<property name="sourceClass.dir" value="${sourceBase.dir}\bin" />
+	<property name="sourceClass.dir.com" value="${sourceClass.dir}\com" />
+	<property name="sourceWebWorkContent.dir" value="${sourceBase.dir}\war\src\main\webapp" />
+	<target name="copyMyFiles" description="Copies the files from the source directory to the server directory" >
+	  <copy todir="${destination_classes.dir}"  description="Copy Class files">
+		<fileset dir="${sourceClass.dir}" />
+	  </copy>
+	  <copy todir="${destinationWebContent.dir}"  description="Copy Webwork files" >
+		<fileset dir="${sourceWebWorkContent.dir}" />
+	  </copy>
+	</target>	
+</project>

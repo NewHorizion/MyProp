@@ -37,6 +37,11 @@
 			.when('/login', {
 			templateUrl : 'pages/login.html',
 			controller  : 'loginController'
+		})
+		// rout for the login page
+		.when('/registration', {
+		templateUrl : 'pages/registration.html',
+		controller  : 'registrationController'
 		});
 	});
 
@@ -63,6 +68,34 @@
 		$http({
 		method : 'POST',
 		url : 'webservice/Login.action',
+		data : $.param($scope.formData), // pass in data as strings
+		headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
+		})
+		.success(function(data) {
+		console.log(data);
+
+		if (!data.jsonMap.success) {
+		// if not successful, bind errors to error variables
+		$scope.errorName = data.jsonMap.errorName;
+		$scope.messages = "";
+		} else {
+		// if successful, bind success message to message
+		$scope.messages = data.jsonMap.messages;
+		$scope.errorName = "";
+		}
+		});
+
+		};
+	});
+	
+	scotchApp.controller('registrationController', function($scope,$http) {
+		$scope.formData = {};
+
+		// process the form
+		$scope.processForm = function() {
+		$http({
+		method : 'POST',
+		url : 'webservice/Registration.action',
 		data : $.param($scope.formData), // pass in data as strings
 		headers : { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
 		})

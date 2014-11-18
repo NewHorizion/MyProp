@@ -32,4 +32,8 @@
 		<property name="mergedProperties" ref="mergedProperties"></property>
 	</bean>
 	
+	<bean id="propUsersDaoProcess" class="com.vstar.dao.process.PropUsersDaoProcess">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
 </beans>
