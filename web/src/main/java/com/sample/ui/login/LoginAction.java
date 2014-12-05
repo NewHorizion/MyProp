@@ -56,6 +56,8 @@ implements ServletResponseAware, ServletRequestAware{
 								registrationInfo.getEmailId(), registrationInfo.getPassword()));
 				SecurityContextHolder.getContext().setAuthentication(
 						authentication);
+				HttpSession session = request.getSession(true);
+		        session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
 				if (authentication.isAuthenticated()) {
 					PropUsersDao propUsersDao  = registrationProcess.getPropUserDaoExtnProcess().getPropUsersDaoExtnById(registrationInfo.getEmailId());
 					jsonMap.put("success", true);
